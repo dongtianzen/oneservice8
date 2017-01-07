@@ -1,0 +1,52 @@
+{
+  "navInfoMenus":  [
+    {
+      "title":"CarePlan",
+      "iconClass":"fa fa-th",
+      "menuValues": [
+        {
+          "termTid": 1,
+          "termName": "Analysis"
+        },
+        {
+          "termTid": 2,
+          "termName": "Referral Dashboard"
+        },
+        {
+          "termTid": 3,
+          "termName": "Post Questionnaire"
+        },
+        {
+          "termTid": 4,
+          "termName": "CHE Dashboard"
+        }
+      ]
+    },
+    {
+      "title":"CarePlan2",
+      "iconClass":"fa fa-th",
+      "menuValues":[
+        {
+          "termTid": 1,
+          "termName": "Analysis2"
+        },
+        {
+          "termTid": 2,
+          "termName": "Referral Dashboard2"
+        },
+        {
+          "termTid": 3,
+          "termName": "Post Questionnaire"
+        },
+        {
+          "termTid": 4,
+          "termName": "CHE Dashboard"
+        }
+      ]
+    }
+  ],
+  "navInfoUrls": {
+    "postUrl":"dashpage/mildder-landing/snapshot",
+    "redirectUrl":"dashpage/mildder-landing/snapshot"
+  }
+}

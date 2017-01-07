@@ -1,0 +1,8 @@
+angular_form:
+  css:
+    theme:
+      css/angular-form.css: {}
+  js:
+    angular/angular-form.js: {}
+  dependencies:
+    - fxt/angular.angularjs

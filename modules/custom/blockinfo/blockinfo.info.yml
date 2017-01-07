@@ -1,0 +1,5 @@
+name: BlockInfo
+description: 'BlockInfo Module'
+type: module
+core: 8.x
+package: Zen

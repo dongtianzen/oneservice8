@@ -1,0 +1,7 @@
+jsoninfo.node.:
+  path: '/jsoninfo/businessunit/snapshot'
+  defaults:
+    _controller: '\Drupal\jsoninfo\Controller\JsoninfoController::businessunitSnapshot'
+    _title: 'Jsoninfo Page'
+  requirements:
+    _permission: 'access content'

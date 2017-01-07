@@ -1,0 +1,53 @@
+/*To hide raw html code*/
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important;
+}
+/*Labels*/
+.pageinfo-subpage-common md-input-container label {
+  color:#404040;
+  font-weight: 400;
+}
+.pageinfo-subpage-common md-input-container md-select-value.md-select-placeholder {
+  color:#404040;
+}
+.pageinfo-subpage-common .md-input-focused label,
+.pageinfo-subpage-common .md-input-has-value label {
+  padding: 0px;
+  font-size: 18px;
+  color: #0095c6 !important;
+}
+.pageinfo-subpage-common .slider-label {
+  padding: 0px;
+  font-size: 16px;
+  color: #0095c6 !important;
+}
+
+ /*Button save*/
+.pageinfo-subpage-common .pageinfo-btn-saved {
+  color: #fff;
+  background-color: #0095c6;
+  font-size: 14px;
+}
+.pageinfo-subpage-common .pageinfo-btn-saved:not([disabled]):hover {
+  background-color: #0082ad;
+  color: white;
+}
+.pageinfo-subpage-common .pageinfo-btn-saved[disabled] {
+  color: rgb(187, 187, 187);
+  background-color: rgba(230, 230, 229, 0.96);
+}
+
+/*Button Cancel*/
+.pageinfo-subpage-common .pageinfo-btn-cancel {
+  color: #fff;
+  background-color: #f84f6f;
+  font-size: 14px;
+}
+.pageinfo-subpage-common .pageinfo-btn-cancel:not([disabled]):hover {
+  background-color: #b73b54;
+  color: white;
+}
+.pageinfo-subpage-common .pageinfo-btn-cancel[disabled] {
+  color: rgb(187, 187, 187);
+  background-color: rgba(230, 230, 229, 0.96);
+}
