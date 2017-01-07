@@ -8,5 +8,4 @@
 
 function _state_value($key = NULL) {
   dpm($key . ' is :');
-  // dpm($val);
 }
