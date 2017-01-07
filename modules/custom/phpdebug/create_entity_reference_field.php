@@ -19,6 +19,24 @@ function _run_batch_entity_create_fields() {
 
 }
 
+/**
+ *
+  boolean
+  datetime
+  decimal
+  email
+  entity_reference
+  file
+  float
+  image
+  integer
+  link
+  list_integer
+  list_string
+  telephone
+  text_long
+  text_with_summary
+ */
 function _entity_fields_info() {
   $fields[] = array(
     // field_storage_config
@@ -47,6 +65,25 @@ function _entity_create_fields($entity_info, $field) {
     // 'required'    => isset($field['required']) ? TRUE : FALSE,
     // 'description' => isset($field['description']) ? $field['description'] : NULL,
   ))->save();
+
+  entity_get_form_display($entity_info['entity_type'], $entity_info['bundle'], 'default')
+    ->setComponent($field['field_name'], [
+      // 'type' => 'text_textarea_with_summary',
+      'settings' => [
+        'display' => TRUE,
+      ],
+    ])
+    ->save();
+
+  entity_get_display($entity_info['entity_type'], $entity_info['bundle'], 'default')
+    ->setComponent($field_name, [
+      'settings' => [
+        'display_summary' => TRUE,
+      ],
+      'type' => 'string',
+    ])
+    ->save();
+    dpm(33);
 }
 
 function _entity_create_field_template() {
