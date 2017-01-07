@@ -2,7 +2,7 @@
 
 /**
  *
-  require_once(DRUPAL_ROOT . '/modules/custom/phpdebug/create_entity_reference_field.php');
+  require_once(DRUPAL_ROOT . '/modules/custom/phpdebug/create_entity_fields.php');
   _run_batch_entity_create_fields();
  */
 
@@ -41,11 +41,9 @@ function _run_batch_entity_create_fields() {
  */
 function _entity_fields_info() {
   $fields[] = array(
-    // field_storage_config
-    'field_name'  => 'field_client_contactname',
-    'type'  => 'string',
-    // field_config
-    'label'       => t('Contact Name'),
+    'field_name' => 'field_client_contactname',
+    'type'       => 'string',
+    'label'      => t('Contact Name'),
   );
 
   return $fields;
