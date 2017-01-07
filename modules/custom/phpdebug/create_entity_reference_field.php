@@ -68,7 +68,6 @@ function _entity_create_fields($entity_info, $field) {
 
   entity_get_form_display($entity_info['entity_type'], $entity_info['bundle'], 'default')
     ->setComponent($field['field_name'], [
-      // 'type' => 'text_textarea_with_summary',
       'settings' => [
         'display' => TRUE,
       ],
@@ -76,14 +75,13 @@ function _entity_create_fields($entity_info, $field) {
     ->save();
 
   entity_get_display($entity_info['entity_type'], $entity_info['bundle'], 'default')
-    ->setComponent($field_name, [
+    ->setComponent($field['field_name'], [
       'settings' => [
         'display_summary' => TRUE,
       ],
       'type' => 'string',
     ])
     ->save();
-    dpm(33);
 }
 
 function _entity_create_field_template() {
@@ -102,4 +100,21 @@ function _entity_create_field_template() {
     'required'    => FALSE,
     'description' => t('your description'),
   ))->save();
+
+  entity_get_form_display('node', 'page', 'default')
+    ->setComponent('field_page_large_text', [
+      'settings' => [
+        'display' => TRUE,
+      ],
+    ])
+    ->save();
+
+  entity_get_display('node', 'page', 'default')
+    ->setComponent('field_page_large_text', [
+      'settings' => [
+        'display_summary' => TRUE,
+      ],
+      'type' => 'string',
+    ])
+    ->save();
 }
