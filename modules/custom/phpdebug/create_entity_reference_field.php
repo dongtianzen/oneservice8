@@ -16,11 +16,11 @@ function _run_batch_entity_create_fields() {
   foreach ($fields as $field) {
     _entity_create_fields($entity_info, $field);
   }
-
 }
 
 /**
  *
+  field type list:
   boolean
   datetime
   decimal
@@ -34,14 +34,16 @@ function _run_batch_entity_create_fields() {
   list_integer
   list_string
   telephone
-  text_long
+  string         // Text (plain)
+  string_long    // Text (plain, long)
+  text_long      // Text (formatted, long)
   text_with_summary
  */
 function _entity_fields_info() {
   $fields[] = array(
     // field_storage_config
-    'field_name' => 'field_client_contactname',
-    'type'        => 'text_long',       // 'entity_reference', 'image', 'text_with_summary',
+    'field_name'  => 'field_client_contactname',
+    'type'  => 'string',
     // field_config
     'label'       => t('Contact Name'),
   );
@@ -53,7 +55,7 @@ function _entity_create_fields($entity_info, $field) {
   entity_create('field_storage_config', array(
     'field_name'  => $field['field_name'],
     'entity_type' => $entity_info['entity_type'],
-    'type'        => $field['type'],
+    'type'  => $field['type'],
   ))->save();
 
   entity_create('field_config', array(
@@ -79,7 +81,6 @@ function _entity_create_fields($entity_info, $field) {
       'settings' => [
         'display_summary' => TRUE,
       ],
-      'type' => 'string',
     ])
     ->save();
 }
@@ -111,6 +112,8 @@ function _entity_create_field_template() {
 
   entity_get_display('node', 'page', 'default')
     ->setComponent('field_page_large_text', [
+      'label' => 'above',
+      'weight' => 20,
       'settings' => [
         'display_summary' => TRUE,
       ],
