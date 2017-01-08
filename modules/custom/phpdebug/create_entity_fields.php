@@ -5,6 +5,7 @@
   require_once(DRUPAL_ROOT . '/modules/custom/phpdebug/create_entity_fields.php');
   _run_batch_entity_create_fields();
  */
+use Drupal\field\Entity\FieldStorageConfig;
 
 function _run_batch_entity_create_fields() {
   $entity_info = array(
@@ -45,6 +46,30 @@ function _entity_fields_info() {
     'type'       => 'string',
     'label'      => t('Contact Name'),
   );
+
+  // $fields[] = array(
+  //   'field_name' => 'field_client_province',
+  //   'type'       => 'entity_reference',
+  //   'label'      => t('Province'),
+  //   'field_storage_config' => array(
+  //     'settings' =>  array(
+  //       'target_type' => 'taxonomy_term',
+  //     ),
+  //   ),
+  //   'field_config' => array(
+  //     'settings' => array(
+  //       'handler' => 'default',
+  //       'handler_settings' => array(
+  //         // Reference a single vocabulary.
+  //         'target_bundles' => array(
+  //           'province',
+  //         ),
+  //         // Enable auto-create.
+  //         // 'auto_create' => TRUE,
+  //       ),
+  //     ),
+  //   ),
+  // );
 
   return $fields;
 }
