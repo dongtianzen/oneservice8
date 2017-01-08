@@ -6,37 +6,37 @@ dashpage.client.list:
   requirements:
     _permission: 'access content'
 
-dashpage.company.list:
-  path: '/dashpage/company/list'
-  defaults:
-    _controller: '\Drupal\dashpage\Controller\DashpageController::companyList'
-    _title: 'Company List'
-  requirements:
-    _permission: 'access content'
+# dashpage.company.list:
+#   path: '/dashpage/company/list'
+#   defaults:
+#     _controller: '\Drupal\dashpage\Controller\DashpageController::companyList'
+#     _title: 'Company List'
+#   requirements:
+#     _permission: 'access content'
 
-dashpage.quote.list:
-  path: '/dashpage/quote/list'
-  defaults:
-    _controller: '\Drupal\dashpage\Controller\DashpageController::quoteList'
-    _title: 'Quote List'
-  requirements:
-    _permission: 'access content'
+# dashpage.quote.list:
+#   path: '/dashpage/quote/list'
+#   defaults:
+#     _controller: '\Drupal\dashpage\Controller\DashpageController::quoteList'
+#     _title: 'Quote List'
+#   requirements:
+#     _permission: 'access content'
 
-dashpage.repair.list:
-  path: '/dashpage/repair/list'
-  defaults:
-    _controller: '\Drupal\dashpage\Controller\DashpageController::repairList'
-    _title: 'Repair List'
-  requirements:
-    _permission: 'access content'
+# dashpage.repair.list:
+#   path: '/dashpage/repair/list'
+#   defaults:
+#     _controller: '\Drupal\dashpage\Controller\DashpageController::repairList'
+#     _title: 'Repair List'
+#   requirements:
+#     _permission: 'access content'
 
-dashpage.user.list:
-  path: '/dashpage/user/list'
-  defaults:
-    _controller: '\Drupal\dashpage\Controller\DashpageController::userList'
-    _title: 'User List'
-  requirements:
-    _permission: 'access content'
+# dashpage.user.list:
+#   path: '/dashpage/user/list'
+#   defaults:
+#     _controller: '\Drupal\dashpage\Controller\DashpageController::userList'
+#     _title: 'User List'
+#   requirements:
+#     _permission: 'access content'
 
 
 
