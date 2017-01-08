@@ -7,7 +7,6 @@
 namespace Drupal\dashpage\Content;
 
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\dashpage\Content\DashpageBlockGenerator;
 
 /**
  * An example controller.
@@ -19,7 +18,7 @@ class DashpageContentGenerator extends ControllerBase {
   /**
    *
    */
-  public function angularSnapshot() {
+  public function clientList() {
     $DashpageBlockGenerator = new DashpageBlockGenerator();
 
     $output = '';
@@ -45,4 +44,5 @@ class DashpageContentGenerator extends ControllerBase {
 
     return $output;
   }
+
 }

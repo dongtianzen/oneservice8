@@ -1,7 +1,43 @@
-dashpage.angular.snapshot:
-  path: '/dashpage/angular/snapshot'
+dashpage.client.list:
+  path: '/dashpage/client/list'
   defaults:
-    _controller: '\Drupal\dashpage\Controller\DashpageController::angularSnapshot'
-    _title: 'Dash Angular Page'
+    _controller: '\Drupal\dashpage\Controller\DashpageController::clientList'
+    _title: 'Client List'
   requirements:
     _permission: 'access content'
+
+dashpage.company.list:
+  path: '/dashpage/company/list'
+  defaults:
+    _controller: '\Drupal\dashpage\Controller\DashpageController::companyList'
+    _title: 'Company List'
+  requirements:
+    _permission: 'access content'
+
+dashpage.quote.list:
+  path: '/dashpage/quote/list'
+  defaults:
+    _controller: '\Drupal\dashpage\Controller\DashpageController::quoteList'
+    _title: 'Quote List'
+  requirements:
+    _permission: 'access content'
+
+dashpage.repair.list:
+  path: '/dashpage/repair/list'
+  defaults:
+    _controller: '\Drupal\dashpage\Controller\DashpageController::repairList'
+    _title: 'Repair List'
+  requirements:
+    _permission: 'access content'
+
+dashpage.user.list:
+  path: '/dashpage/user/list'
+  defaults:
+    _controller: '\Drupal\dashpage\Controller\DashpageController::userList'
+    _title: 'User List'
+  requirements:
+    _permission: 'access content'
+
+
+
+

@@ -1,5 +1,0 @@
-angular_snapshot:
-  js:
-    angular/angular-snapshot.js: {}
-  dependencies:
-    - fxt/angular.angularjs
