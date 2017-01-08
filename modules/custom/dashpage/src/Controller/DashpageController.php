@@ -17,11 +17,11 @@ use Drupal\dashpage\Content\DashpageContentGenerator;
 class DashpageController extends ControllerBase {
 
   /**
-   * {@inheritdoc}
+   *
    */
-  public function clientList() {
+  public function ContentGeneratorTemplate($method = 'template') {
     $DashpageContentGenerator = new DashpageContentGenerator();
-    $output = $DashpageContentGenerator->clientList();
+    $output = $DashpageContentGenerator->{$method}();
 
     $build = array(
       '#type' => 'markup',
@@ -29,6 +29,41 @@ class DashpageController extends ControllerBase {
       '#markup' => $output,
     );
     return $build;
+  }
+
+  /**
+   * call from routing.yml
+   */
+  public function clientList() {
+    return $this->ContentGeneratorTemplate('clientList');
+  }
+
+  /**
+   * call from routing.yml
+   */
+  public function companyList() {
+    return $this->ContentGeneratorTemplate('companyList');
+  }
+
+  /**
+   * call from routing.yml
+   */
+  public function quoteList() {
+    return $this->ContentGeneratorTemplate('quoteList');
+  }
+
+  /**
+   * call from routing.yml
+   */
+  public function repairList() {
+    return $this->ContentGeneratorTemplate('repairList');
+  }
+
+  /**
+   * call from routing.yml
+   */
+  public function userList() {
+    return $this->ContentGeneratorTemplate('userList');
   }
 
 }
