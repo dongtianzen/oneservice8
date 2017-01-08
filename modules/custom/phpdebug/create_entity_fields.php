@@ -112,40 +112,6 @@ function _entity_create_fields_save($entity_info, $field) {
     ->save();
 }
 
-function _entity_create_fields($entity_info, $field) {
-  entity_create('field_storage_config', array(
-    'field_name'  => $field['field_name'],
-    'entity_type' => $entity_info['entity_type'],
-    'type'  => $field['type'],
-  ))->save();
-
-  entity_create('field_config', array(
-    'field_name'  => $field['field_name'],
-    'label'       => $field['label'],
-    'entity_type' => $entity_info['entity_type'],
-    'bundle'      => $entity_info['bundle'],
-    // optional
-    // 'required'    => isset($field['required']) ? TRUE : FALSE,
-    // 'description' => isset($field['description']) ? $field['description'] : NULL,
-  ))->save();
-
-  entity_get_form_display($entity_info['entity_type'], $entity_info['bundle'], 'default')
-    ->setComponent($field['field_name'], [
-      'settings' => [
-        'display' => TRUE,
-      ],
-    ])
-    ->save();
-
-  entity_get_display($entity_info['entity_type'], $entity_info['bundle'], 'default')
-    ->setComponent($field['field_name'], [
-      'settings' => [
-        'display_summary' => TRUE,
-      ],
-    ])
-    ->save();
-}
-
 function _entity_create_field_template() {
   entity_create('field_storage_config', array(
     'field_name'  => 'field_page_large_text',
@@ -179,6 +145,43 @@ function _entity_create_field_template() {
         'display_summary' => TRUE,
       ],
       'type' => 'string',
+    ])
+    ->save();
+}
+
+/**
+ * Use entity_create('field_entity', $definition)->save().
+ */
+function _entity_create_fields($entity_info, $field) {
+  entity_create('field_storage_config', array(
+    'field_name'  => $field['field_name'],
+    'entity_type' => $entity_info['entity_type'],
+    'type'  => $field['type'],
+  ))->save();
+
+  entity_create('field_config', array(
+    'field_name'  => $field['field_name'],
+    'label'       => $field['label'],
+    'entity_type' => $entity_info['entity_type'],
+    'bundle'      => $entity_info['bundle'],
+    // optional
+    // 'required'    => isset($field['required']) ? TRUE : FALSE,
+    // 'description' => isset($field['description']) ? $field['description'] : NULL,
+  ))->save();
+
+  entity_get_form_display($entity_info['entity_type'], $entity_info['bundle'], 'default')
+    ->setComponent($field['field_name'], [
+      'settings' => [
+        'display' => TRUE,
+      ],
+    ])
+    ->save();
+
+  entity_get_display($entity_info['entity_type'], $entity_info['bundle'], 'default')
+    ->setComponent($field['field_name'], [
+      'settings' => [
+        'display_summary' => TRUE,
+      ],
     ])
     ->save();
 }
