@@ -1,0 +1,12 @@
+/**
+ * Place your custom styles here.
+ */
+
+.region-navigation nav{
+  float: left;
+  margin-left: 24px;
+}
+
+.region-navigation .logo.navbar-btn img{
+  height: 72px;
+}
