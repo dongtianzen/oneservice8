@@ -1,8 +1,0 @@
-navinfo.navbar:
-  css:
-    theme:
-      css/navigation-block.css: {}
-  js:
-    angular/navigation-block.js: {}
-  dependencies:
-    - fxt/angular.angularjs
