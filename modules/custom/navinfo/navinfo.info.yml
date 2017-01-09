@@ -7,3 +7,4 @@ package: Zen
 dependencies:
   - block
   - node
+  - dashpage
