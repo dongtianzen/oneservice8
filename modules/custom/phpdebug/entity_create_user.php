@@ -33,7 +33,94 @@ function _entity_user_info() {
 }
 
 /**
- *
+ * \Drupal\user\Entity\User::create();
+ */
+function _entity_create_user_save() {
+  $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  $user = \Drupal\user\Entity\User::create();
+
+  // Mandatory settings
+  $user->setPassword('password');
+  // $user->setPassword(user_password());   // automatically set a password with the code
+
+  $user->enforceIsNew();
+  $user->setEmail('email');
+  $user->setUsername('user_name');  // This username must be unique and accept only a-Z,0-9, - _ @ .
+
+  // Optional settings
+  $user->set("init", 'email');
+  $user->set("langcode", $language);
+  $user->set("preferred_langcode", $language);
+  $user->set("preferred_admin_langcode", $language);
+
+  // $user->set("setting_name", 'setting_value');
+  $user->activate();
+
+  // Save user
+  $res = $user->save();
+
+  //
+  $uid = $user->id();
+
+  // If you want to send welcome email with out admin approval you can use after user save
+  // _user_mail_notify('register_no_approval_required', $user);
+
+}
+
+/**
+ * update
+ */
+function _update_user_template() {
+  use Drupal\user\Entity\User;
+
+  // Load user with user ID
+  $user = User::load($uid);
+
+  // Load the current user.
+  $user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
+  // $user = \Drupal::currentUser();
+
+  // Update email Id
+  $user->setEmail($content['email']);
+
+  // Update username
+  $user->setUsername($content['email']);
+
+  //Update password reset
+      if (isset($content['password'])) {
+        $user->setPassword($content['password']);
+      }
+
+  // For User field
+  $user->set("field_first_name", $firstName);
+  $user->set("field_last_name", $lastName);
+
+  //Save user
+  $userss = $user->save();
+
+  //Where "$content" array contains all user profile data
+}
+
+/**
+ * load
+ */
+function _load_user_template() {
+  // Load the current user.
+  $user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
+
+  // get field data from that user
+  $website = $user->get('field_website')->value;
+  $body = $user->get('body')->value;
+
+
+  $email = $user->get('mail')->value;
+  $name = $user->get('name')->value;
+  $uid= $user->get('uid')->value;
+}
+
+
+/**
+ * entity_create()
  */
 function _entity_create_user_template() {
   $values = array(
