@@ -37,26 +37,26 @@ function _entity_create_term_client_field() {
     'type'       => 'email',
     'label'      => t('Email'),
   );
-  $fields[] = array(
-    'field_name' => 'field_client_province',
-    'type'       => 'entity_reference',
-    'label'      => t('Province'),
-  );
+  // $fields[] = array(
+  //   'field_name' => 'field_client_province',
+  //   'type'       => 'entity_reference',
+  //   'label'      => t('Province'),
+  // );
   $fields[] = array(
     'field_name' => 'field_client_address',
-    'type'       => 'entity_reference',
+    'type'       => 'string',
     'label'      => t('Address'),
   );
-  $fields[] = array(
-    'field_name' => 'field_client_clienttype',
-    'type'       => 'entity_reference',
-    'label'      => t('Client Type'),
-  );
-  $fields[] = array(
-    'field_name' => 'field_client_salesperson',
-    'type'       => 'entity_reference',
-    'label'      => t('Salesperson'),
-  );
+  // $fields[] = array(
+  //   'field_name' => 'field_client_clienttype',
+  //   'type'       => 'entity_reference',
+  //   'label'      => t('Client Type'),
+  // );
+  // $fields[] = array(
+  //   'field_name' => 'field_client_salesperson',
+  //   'type'       => 'entity_reference',
+  //   'label'      => t('Salesperson'),
+  // );
 
   return $fields;
 }

@@ -2,7 +2,7 @@
 
 /**
  *
-  require_once(DRUPAL_ROOT . '/modules/custom/phpdebug/create_entity_term.php');
+  require_once(DRUPAL_ROOT . '/modules/custom/phpdebug/entity_create_term.php');
   _run_batch_entity_create_terms();
  */
 

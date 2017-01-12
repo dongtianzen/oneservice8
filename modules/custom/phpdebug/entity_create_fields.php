@@ -2,7 +2,7 @@
 
 /**
  *
-  require_once(DRUPAL_ROOT . '/modules/custom/phpdebug/create_entity_fields.php');
+  require_once(DRUPAL_ROOT . '/modules/custom/phpdebug/entity_create_fields.php');
   _run_batch_entity_create_fields();
  */
 
@@ -15,7 +15,6 @@ function _run_batch_entity_create_fields() {
   $fields = _entity_fields_info();
   foreach ($fields as $field) {
     _entity_create_fields_save($entity_info, $field);
-    // _entity_create_fields($entity_info, $field);
   }
 }
 
@@ -41,35 +40,26 @@ function _run_batch_entity_create_fields() {
   text_with_summary
  */
 function _entity_fields_info() {
-  $fields[] = array(
-    'field_name' => 'field_client_contactname',
-    'type'       => 'string',
-    'label'      => t('Contact Name'),
-  );
-
   // $fields[] = array(
-  //   'field_name' => 'field_client_province',
-  //   'type'       => 'entity_reference',
-  //   'label'      => t('Province'),
-  //   'field_storage_config' => array(
-  //     'settings' =>  array(
-  //       'target_type' => 'taxonomy_term',
-  //     ),
-  //   ),
-  //   'field_config' => array(
-  //     'settings' => array(
-  //       'handler' => 'default',
-  //       'handler_settings' => array(
-  //         // Reference a single vocabulary.
-  //         'target_bundles' => array(
-  //           'province',
-  //         ),
-  //         // Enable auto-create.
-  //         // 'auto_create' => TRUE,
-  //       ),
-  //     ),
-  //   ),
+  //   'field_name' => 'field_client_contactname',
+  //   'type'       => 'string',
+  //   'label'      => t('Contact Name'),
   // );
+  // $fields[] = array(
+  //   'field_name' => 'field_client_phone',
+  //   'type'       => 'string',
+  //   'label'      => t('Phone'),
+  // );
+  // $fields[] = array(
+  //   'field_name' => 'field_client_email',
+  //   'type'       => 'email',
+  //   'label'      => t('Email'),
+  // );
+  $fields[] = array(
+    'field_name' => 'field_client_address',
+    'type'       => 'string',
+    'label'      => t('Address'),
+  );
 
   return $fields;
 }
@@ -112,6 +102,9 @@ function _entity_create_fields_save($entity_info, $field) {
     ->save();
 }
 
+/**
+ *
+ */
 function _entity_create_field_template() {
   entity_create('field_storage_config', array(
     'field_name'  => 'field_page_large_text',
