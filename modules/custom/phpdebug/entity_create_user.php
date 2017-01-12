@@ -77,8 +77,8 @@ function _update_user_template($content) {
   $user = User::load($uid);
 
   // Load the current user.
+  $user = \Drupal::currentUser();
   $user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
-  // $user = \Drupal::currentUser();
 
   // Update email Id
   $user->setEmail($content['email']);
@@ -86,10 +86,12 @@ function _update_user_template($content) {
   // Update username
   $user->setUsername($content['email']);
 
-  //Update password reset
-  if (isset($content['password'])) {
-    $user->setPassword($content['password']);
-  }
+  // Update password reset
+  $user->setPassword($content['password']);
+
+  // user role
+  $user->addRole('administrator');
+  $user->removeRole('administrator');
 
   // For User field
   $user->set("field_first_name", $firstName);
@@ -106,12 +108,12 @@ function _update_user_template($content) {
  */
 function _load_user_template() {
   // Load the current user.
+  $user = \Drupal::currentUser();
   $user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
 
   // get field data from that user
   $website = $user->get('field_website')->value;
-  $body = $user->get('body')->value;
-
+  $body = $user->get('body')->
 
   $email = $user->get('mail')->value;
   $name = $user->get('name')->value;
