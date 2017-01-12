@@ -40,12 +40,12 @@ function _entity_create_user_save() {
   $user = \Drupal\user\Entity\User::create();
 
   // Mandatory settings
+  $user->setUsername('user_name');  // This username must be unique and accept only a-Z,0-9, - _ @ .
   $user->setPassword('password');
   // $user->setPassword(user_password());   // automatically set a password with the code
 
-  $user->enforceIsNew();
   $user->setEmail('email');
-  $user->setUsername('user_name');  // This username must be unique and accept only a-Z,0-9, - _ @ .
+  $user->enforceIsNew();        // Set this to FALSE if you want to edit (resave) an existing user object
 
   // Optional settings
   $user->set("init", 'email');
@@ -70,7 +70,7 @@ function _entity_create_user_save() {
 /**
  * update
  */
-function _update_user_template() {
+function _update_user_template($content) {
   use Drupal\user\Entity\User;
 
   // Load user with user ID
@@ -87,9 +87,9 @@ function _update_user_template() {
   $user->setUsername($content['email']);
 
   //Update password reset
-      if (isset($content['password'])) {
-        $user->setPassword($content['password']);
-      }
+  if (isset($content['password'])) {
+    $user->setPassword($content['password']);
+  }
 
   // For User field
   $user->set("field_first_name", $firstName);
