@@ -14,9 +14,9 @@ function _run_batch_entity_create_user() {
 }
 
 function _entity_user_info() {
-  $users[] = array(
-    'name' => 'test',
-    'email' => 'test@test.com',
+  $users = array(
+    array("name" => "zhangsan", "email" =>"zhangsan@example.com"),
+    array("name" => "wangwu",   "email" =>"wangwu@example.com"),
   );
 
   return $users;
