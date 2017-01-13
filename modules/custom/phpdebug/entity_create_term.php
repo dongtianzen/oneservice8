@@ -3,67 +3,65 @@
 /**
  *
   require_once(DRUPAL_ROOT . '/modules/custom/phpdebug/entity_create_term.php');
+  _load_terms();
   _run_batch_entity_create_terms();
  */
 
 use Drupal\taxonomy\Entity\Term;
 
+function _load_terms($term_name, $vocabulary = NULL) {
+  $output = NULL;
+  $terms = taxonomy_term_load_multiple_by_name($term_name, $vocabulary);
+  if (count($terms) > 0) {
+    $term = reset($terms);
+
+    $output = $term->get('tid')->value;
+  }
+
+  return $output;
+}
+
+function _load_user($user_name) {
+  $output = NULL;
+  $user = user_load_by_name($user_name);
+
+  if (count($user) > 0) {
+    $output = $user->get('uid')->value;
+  }
+
+  return $output;
+}
+
 function _run_batch_entity_create_terms() {
   $vocabulary = array(
-    'vid'  => 'province',
+    'vid'  => 'client',
   );
 
   $terms = _entity_terms_info();
-  foreach ($terms as $term) {
-    _entity_create_terms($vocabulary, $term);
+  foreach ($terms as $term_info) {
+    _entity_create_terms($vocabulary, $term_info);
   }
 }
 
-function _entity_create_terms($vocabulary, $term) {
+function _entity_create_terms($vocabulary, $term_info) {
   $term = Term::create([
-    'name' => $term,
+    'name' => $term_info[0],
     'vid'  => $vocabulary['vid'],
+    'field_client_address' => $term_info[1],
+    'field_client_clienttype' => _load_terms($term_info[2]),
+    'field_client_contactname' => $term_info[3],
+    'field_client_email' => $term_info[4],
+    'field_client_phone' => $term_info[5],
+    'field_client_province' => _load_terms($term_info[6]),
+    'field_client_salesperson' => _load_user($term_info[7]),
   ]);
   $term->save();
 }
 
 function _entity_terms_info() {
   $terms = array(
-    '北京',
-    '上海',
-    '天津',
-    '重庆',
-    '内蒙古',
-    '辽宁',
-    '吉林',
-    '黑龙江',
-    '河北',
-    '山东',
-    '山西',
-    '河南',
-    '江苏',
-    '安徽',
-    '浙江',
-    '江西',
-    '湖北',
-    '湖南',
-    '福建',
-    '广东',
-    '广西',
-    '海南',
-    '贵州',
-    '云南',
-    '四川',
-    '陕西',
-    '甘肃',
-    '宁夏',
-    '青海',
-    '新疆',
-    '西藏',
-    '香港',
-    '澳门',
-    '台湾',
-    '其它地区',
+    array("上海影音系统有限公司", "上海影音系统有限公司", "", "许亮", "", "13900000000", "上海", "zhangsan"),
+
   );
 
   return $terms;
