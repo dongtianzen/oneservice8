@@ -37,7 +37,3 @@ dashpage.user.list:
     _title: 'User List'
   requirements:
     _permission: 'access content'
-
-
-
-

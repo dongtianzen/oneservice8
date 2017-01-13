@@ -5,7 +5,6 @@
   require_once(DRUPAL_ROOT . '/modules/custom/phpdebug/entity_create_user.php');
   _run_batch_entity_create_user();
  */
-
 function _run_batch_entity_create_user() {
   $users_info = _entity_user_info();
   foreach ($users_info as $user_info) {
@@ -31,7 +30,7 @@ function _entity_create_user_save($user_info = array()) {
 
   // Mandatory settings
   $user->setUsername($user_info['name']);
-  $user->setPassword('oneband1001');
+  $user->setPassword('your_password');
   // $user->setPassword(user_password());   // automatically set a password with the code
 
   $user->setEmail($user_info['email']);
@@ -129,4 +128,3 @@ function _entity_create_user_template() {
   $account = entity_create('user', $values);
   $account->save();
 }
-

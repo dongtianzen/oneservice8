@@ -16,5 +16,3 @@ function _load_user_print_info() {
     }
   }
 }
-
-
