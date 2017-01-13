@@ -7,26 +7,16 @@
  */
 
 function _run_batch_entity_create_user() {
-  $entity_info = array(
-    'entity_type' => 'user',  // 'node', 'taxonomy_term', 'user'
-    'bundle' => 'client',
-  );
-
-  $users = _entity_user_info();
-  foreach ($users as $user) {
-    _entity_create_user_save($entity_info, $field);
+  $users_info = _entity_user_info();
+  foreach ($users_info as $user_info) {
+    _entity_create_user_save($user_info);
   }
 }
 
 function _entity_user_info() {
   $users[] = array(
-    'field_first_name' => 'Test First name',
-    'fieldt_last_name' => 'Test Last name',
     'name' => 'test',
-    'mail' => 'test@test.com',
-    'roles' => array(),
-    'pass' => 'password',
-    'status' => 1,
+    'email' => 'test@test.com',
   );
 
   return $users;
@@ -35,43 +25,44 @@ function _entity_user_info() {
 /**
  * \Drupal\user\Entity\User::create();
  */
-function _entity_create_user_save() {
+function _entity_create_user_save($user_info = array()) {
   $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
   $user = \Drupal\user\Entity\User::create();
 
   // Mandatory settings
-  $user->setUsername('user_name');  // This username must be unique and accept only a-Z,0-9, - _ @ .
-  $user->setPassword('password');
+  $user->setUsername($user_info['name']);
+  $user->setPassword('oneband1001');
   // $user->setPassword(user_password());   // automatically set a password with the code
 
-  $user->setEmail('email');
-  $user->enforceIsNew();        // Set this to FALSE if you want to edit (resave) an existing user object
+  $user->setEmail($user_info['email']);
+  $user->enforceIsNew();                    // Set this to FALSE if you want to edit (resave) an existing user object
 
   // Optional settings
-  $user->set("init", 'email');
-  $user->set("langcode", $language);
-  $user->set("preferred_langcode", $language);
-  $user->set("preferred_admin_langcode", $language);
+  // $user->set("init", 'email');
+  // $user->set("langcode", $language);
+  // $user->set("preferred_langcode", $language);
+  // $user->set("preferred_admin_langcode", $language);
 
   // $user->set("setting_name", 'setting_value');
   $user->activate();
 
+  $user->addRole('moderator');
+
   // Save user
   $res = $user->save();
 
-  //
+  // return user uid
   $uid = $user->id();
 
   // If you want to send welcome email with out admin approval you can use after user save
   // _user_mail_notify('register_no_approval_required', $user);
-
 }
 
 /**
  * update
  */
+use Drupal\user\Entity\User;
 function _update_user_template($content) {
-  use Drupal\user\Entity\User;
 
   // Load user with user ID
   $user = User::load($uid);
@@ -126,7 +117,7 @@ function _load_user_template() {
  */
 function _entity_create_user_template() {
   $values = array(
-    'name' => 'test',
+    'name' => 'test',        // This username must be unique and accept only a-Z,0-9, - _ @ .
     'mail' => 'test@test.com',
     'roles' => array(),
     'pass' => 'password',
