@@ -68,4 +68,3 @@ function _entity_terms_info() {
 
   return $terms;
 }
-
