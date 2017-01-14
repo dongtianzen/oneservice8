@@ -8,6 +8,8 @@ namespace Drupal\dashpage\Content;
 
 use Drupal\Core\Controller\ControllerBase;
 
+use Drupal\views\Views;
+
 /**
  * An example controller.
  $DashpageContentGenerator = new DashpageContentGenerator();
@@ -33,10 +35,19 @@ class DashpageContentGenerator extends ControllerBase {
    *
    */
   public function clientList() {
+    $view = Views::getView('term_client_collection');
+    $view->execute('master');
+// dpm($view->result);
+
+    $view->setDisplay('master');
+    $displayObj = $view->getDisplay();
+
     $output = '';
     $output .= '<divclass="dashpage-wrapper">';
       $output .= '<div class="margin-top-16">';
         $output .= 'Client List';
+        // $output .= render($displayObj);
+        // $output .= $displayObj;
       $output .= '</div>';
     $output .= '</div>';
 
