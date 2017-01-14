@@ -36,18 +36,22 @@ class DashpageContentGenerator extends ControllerBase {
    */
   public function clientList() {
     $view = Views::getView('term_client_collection');
-    $view->execute('master');
-// dpm($view->result);
 
-    $view->setDisplay('master');
-    $displayObj = $view->getDisplay();
+    $view->setDisplay('default');
+    $view->execute();
+
+// dpm($view->total_rows);
+    // $view->getDisplay();
 
     $output = '';
     $output .= '<divclass="dashpage-wrapper">';
       $output .= '<div class="margin-top-16">';
         $output .= 'Client List';
-        // $output .= render($displayObj);
-        // $output .= $displayObj;
+        // $output .= $view->viewsData;
+        // $output .= $view->render();
+        // $output .= render($view->render());    // method 1
+        $output .= render($view->buildRenderable('default'));// method 2
+        // $output .= drupal_render(views_embed_view('term_client_collection', 'default'));  // method 3
       $output .= '</div>';
     $output .= '</div>';
 
