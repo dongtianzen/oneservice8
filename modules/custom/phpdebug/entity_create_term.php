@@ -61,7 +61,6 @@ function _entity_create_terms($vocabulary, $term_info) {
 function _entity_terms_info() {
   $terms = array(
     array("上海影音系统有限公司", "上海影音系统有限公司", "", "许亮", "", "13900000000", "上海", "zhangsan"),
-
   );
 
   return $terms;
