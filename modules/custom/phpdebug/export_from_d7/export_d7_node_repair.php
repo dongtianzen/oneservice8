@@ -20,27 +20,24 @@ function _export_d7_node_repair() {
       if ($key < 30) {
         $row = array();
         foreach ($node_method_collections as $field_name => $value) {
-          $field_item = field_get_items('node', $node, $field_name);
 
-          $field_value = "NULL";
-          $field_data = field_view_field('node', $node, $field_name);
+        //   $field_value = "NULL";
 
-          if ($value == 'datetime') {
-            // $field_value = field_view_value('node', $node, $field_name, $field_item[0]);
-            if (isset($field_item[0]['value'])) {
-              $field_value = $field_item[0]['value'];
-            }
-          }
-          else {
-            if (isset($field_data[0]['#markup'])) {
-              $field_value = $field_data[0]['#markup'];
-            }
-          }
-          $row[] = $field_name . ' - ' . $field_value;
-          dpm($field_name . ' - ' . $field_value);
+        //   if (isset($node->$field_name['und'][0][$value]) {
+        //     $field_value = $node->{$field_name}['und'][0][$value];
+
+        //     if ($value == "tid" || $value == "target_id")) {
+        //       $term = taxonomy_term_load($node->{$field_name}['und'][0][$value]);
+        //       if (isset($term->name)) {
+        //         $field_value = $term->name;
+        //       }
+        //     }
+        //   }
+        //   $row[] = $field_name . ' - ' . $field_value;
+        //   dpm($field_name . ' - ' . $field_value);
         }
 
-        // dpm('array(' . implode(',', $row) . '),');
+        dpm('array(' . implode(',', $row) . '),');
       }
     }
   }
@@ -81,13 +78,13 @@ function _node_method_collections() {
     'field_repair_device_type' => "tid",
     'field_repair_device_spec' => "safe_value",
     'field_repair_receive_note' => "safe_value",
-    'field_repair_receive_date' => "datetime",
+    'field_repair_receive_date' => "value",
 
     // 初验
     'field_repair_check_note' => "safe_value",
     'field_repair_check_issue' => "safe_value",
     'field_repair_check_staff' => "target_id",
-    'field_repair_check_date' => "datetime",
+    'field_repair_check_date' => "value",
     'field_repair_quote_amount' => "value",
     'field_repair_quote_status' => "value",
 
@@ -95,12 +92,12 @@ function _node_method_collections() {
     'field_repair_issue_reason' => "safe_value",
     'field_repair_repair_approach' => "safe_value",
     'field_repair_repair_amount' => "value",
-    'field_repair_repair_date' => "datetime",
+    'field_repair_repair_date' => "value",
 
     // 返回
     'field_repair_return_amount' => "value",
     'field_repair_return_note' => "safe_value",
-    'field_repair_return_date' => "datetime",
+    'field_repair_return_date' => "value",
     'field_repair_warranty_day' => "value",
   );
 
