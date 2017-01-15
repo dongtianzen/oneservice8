@@ -7,7 +7,6 @@
 
 
   _export_d7_node_repair();
-
 function _export_d7_node_repair() {
   $output = array();
 
@@ -18,14 +17,31 @@ function _export_d7_node_repair() {
 
   if (is_array($nodes)) {
     foreach ($nodes as $key => $node) {
-      // if ($key < 3)
-      //   $row = array();
-      //   foreach ($node_method_collections as $field_name => $value) {
-      //     $row[] = $field_name . $value;
-      //   }
+      if ($key < 30) {
+        $row = array();
+        foreach ($node_method_collections as $field_name => $value) {
+          $field_item = field_get_items('node', $node, $field_name);
 
-      //   dpm('array(' . implode(',', $row) . '),');
-      // }
+          $field_value = "NULL";
+          $field_data = field_view_field('node', $node, $field_name);
+
+          if ($value == 'datetime') {
+            // $field_value = field_view_value('node', $node, $field_name, $field_item[0]);
+            if (isset($field_item[0]['value'])) {
+              $field_value = $field_item[0]['value'];
+            }
+          }
+          else {
+            if (isset($field_data[0]['#markup'])) {
+              $field_value = $field_data[0]['#markup'];
+            }
+          }
+          $row[] = $field_name . ' - ' . $field_value;
+          dpm($field_name . ' - ' . $field_value);
+        }
+
+        // dpm('array(' . implode(',', $row) . '),');
+      }
     }
   }
 
@@ -33,7 +49,6 @@ function _export_d7_node_repair() {
 }
 
 function _specifyBundleNid($node_type = array()) {
-  dpm(34);
     $query = new EntityFieldQuery;
     $query->entityCondition('entity_type', 'node')
       ->entityCondition('bundle', $node_type)
@@ -48,15 +63,14 @@ function _specifyBundleNid($node_type = array()) {
     }
 
     return $nid_array;
-  }
+}
 
 function _node_method_collections() {
-  $vid = 2;
   $methods = array(
-    'field_text'             => "safe_value",
-    'field_entity_reference' => "target_id",
-    'field_term_reference'   => "tid",
-    'field_datetime'         => "value",
+    // 'field_text'             => "safe_value",
+    // 'field_entity_reference' => "target_id",
+    // 'field_term_reference'   => "tid",
+    // 'field_datetime'         => "value",
 
     'field_repair_client_name' => "target_id",
     'field_repair_client_subname' => "safe_value",
@@ -67,13 +81,13 @@ function _node_method_collections() {
     'field_repair_device_type' => "tid",
     'field_repair_device_spec' => "safe_value",
     'field_repair_receive_note' => "safe_value",
-    'field_repair_receive_date' => "value",
+    'field_repair_receive_date' => "datetime",
 
     // 初验
     'field_repair_check_note' => "safe_value",
     'field_repair_check_issue' => "safe_value",
     'field_repair_check_staff' => "target_id",
-    'field_repair_check_date' => "value",
+    'field_repair_check_date' => "datetime",
     'field_repair_quote_amount' => "value",
     'field_repair_quote_status' => "value",
 
@@ -81,12 +95,14 @@ function _node_method_collections() {
     'field_repair_issue_reason' => "safe_value",
     'field_repair_repair_approach' => "safe_value",
     'field_repair_repair_amount' => "value",
-    'field_repair_repair_date' => "value",
+    'field_repair_repair_date' => "datetime",
 
     // 返回
     'field_repair_return_amount' => "value",
     'field_repair_return_note' => "safe_value",
-    'field_repair_return_date' => "value",
+    'field_repair_return_date' => "datetime",
     'field_repair_warranty_day' => "value",
   );
+
+  return $methods;
 }
