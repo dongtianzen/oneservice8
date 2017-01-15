@@ -29,7 +29,6 @@ function _entity_create_terms($vocabulary, $term) {
 
 function _entity_terms_info() {
   $terms = array(
-    " ",
     "ADP-1000",
     "ADP-2000",
     "ATV",

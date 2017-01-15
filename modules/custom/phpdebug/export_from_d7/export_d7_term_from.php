@@ -3,14 +3,14 @@
 
 /**
  *
-  require_once(DRUPAL_ROOT . '/modules/custom/phpdebug/export_from_d7/export_term_from_d7.php');
+  require_once(DRUPAL_ROOT . '/modules/custom/phpdebug/export_from_d7/export_d7_term_from.php');
   _state_value(3);
  */
 
 function _state_value($key = NULL) {
 }
 
-public function taxonomyGetTreeTidNames($vid = NULL) {
+function taxonomyGetTreeTidNames($vid = NULL) {
   $output = array();
 
 
