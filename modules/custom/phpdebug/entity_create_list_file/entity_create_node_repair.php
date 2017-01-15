@@ -42,6 +42,8 @@ function _entity_create_node_repair_field() {
     'type'       => 'string',
     'label'      => t('Contact Phone'),
   );
+
+  // 收取
   $fields[] = array(
     'field_name' => 'field_repair_serialnumber',
     'type'       => 'string',
@@ -67,8 +69,52 @@ function _entity_create_node_repair_field() {
     'type'       => 'datetime',
     'label'      => t('Receive Date'),
   );
+
+  // 初验
+  $fields[] = array(
+    'field_name' => 'field_repair_checknote',
+    'type'       => 'string',
+    'label'      => t('Check Note'),
+  );
+  $fields[] = array(
+    'field_name' => 'field_repair_checkissue',
+    'type'       => 'string',
+    'label'      => t('Check Issue'),
+  );
+  // $fields[] = array(
+  //   'field_name' => 'field_repair_check_staff',
+  //   'type'       => 'entity_reference',
+  //   'label'      => t('初验人员'),
+  // );
+  $fields[] = array(
+    'field_name' => 'field_repair_check date',
+    'type'       => 'datetime',
+    'label'      => t('Check Date'),
+  );
   $fields[] = array(
     'field_name' => 'field_repair_quoteamount',
+    'type'       => 'decimal',
+    'label'      => t('Quote Amount'),
+  );
+  $fields[] = array(
+    'field_name' => 'field_repair_quotestatus',
+    'type'       => 'boolean',
+    'label'      => t('Quote Status'),
+  );
+
+  // 维修
+  $fields[] = array(
+    'field_name' => 'field_repair_issuereason',
+    'type'       => 'string',
+    'label'      => t('Issue Reason'),
+  );
+  $fields[] = array(
+    'field_name' => 'field_repair_repairapproach',
+    'type'       => 'string',
+    'label'      => t('Repair Approach'),
+  );
+  $fields[] = array(
+    'field_name' => 'field_repair_repairamount',
     'type'       => 'decimal',
     'label'      => t('Quote Amount'),
   );
@@ -77,6 +123,8 @@ function _entity_create_node_repair_field() {
     'type'       => 'string',
     'label'      => t('Repair Date'),
   );
+
+  // 返回
   $fields[] = array(
     'field_name' => 'field_repair_returnamount',
     'type'       => 'decimal',
