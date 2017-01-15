@@ -21,20 +21,26 @@ function _export_d7_node_repair() {
         $row = array();
         foreach ($node_method_collections as $field_name => $value) {
 
-        //   $field_value = "NULL";
+          $field_value = "NULL";
+          if (isset($node->{$field_name}['und'][0][$value])) {
+            $field_value = $node->{$field_name}['und'][0][$value];
 
-        //   if (isset($node->$field_name['und'][0][$value]) {
-        //     $field_value = $node->{$field_name}['und'][0][$value];
+            if ($value == "tid" || $value == "target_id") {
+              $term = taxonomy_term_load($node->{$field_name}['und'][0][$value]);
+              if (isset($term->name)) {
+                $field_value = $term->name;
+              }
 
-        //     if ($value == "tid" || $value == "target_id")) {
-        //       $term = taxonomy_term_load($node->{$field_name}['und'][0][$value]);
-        //       if (isset($term->name)) {
-        //         $field_value = $term->name;
-        //       }
-        //     }
-        //   }
-        //   $row[] = $field_name . ' - ' . $field_value;
-        //   dpm($field_name . ' - ' . $field_value);
+              if ($field_name == "field_repair_check_staff") {
+                $user = user_load($node->{$field_name}['und'][0][$value]);
+                if (isset($user->name)) {
+                  $field_value = $user->name;
+                }
+              }
+            }
+          }
+          $row[] = $field_name . ' - ' . $field_value;
+          dpm($field_name . ' - ' . $field_value);
         }
 
         dpm('array(' . implode(',', $row) . '),');
