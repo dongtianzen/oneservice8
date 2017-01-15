@@ -3,11 +3,10 @@
 /**
  *
   require_once(DRUPAL_ROOT . '/modules/custom/phpdebug/entity_create_node_repair.php');
-  _load_terms();
   _run_batch_entity_node_repair();
  */
 
-use Drupal\taxonomy\Entity\Term;
+use \Drupal\node\Entity\Node;
 
 function _load_terms($term_name, $vocabulary = NULL) {
   $output = NULL;
@@ -35,11 +34,11 @@ function _load_user($user_name) {
 function _run_batch_entity_node_repair() {
   $nodes_info = json_decode(_entity_node_json_info(), true);
   foreach ($nodes_info as $node_info) {
-    _entity_node_repair($node_info);
+    _entity_create_node_repair($node_info);
   }
 }
 
-function _entity_node_repair($node_info) {
+function _entity_create_node_repair($node_info) {
   $bundle_type = 'repair';
   $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
@@ -51,10 +50,10 @@ function _entity_node_repair($node_info) {
     'status' => 1,
 
     // field
-    'field_repair_clientname' => $node_info['field_repair_client_name'],
+    // 'field_repair_clientname' => $node_info['field_repair_client_name'],
 
     // 收取
-    'field_repair_serial_number' => $node_info['field_repair_serial_number'],
+    // 'field_repair_serial_number' => $node_info['field_repair_serial_number'],
     // 'field_client_province' => _load_terms($term_info[6]),
     // 'field_client_salesperson' => _load_user($term_info[7]),
   ));
@@ -63,9 +62,7 @@ function _entity_node_repair($node_info) {
 }
 
 function _entity_node_json_info() {
-  $jsons = array(
-    array("上海影音系统有限公司", "上海影音系统有限公司", "", "许亮", "", "13900000000", "上海", "zhangsan"),
-  );
+  $jsons = '';
 
   return $jsons;
 }
