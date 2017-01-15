@@ -80,7 +80,7 @@ function _entity_fields_info() {
   $fields[] = array(
     'field_name' => 'field_repair_receivenote',
     'type'       => 'string',
-    'label'      => t('receive note'),
+    'label'      => t('Receive Note'),
   );
   $fields[] = array(
     'field_name' => 'field_repair_receivedate',
@@ -105,7 +105,7 @@ function _entity_fields_info() {
   //   'label'      => t('初验人员'),
   // );
   $fields[] = array(
-    'field_name' => 'field_repair_check date',
+    'field_name' => 'field_repair_checkdate',
     'type'       => 'datetime',
     'label'      => t('Check Date'),
   );
