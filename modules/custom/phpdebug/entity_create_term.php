@@ -23,10 +23,12 @@ function _load_terms($term_name, $vocabulary = NULL) {
 
 function _load_user($user_name) {
   $output = NULL;
-  $user = user_load_by_name($user_name);
 
-  if (count($user) > 0) {
-    $output = $user->get('uid')->value;
+  if ($user_name) {
+    $user = user_load_by_name($user_name);
+    if (count($user) > 0) {
+      $output = $user->get('uid')->value;
+    }
   }
 
   return $output;

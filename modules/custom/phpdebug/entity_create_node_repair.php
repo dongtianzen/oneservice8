@@ -23,10 +23,13 @@ function _load_terms($term_name, $vocabulary = NULL) {
 
 function _load_user($user_name) {
   $output = NULL;
-  $user = user_load_by_name($user_name);
 
-  if (count($user) > 0) {
-    $output = $user->get('uid')->value;
+  if ($user_name) {
+    $user = user_load_by_name($user_name);
+
+    if (count($user) > 0) {
+      $output = $user->get('uid')->value;
+    }
   }
 
   return $output;
@@ -44,8 +47,14 @@ function _timestamp_convert($timestamp) {
 
 function _run_batch_entity_node_repair() {
   $nodes_info = json_decode(_entity_node_json_info(), true);
-  foreach ($nodes_info as $node_info) {
-    _entity_create_node_repair($node_info);
+  dpm('count --'  . count($nodes_info));
+  if (is_array($nodes_info)) {
+    foreach ($nodes_info as $key => $node_info) {
+      if ($key > 4) {
+        _entity_create_node_repair($node_info);
+        dpm('node create -- ' . $key);
+      }
+    }
   }
 }
 
@@ -99,6 +108,5 @@ function _entity_create_node_repair($node_info) {
 
 function _entity_node_json_info() {
   $jsons = _entity_node_json_info_json();
-
   return $jsons;
 }

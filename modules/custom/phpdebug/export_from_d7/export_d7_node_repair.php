@@ -17,37 +17,35 @@ function _export_d7_node_repair() {
 
   if (is_array($nodes)) {
     foreach ($nodes as $key => $node) {
-      if ($key < 30) {
-        $row = array();
-        foreach ($node_method_collections as $field_name => $value) {
+      $row = array();
+      foreach ($node_method_collections as $field_name => $value) {
 
-          $field_value = NULL;
-          if (isset($node->{$field_name}['und'][0][$value])) {
-            $field_value = $node->{$field_name}['und'][0][$value];
+        $field_value = NULL;
+        if (isset($node->{$field_name}['und'][0][$value])) {
+          $field_value = $node->{$field_name}['und'][0][$value];
 
-            if ($value == "tid" || $value == "target_id") {
-              $term = taxonomy_term_load($node->{$field_name}['und'][0][$value]);
-              if (isset($term->name)) {
-                $field_value = $term->name;
-              }
+          if ($value == "tid" || $value == "target_id") {
+            $term = taxonomy_term_load($node->{$field_name}['und'][0][$value]);
+            if (isset($term->name)) {
+              $field_value = $term->name;
+            }
 
-              if ($field_name == "field_repair_check_staff") {
-                $user = user_load($node->{$field_name}['und'][0][$value]);
-                if (isset($user->name)) {
-                  $field_value = $user->name;
-                }
+            if ($field_name == "field_repair_check_staff") {
+              $user = user_load($node->{$field_name}['und'][0][$value]);
+              if (isset($user->name)) {
+                $field_value = $user->name;
               }
             }
           }
-          dpm($field_name . ' - ' . $field_value);
-          $row[$field_name] = $field_value;
         }
-
-        dpm('array(' . implode(',', $row) . '),');
+        dpm($field_name . ' - ' . $field_value);
+        $row[$field_name] = $field_value;
       }
 
-      $output[] = $row;
+      dpm('array(' . implode(',', $row) . '),');
     }
+
+    $output[] = $row;
 
     $json_data = json_encode($output, JSON_UNESCAPED_UNICODE);
     dpm($json_data);
