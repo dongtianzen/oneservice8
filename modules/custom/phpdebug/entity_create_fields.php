@@ -9,7 +9,7 @@
 function _run_batch_entity_create_fields() {
   $entity_info = array(
     'entity_type' => 'node',  // 'node', 'taxonomy_term', 'user'
-    'bundle' => 'repair',
+    'bundle' => 'quote',
   );
 
   $fields = _entity_fields_info();
@@ -20,148 +20,42 @@ function _run_batch_entity_create_fields() {
 
 /**
  *
-  field type list:
-  boolean
-  datetime
-  decimal
-  email
-  entity_reference
-  file
-  float
-  image
-  integer
-  link
-  list_integer
-  list_string
-  telephone
-  string         // Text (plain)
-  string_long    // Text (plain, long)
-  text_long      // Text (formatted, long)
-  text_with_summary
  */
 function _entity_fields_info() {
   // $fields[] = array(
-  //   'field_name' => 'field_repair_client_name',
+  //   'field_name' => 'field_quote_repairnid',
   //   'type'       => 'entity_reference',
-  //   'label'      => t('客户名称'),
+  //   'label'      => t('Repair NID'),
   // );
-  $fields[] = array(
-    'field_name' => 'field_repair_clientsubname',
-    'type'       => 'string',
-    'label'      => t('Client Sub Name'),
-  );
-  $fields[] = array(
-    'field_name' => 'field_repair_contactname',
-    'type'       => 'string',
-    'label'      => t('Contact Name'),
-  );
-  $fields[] = array(
-    'field_name' => 'field_repair_contactphone',
-    'type'       => 'string',
-    'label'      => t('Contact Phone'),
-  );
-
-  // 收取
-  $fields[] = array(
-    'field_name' => 'field_repair_serialnumber',
-    'type'       => 'string',
-    'label'      => t('Serial Number'),
-  );
   // $fields[] = array(
-  //   'field_name' => 'field_repair_device_type',
+  //   'field_name' => 'field_quote_company',
   //   'type'       => 'entity_reference',
-  //   'label'      => t('设备类型'),
+  //   'label'      => t('Company Name'),
   // );
   $fields[] = array(
-    'field_name' => 'field_repair_deviceformat',
+    'field_name' => 'field_quote_clientname',
     'type'       => 'string',
-    'label'      => t('Device Format'),
+    'label'      => t('Client Name'),
   );
   $fields[] = array(
-    'field_name' => 'field_repair_receivenote',
-    'type'       => 'string',
-    'label'      => t('Receive Note'),
-  );
-  $fields[] = array(
-    'field_name' => 'field_repair_receivedate',
-    'type'       => 'datetime',
-    'label'      => t('Receive Date'),
-  );
-
-  // 初验
-  $fields[] = array(
-    'field_name' => 'field_repair_checknote',
-    'type'       => 'string',
-    'label'      => t('Check Note'),
-  );
-  $fields[] = array(
-    'field_name' => 'field_repair_checkissue',
-    'type'       => 'string',
-    'label'      => t('Check Issue'),
-  );
-  // $fields[] = array(
-  //   'field_name' => 'field_repair_check_staff',
-  //   'type'       => 'entity_reference',
-  //   'label'      => t('初验人员'),
-  // );
-  $fields[] = array(
-    'field_name' => 'field_repair_checkdate',
-    'type'       => 'datetime',
-    'label'      => t('Check Date'),
-  );
-  $fields[] = array(
-    'field_name' => 'field_repair_quoteamount',
+    'field_name' => 'field_quote_sumprice',
     'type'       => 'decimal',
-    'label'      => t('Quote Amount'),
+    'label'      => t('Sum Price'),
   );
   $fields[] = array(
-    'field_name' => 'field_repair_quotestatus',
-    'type'       => 'boolean',
-    'label'      => t('Quote Status'),
-  );
-
-  // 维修
-  $fields[] = array(
-    'field_name' => 'field_repair_issuereason',
-    'type'       => 'string',
-    'label'      => t('Issue Reason'),
-  );
-  $fields[] = array(
-    'field_name' => 'field_repair_repairapproach',
-    'type'       => 'string',
-    'label'      => t('Repair Approach'),
-  );
-  $fields[] = array(
-    'field_name' => 'field_repair_repairamount',
-    'type'       => 'decimal',
-    'label'      => t('Quote Amount'),
-  );
-  $fields[] = array(
-    'field_name' => 'field_repair_repairdate',
-    'type'       => 'datetime',
-    'label'      => t('Repair Date'),
-  );
-
-  // 返回
-  $fields[] = array(
-    'field_name' => 'field_repair_returnamount',
-    'type'       => 'decimal',
-    'label'      => t('Return Amount'),
-  );
-  $fields[] = array(
-    'field_name' => 'field_repair_returnnote',
-    'type'       => 'string',
-    'label'      => t('Return Note'),
-  );
-  $fields[] = array(
-    'field_name' => 'field_repair_returndate',
-    'type'       => 'datetime',
-    'label'      => t('Return Date'),
-  );
-  $fields[] = array(
-    'field_name' => 'field_repair_warrantyday',
+    'field_name' => 'field_quote_warrantyday',
     'type'       => 'integer',
     'label'      => t('Warranty Day'),
+  );
+  $fields[] = array(
+    'field_name' => 'field_quote_date',
+    'type'       => 'datetime',
+    'label'      => t('Quote Date'),
+  );
+  $fields[] = array(
+    'field_name' => 'field_quote_authorizestamp',
+    'type'       => 'boolean',
+    'label'      => t('Authorize Stamp'),
   );
 
   return $fields;
