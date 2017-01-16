@@ -8,8 +8,8 @@
 
 function _run_batch_entity_create_fields() {
   $entity_info = array(
-    'entity_type' => 'node',  // 'node', 'taxonomy_term', 'user'
-    'bundle' => 'quote',
+    'entity_type' => 'taxonomy_term',  // 'node', 'taxonomy_term', 'user'
+    'bundle' => 'company',
   );
 
   $fields = _entity_fields_info();
@@ -22,40 +22,40 @@ function _run_batch_entity_create_fields() {
  *
  */
 function _entity_fields_info() {
-  // $fields[] = array(
-  //   'field_name' => 'field_quote_repairnid',
-  //   'type'       => 'entity_reference',
-  //   'label'      => t('Repair NID'),
-  // );
-  // $fields[] = array(
-  //   'field_name' => 'field_quote_company',
-  //   'type'       => 'entity_reference',
-  //   'label'      => t('Company Name'),
-  // );
   $fields[] = array(
-    'field_name' => 'field_quote_clientname',
+    'field_name' => 'field_company_bank',
     'type'       => 'string',
-    'label'      => t('Client Name'),
+    'label'      => t('Bank Name'),
   );
   $fields[] = array(
-    'field_name' => 'field_quote_sumprice',
-    'type'       => 'decimal',
-    'label'      => t('Sum Price'),
+    'field_name' => 'field_company_accountnum',
+    'type'       => 'string',
+    'label'      => t('Account Number'),
   );
   $fields[] = array(
-    'field_name' => 'field_quote_warrantyday',
-    'type'       => 'integer',
-    'label'      => t('Warranty Day'),
+    'field_name' => 'field_company_logo',
+    'type'       => 'image',
+    'label'      => t('Company Logo'),
   );
   $fields[] = array(
-    'field_name' => 'field_quote_date',
-    'type'       => 'datetime',
-    'label'      => t('Quote Date'),
+    'field_name' => 'field_company_address',
+    'type'       => 'string',
+    'label'      => t('Company Address'),
   );
   $fields[] = array(
-    'field_name' => 'field_quote_authorizestamp',
-    'type'       => 'boolean',
-    'label'      => t('Authorize Stamp'),
+    'field_name' => 'field_company_contacts',
+    'type'       => 'string',
+    'label'      => t('Contacts'),
+  );
+  $fields[] = array(
+    'field_name' => 'field_company_phone',
+    'type'       => 'string',
+    'label'      => t('Phone'),
+  );
+  $fields[] = array(
+    'field_name' => 'field_company_stamp',
+    'type'       => 'image',
+    'label'      => t('Stamp'),
   );
 
   return $fields;

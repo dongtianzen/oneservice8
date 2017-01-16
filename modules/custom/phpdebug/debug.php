@@ -3,7 +3,7 @@
 /**
  *
   require_once(DRUPAL_ROOT . '/modules/custom/phpdebug/debug.php');
-  _state_keyvalue(3);
+  _print_class();
   _query_nodes();
  */
 
@@ -14,6 +14,16 @@
 // use Symfony\Component\DependencyInjection\ContainerInterface;
 
 // use Drupal\nodeinfo\Controller\NodeinfoQueryController;
+use \Drupal\dashpage\Controller\DashpageController;
+function _print_class() {
+  $val = 33;
+  dpm($val . ' is :');
+
+  $cc = new DashpageController();
+  $methods = get_class_methods($cc);
+  dpm($cc);
+  dpm($methods);
+}
 
 function _state_value($key = NULL) {
   $val = \Drupal::state()->get($key);
