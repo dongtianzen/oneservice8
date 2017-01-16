@@ -3,6 +3,7 @@
 /**
  *
   require_once(DRUPAL_ROOT . '/modules/custom/phpdebug/entity_create_node_repair.php');
+  require_once(DRUPAL_ROOT . '/modules/custom/phpdebug/ignore/entity_create_node_repair_json.php');
   _run_batch_entity_node_repair();
  */
 
@@ -97,7 +98,7 @@ function _entity_create_node_repair($node_info) {
 }
 
 function _entity_node_json_info() {
-
+  $jsons = _entity_node_json_info_json();
 
   return $jsons;
 }

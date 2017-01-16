@@ -6,6 +6,9 @@ files/
 sites/*/files
 sites/*/private
 
+# Ignore debug files
+modules/custom/phpdebug/ignore/*
+
 # Ignore default text files
 # robots.txt
 # /CHANGELOG.txt
