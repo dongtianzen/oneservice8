@@ -120,7 +120,7 @@ function _entity_create_node_repair_field() {
   );
   $fields[] = array(
     'field_name' => 'field_repair_repairdate',
-    'type'       => 'string',
+    'type'       => 'datetime',
     'label'      => t('Repair Date'),
   );
 
@@ -133,17 +133,17 @@ function _entity_create_node_repair_field() {
   $fields[] = array(
     'field_name' => 'field_repair_returnnote',
     'type'       => 'string',
-    'label'      => t('return note'),
+    'label'      => t('Return Note'),
   );
   $fields[] = array(
     'field_name' => 'field_repair_returndate',
     'type'       => 'datetime',
-    'label'      => t('return date'),
+    'label'      => t('Return Date'),
   );
   $fields[] = array(
     'field_name' => 'field_repair_warrantyday',
     'type'       => 'integer',
-    'label'      => t('warranty day'),
+    'label'      => t('Warranty Day'),
   );
 
   return $fields;
