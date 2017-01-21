@@ -3,7 +3,7 @@
 /**
  *
   require_once(DRUPAL_ROOT . '/modules/custom/phpdebug/debug.php');
-  _print_class();
+  _convert_date();
   _query_nodes();
  */
 
@@ -23,6 +23,13 @@ function _print_class() {
   $methods = get_class_methods($cc);
   dpm($cc);
   dpm($methods);
+}
+
+function _convert_date() {
+  $timestamp = 1426694400;
+  $output = date('Y-m-d', $timestamp);
+
+  dpm($output);
 }
 
 function _state_value($key = NULL) {
