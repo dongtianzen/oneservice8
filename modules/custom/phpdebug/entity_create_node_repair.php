@@ -58,27 +58,6 @@ function _run_batch_entity_node_repair() {
   }
 }
 
-function _entity_create_node_quote($node_info) {
-  $bundle_type = 'repair';
-  $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-
-  $node = \Drupal\node\Entity\Node::create(array(
-    'type' => $bundle_type,
-    'title' => 'D7-' . 'Quote-' . $node_info['field_repair_client_name'] . '-' . $node_info['field_repair_serial_number'],
-    'langcode' => $language,
-    'uid' => 1,
-    'status' => 1,
-
-    // 返回
-    'field_repair_returnamount'  => $node_info['field_repair_return_amount'],
-    'field_repair_returnnote'    => $node_info['field_repair_return_note'],
-    'field_repair_returndate'    => _timestamp_convert($node_info['field_repair_return_date']),
-    'field_repair_warrantyday'   => $node_info['field_repair_warranty_day'],
-  ));
-
-  $node->save();
-}
-
 function _entity_create_node_repair($node_info) {
   $bundle_type = 'repair';
   $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
@@ -128,6 +107,6 @@ function _entity_create_node_repair($node_info) {
 }
 
 function _entity_node_json_info() {
-  $jsons = _entity_node_json_info_json();
+  $jsons = _entity_d7_node_repair_json();
   return $jsons;
 }

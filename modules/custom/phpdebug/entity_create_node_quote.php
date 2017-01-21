@@ -83,6 +83,6 @@ function _entity_create_node_quote($node_info) {
 }
 
 function _entity_node_json_info() {
-  $jsons = _entity_node_json_info_json();
+  $jsons = _entity_d7_node_quote_json();
   return $jsons;
 }
