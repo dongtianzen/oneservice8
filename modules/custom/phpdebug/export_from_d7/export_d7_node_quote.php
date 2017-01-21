@@ -69,13 +69,14 @@ function _specifyBundleNid($node_type = array()) {
     return $nid_array;
 }
 
+/**
+ * 'field_text'             => "safe_value",
+ * 'field_entity_reference' => "target_id",
+ * 'field_term_reference'   => "tid",
+ * 'field_datetime'         => "value",
+ */
 function _node_method_collections() {
   $methods = array(
-    // 'field_text'             => "safe_value",
-    // 'field_entity_reference' => "target_id",
-    // 'field_term_reference'   => "tid",
-    // 'field_datetime'         => "value",
-
     'field_quote_repair_nid'      => "value",
     'field_quote_company_name'    => "target_id",
     'field_quote_client_name'     => "safe_value",
