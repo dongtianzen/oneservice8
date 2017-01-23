@@ -4,7 +4,7 @@
  */
 
 var jsonFileUrl = drupalSettings.path.baseUrl + 'manage/term/client/json';
-
+console.log(777);
 var pageInfoBaseControllers = angular.module('pageInfoBase', []);
 
 pageInfoBaseControllers.controller('PageInfoBaseController', ['$scope', '$http', '$filter', '$sce',
