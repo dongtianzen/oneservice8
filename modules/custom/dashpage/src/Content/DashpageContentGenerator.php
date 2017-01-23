@@ -34,6 +34,30 @@ class DashpageContentGenerator extends ControllerBase {
   /**
    *
    */
+  public function angularDemo() {
+    $output = '';
+    $output .= '<div id="pageInfoBase" data-ng-app="pageInfoBase" class="custom-pageinfo pageinfo-subpage-common">';
+      $output .= '<div data-ng-controller="PageInfoBaseController" class="row margin-top-16">';
+
+        $output .= '<div class="block-one bg-ffffff padding-bottom-20">';
+          $output .= '<div class="row">';
+            $output .= "{{ pageTitle }}";
+            $output .= "<br />";
+            $output .= "{{ pageSubTitle }}";
+            $output .= "<br />";
+            $output .= "{{ pageData[0].name }}";
+          $output .= '</div>';
+        $output .= '</div>';
+
+      $output .= '</div>';
+    $output .= '</div>';
+
+    return $output;
+  }
+
+  /**
+   *
+   */
   public function angularSnapshot() {
     $output = '';
     $output .= '<div id="pageInfoBase" data-ng-app="pageInfoBase" class="custom-pageinfo pageinfo-subpage-common">';
@@ -41,8 +65,32 @@ class DashpageContentGenerator extends ControllerBase {
 
         $output .= '<div class="block-one bg-ffffff padding-bottom-20">';
           $output .= '<div class="row">';
-            // $output .= "{{ pageData[0].name }}";
-            $output .= "99";
+
+            // $output .= '<div data-ng-repeat="pageDataRow in pageData" ng-init="parent=$parent">';
+            //   $output .= "{{ pageDataRow.name }}";
+            // $output .= '</div>';
+
+            $output .= '<div class="margin-top-12">';
+              $output .= '<table class="table table-hover">';
+                $output .= '<thead>';
+                  $output .= '<tr>';
+                    $output .= '<th data-ng-repeat="tableHead in pageData[0]">';
+                      $output .= "{{ tableHead }}";
+                    $output .= '</th>';
+                  $output .= '</tr>';
+                $output .= '</thead>';
+
+                $output .= '<tbody data-ng-repeat="pageDataRow in pageData | filter:inputFilter" class="">';
+                  $output .= '<tr>';
+                    $output .= '<td data-ng-repeat="tableHead in pageDataRow">';
+                      $output .= "{{ tableHead }}";
+                    $output .= '</td>';
+                  $output .= '</tr>';
+
+                $output .= '</tbody>';
+              $output .= '</table>';
+            $output .= '</div>';
+
           $output .= '</div>';
         $output .= '</div>';
 

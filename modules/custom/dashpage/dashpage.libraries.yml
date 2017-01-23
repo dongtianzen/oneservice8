@@ -1,3 +1,9 @@
+angular_demo:
+  js:
+    angular/angular-demo.js: {}
+  dependencies:
+    - fxt/angular.angularjs
+
 angular_snapshot:
   js:
     angular/angular-snapshot.js: {}

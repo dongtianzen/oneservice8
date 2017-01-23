@@ -10,6 +10,8 @@ pageInfoBaseControllers.controller('PageInfoBaseController', ['$scope', '$http',
   function($scope, $http, $filter, $sce) {
 
     $scope.$sce = $sce;
+    $scope.pageTitle = 'This is angularjs page';
+    $scope.pageSubTitle = 'This is angularjs Demo page';
 
     angular.element(document).ready(function() {
       $http.get(jsonFileUrl).success(function(data) {
