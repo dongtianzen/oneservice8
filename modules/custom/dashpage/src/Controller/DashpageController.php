@@ -8,6 +8,7 @@
 namespace Drupal\dashpage\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Component\Utility\Xss;
 
 use Drupal\dashpage\Content\DashpageContentGenerator;
 

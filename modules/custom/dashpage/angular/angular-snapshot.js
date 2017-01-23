@@ -3,8 +3,7 @@
  * This controller will take care of parsing the data from json file
  */
 
-var jsonFileUrl = drupalSettings.path.baseUrl + 'modules/custom/dashpage/angular/mildderjson.json';
-var jsonFileUrl = drupalSettings.path.baseUrl + 'dashpage/angular/json';
+var jsonFileUrl = drupalSettings.path.baseUrl + 'manage/term/client/json';
 
 var pageInfoBaseControllers = angular.module('pageInfoBase', ['flexxiaChartsnewjs', 'ngMaterial', 'datatables', 'ngResource', 'datatables.buttons']);
 
