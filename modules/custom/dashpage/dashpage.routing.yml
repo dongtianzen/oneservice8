@@ -1,3 +1,11 @@
+dashpage.angular.snapshot:
+  path: '/dashpage/angular/snapshot'
+  defaults:
+    _controller: '\Drupal\dashpage\Controller\DashpageController::angularSnapshot'
+    _title: 'Dash Angular Page'
+  requirements:
+    _permission: 'access content'
+
 dashpage.client.list:
   path: '/dashpage/client/list'
   defaults:
