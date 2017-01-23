@@ -35,10 +35,10 @@ class DashpageContentGenerator extends ControllerBase {
    *
    */
   public function clientList() {
-    $view = Views::getView('term_client_collection');
+    // $view = Views::getView('term_client_collection');
 
-    $view->setDisplay('default');
-    $view->execute();
+    // $view->setDisplay('default');
+    // $view->execute();
 
 // dpm($view->total_rows);
     // $view->getDisplay();
@@ -50,8 +50,8 @@ class DashpageContentGenerator extends ControllerBase {
         // $output .= $view->viewsData;
         // $output .= $view->render();
         // $output .= render($view->render());    // method 1
-        $output .= render($view->buildRenderable('default'));// method 2
-        // $output .= drupal_render(views_embed_view('term_client_collection', 'default'));  // method 3
+        // $output .= render($view->buildRenderable('default'));// method 2
+        $output .= render(views_embed_view('term_client_collection', 'default'));  // method 3
       $output .= '</div>';
     $output .= '</div>';
 
