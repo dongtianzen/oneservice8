@@ -41,7 +41,8 @@ class DashpageContentGenerator extends ControllerBase {
 
         $output .= '<div class="block-one bg-ffffff padding-bottom-20">';
           $output .= '<div class="row">';
-            $output .= 33;
+            // $output .= "{{ pageData[0].name }}";
+            $output .= "99";
           $output .= '</div>';
         $output .= '</div>';
 

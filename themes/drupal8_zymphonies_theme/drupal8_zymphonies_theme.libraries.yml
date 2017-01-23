@@ -32,3 +32,59 @@ global-components:
     - core/drupal
     - core/drupalSettings
     - core/jquery.once
+
+# custom library - - - - - - - - - - - - - - - - - - - - - - - -
+# external remote CDN
+angular.angularjs:
+  remote: https://github.com/angular
+  version: 1.4.4
+  license:
+    name: MIT
+    url: https://github.com/angular/angular.js/blob/master/LICENSE
+    gpl-compatible: true
+  js:
+    https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js: { type: external, minified: true }
+    https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-animate.min.js: { type: external, minified: true }
+    https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-aria.min.js: { type: external, minified: true }
+    https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-messages.min.js: { type: external, minified: true }
+    https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-resource.min.js: { type: external, minified: true }
+    https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.min.js: { type: external, minified: true }
+    https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-sanitize.min.js: { type: external, minified: true }
+
+#
+angular.chartnewjs:
+  remote: https://github.com/FVANCOP/ChartNew.js/
+  version: 1.0.1
+  license:
+    name: MIT
+    url: https://github.com/FVANCOP/ChartNew.js/
+    gpl-compatible: true
+  js:
+    /libraries/chartnewjs/chartNew.js: {}
+    /libraries/chartnewjs/angular-chartNew.js: {}
+
+# external remote CDN
+angular.material:
+  remote: https://github.com/angular
+  version: 1.4.4
+  license:
+    name: MIT
+    url: https://github.com/angular/angular.js/blob/master/LICENSE
+    gpl-compatible: true
+  css:
+    theme:
+      https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.0.9/angular-material.min.css: { type: external, minified: true }
+  js:
+    https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.0.9/angular-material.min.js: { type: external, minified: true }
+
+# external remote
+font-awesome:
+  remote: https://fortawesome.github.io/Font-Awesome/
+  version: 4.5.0
+  license:
+    name: MIT
+    url: https://fortawesome.github.io/Font-Awesome/license/
+    gpl-compatible: true
+  css:
+    theme:
+      https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css: { type: external, minified: true }
