@@ -74,16 +74,16 @@ class DashpageContentGenerator extends ControllerBase {
               $output .= '<table class="table table-hover">';
                 $output .= '<thead>';
                   $output .= '<tr>';
-                    $output .= '<th data-ng-repeat="tableHead in pageData[0]">';
-                      $output .= "{{ tableHead }}";
+                    $output .= '<th data-ng-repeat="(tableHeadKey, tableHeadCell) in pageData[0]">';
+                      $output .= "{{ tableHeadKey }}";
                     $output .= '</th>';
                   $output .= '</tr>';
                 $output .= '</thead>';
 
-                $output .= '<tbody data-ng-repeat="pageDataRow in pageData | filter:inputFilter" class="">';
+                $output .= '<tbody data-ng-repeat="tableRow in pageData | filter:inputFilter" class="">';
                   $output .= '<tr>';
-                    $output .= '<td data-ng-repeat="tableHead in pageDataRow">';
-                      $output .= "{{ tableHead }}";
+                    $output .= '<td data-ng-repeat="tableRowCell in tableRow">';
+                      $output .= "{{ tableRowCell }}";
                     $output .= '</td>';
                   $output .= '</tr>';
 
