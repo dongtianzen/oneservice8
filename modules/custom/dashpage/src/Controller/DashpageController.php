@@ -39,14 +39,6 @@ class DashpageController extends ControllerBase {
     $DashpageContentGenerator = new DashpageContentGenerator();
     $output = $DashpageContentGenerator->angularDemo();
 
-    $admin_tags = Xss::getAdminTagList();
-    $admin_tags_plus = [
-      'canvas', 'form', 'input', 'label', 'md-button', 'md-content',
-      'md-input-container', 'md-menu', 'md-menu-content', 'md-option',
-      'md-select', 'md-tab', 'md-tabs', 'md-tooltip',
-    ];
-    $admin_tags = array_merge($admin_tags, $admin_tags_plus);
-
     $build = array(
       '#type' => 'markup',
       '#header' => 'header',
@@ -68,14 +60,6 @@ class DashpageController extends ControllerBase {
     $DashpageContentGenerator = new DashpageContentGenerator();
     $output = $DashpageContentGenerator->angularSnapshot();
 
-    $admin_tags = Xss::getAdminTagList();
-    $admin_tags_plus = [
-      'canvas', 'form', 'input', 'label', 'md-button', 'md-content',
-      'md-input-container', 'md-menu', 'md-menu-content', 'md-option',
-      'md-select', 'md-tab', 'md-tabs', 'md-tooltip',
-    ];
-    $admin_tags = array_merge($admin_tags, $admin_tags_plus);
-
     $build = array(
       '#type' => 'markup',
       '#header' => 'header',
@@ -93,7 +77,7 @@ class DashpageController extends ControllerBase {
   /**
    *
    */
-  public function ContentGeneratorTemplate($method = 'template') {
+  public function contentGeneratorTemplate($method = 'template') {
     $DashpageContentGenerator = new DashpageContentGenerator();
     $output = $DashpageContentGenerator->{$method}();
 
@@ -109,35 +93,35 @@ class DashpageController extends ControllerBase {
    * call from routing.yml
    */
   public function clientList() {
-    return $this->ContentGeneratorTemplate('clientList');
+    return $this->contentGeneratorTemplate('clientList');
   }
 
   /**
    * call from routing.yml
    */
   public function companyList() {
-    return $this->ContentGeneratorTemplate('companyList');
+    return $this->contentGeneratorTemplate('companyList');
   }
 
   /**
    * call from routing.yml
    */
   public function quoteList() {
-    return $this->ContentGeneratorTemplate('quoteList');
+    return $this->contentGeneratorTemplate('quoteList');
   }
 
   /**
    * call from routing.yml
    */
   public function repairList() {
-    return $this->ContentGeneratorTemplate('repairList');
+    return $this->contentGeneratorTemplate('repairList');
   }
 
   /**
    * call from routing.yml
    */
   public function userList() {
-    return $this->ContentGeneratorTemplate('userList');
+    return $this->contentGeneratorTemplate('userList');
   }
 
 }

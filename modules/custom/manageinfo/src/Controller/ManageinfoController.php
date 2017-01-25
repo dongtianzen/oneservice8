@@ -21,6 +21,22 @@ use Drupal\manageinfo\Content\ManageinfoJsonGenerator;
  * An example controller.
  */
 class ManageinfoController extends ControllerBase {
+
+  /**
+   *
+   */
+  public function adminTag() {
+    $admin_tags = Xss::getAdminTagList();
+    $admin_tags_plus = [
+      'canvas', 'form', 'input', 'label', 'md-button', 'md-content',
+      'md-datepicker', 'md-input-container', 'md-menu', 'md-menu-content',
+      'md-option', 'md-select', 'md-slider', 'md-tab', 'md-tabs', 'md-tooltip',
+    ];
+    $admin_tags = array_merge($admin_tags, $admin_tags_plus);
+
+    return $admin_tags;
+  }
+
   /**
    * {@inheritdoc}
    */
@@ -28,19 +44,11 @@ class ManageinfoController extends ControllerBase {
     $ManageinfoContentGenerator = new ManageinfoContentGenerator();
     $output = $ManageinfoContentGenerator->angularForm();
 
-    $admin_tags = Xss::getAdminTagList();
-    $admin_tags_plus = [
-      'form', 'input', 'label', 'md-button', 'md-content', 'md-datepicker',
-      'md-input-container', 'md-menu', 'md-menu-content', 'md-option',
-      'md-select', 'md-slider', 'md-tab', 'md-tabs', 'md-tooltip',
-    ];
-    $admin_tags = array_merge($admin_tags, $admin_tags_plus);
-
     $build = array(
       '#type' => 'markup',
       '#header' => 'header',
       '#markup' => $output,
-      '#allowed_tags' => $admin_tags,
+      '#allowed_tags' => $this->adminTag(),
       '#attached' => array(
         'library' => array(
           'manageinfo/angular_form',
@@ -63,6 +71,27 @@ class ManageinfoController extends ControllerBase {
     $build = array(
       '#type' => 'markup',
       '#markup' => json_encode($output),
+    );
+    return $build;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function manageinfoTable($topic) {
+    $ManageinfoJsonGenerator = new ManageinfoJsonGenerator();
+    $output = $ManageinfoJsonGenerator->manageinfoTable();
+
+    $build = array(
+      '#type' => 'markup',
+      '#header' => 'header',
+      '#markup' => $output,
+      '#allowed_tags' => $this->adminTag(),
+      '#attached' => array(
+        'library' => array(
+          'dashpage/angular_table',
+        ),
+      ),
     );
     return $build;
   }

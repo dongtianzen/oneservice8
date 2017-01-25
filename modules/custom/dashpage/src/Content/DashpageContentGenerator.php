@@ -66,9 +66,11 @@ class DashpageContentGenerator extends ControllerBase {
         $output .= '<div class="block-one bg-ffffff padding-bottom-20">';
           $output .= '<div class="row">';
 
-            // $output .= '<div data-ng-repeat="pageDataRow in pageData" ng-init="parent=$parent">';
-            //   $output .= "{{ pageDataRow.name }}";
-            // $output .= '</div>';
+            $output .= '<div class="">';
+              $output .= '<div class="float-left">';
+                $output .= t('Search') . ' <input data-ng-model="inputFilter.$">';
+              $output .= '</div>';
+            $output .= '</div>';
 
             $output .= '<div class="margin-top-12">';
               $output .= '<table class="table table-hover">';

@@ -6,3 +6,12 @@ angular_form:
     angular/angular-form.js: {}
   dependencies:
     - fxt/angular.angularjs
+
+angular_table:
+  css:
+    theme:
+      css/angular-table.css: {}
+  js:
+    angular/angular-table.js: {}
+  dependencies:
+    - fxt/angular.angularjs
