@@ -72,6 +72,7 @@ class ManageinfoController extends ControllerBase {
       '#type' => 'markup',
       '#markup' => json_encode($output),
     );
+
     return $build;
   }
 
@@ -93,6 +94,7 @@ class ManageinfoController extends ControllerBase {
         ),
       ),
     );
+
     return $build;
   }
 
