@@ -79,8 +79,8 @@ class ManageinfoController extends ControllerBase {
    * {@inheritdoc}
    */
   public function manageinfoTable($topic) {
-    $ManageinfoJsonGenerator = new ManageinfoJsonGenerator();
-    $output = $ManageinfoJsonGenerator->manageinfoTable();
+    $ManageinfoContentGenerator = new ManageinfoContentGenerator();
+    $output = $ManageinfoContentGenerator->manageinfoTable();
 
     $build = array(
       '#type' => 'markup',
