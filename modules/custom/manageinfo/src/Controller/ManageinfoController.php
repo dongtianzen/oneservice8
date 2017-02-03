@@ -90,7 +90,7 @@ class ManageinfoController extends ControllerBase {
       '#allowed_tags' => $this->adminTag(),
       '#attached' => array(
         'library' => array(
-          'dashpage/angular_table',
+          'manageinfo/angular_table',
         ),
       ),
     );
