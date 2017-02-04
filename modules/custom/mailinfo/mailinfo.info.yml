@@ -1,0 +1,5 @@
+name: MailInfo
+description: 'MailInfo Module'
+type: module
+core: 8.x
+package: Zen
