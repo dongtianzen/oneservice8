@@ -7,6 +7,7 @@
  */
 
 use Drupal\Core\Mail\MailManagerInterface;
+use Drupal\Core\Language\LanguageManagerInterface;
 
 function _run_send_mail() {
   // All system mails need to specify the module and template key (mirrored
@@ -21,7 +22,7 @@ function _run_send_mail() {
   // "params" loads in additional context for email content completion in
   // hook_mail(). In this case, we want to pass in the values the user entered
   // into the form, which include the message body in $form_values['message'].
-  $params['message'] = 'some message';
+  $params['message'] = 'some message 2';
 
   // MailManager::mail();
 
@@ -31,7 +32,7 @@ function _run_send_mail() {
   // - \Drupal::currentUser()->getPreferredLangcode(): Used when sending a
   //   mail back to the user currently viewing the site. This will send it in
   //   the language they're currently using.
-  // - \Drupal::languageManager()->getDefaultLanguage()->getId: Used when
+  // - \Drupal::languageManager()->getDefaultLanguage()->getId(): Used when
   //   sending mail to a pre-existing, 'neutral' address, such as the system
   //   e-mail address, or when you're unsure of the language preferences of
   //   the intended recipient.
@@ -39,7 +40,9 @@ function _run_send_mail() {
   // Since in our case, we are sending a message to a random e-mail address
   // that is not necessarily tied to a user account, we will use the site's
   // default language.
-  $language_code = 'en';
+
+  // $language_code = 'en';
+  $language_code = \Drupal::languageManager()->getDefaultLanguage()->getId();
 
   // Whether or not to automatically send the mail when we call mail() on the
   // mail manager. This defaults to TRUE, and is normally what you want unless
@@ -51,11 +54,11 @@ function _run_send_mail() {
   // while sending.
 
   $mailManager = \Drupal::service('plugin.manager.mail');
-  $result = $mailManager->mail($module, $key, $to, $language_code, $params, $from, $send_now);
-  if ($result['result'] == TRUE) {
-    drupal_set_message(t('Your message has been sent.'));
-  }
-  else {
-    drupal_set_message(t('There was a problem sending your message and it was not sent.'), 'error');
-  }
+  // $result = $mailManager->mail($module, $key, $to, $language_code, $params, $from, $send_now);
+  // if ($result['result'] == TRUE) {
+  //   drupal_set_message(t('Your message has been sent.'));
+  // }
+  // else {
+  //   drupal_set_message(t('There was a problem sending your message and it was not sent.'), 'error');
+  // }
 }
