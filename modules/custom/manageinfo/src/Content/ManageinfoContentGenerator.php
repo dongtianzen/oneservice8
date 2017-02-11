@@ -166,4 +166,18 @@ class ManageinfoContentGenerator extends ControllerBase {
     return $output;
   }
 
+  /**
+   *
+   */
+  public function settingIndex() {
+    $output = '';
+    $output .= '<div class="row margin-0">';
+      $output .= '<div class="">';
+        $output .='<span class="padding-top-12">Setting Index</span>';
+      $output .='</div>';
+    $output .= '</div>';
+
+    return $output;
+  }
+
 }

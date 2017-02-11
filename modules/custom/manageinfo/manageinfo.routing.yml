@@ -24,3 +24,12 @@ manageinfo.list.topic:
   requirements:
     _permission: 'access content'
     _role: 'authenticated'
+
+manageinfo.setting.index:
+  path: '/manageinfo/setting/index'
+  defaults:
+    _controller: '\Drupal\manageinfo\Controller\ManageinfoController::settingIndex'
+    _title: 'Setting Index'
+  requirements:
+    _permission: 'access content'
+    _role: 'authenticated'

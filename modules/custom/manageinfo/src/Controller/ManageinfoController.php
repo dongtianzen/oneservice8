@@ -146,4 +146,21 @@ class ManageinfoController extends ControllerBase {
     return $output;
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function settingIndex() {
+    $ManageinfoContentGenerator = new ManageinfoContentGenerator();
+    $output = $ManageinfoContentGenerator->settingIndex();
+
+    $build = array(
+      '#type' => 'markup',
+      '#header' => 'header',
+      '#markup' => $output,
+      '#allowed_tags' => $this->adminTag(),
+    );
+
+    return $build;
+  }
+
 }
