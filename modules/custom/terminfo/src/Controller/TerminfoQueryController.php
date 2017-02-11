@@ -2,12 +2,15 @@
 /**
  * @file
  */
+namespace Drupal\terminfo\Controller;
+
+use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Entity\Query\QueryFactory;
 
 /**
  * class
-   $TeaminfoQueryController = new TeaminfoQueryController();
-   $TeaminfoQueryController->meetingNids();
+   $TerminfoQueryController = new TerminfoQueryController();
+   $TerminfoQueryController->count();
 
    $nodes = entity_load_multiple('node', $nids = array());
    $nodes = entity_view_multiple($nodes);
@@ -17,7 +20,8 @@ use Drupal\Core\Entity\Query\QueryFactory;
    $vocabulary->label();
  *
  */
-class TeaminfoQueryController {
+class TerminfoQueryController extends ControllerBase {
+
   /**
    * @return array, nids
    */
@@ -66,4 +70,5 @@ class TeaminfoQueryController {
 
     return $query;
   }
+
 }

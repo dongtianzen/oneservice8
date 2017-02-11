@@ -1,0 +1,7 @@
+terminfo_json.basic_collection.topic:
+  path: '/terminfojson/basiccollection/{topic}'
+  defaults:
+    _controller: '\Drupal\terminfo\Controller\TerminfoJsonController::basicCollection'
+    _title: 'Basic Collection'
+  requirements:
+    _permission: 'access content'
