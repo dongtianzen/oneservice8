@@ -8,6 +8,9 @@ namespace Drupal\manageinfo\Content;
 
 use Drupal\Core\Controller\ControllerBase;
 
+use Drupal\Core\Link;
+use Drupal\Core\Url;
+
 /**
  * An example controller.
  $ ManageinfoContentGenerator = new ManageinfoContentGenerator();
@@ -170,11 +173,26 @@ class ManageinfoContentGenerator extends ControllerBase {
    *
    */
   public function settingIndex() {
+    $setting_array = array(
+      array(
+        'url' => '/superinfo/table/province',
+        'name' => 'Province',
+      ),
+      array(
+        'url' => '/superinfo/table/company',
+        'name' => 'Company',
+      ),
+    );
+
     $output = '';
     $output .= '<div class="row margin-0">';
-      $output .= '<div class="">';
-        $output .='<span class="padding-top-12">Setting Index</span>';
-      $output .='</div>';
+      foreach ($setting_array as $row) {
+        $output .= '<div class="col-md-4 col-sm-6 col-xs-12">';
+          $url = Url::fromUserInput($row['url']);
+          $output .= '<span class=""><i class="fa fa-television" aria-hidden="true"></i></span>';
+          $output .= '<span class="margin-left-12">' . $this->l($row['name'], $url) . '</span>';
+        $output .= '</div>';
+      }
     $output .= '</div>';
 
     return $output;
