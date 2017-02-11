@@ -34,30 +34,6 @@ class DashpageContentGenerator extends ControllerBase {
   /**
    *
    */
-  public function angularDemo() {
-    $output = '';
-    $output .= '<div id="pageInfoBase" data-ng-app="pageInfoBase" class="custom-pageinfo pageinfo-subpage-common">';
-      $output .= '<div data-ng-controller="PageInfoBaseController" class="row margin-top-16">';
-
-        $output .= '<div class="block-one bg-ffffff padding-bottom-20">';
-          $output .= '<div class="row">';
-            $output .= "{{ pageTitle }}";
-            $output .= "<br />";
-            $output .= "{{ pageSubTitle }}";
-            $output .= "<br />";
-            $output .= "{{ pageData[0].name }}";
-          $output .= '</div>';
-        $output .= '</div>';
-
-      $output .= '</div>';
-    $output .= '</div>';
-
-    return $output;
-  }
-
-  /**
-   *
-   */
   public function angularSnapshot() {
     $output = '';
     $output .= '<div id="pageInfoBase" data-ng-app="pageInfoBase" class="custom-pageinfo pageinfo-subpage-common">';
@@ -134,20 +110,6 @@ class DashpageContentGenerator extends ControllerBase {
   /**
    *
    */
-  public function companyList() {
-    $output = '';
-    $output .= '<divclass="dashpage-wrapper">';
-      $output .= '<div class="margin-top-16">';
-        $output .= 'Company List';
-      $output .= '</div>';
-    $output .= '</div>';
-
-    return $output;
-  }
-
-  /**
-   *
-   */
   public function quoteList() {
     $output = '';
     $output .= '<divclass="dashpage-wrapper">';
@@ -167,20 +129,6 @@ class DashpageContentGenerator extends ControllerBase {
     $output .= '<divclass="dashpage-wrapper">';
       $output .= '<div class="margin-top-16">';
         $output .= 'Repair List';
-      $output .= '</div>';
-    $output .= '</div>';
-
-    return $output;
-  }
-
-  /**
-   *
-   */
-  public function userList() {
-    $output = '';
-    $output .= '<divclass="dashpage-wrapper">';
-      $output .= '<div class="margin-top-16">';
-        $output .= 'User List';
       $output .= '</div>';
     $output .= '</div>';
 

@@ -35,27 +35,6 @@ class DashpageController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
-  public function angularDemo() {
-    $DashpageContentGenerator = new DashpageContentGenerator();
-    $output = $DashpageContentGenerator->angularDemo();
-
-    $build = array(
-      '#type' => 'markup',
-      '#header' => 'header',
-      '#markup' => $output,
-      '#allowed_tags' => $this->adminTag(),
-      '#attached' => array(
-        'library' => array(
-          'dashpage/angular_demo',
-        ),
-      ),
-    );
-    return $build;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function angularSnapshot() {
     $DashpageContentGenerator = new DashpageContentGenerator();
     $output = $DashpageContentGenerator->angularSnapshot();
@@ -99,13 +78,6 @@ class DashpageController extends ControllerBase {
   /**
    * call from routing.yml
    */
-  public function companyList() {
-    return $this->contentGeneratorTemplate('companyList');
-  }
-
-  /**
-   * call from routing.yml
-   */
   public function quoteList() {
     return $this->contentGeneratorTemplate('quoteList');
   }
@@ -115,13 +87,6 @@ class DashpageController extends ControllerBase {
    */
   public function repairList() {
     return $this->contentGeneratorTemplate('repairList');
-  }
-
-  /**
-   * call from routing.yml
-   */
-  public function userList() {
-    return $this->contentGeneratorTemplate('userList');
   }
 
 }

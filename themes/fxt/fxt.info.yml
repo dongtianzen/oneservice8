@@ -26,5 +26,4 @@ libraries:
   - 'fxt/angular.datatables'
   - 'fxt/angular.material'
   - 'fxt/datatables'
-  - 'fxt/daterangepicker'
   - 'fxt/font-awesome'

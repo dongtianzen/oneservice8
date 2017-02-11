@@ -1,11 +1,3 @@
-dashpage.angular.demo:
-  path: '/dashpage/angular/demo'
-  defaults:
-    _controller: '\Drupal\dashpage\Controller\DashpageController::angularDemo'
-    _title: 'Dash Angular Page'
-  requirements:
-    _permission: 'access content'
-
 dashpage.angular.snapshot:
   path: '/dashpage/angular/snapshot'
   defaults:
@@ -22,14 +14,6 @@ dashpage.client.list:
   requirements:
     _permission: 'access content'
 
-dashpage.company.list:
-  path: '/dashpage/company/list'
-  defaults:
-    _controller: '\Drupal\dashpage\Controller\DashpageController::companyList'
-    _title: 'Company List'
-  requirements:
-    _permission: 'access content'
-
 dashpage.quote.list:
   path: '/dashpage/quote/list'
   defaults:
@@ -43,13 +27,5 @@ dashpage.repair.list:
   defaults:
     _controller: '\Drupal\dashpage\Controller\DashpageController::repairList'
     _title: 'Repair List'
-  requirements:
-    _permission: 'access content'
-
-dashpage.user.list:
-  path: '/dashpage/user/list'
-  defaults:
-    _controller: '\Drupal\dashpage\Controller\DashpageController::userList'
-    _title: 'User List'
   requirements:
     _permission: 'access content'
