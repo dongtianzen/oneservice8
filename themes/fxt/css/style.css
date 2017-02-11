@@ -2,6 +2,15 @@
  * Place your custom styles here.
  */
 
+ /**
+  * common CSS
+  */
+ .h1,
+ h1 {
+   font-size: 36px;
+ }
+
+
 .region-navigation nav{
   float: left;
   margin-left: 24px;

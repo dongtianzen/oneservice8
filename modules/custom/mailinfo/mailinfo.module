@@ -50,7 +50,7 @@ function mailinfo_mail($key, &$message, $params) {
 
   switch ($key) {
     // Send a simple message from the contact form.
-    case 'contact_message':
+    case 'mailinfo_demo_message':
       $from = \Drupal::config('system.site')->get('mail');
       $message['subject'] = t('E-mail sent from @site-name', array('@site-name' => $from), $options);
       // Note that the message body is an array, not a string.

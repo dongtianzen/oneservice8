@@ -54,11 +54,15 @@ function _run_send_mail() {
   // while sending.
 
   $mailManager = \Drupal::service('plugin.manager.mail');
-  // $result = $mailManager->mail($module, $key, $to, $language_code, $params, $from, $send_now);
-  // if ($result['result'] == TRUE) {
-  //   drupal_set_message(t('Your message has been sent.'));
-  // }
-  // else {
-  //   drupal_set_message(t('There was a problem sending your message and it was not sent.'), 'error');
-  // }
+  $result = $mailManager->mail($module, $key, $to, $language_code, $params, $from, $send_now);
+  $params['message'] = 'some message from update';
+  $message = \Drupal::service('plugin.manager.mail')->mail('update', 'status_notify', $to, $language_code, $params);
+
+  kint($result);
+  if ($result['result'] == TRUE) {
+    drupal_set_message(t('Your message has been sent.'));
+  }
+  else {
+    drupal_set_message(t('There was a problem sending your message and it was not sent.'), 'error');
+  }
 }
