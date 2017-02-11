@@ -48,7 +48,7 @@ class JsonFormBase {
 
   public function getSelect($fieldName = NULL, $fieldTitle = NULL, $defaultValue = NULL, $fieldRequired = FALSE, $fieldLabel = NULL) {
     $output = array(
-      'fieldTid' => 202,
+      'fieldTid' => NULL,
       'fieldType' => "select",
       'fieldStyle' => "dropDown",
       'fieldName' => $fieldName,
@@ -61,6 +61,36 @@ class JsonFormBase {
     );
     return $output;
   }
+
+  public function getDateTime($fieldName = NULL, $fieldTitle = NULL, $defaultValue = NULL, $fieldRequired = FALSE, $fieldLabel = NULL) {
+    if(!$fieldLabel) {
+      $startTime = "5:00";
+      $timeInterval = array();
+
+      for($i=0; $i<=74; ++$i) {
+        $startTime += strtotime("+15 minutes", strtotime($startTime));
+        array_push($timeInterval, $startTime);
+      }
+
+      foreach ($timeInterval as $key => $value) {
+        $fieldLabel[] = (date('h:i A', $value));
+      }
+    }
+
+    $output = array(
+      'fieldTid' => NULL,
+      'fieldType' => "dateTime",
+      'fieldStyle' => "dateTime",
+      'fieldName' => $fieldName,
+      'fieldTitle' => $fieldTitle,
+      'fieldLabel' => $fieldLabel,
+      'fieldRequired' => $fieldRequired,
+      'defaultValue' => $defaultValue,
+      'returnType' => "timeStamp",
+      'updateStatus' => 0
+    );
+    return $output;
+  }
 }
 
 /**
@@ -69,6 +99,7 @@ class JsonFormBase {
  $ManageinfoJsonGenerator->angularForm();
  */
 class ManageinfoJsonGenerator extends JsonFormBase {
+
   /**
    *
    */
@@ -86,6 +117,9 @@ class ManageinfoJsonGenerator extends JsonFormBase {
     $form_elements[] = $this->getTextfield('eventRegionName', 'City', 'Windsor');
     $form_elements[] = $this->getTextfield('eventRegionName', 'Province');
     $form_elements[] = $this->getTextfield('eventRegionName', 'Location');
+    $form_elements[] = $this->getDateTime('field_dateTime_abbrname', 'Select Time');
+    $form_elements[] = $this->getDateTime('field_dateTime_abbrname', 'Select Time');
+
 
     $options = array(
       array(
@@ -103,4 +137,5 @@ class ManageinfoJsonGenerator extends JsonFormBase {
 
     return $output;
   }
+
 }

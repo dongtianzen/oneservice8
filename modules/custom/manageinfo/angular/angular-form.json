@@ -80,7 +80,7 @@
         "3:15 PM", "3:30 PM", "3:45 PM", "4:00 PM", "4:15 PM", "4:30 PM", "4:45 PM", "5:00 PM", "5:15 PM", "5:30 PM", "5:45 PM", "6:00 PM", "6:15 PM", "6:30 PM", "6:45 PM",
         "7:00 PM", "7:15 PM", "7:30 PM", "7:45 PM", "8:00 PM", "8:15 PM", "8:30 PM", "8:45 PM", "9:00 PM", "9:15 PM", "9:30 PM", "9:45 PM", "10:00PM", "10:15 PM", "10:30 PM",
         "10:45 PM", "11:00 PM", "11:15 PM", "11:30 PM", "11:45 PM"
-       ],
+      ],
       "fieldRequired": false,
       "returnType":"timeStamp",
       "defaultValue":"",
@@ -88,7 +88,7 @@
     },
     {
       "fieldTid": 77,
-      "fieldType": "firstSuperSelect",
+      "fieldType": "singleSelectFather",
       "fieldStyle":"dropDown",
       "fieldName": "working_diagnosis",
       "fieldTitle": "Working Diagnosis",
@@ -113,7 +113,7 @@
     },
     {
       "fieldTid": 101,
-      "fieldType": "firstSubSelect",
+      "fieldType": "singleSelectFatherMultipleChild",
       "fieldStyle":"dropDown",
       "filter": true,
       "fieldShow": false,
@@ -140,7 +140,7 @@
     },
     {
       "fieldTid": 102,
-      "fieldType": "firstSubSelect",
+      "fieldType": "singleSelectFatherMultipleChild",
       "fieldStyle":"dropDown",
       "filter": true,
       "fieldShow": false,
@@ -167,7 +167,7 @@
     },
     {
       "fieldTid": 103,
-      "fieldType": "firstSubSelect",
+      "fieldType": "singleSelectFatherMultipleChild",
       "fieldStyle":"dropDown",
       "filter": true,
       "fieldShow": false,
@@ -336,7 +336,7 @@
         {
           "termTid": 1124,
           "termName": "Imuran(Azathioprine)",
-          "parentTid": [1178,1124]
+          "parentTid": 1178
         },
         {
           "termTid": 1125,

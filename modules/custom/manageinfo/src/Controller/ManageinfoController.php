@@ -14,8 +14,13 @@ use Drupal\Component\Utility\Xss;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 
+use Drupal\dashpage\Content\DashpageContentGenerator;
+use Drupal\dashpage\Content\DashpageJsonGenerator;
+
 use Drupal\manageinfo\Content\ManageinfoContentGenerator;
 use Drupal\manageinfo\Content\ManageinfoJsonGenerator;
+
+use Drupal\terminfo\Controller\TerminfoJsonController;
 
 /**
  * An example controller.
@@ -23,7 +28,7 @@ use Drupal\manageinfo\Content\ManageinfoJsonGenerator;
 class ManageinfoController extends ControllerBase {
 
   /**
-   *
+   * @return Xss::getAdminTagList() + custom tags
    */
   public function adminTag() {
     $admin_tags = Xss::getAdminTagList();
@@ -32,6 +37,7 @@ class ManageinfoController extends ControllerBase {
       'md-datepicker', 'md-input-container', 'md-menu', 'md-menu-content',
       'md-option', 'md-select', 'md-slider', 'md-tab', 'md-tabs', 'md-tooltip',
     ];
+
     $admin_tags = array_merge($admin_tags, $admin_tags_plus);
 
     return $admin_tags;
@@ -78,10 +84,14 @@ class ManageinfoController extends ControllerBase {
 
   /**
    * {@inheritdoc}
+   * use Drupal\dashpage\Content\DashpageContentGenerator;
    */
-  public function manageinfoTable($topic) {
-    $ManageinfoContentGenerator = new ManageinfoContentGenerator();
-    $output = $ManageinfoContentGenerator->manageinfoTable();
+  public function manageinfoList($topic) {
+    // load and use DashpageContent templage
+    $DashpageContentGenerator = new DashpageContentGenerator();
+    $output = $DashpageContentGenerator->angularSnapshot();
+
+    $json_content_data = $this->manageinfoTableContent($topic);
 
     $build = array(
       '#type' => 'markup',
@@ -90,12 +100,50 @@ class ManageinfoController extends ControllerBase {
       '#allowed_tags' => $this->adminTag(),
       '#attached' => array(
         'library' => array(
-          'manageinfo/angular_table',
+          'dashpage/angular_snapshot',
         ),
+        'drupalSettings' => [
+          'manageinfo' => [
+            'manageinfoTable' => [
+              'jsonContentData' => $json_content_data,
+            ],
+          ],
+        ],
       ),
     );
 
     return $build;
+  }
+
+  /**
+   * {@inheritdoc}
+   * @return php object, not JSON
+   */
+  public function manageinfoTableContent($topic) {
+    $TerminfoJsonController = new TerminfoJsonController();
+    $term_content = $TerminfoJsonController->basicCollectionContent($topic);
+
+    $table_value = array();
+    if (is_array($term_content)) {
+      foreach ($term_content as $row) {
+        $tbody_content[] = array_values($row);
+      }
+
+      $table_value = array(
+        "thead" => array(array_keys($term_content[0])),
+        "tbody" => array_values($tbody_content),
+      );
+    }
+
+    $DashpageJsonGenerator = new DashpageJsonGenerator();
+    $output['contentSection'] = array(
+      $DashpageJsonGenerator->getBlockOne(
+        array('class' => "col-md-12", 'type' => "commonTable"),
+        $DashpageJsonGenerator->getCommonTable($option = array(), $table_value)
+      ),
+    );
+
+    return $output;
   }
 
 }

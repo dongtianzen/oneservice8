@@ -10,8 +10,8 @@ use Drupal\Core\Controller\ControllerBase;
 
 /**
  * An example controller.
- $ManageinfoContentGenerator = new ManageinfoContentGenerator();
- $ManageinfoContentGenerator->angularForm();
+ $ ManageinfoContentGenerator = new ManageinfoContentGenerator();
+ $ ManageinfoContentGenerator->angularForm();
  */
 class ManageinfoContentGenerator extends ControllerBase {
 
@@ -51,7 +51,7 @@ class ManageinfoContentGenerator extends ControllerBase {
                 $output .= '<div data-ng-switch-when="select">';
                   $output .= '<md-input-container md-block class="width-pt-60">';
                     $output .= '<label>{{field.fieldTitle}}</label>';
-                    $output .= '<md-select aria-label="select" data-ng-model="field.defaultValue" data-ng-change="field.updateStatus=\'1\'" ng-required="field.fieldRequired">';
+                    $output .= '<md-select aria-label="select" data-ng-model="field.defaultValue" data-ng-change="field.updateStatus=\'1\'" data-ng-required="field.fieldRequired">';
                       $output .= '<md-option data-ng-value="options.termTid" data-ng-repeat="options in field.fieldLabel">{{options.termName}}</md-option>';
                     $output .= '</md-select>';
                   $output .= '</md-input-container>';
@@ -61,7 +61,7 @@ class ManageinfoContentGenerator extends ControllerBase {
                 $output .= '<div data-ng-switch-when="multiSelect">';
                   $output .= '<md-input-container md-block class="width-pt-60">';
                     $output .= '<label>{{field.fieldTitle}}</label>';
-                    $output .= '<md-select multiple aria-label="select" data-ng-model="field.defaultValue" data-ng-change="field.updateStatus=\'1\'" ng-required="field.fieldRequired">';
+                    $output .= '<md-select multiple aria-label="select" data-ng-model="field.defaultValue" data-ng-change="field.updateStatus=\'1\'" ="field.fieldRequired">';
                       $output .= '<md-option data-ng-value="options.termTid" data-ng-repeat="options in field.fieldLabel">{{options.termName}}</md-option>';
                     $output .= '</md-select>';
                   $output .= '</md-input-container>';
@@ -71,7 +71,7 @@ class ManageinfoContentGenerator extends ControllerBase {
                 $output .= '<div data-ng-switch-when="dateTime">';
                   $output .= '<md-input-container class="width-pt-25">';
                     $output .= '<label>{{field.fieldTitle}}</label>';
-                    $output .= '<md-select data-ng-model="field.defaultValue" data-ng-change="field.updateStatus=\'1\';" ng-required="field.fieldRequired">';
+                    $output .= '<md-select data-ng-model="field.defaultValue" data-ng-change="field.updateStatus=\'1\';" ="field.fieldRequired">';
                       $output .= '<md-option data-ng-value="options" data-ng-repeat="options in field.fieldLabel">{{options}}</md-option>';
                     $output .= '</md-select>';
                   $output .= '</md-input-container>';
@@ -84,23 +84,23 @@ class ManageinfoContentGenerator extends ControllerBase {
                 $output .= '<div data-ng-switch-when="slider">';
                   $output .= '<md-input-container md-block class="width-pt-60">';
                     $output .= '<span class="slider-label">{{field.fieldTitle}}</span>';
-                    $output .= '<md-slider flex="" class="md-primary" md-discrete="" data-ng-model="field.defaultValue" data-ng-change="field.updateStatus=\'1\';" step="1" min="0" max="10" aria-label="rating" ng-required="field.fieldRequired">';
+                    $output .= '<md-slider flex="" class="md-primary" md-discrete="" data-ng-model="field.defaultValue" data-ng-change="field.updateStatus=\'1\';" step="1" min="0" max="10" aria-label="rating" ="field.fieldRequired">';
                     $output .= '</md-slider>';
                   $output .= '</md-input-container>';
                 $output .= '</div>';
 
-                /* firstSuperSelect */
-                $output .= '<div data-ng-switch-when="firstSuperSelect">';
+                /* singleSelectFather */
+                $output .= '<div data-ng-switch-when="singleSelectFather">';
                   $output .= '<md-input-container md-block class="width-pt-60">';
                     $output .= '<label>{{field.fieldTitle}}</label>';
-                    $output .= '<md-select aria-label="select" data-ng-model="field.defaultValue" data-ng-change="field.updateStatus=\'1\'; superSelectOptions(field.defaultValue)" ng-required="field.fieldRequired">';
+                    $output .= '<md-select aria-label="select" data-ng-model="field.defaultValue" data-ng-change="field.updateStatus=\'1\'; superSelectOptions(field.defaultValue)" data-ng-required="field.fieldRequired">';
                       $output .= '<md-option data-ng-value="options.termTid" data-ng-repeat="options in field.fieldLabel">{{options.termName}}</md-option>';
                     $output .= '</md-select>';
                   $output .= '</md-input-container>';
                 $output .= '</div>';
 
-                /* firstSubSelect */
-                $output .= '<div data-ng-switch-when="firstSubSelect">';
+                /* singleFatherMultipleChild */
+                $output .= '<div data-ng-switch-when="singleSelectFatherMultipleChild">';
                   $output .= '<md-input-container ng-show="field.fieldShow" md-block class="width-pt-60">';
                     $output .= '<label>{{field.fieldTitle}}</label>';
                     $output .= '<md-select multiple aria-label="select" data-ng-model="field.defaultValue" data-ng-change="field.updateStatus=\'1\'" data-ng-required="field.fieldRequired">';
@@ -109,17 +109,17 @@ class ManageinfoContentGenerator extends ControllerBase {
                   $output .= '</md-input-container>';
                 $output .= '</div>';
 
-                /* Investigations Multi Select */
+                /* firstMultiSelectFather */
                 $output .= '<div data-ng-switch-when="firstMultiSelectFather">';
                   $output .= '<md-input-container md-block class="width-pt-60">';
                     $output .= '<label>{{field.fieldTitle}}</label>';
                     $output .= '<md-select multiple aria-label="select" data-ng-model="field.defaultValue" data-ng-change="field.updateStatus=\'1\'; updateChildfield(field.defaultValue)" data-ng-required="field.fieldRequired">';
                       $output .= '<md-option data-ng-value="options.termTid" data-ng-repeat="options in field.fieldLabel">{{options.termName}}</md-option>';
                     $output .= '</md-select>';
-                  $output .= '</md-input-container><br>';
+                  $output .= '</md-input-container>';
                 $output .= '</div>';
 
-                /* CT Select */
+                /* firstMultiSelectChild */
                 $output .= '<div data-ng-switch-when="firstMultiSelectChild">';
                   $output .= '<md-input-container data-ng-show="showChildField" md-block class="width-pt-60">';
                     $output .= '<label>{{field.fieldTitle}}</label>';
@@ -133,19 +133,20 @@ class ManageinfoContentGenerator extends ControllerBase {
                 $output .= '<div data-ng-switch-when="selectFilterFather">';
                   $output .= '<md-input-container md-block class="width-pt-60">';
                     $output .= '<label>{{field.fieldTitle}}</label>';
-                    $output .= '<md-select aria-label="select" data-ng-model="field.defaultValue" data-ng-change="field.updateStatus=\'1\'; updateChildOptions(field.defaultValue)" ng-required="field.fieldRequired">';
+                    $output .= '<md-select aria-label="select" data-ng-model="field.defaultValue" data-ng-change="field.updateStatus=\'1\'; updateChildOptions(field.defaultValue)" data-ng-required="field.fieldRequired">';
                       $output .= '<md-option data-ng-value="options.termTid" data-ng-repeat="options in field.fieldLabel">{{options.termName}}</md-option>';
                     $output .= '</md-select>';
-                  $output .= '</md-input-container><br>';
+                  $output .= '</md-input-container>';
                 $output .= '</div>';
 
+                 /* Select Filter Child */
                  $output .= '<div data-ng-switch-when="selectFilterChild">';
                   $output .= '<md-input-container data-ng-show="field.fieldShow" md-block class="width-pt-60">';
                     $output .= '<label>{{field.fieldTitle}}</label>';
-                    $output .= '<md-select aria-label="select" data-ng-model="field.defaultValue" data-ng-change="field.updateStatus=\'1\'" ng-required="field.fieldRequired">';
+                    $output .= '<md-select aria-label="select" data-ng-model="field.defaultValue" data-ng-change="field.updateStatus=\'1\'" data-ng-required="field.fieldRequired">';
                       $output .= '<md-option data-ng-value="options.termTid" data-ng-repeat="options in filteredLabels">{{options.termName}}</md-option>';
                     $output .= '</md-select>';
-                  $output .= '</md-input-container><br>';
+                  $output .= '</md-input-container>';
                 $output .= '</div>';
 
               $output .= '</div>';
@@ -158,53 +159,6 @@ class ManageinfoContentGenerator extends ControllerBase {
             $output .= '</section>';
           $output .= '</md-content>';
         $output .= '</form>';
-
-      $output .= '</div>';
-    $output .= '</div>';
-
-    return $output;
-  }
-
-  /**
-   *
-   */
-  public function manageinfoTable() {
-    $output = '';
-    $output .= '<div id="pageInfoBase" data-ng-app="pageInfoBase" class="custom-pageinfo pageinfo-subpage-common">';
-      $output .= '<div data-ng-controller="PageInfoBaseController" class="row margin-top-16">';
-
-        $output .= '<div class="block-one bg-ffffff padding-bottom-20">';
-          $output .= '<div class="row">';
-
-            $output .= '<div class="">';
-              $output .= '<div class="float-left">';
-                $output .= t('Search') . ' <input data-ng-model="inputFilter.$">';
-              $output .= '</div>';
-            $output .= '</div>';
-
-            $output .= '<div class="margin-top-12">';
-              $output .= '<table class="table table-hover">';
-                $output .= '<thead>';
-                  $output .= '<tr>';
-                    $output .= '<th data-ng-repeat="(tableHeadKey, tableHeadCell) in pageData[0]">';
-                      $output .= "{{ tableHeadKey }}";
-                    $output .= '</th>';
-                  $output .= '</tr>';
-                $output .= '</thead>';
-
-                $output .= '<tbody data-ng-repeat="tableRow in pageData | filter:inputFilter" class="">';
-                  $output .= '<tr>';
-                    $output .= '<td data-ng-repeat="tableRowCell in tableRow">';
-                      $output .= "{{ tableRowCell }}";
-                    $output .= '</td>';
-                  $output .= '</tr>';
-
-                $output .= '</tbody>';
-              $output .= '</table>';
-            $output .= '</div>';
-
-          $output .= '</div>';
-        $output .= '</div>';
 
       $output .= '</div>';
     $output .= '</div>';

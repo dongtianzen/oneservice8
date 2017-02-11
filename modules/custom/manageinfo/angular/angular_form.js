@@ -1,5 +1,12 @@
-var jsonFileUrl = drupalSettings.path.baseUrl + 'modules/custom/manageinfo/angular/angular-form.json';
+/*
+ * This controller will take care of parsing the data from json file
+ */
+
+// var jsonFileUrl = drupalSettings.path.baseUrl + 'modules/custom/manageinfo/angular/angular-form.json';
 var jsonFileUrl = drupalSettings.path.baseUrl + 'manageinfo/angular/json/66';
+
+var formType = 'create';
+// var formType = 'edit';
 
 var pageInfoBaseControllers = angular.module('pageInfoBase', ['ngResource', 'ngMaterial']);
 pageInfoBaseControllers.controller('MildderPreFormController', ['$scope', '$http', '$timeout', '$q', '$log', '$filter','$mdDialog', '$element',
@@ -11,11 +18,17 @@ pageInfoBaseControllers.controller('MildderPreFormController', ['$scope', '$http
       }).catch(function(err) {
         // Log error somehow.
       }).finally(function() {
-        // Hide loading spinner whether our call succeeded or failed.
+        //to fill intial values
+        angular.forEach($scope.formJson.formElementsSection, function(field) {
+          if(field.defaultValue != null) {
+            $scope.submitAnswers[field.fieldTitle] = field.defaultValue;
+          }
+        });
       });
     });
-    // working diagnosis sub questions
+    // singleFatherMultipleChild options
     $scope.superSelectOptions = function(answerTid) {
+      console.log(answerTid);
       $scope.clearSubModels();
       angular.forEach($scope.formJson.formElementsSection, function(field) {
         if(field.fieldTid == answerTid) {
@@ -49,6 +62,7 @@ pageInfoBaseControllers.controller('MildderPreFormController', ['$scope', '$http
       angular.forEach($scope.formJson.formElementsSection, function(field) {
         if(field.fieldType == 'datetime') {
           var time = field.defaultValue;
+          console.log(time);
           var formatDate = $filter('date')(referralDate, 'EEEE, MMMM d, y');
           var timeStamp = formatDate + ' ' + time;
           timeStamp = Date.parse(timeStamp) / 1000;
@@ -77,14 +91,23 @@ pageInfoBaseControllers.controller('MildderPreFormController', ['$scope', '$http
      */
     $scope.submit  = function() {
       $scope.submitAnswers = [];
-      angular.forEach($scope.formJson.formElementsSection, function(field) {
-        if(field.updateStatus == 1) {
-          $scope.submitAnswers[field.fieldName] = field.defaultValue;
-        }
-      });
+      if(formType == 'create') {
+        angular.forEach($scope.formJson.formElementsSection, function(field) {
+          if(field.defaultValue != null) {
+            $scope.submitAnswers[field.fieldTitle] = field.defaultValue;
+          }
+        });
+      }
+      else if (formType == 'edit') {
+        angular.forEach($scope.formJson.formElementsSection, function(field) {
+          if(field.updateStatus == 1) {
+            $scope.submitAnswers[field.fieldTitle] = field.defaultValue;
+          }
+        });
+      }
       console.log($scope.submitAnswers);
 
-      var createNodeJson = angular.toJson($scope.submitAnswers);
+      var createNodeJson = JSON.stringify($scope.submitAnswers);
       console.log(createNodeJson);
 
       var postUrl = $scope.formJson.formInfo.postUrl;
@@ -95,7 +118,7 @@ pageInfoBaseControllers.controller('MildderPreFormController', ['$scope', '$http
      //    $scope.status = response.status;
      //    $scope.data = response.data;
 
-     //    window.location.replace(basePathUrl + redirectUrl);
+     //    window.location.replace(redirectUrl);
      //  }, function(response) {
      //    // called asynchronously if an error occurs or server returns response with an error status.
      //    $scope.data = response.data || "Request failed";
@@ -114,6 +137,8 @@ pageInfoBaseControllers.controller('MildderPreFormController', ['$scope', '$http
 ]);
 
 // code to load 2 apps
-jQuery(document).ready(function(){
-  // angular.bootstrap(document.getElementById("pageInfoBase"), ['pageInfoBase']);
+jQuery(document).ready(function() {
+  if(document.getElementById('navInfoBase') !== null) {
+    angular.bootstrap(document.getElementById("pageInfoBase"), ['pageInfoBase']);
+  }
 });

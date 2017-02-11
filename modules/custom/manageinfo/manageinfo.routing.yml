@@ -16,11 +16,11 @@ manageinfo.angular.json:
     _permission: 'access content'
     _role: 'authenticated'
 
-manageinfo.table.topic:
-  path: '/manageinfo/table/{topic}'
+manageinfo.list.topic:
+  path: '/manageinfo/list/{topic}'
   defaults:
-    _controller: '\Drupal\manageinfo\Controller\ManageinfoController::manageinfoTable'
-    _title: 'Manageinfo Table'
+    _controller: '\Drupal\manageinfo\Controller\ManageinfoController::manageinfoList'
+    _title: 'Manageinfo List'
   requirements:
     _permission: 'access content'
     _role: 'authenticated'
