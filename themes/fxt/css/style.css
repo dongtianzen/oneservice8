@@ -5,9 +5,9 @@
  /**
   * common CSS
   */
- .h1,
- h1 {
-   font-size: 36px;
+body .h1,
+body h1 {
+   font-size: 24px;
  }
 
 
@@ -17,5 +17,5 @@
 }
 
 .region-navigation .logo.navbar-btn img{
-  height: 72px;
+  height: 34px;
 }
