@@ -1,0 +1,18 @@
+superinfo.form.topic:
+  path: '/superinfo/form/{topic}'
+  defaults:
+    _controller: '\Drupal\superinfo\Controller\SuperinfoController::superinfoForm'
+    _title: 'Superinfo Form'
+  requirements:
+    _permission: 'access content'
+    _role: 'authenticated'
+
+superinfo.table.topic:
+  path: '/superinfo/table/{topic}'
+  defaults:
+    _controller: '\Drupal\superinfo\Controller\SuperinfoController::superinfoTable'
+    _title: 'Superinfo Table'
+  requirements:
+    _permission: 'access content'
+    _role: 'authenticated'
+

@@ -1,0 +1,5 @@
+superinfo_table:
+  js:
+    angular/superinfo-table.js: {}
+  dependencies:
+    - fxt/angular.angularjs
