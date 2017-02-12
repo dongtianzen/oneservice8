@@ -105,6 +105,8 @@ class DashpageContentGenerator extends ControllerBase {
     $field = \Drupal\field\Entity\FieldStorageConfig::loadByName($entity_type, $field_name);
     $field_standard_type = array(
       'boolean',
+      'datetime',
+      'decimal',
       'email',
       'integer',
       'string',
@@ -119,7 +121,7 @@ class DashpageContentGenerator extends ControllerBase {
       $target_id = $entity->get($field_name)->target_id;
 
       if ($field->getSetting('target_type') == 'taxonomy_term') {
-        $output = $this->_entity_load_terms($target_id);
+        $output = $this->_entity_load_term($target_id);
       }
       else{
         $output = $this->_entity_load_user($target_id);
@@ -134,7 +136,7 @@ class DashpageContentGenerator extends ControllerBase {
     return $output;
   }
 
-  public function _entity_load_terms($tid) {
+  public function _entity_load_term($tid) {
     $output = NULL;
 
     $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid);
@@ -151,7 +153,7 @@ class DashpageContentGenerator extends ControllerBase {
   public function _entity_load_user($tid) {
     $output = NULL;
 
-    $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid);
+    $term = \Drupal::entityTypeManager()->getStorage('user')->load($tid);
     if ($term) {
       $output = $term->get('name')->value;
     }
@@ -177,49 +179,49 @@ class DashpageContentGenerator extends ControllerBase {
             $output .= '</tr>';
             $output .= '<tr>';
               $output .= '<td>联系人</td>';
-              $output .= '<td>高金国</td>';
+              $output .= '<td>' . $this->renderFieldValue('node', $node, 'field_repair_contactname') . '</td>';
               $output .= '<td>联系电话</td>';
               $output .= '<td>' . $this->renderFieldValue('node', $node, 'field_repair_contactphone') . '</td>';
             $output .= '</tr>';
             $output .= '<tr>';
               $output .= '<td>客户地址</td>';
-              $output .= '<td colspan="3"></td>';
+              $output .= '<td colspan="3">' . . '</td>';
             $output .= '</tr>';
             $output .= '<tr>';
               $output .= '<td>设备型号</td>';
-              $output .= '<td>PSM-1000</td>';
+              $output .= '<td>' . $this->renderFieldValue('node', $node, 'field_repair_devicetype') . '</td>';
               $output .= '<td>序列号</td>';
               $output .= '<td>' . $this->renderFieldValue('node', $node, 'field_repair_serialnumber') . '</td>';
             $output .= '</tr>';
             $output .= '<tr>';
               $output .= '<td>收取日期</td>';
-              $output .= '<td colspan="3">2017-02-10</td>';
+              $output .= '<td colspan="3">' . $this->renderFieldValue('node', $node, 'field_repair_receivedate') . '</td>';
             $output .= '</tr>';
             $output .= '<tr>';
               $output .= '<td>收取备注</td>';
-              $output .= '<td colspan="3">system loading ....观察时间半小时</td>';
+              $output .= '<td colspan="3">' . $this->renderFieldValue('node', $node, 'field_repair_receivenote') . '</td>';
             $output .= '</tr>';
             $output .= '<tr>';
               $output .= '<td>故障原因</td>';
-              $output .= '<td colspan="3"></td>';
+              $output .= '<td colspan="3">' . $this->renderFieldValue('node', $node, 'field_repair_issuereason') . '</td>';
             $output .= '</tr>';
             $output .= '<tr>';
               $output .= '<td>维修处理办法</td>';
-              $output .= '<td colspan="3"></td>';
+              $output .= '<td colspan="3">' . $this->renderFieldValue('node', $node, 'field_repair_repairapproach') . '</td>';
             $output .= '</tr>';
             $output .= '<tr>';
               $output .= '<td>返回备注</td>';
-              $output .= '<td colspan="3"></td>';
+              $output .= '<td colspan="3">' . $this->renderFieldValue('node', $node, 'field_repair_returnnote') . '</td>';
             $output .= '</tr>';
             $output .= '<tr>';
               $output .= '<td>收费金额</td>';
-              $output .= '<td colspan="3"></td>';
+              $output .= '<td colspan="3">' . $this->renderFieldValue('node', $node, 'field_repair_quoteamount') . '</td>';
             $output .= '</tr>';
             $output .= '<tr>';
               $output .= '<td>维修工程师</td>';
-              $output .= '<td>胡晓光</td>';
+              $output .= '<td>' . $this->renderFieldValue('node', $node, 'field_repair_checkstaff') . '</td>';
               $output .= '<td>返回日期</td>';
-              $output .= '<td></td>';
+              $output .= '<td>' . $this->renderFieldValue('node', $node, 'field_repair_returndate') . '</td>';
             $output .= '</tr>';
           $output .= '</tbody>';
         $output .= '</table>';
