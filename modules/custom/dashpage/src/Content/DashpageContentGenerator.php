@@ -185,7 +185,7 @@ class DashpageContentGenerator extends ControllerBase {
             $output .= '</tr>';
             $output .= '<tr>';
               $output .= '<td>客户地址</td>';
-              $output .= '<td colspan="3">' . . '</td>';
+              $output .= '<td colspan="3"></td>';
             $output .= '</tr>';
             $output .= '<tr>';
               $output .= '<td>设备型号</td>';
