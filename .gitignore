@@ -8,6 +8,8 @@ sites/*/private
 
 # Ignore debug files
 modules/custom/phpdebug/ignore/*
+modules/custom/phpdebug/import_data/entity_create_term_json.json
+
 
 # Ignore default text files
 # robots.txt

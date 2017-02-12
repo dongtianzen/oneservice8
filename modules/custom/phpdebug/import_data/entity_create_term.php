@@ -57,7 +57,14 @@ function _entity_create_terms($row = array(), $vocabulary) {
       );
 
       if (in_array($field->getType(), $field_standard_type)) {
-        $term_value[$field_name] = $value;
+        if (is_array($value)) {
+          foreach ($value as $row_value) {
+            $term_value[$field_name] = $row_value;
+          }
+        }
+        else {
+          dpm($field_name . ' - is not an array');
+        }
       }
       elseif ($field->getType() == 'entity_reference') {
         if ($field->getSetting('target_type') == 'taxonomy_term') {
@@ -69,9 +76,19 @@ function _entity_create_terms($row = array(), $vocabulary) {
               // dpm($row_value . ' - ' . _load_terms($row_value, $vocabulary_name));
             }
           }
+          else {
+            dpm($field_name . ' - is not an array');
+          }
         }
         else{
-          $term_value[$field_name] = _load_user($value);
+          if (is_array($value)) {
+            foreach ($value as $row_value) {
+              $term_value[$field_name] = _load_user($row_value);
+            }
+          }
+          else {
+            dpm($field_name . ' - is not an array');
+          }
         }
       }
       else {

@@ -37,9 +37,11 @@ function _taxonomyGetTreeTidNames($vid = NULL) {
 
           if ($field_info['type'] == 'entityreference') {
             if ($field_info['settings']['target_type'] == 'user') {
-              $user = user_load($term->{$row['d7_field_name']}['und'][0]['target_id']);
-              if (isset($user->name)) {
-                $field_value = $user->name;
+              foreach ($term->{$row['d7_field_name']}['und'] as $value) {
+                $user = user_load($value['target_id']);
+                if (isset($user->name)) {
+                  $field_value[] = $user->name;
+                }
               }
             }
             else {
@@ -55,7 +57,9 @@ function _taxonomyGetTreeTidNames($vid = NULL) {
           }
           else {       // text, date field
             if (isset($term->{$row['d7_field_name']}['und'][0]['value'])) {
-              $field_value = $term->{$row['d7_field_name']}['und'][0]['value'];
+              foreach ($term->{$row['d7_field_name']}['und'] as $value) {
+                $field_value[] = $value['value'];
+              }
             }
           }
 
