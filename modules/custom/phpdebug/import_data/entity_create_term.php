@@ -56,43 +56,29 @@ function _entity_create_terms($row = array(), $vocabulary) {
         'text_long',
       );
 
-      if (in_array($field->getType(), $field_standard_type)) {
-        if (is_array($value)) {
-          foreach ($value as $row_value) {
-            $term_value[$field_name] = $row_value;
+      if (is_array($value)) {
+        foreach ($value as $row_value) {
+          if (in_array($field->getType(), $field_standard_type)) {
+            $term_value[$field_name][] = $row_value;
           }
-        }
-        else {
-          dpm($field_name . ' - is not an array');
-        }
-      }
-      elseif ($field->getType() == 'entity_reference') {
-        if ($field->getSetting('target_type') == 'taxonomy_term') {
-          if (is_array($value)) {
-            foreach ($value as $row_value) {
+          elseif ($field->getType() == 'entity_reference') {
+            if ($field->getSetting('target_type') == 'taxonomy_term') {
               $vocabulary_name = _check_vocabulary_name($field_name, $vocabulary['vid']);
 
               $term_value[$field_name][] = _load_terms($row_value, $vocabulary_name);
               // dpm($row_value . ' - ' . _load_terms($row_value, $vocabulary_name));
             }
-          }
-          else {
-            dpm($field_name . ' - is not an array');
-          }
-        }
-        else{
-          if (is_array($value)) {
-            foreach ($value as $row_value) {
-              $term_value[$field_name] = _load_user($row_value);
+            else{
+              $term_value[$field_name][] = _load_user($row_value);
             }
           }
           else {
-            dpm($field_name . ' - is not an array');
+            dpm('no found this field type - ' .$field->getType());
           }
         }
       }
       else {
-        dpm('no found this field type - ' .$field->getType());
+        dpm($field_name . ' - is not an array');
       }
     }
   }
