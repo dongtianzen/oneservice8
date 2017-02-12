@@ -41,27 +41,20 @@ class SuperinfoController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
-  public function superinfoFormNode($bundle) {
+  public function formCreate($entity_type, $bundle) {
     $entity = \Drupal::entityManager()
-      ->getStorage('node')
+      ->getStorage($entity_type)
       ->create(
         array('type' => $bundle)    // node_type
       );
 
-    $form = \Drupal::entityTypeManager()
-      ->getFormObject('node', 'default')
+    $entity_form = \Drupal::entityTypeManager()
+      ->getFormObject($entity_type, 'default')
       ->setEntity($entity);
 
-    return \Drupal::formBuilder()->getForm($form);
+    $form = \Drupal::formBuilder()->getForm($entity_form);
 
-    // or render
-    $form = \Drupal::formBuilder()->getForm($form);
-    $build = array(
-      '#type' => 'markup',
-      '#markup' => render($form),
-    );
-
-    return $build;
+    return $form;
   }
 
   /**
