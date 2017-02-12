@@ -68,7 +68,17 @@ class SuperinfoController extends ControllerBase {
 
     $form = \Drupal::formBuilder()->getForm($entity_form);
 
-    return $form;
+    $build = array(
+      '#type' => 'markup',
+      '#markup' => render($form),
+      '#attached' => array(
+        'library' => array(
+          'superinfo/form_create',
+        ),
+      ),
+    );
+
+    return $build;
   }
 
   /**

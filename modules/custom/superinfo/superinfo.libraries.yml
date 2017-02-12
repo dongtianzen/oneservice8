@@ -1,5 +1,11 @@
+form_create:
+  css:
+    theme:
+      css/form_create.css: {}
+
 superinfo_table:
   js:
     angular/superinfo-table.js: {}
   dependencies:
     - fxt/angular.angularjs
+

@@ -1,0 +1,9 @@
+/* hide edit-relations--content */
+.taxonomy-term-form .js-form-item.panel {
+  display: none;
+}
+
+/* hide description text format option */
+.taxonomy-term-form .field--name-description.field--widget-text-textarea #edit-description-0-format {
+  display: none;
+}
