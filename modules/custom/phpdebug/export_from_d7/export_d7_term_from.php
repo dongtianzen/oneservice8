@@ -7,10 +7,9 @@
   _taxonomyGetTreeTidNames();
  */
 
-_taxonomyGetTreeTidNames();
+_taxonomyGetTreeTidNames(7);
 function _taxonomyGetTreeTidNames($vid = NULL) {
   $output = array();
-
 
   $term_method_collections = _term_method_collections($vid);
   if ($vid) {
