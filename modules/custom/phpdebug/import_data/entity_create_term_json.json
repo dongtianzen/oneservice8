@@ -2,10 +2,11 @@
   "131": {
     "name": "After Device Register 10 days and No quote for this repair",
     "field": {
+      "field_notify_mailto": "lijing@example.com",
       "field_notify_mailtitle": "设备收取后10日内未报价 title",
       "field_notify_mailcontent": "设备收取后10日内未报价 content",
       "field_notify_aheadtime": "864000",
       "field_notify_enablestatus": "1"
     }
-  },
+  }
 }

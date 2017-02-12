@@ -29,7 +29,6 @@ function _run_batch_entity_create_terms() {
     foreach ($terms_array as $key => $row) {
       if (1 < 97) {
         _entity_create_terms($row, $vocabulary);
-        dpm(31);
       }
     }
   }
@@ -48,8 +47,16 @@ function _entity_create_terms($row = array(), $vocabulary) {
     foreach ($row['field'] as $field_name => $value) {
 
       $field = \Drupal\field\Entity\FieldStorageConfig::loadByName('taxonomy_term', $field_name);
+      $field_standard_type = array(
+        'boolean',
+        'email',
+        'integer',
+        'string',
+        'string_long',
+        'text_long',
+      );
 
-      if ($field->getType() == 'string') {
+      if (in_array($field->getType(), $field_standard_type)) {
         $term_value[$field_name] = $value;
       }
       elseif ($field->getType() == 'entity_reference') {
@@ -66,6 +73,9 @@ function _entity_create_terms($row = array(), $vocabulary) {
         else{
           $term_value[$field_name] = _load_user($value);
         }
+      }
+      else {
+        dpm('no found this field type - ' .$field->getType());
       }
     }
   }
