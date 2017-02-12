@@ -81,56 +81,17 @@ class DashpageContentGenerator extends ControllerBase {
   /**
    * render views output
    */
-  public function clientList() {
-    // $view = Views::getView('term_client_collection');
-
-    // $view->setDisplay('default');
-    // $view->execute();
-
-// dpm($view->total_rows);
-    // $view->getDisplay();
-
+  public function renderViewsContent($views_name = NULL) {
     $output = '';
-    $output .= '<divclass="dashpage-wrapper">';
-      $output .= '<div class="margin-top-16">';
+
+    if ($views_name) {
+      $view_content = views_embed_view($views_name, 'default');
+
+      $output .= '<divclass="dashpage-wrapper margin-top-16">';
         $output .= 'Client List';
-        // $output .= $view->viewsData;
-        // $output .= $view->render();
-        // $output .= render($view->render());    // method 1
-        // $output .= render($view->buildRenderable('default'));// method 2
-
-        $views_content = views_embed_view('term_client_collection', 'default');   // method 3
-        $output .= render($views_content);
+        $output .= render($view_content);    // method 1
       $output .= '</div>';
-    $output .= '</div>';
-
-    return $output;
-  }
-
-  /**
-   *
-   */
-  public function quoteList() {
-    $output = '';
-    $output .= '<divclass="dashpage-wrapper">';
-      $output .= '<div class="margin-top-16">';
-        $output .= 'Quote List';
-      $output .= '</div>';
-    $output .= '</div>';
-
-    return $output;
-  }
-
-  /**
-   *
-   */
-  public function repairList() {
-    $output = '';
-    $output .= '<divclass="dashpage-wrapper">';
-      $output .= '<div class="margin-top-16">';
-        $output .= 'Repair List';
-      $output .= '</div>';
-    $output .= '</div>';
+    }
 
     return $output;
   }

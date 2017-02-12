@@ -54,11 +54,11 @@ class DashpageController extends ControllerBase {
   }
 
   /**
-   *
+   * {@inheritdoc}
    */
-  public function contentGeneratorTemplate($method = 'template') {
+  public function contentGeneratorTemplate($method = 'template', $views_name = NULL) {
     $DashpageContentGenerator = new DashpageContentGenerator();
-    $output = $DashpageContentGenerator->{$method}();
+    $output = $DashpageContentGenerator->{$method}($views_name);
 
     $build = array(
       '#type' => 'markup',
@@ -72,21 +72,21 @@ class DashpageController extends ControllerBase {
    * call from routing.yml
    */
   public function clientList() {
-    return $this->contentGeneratorTemplate('clientList');
+    return $this->contentGeneratorTemplate('renderViewsContent', 'term_client_collection');
   }
 
   /**
    * call from routing.yml
    */
   public function quoteList() {
-    return $this->contentGeneratorTemplate('quoteList');
+    return $this->contentGeneratorTemplate('renderViewsContent', 'term_client_collection');
   }
 
   /**
    * call from routing.yml
    */
   public function repairList() {
-    return $this->contentGeneratorTemplate('repairList');
+    return $this->contentGeneratorTemplate('renderViewsContent', 'node_repair_collection');
   }
 
 }
