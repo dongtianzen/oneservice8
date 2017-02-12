@@ -29,3 +29,11 @@ dashpage.repair.list:
     _title: 'Repair List'
   requirements:
     _permission: 'access content'
+
+dashpage.repair.print:
+  path: '/dashpage/repair/print/{nid}'
+  defaults:
+    _controller: '\Drupal\dashpage\Controller\DashpageController::repairPrint'
+    _title: 'Repair Print'
+  requirements:
+    _permission: 'access content'

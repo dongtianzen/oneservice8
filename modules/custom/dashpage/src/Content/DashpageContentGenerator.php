@@ -7,6 +7,7 @@
 namespace Drupal\dashpage\Content;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\field\Entity\FieldConfig;
 
 use Drupal\views\Views;
 
@@ -88,10 +89,147 @@ class DashpageContentGenerator extends ControllerBase {
       $view_content = views_embed_view($views_name, 'default');
 
       $output .= '<divclass="dashpage-wrapper margin-top-16">';
-        $output .= 'Client List';
         $output .= render($view_content);
       $output .= '</div>';
     }
+
+    return $output;
+  }
+
+  /**
+   * render node field value
+   */
+  public function renderFieldValue($entity_type = NULL, $entity = NULL, $field_name = NULL) {
+    $output = '';
+
+    $field = \Drupal\field\Entity\FieldStorageConfig::loadByName($entity_type, $field_name);
+    $field_standard_type = array(
+      'boolean',
+      'email',
+      'integer',
+      'string',
+      'string_long',
+      'text_long',
+    );
+
+    if (in_array($field->getType(), $field_standard_type)) {
+      $output = $entity->get($field_name)->value;
+    }
+    elseif ($field->getType() == 'entity_reference') {
+      $target_id = $entity->get($field_name)->target_id;
+
+      if ($field->getSetting('target_type') == 'taxonomy_term') {
+        $output = $this->_entity_load_terms($target_id);
+      }
+      else{
+        $output = $this->_entity_load_user($target_id);
+      }
+    }
+    else {
+      dpm('no found this field type - ' .$field->getType());
+    }
+
+
+
+    return $output;
+  }
+
+  public function _entity_load_terms($tid) {
+    $output = NULL;
+
+    $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid);
+    if ($term) {
+      $output = $term->get('name')->value;
+    }
+
+    return $output;
+  }
+
+  /**
+   * @return, user uid
+   */
+  public function _entity_load_user($tid) {
+    $output = NULL;
+
+    $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid);
+    if ($term) {
+      $output = $term->get('name')->value;
+    }
+
+    return $output;
+  }
+
+  /**
+   * render views output
+   */
+  public function repairPrint($nid = NULL) {
+    $output = '';
+
+    $output .= '<div class="dashpage-wrapper">';
+
+      $node  = \Drupal::entityTypeManager()->getStorage('node')->load($nid);
+      if ($node) {
+        $output .= '<table class="table table-bordered table-hover table-responsive">';
+          $output .= '<tbody>';
+            $output .= '<tr>';
+              $output .= '<td>客户名称</td>';
+              $output .= '<td colspan="3">' . $this->renderFieldValue('node', $node, 'field_repair_clientname') . '</td>';
+            $output .= '</tr>';
+            $output .= '<tr>';
+              $output .= '<td>联系人</td>';
+              $output .= '<td>高金国</td>';
+              $output .= '<td>联系电话</td>';
+              $output .= '<td>' . $this->renderFieldValue('node', $node, 'field_repair_contactphone') . '</td>';
+            $output .= '</tr>';
+            $output .= '<tr>';
+              $output .= '<td>客户地址</td>';
+              $output .= '<td colspan="3"></td>';
+            $output .= '</tr>';
+            $output .= '<tr>';
+              $output .= '<td>设备型号</td>';
+              $output .= '<td>PSM-1000</td>';
+              $output .= '<td>序列号</td>';
+              $output .= '<td>' . $this->renderFieldValue('node', $node, 'field_repair_serialnumber') . '</td>';
+            $output .= '</tr>';
+            $output .= '<tr>';
+              $output .= '<td>收取日期</td>';
+              $output .= '<td colspan="3">2017-02-10</td>';
+            $output .= '</tr>';
+            $output .= '<tr>';
+              $output .= '<td>收取备注</td>';
+              $output .= '<td colspan="3">system loading ....观察时间半小时</td>';
+            $output .= '</tr>';
+            $output .= '<tr>';
+              $output .= '<td>故障原因</td>';
+              $output .= '<td colspan="3"></td>';
+            $output .= '</tr>';
+            $output .= '<tr>';
+              $output .= '<td>维修处理办法</td>';
+              $output .= '<td colspan="3"></td>';
+            $output .= '</tr>';
+            $output .= '<tr>';
+              $output .= '<td>返回备注</td>';
+              $output .= '<td colspan="3"></td>';
+            $output .= '</tr>';
+            $output .= '<tr>';
+              $output .= '<td>收费金额</td>';
+              $output .= '<td colspan="3"></td>';
+            $output .= '</tr>';
+            $output .= '<tr>';
+              $output .= '<td>维修工程师</td>';
+              $output .= '<td>胡晓光</td>';
+              $output .= '<td>返回日期</td>';
+              $output .= '<td></td>';
+            $output .= '</tr>';
+          $output .= '</tbody>';
+        $output .= '</table>';
+
+      }
+      else {
+        $output .= $this->t('没有发现维修信息');
+      }
+
+    $output .= '</div>';
 
     return $output;
   }

@@ -79,7 +79,7 @@ class DashpageController extends ControllerBase {
    * call from routing.yml
    */
   public function quoteList() {
-    return $this->contentGeneratorTemplate('renderViewsContent', 'term_client_collection');
+    return $this->contentGeneratorTemplate('renderViewsContent', 'node_quote_collection');
   }
 
   /**
@@ -87,6 +87,22 @@ class DashpageController extends ControllerBase {
    */
   public function repairList() {
     return $this->contentGeneratorTemplate('renderViewsContent', 'node_repair_collection');
+  }
+
+  /**
+   * call from routing.yml
+   */
+  public function repairPrint($nid) {
+    $DashpageContentGenerator = new DashpageContentGenerator();
+    $output = $DashpageContentGenerator->repairPrint($nid);
+
+    $build = array(
+      '#type' => 'markup',
+      '#header' => 'header',
+      '#markup' => $output,
+      '#allowed_tags' => $this->adminTag(),
+    );
+    return $build;
   }
 
 }
