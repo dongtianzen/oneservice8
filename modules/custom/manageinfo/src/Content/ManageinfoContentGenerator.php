@@ -190,6 +190,10 @@ class ManageinfoContentGenerator extends ControllerBase {
         'name' => 'Device Type',
       ),
       array(
+        'url' => '/superinfo/table/notification',
+        'name' => 'Notification',
+      ),
+      array(
         'url' => '/superinfo/table/province',
         'name' => 'Province',
       ),
