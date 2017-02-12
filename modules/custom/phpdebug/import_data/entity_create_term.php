@@ -17,7 +17,7 @@ use Drupal\Core\Url;
 
 function _run_batch_entity_create_terms() {
   $vocabulary = array(
-    'vid'  => 'module',
+    'vid'  => 'notification',
   );
 
   $name = 'time_one';
@@ -29,6 +29,7 @@ function _run_batch_entity_create_terms() {
     foreach ($terms_array as $key => $row) {
       if (1 < 97) {
         _entity_create_terms($row, $vocabulary);
+        dpm(31);
       }
     }
   }
@@ -69,12 +70,12 @@ function _entity_create_terms($row = array(), $vocabulary) {
     }
   }
 
-  // $term = Term::create($term_value);
-  // $term->save();
+  $term = Term::create($term_value);
+  $term->save();
 
-  // if (isset($term->get('tid')->value)) {
-  //   dpm('create term -' . $term->get('name')->value . ' - tid - ' . $term->get('tid')->value);
-  // }
+  if (isset($term->get('tid')->value)) {
+    dpm('create term -' . $term->get('name')->value . ' - tid - ' . $term->get('tid')->value);
+  }
 }
 
 /**
