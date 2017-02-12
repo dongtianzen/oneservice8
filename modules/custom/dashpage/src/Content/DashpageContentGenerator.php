@@ -89,7 +89,7 @@ class DashpageContentGenerator extends ControllerBase {
 
       $output .= '<divclass="dashpage-wrapper margin-top-16">';
         $output .= 'Client List';
-        $output .= render($view_content);    // method 1
+        $output .= render($view_content);
       $output .= '</div>';
     }
 
