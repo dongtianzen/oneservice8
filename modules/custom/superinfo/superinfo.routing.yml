@@ -1,7 +1,7 @@
-superinfo.form.topic:
-  path: '/superinfo/form/{topic}'
+superinfo.form.node:
+  path: '/superinfo/form/node/{bundle}'
   defaults:
-    _controller: '\Drupal\superinfo\Controller\SuperinfoController::superinfoForm'
+    _controller: '\Drupal\superinfo\Controller\SuperinfoController::superinfoFormNode'
     _title: 'Superinfo Form'
   requirements:
     _permission: 'access content'

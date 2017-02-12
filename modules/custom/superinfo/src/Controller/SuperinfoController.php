@@ -41,11 +41,11 @@ class SuperinfoController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
-  public function superinfoForm($topic) {
+  public function superinfoFormNode($bundle) {
     $entity = \Drupal::entityManager()
       ->getStorage('node')
       ->create(
-        array('type' => "article")    // node_type
+        array('type' => $bundle)    // node_type
       );
 
     $form = \Drupal::entityTypeManager()
