@@ -42,11 +42,25 @@ class SuperinfoController extends ControllerBase {
    * {@inheritdoc}
    */
   public function formCreate($entity_type, $bundle) {
-    $entity = \Drupal::entityManager()
-      ->getStorage($entity_type)
-      ->create(
-        array('type' => $bundle)    // node_type
-      );
+    $request = \Drupal::request();
+    if ($route = $request->attributes->get(\Symfony\Cmf\Component\Routing\RouteObjectInterface::ROUTE_OBJECT)) {
+      $route->setDefault('_title', 'New ' . ucfirst($bundle));
+    }
+
+    if ($entity_type == 'node') {
+      $entity = \Drupal::entityManager()
+        ->getStorage($entity_type)
+        ->create(
+          array('type' => $bundle)    // node_type
+        );
+    }
+    elseif ($entity_type == 'taxonomy_term' || $entity_type == 'term') {
+      $entity = \Drupal::entityManager()
+        ->getStorage('taxonomy_term')
+        ->create(
+          array('vid' => $bundle)
+        );
+    }
 
     $entity_form = \Drupal::entityTypeManager()
       ->getFormObject($entity_type, 'default')
