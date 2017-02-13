@@ -36,22 +36,22 @@ function _taxonomyGetTreeTidNames($vid = NULL) {
           $field_info = field_info_field($row['d7_field_name']);
 
           if ($field_info['type'] == 'entityreference') {
-            if ($field_info['settings']['target_type'] == 'user') {
+            if (isset($term->{$row['d7_field_name']}['und'][0]['target_id'])) {
               foreach ($term->{$row['d7_field_name']}['und'] as $value) {
-                $user = user_load($value['target_id']);
-                if (isset($user->name)) {
-                  $field_value[] = $user->name;
+
+                if ($field_info['settings']['target_type'] == 'user') {
+                  $user = user_load($value['target_id']);
+                  if (isset($user->name)) {
+                    $field_value[] = $user->name;
+                  }
                 }
-              }
-            }
-            else {
-              if (isset($term->{$row['d7_field_name']}['und'][0]['target_id'])) {
-                foreach ($term->{$row['d7_field_name']}['und'] as $value) {
+                else {
                   $field_term = taxonomy_term_load($value['target_id']);
                   if (isset($field_term->name)) {
                     $field_value[] = $field_term->name;
                   }
                 }
+
               }
             }
           }
