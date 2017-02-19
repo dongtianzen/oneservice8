@@ -88,18 +88,18 @@ class DashpageContentGenerator extends ControllerBase {
     $date_start = '2017-01-01';
     $date_end   = '2017-02-01';
 
-    $output .= '<div class="dashpage-daterangepicker-wrapper margin-bottom-12">';
+    $output .= '<div class="dashpage-daterangepicker-wrapper height-16">';
       $output .= '<div id="dashpage-daterangepicker-tag" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">';
           $output .= '<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>';
           $output .= '<span class="margin-left-6">' . $date_start . ' - ' . $date_end . '</span>';
-          $output .= '<b class="caret"></b>';
+          $output .= '<b class="caret margin-left-6"></b>';
       $output .= '</div>';
     $output .= '</div>';
 
     if ($views_name) {
       $view_content = views_embed_view($views_name, 'default');
 
-      $output .= '<div class="dashpage-wrapper margin-top-16 clear-both">';
+      $output .= '<div class="dashpage-wrapper margin-top-24 clear-both">';
         $output .= render($view_content);
       $output .= '</div>';
     }
