@@ -1,0 +1,16 @@
+services:
+  # Defines a simple service of which requires no parameter for its constructor.
+  flexinfo.entity.service:
+    class: Drupal\flexinfo\Service\FlexinfoEntityService
+  # field
+  flexinfo.field.service:
+    class: Drupal\flexinfo\Service\FlexinfoFieldService
+  # term
+  flexinfo.term.service:
+    class: Drupal\flexinfo\Service\FlexinfoTermService
+  # vocabulary
+  flexinfo.vocabulary.service:
+    class: Drupal\flexinfo\Service\FlexinfoVocabularyService
+  # user
+  flexinfo.user.service:
+    class: Drupal\flexinfo\Service\FlexinfoUserService
