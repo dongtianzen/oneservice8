@@ -12,7 +12,7 @@ jQuery(document).ready(function($) {
    * Pre-defined Ranges & Callback
    *
    */
-  $('#block-fxt-main-menu').daterangepicker(
+  $('#dashpage-daterangepicker-tag').daterangepicker(
     {
       ranges: {
         // 'Yesterday': [moment().subtract('days', 1), moment().subtract('days', 1)],
@@ -29,7 +29,7 @@ jQuery(document).ready(function($) {
     },
     // action after click "apply" button or above quick "ranges" link
     function(start, end) {
-      $('#reportrange-header span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+      $('#dashpage-daterangepicker-tag span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
 
       // start.valueOf() is Unix TimeStamp
       var startDate = parseInt((start.valueOf()) / 1000);

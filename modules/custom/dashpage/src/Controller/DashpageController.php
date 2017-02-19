@@ -64,6 +64,11 @@ class DashpageController extends ControllerBase {
       '#type' => 'markup',
       '#header' => 'header',
       '#markup' => $output,
+      '#attached' => array(
+        'library' => array(
+          'fxt/daterangepicker',
+        ),
+      ),
     );
     return $build;
   }
