@@ -8,8 +8,12 @@ namespace Drupal\dashpage\Content;
 
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\field\Entity\FieldConfig;
-
 use Drupal\views\Views;
+
+
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
+use Drupal\flexinfo\Service\FlexinfoEntityService;
 
 /**
  * An example controller.
@@ -17,6 +21,21 @@ use Drupal\views\Views;
  $DashpageContentGenerator->angularPage();
  */
 class DashpageContentGenerator extends ControllerBase {
+
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('flexinfo.entity.service')
+    );
+  }
+
+  protected $flexinfoEntityService;
+
+  /**
+   * Constructor.
+   */
+  public function __construct(FlexinfoEntityService $flexinfoEntityService) {
+    $this->flexinfoEntityService = $flexinfoEntityService;
+  }
 
   /**
    * {@inheritdoc}
@@ -132,7 +151,7 @@ class DashpageContentGenerator extends ControllerBase {
       $target_id = $entity->get($field_name)->target_id;
 
       if ($field->getSetting('target_type') == 'taxonomy_term') {
-        $output = $this->_entity_load_term($target_id);
+        $output = $this->_entity_load_term($target_id) . 666;
       }
       else{
         $output = $this->_entity_load_user($target_id);
