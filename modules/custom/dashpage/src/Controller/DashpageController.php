@@ -57,7 +57,9 @@ class DashpageController extends ControllerBase {
    * {@inheritdoc}
    */
   public function contentGeneratorTemplate($method = 'template', $views_name = NULL) {
-    $DashpageContentGenerator = new DashpageContentGenerator();
+    $FlexinfoEntityService = \Drupal::getContainer()->get('flexinfo.entity.service');
+
+    $DashpageContentGenerator = new DashpageContentGenerator($FlexinfoEntityService);
     $output = $DashpageContentGenerator->{$method}($views_name);
 
     $build = array(
@@ -98,7 +100,9 @@ class DashpageController extends ControllerBase {
    * call from routing.yml
    */
   public function repairPrint($nid) {
-    $DashpageContentGenerator = new DashpageContentGenerator();
+    $FlexinfoEntityService = \Drupal::getContainer()->get('flexinfo.entity.service');
+
+    $DashpageContentGenerator = new DashpageContentGenerator($FlexinfoEntityService);
     $output = $DashpageContentGenerator->repairPrint($nid);
 
     $build = array(

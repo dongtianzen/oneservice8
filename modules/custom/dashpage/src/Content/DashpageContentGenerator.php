@@ -10,7 +10,6 @@ use Drupal\Core\Controller\ControllerBase;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\views\Views;
 
-
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 use Drupal\flexinfo\Service\FlexinfoEntityService;
@@ -127,55 +126,6 @@ class DashpageContentGenerator extends ControllerBase {
   }
 
   /**
-   * render node field value
-   */
-  public function renderFieldValue($entity_type = NULL, $entity = NULL, $field_name = NULL) {
-    $output = '';
-
-    $field = \Drupal\field\Entity\FieldStorageConfig::loadByName($entity_type, $field_name);
-    $field_standard_type = array(
-      'boolean',
-      'datetime',
-      'decimal',
-      'email',
-      'integer',
-      'string',
-      'string_long',
-      'text_long',
-    );
-
-    if (in_array($field->getType(), $field_standard_type)) {
-      $output = $entity->get($field_name)->value;
-    }
-    elseif ($field->getType() == 'entity_reference') {
-      $target_id = $entity->get($field_name)->target_id;
-
-      if ($field->getSetting('target_type') == 'taxonomy_term') {
-        $output = $this->_entity_load_term($target_id) . 666;
-      }
-      else{
-        $output = $this->_entity_load_user($target_id);
-      }
-    }
-    else {
-      dpm('no found this field type - ' .$field->getType());
-    }
-
-    return $output;
-  }
-
-  public function _entity_load_term($tid) {
-    $output = NULL;
-
-    $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid);
-    if ($term) {
-      $output = $term->get('name')->value;
-    }
-
-    return $output;
-  }
-
-  /**
    * @return, user uid
    */
   public function _entity_load_user($tid) {
@@ -203,13 +153,13 @@ class DashpageContentGenerator extends ControllerBase {
           $output .= '<tbody>';
             $output .= '<tr>';
               $output .= '<td>客户名称</td>';
-              $output .= '<td colspan="3">' . $this->renderFieldValue('node', $node, 'field_repair_clientname') . '</td>';
+              $output .= '<td colspan="3">' . $this->flexinfoEntityService->getEntity('field')->getFieldSingleValue('node', $node, 'field_repair_clientname') . '</td>';
             $output .= '</tr>';
             $output .= '<tr>';
               $output .= '<td>联系人</td>';
-              $output .= '<td>' . $this->renderFieldValue('node', $node, 'field_repair_contactname') . '</td>';
+              $output .= '<td>' . $this->flexinfoEntityService->getEntity('field')->getFieldSingleValue('node', $node, 'field_repair_contactname') . '</td>';
               $output .= '<td>联系电话</td>';
-              $output .= '<td>' . $this->renderFieldValue('node', $node, 'field_repair_contactphone') . '</td>';
+              $output .= '<td>' . $this->flexinfoEntityService->getEntity('field')->getFieldSingleValue('node', $node, 'field_repair_contactphone') . '</td>';
             $output .= '</tr>';
             $output .= '<tr>';
               $output .= '<td>客户地址</td>';
@@ -217,39 +167,39 @@ class DashpageContentGenerator extends ControllerBase {
             $output .= '</tr>';
             $output .= '<tr>';
               $output .= '<td>设备型号</td>';
-              $output .= '<td>' . $this->renderFieldValue('node', $node, 'field_repair_devicetype') . '</td>';
+              $output .= '<td>' . $this->flexinfoEntityService->getEntity('field')->getFieldSingleValue('node', $node, 'field_repair_devicetype') . '</td>';
               $output .= '<td>序列号</td>';
-              $output .= '<td>' . $this->renderFieldValue('node', $node, 'field_repair_serialnumber') . '</td>';
+              $output .= '<td>' . $this->flexinfoEntityService->getEntity('field')->getFieldSingleValue('node', $node, 'field_repair_serialnumber') . '</td>';
             $output .= '</tr>';
             $output .= '<tr>';
               $output .= '<td>收取日期</td>';
-              $output .= '<td colspan="3">' . $this->renderFieldValue('node', $node, 'field_repair_receivedate') . '</td>';
+              $output .= '<td colspan="3">' . $this->flexinfoEntityService->getEntity('field')->getFieldSingleValue('node', $node, 'field_repair_receivedate') . '</td>';
             $output .= '</tr>';
             $output .= '<tr>';
               $output .= '<td>收取备注</td>';
-              $output .= '<td colspan="3">' . $this->renderFieldValue('node', $node, 'field_repair_receivenote') . '</td>';
+              $output .= '<td colspan="3">' . $this->flexinfoEntityService->getEntity('field')->getFieldSingleValue('node', $node, 'field_repair_receivenote') . '</td>';
             $output .= '</tr>';
             $output .= '<tr>';
               $output .= '<td>故障原因</td>';
-              $output .= '<td colspan="3">' . $this->renderFieldValue('node', $node, 'field_repair_issuereason') . '</td>';
+              $output .= '<td colspan="3">' . $this->flexinfoEntityService->getEntity('field')->getFieldSingleValue('node', $node, 'field_repair_issuereason') . '</td>';
             $output .= '</tr>';
             $output .= '<tr>';
               $output .= '<td>维修处理办法</td>';
-              $output .= '<td colspan="3">' . $this->renderFieldValue('node', $node, 'field_repair_repairapproach') . '</td>';
+              $output .= '<td colspan="3">' . $this->flexinfoEntityService->getEntity('field')->getFieldSingleValue('node', $node, 'field_repair_repairapproach') . '</td>';
             $output .= '</tr>';
             $output .= '<tr>';
               $output .= '<td>返回备注</td>';
-              $output .= '<td colspan="3">' . $this->renderFieldValue('node', $node, 'field_repair_returnnote') . '</td>';
+              $output .= '<td colspan="3">' . $this->flexinfoEntityService->getEntity('field')->getFieldSingleValue('node', $node, 'field_repair_returnnote') . '</td>';
             $output .= '</tr>';
             $output .= '<tr>';
               $output .= '<td>收费金额</td>';
-              $output .= '<td colspan="3">' . $this->renderFieldValue('node', $node, 'field_repair_quoteamount') . '</td>';
+              $output .= '<td colspan="3">' . $this->flexinfoEntityService->getEntity('field')->getFieldSingleValue('node', $node, 'field_repair_quoteamount') . '</td>';
             $output .= '</tr>';
             $output .= '<tr>';
               $output .= '<td>维修工程师</td>';
-              $output .= '<td>' . $this->renderFieldValue('node', $node, 'field_repair_checkstaff') . '</td>';
+              $output .= '<td>' . $this->flexinfoEntityService->getEntity('user')->getUserNameByUid('node', $node, 'field_repair_checkstaff') . '</td>';
               $output .= '<td>返回日期</td>';
-              $output .= '<td>' . $this->renderFieldValue('node', $node, 'field_repair_returndate') . '</td>';
+              $output .= '<td>' . $this->flexinfoEntityService->getEntity('field')->getFieldSingleValue('node', $node, 'field_repair_returndate') . '</td>';
             $output .= '</tr>';
           $output .= '</tbody>';
         $output .= '</table>';
