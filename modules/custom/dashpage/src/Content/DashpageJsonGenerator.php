@@ -65,11 +65,11 @@ class JsonDashpageBase {
       'type' => "chart",   // chart or multiContiner
       'top' =>  array(
         'enable' => true,
-        'value' => "Working Diagnosis"
+        'value' => NULL,   // Block Top text
       ),
       'middle' =>  array(
         'enable' => true,
-        'middleTop' => "<div>Multi-Chart-Middle-Top</div>",
+        'middleTop' => NULL,    // Block Middle Top HTML text
         'middleMiddle' =>  array(
           'middleMiddleLeftClass' => "",
           'middleMiddleLeft' => "",
@@ -78,11 +78,11 @@ class JsonDashpageBase {
           'middleMiddleRightClass' => "",
           'middleMiddleRight' => ""
         ),
-        'middleBottom' => "<div>Multi-Chart-Middle-Bottom</div>"
+        'middleBottom' => NULL   // Block Middle Bottom HTML text
       ),
       'bottom' => array(
         'enable' => true,
-        'value' => "<div>Doughnut-Chart-Bottom</div>"
+        'value' => NULL              // Block Bottom text
       )
     );
 
@@ -103,7 +103,7 @@ class JsonDashpageBase {
       'type' => "chart",
       'top' =>  array(
         'enable' => true,
-        'value' => "Working Diagnosis"
+        'value' => "Working Diagnosis TabContainer"
       ),
       'middle' =>  array(
         'enable' => true,
@@ -209,9 +209,9 @@ class JsonDashpageBase {
       "chartTitle" => "Identify and address only render on getBlockMultiContainer",
       "chartData" => array(
         "labels" => [
-          "IPF",
-          "CTLD-ID",
-          "Other"
+          "ADP-1000",
+          "Ellipse-1000D",
+          "LU2000"
         ],
         "datasets" => [
           array(
@@ -283,7 +283,7 @@ class JsonDashpageBase {
     $output["chartOptions"]["annotateDisplay"] = false;
     $output["chartOptions"]["barValueSpacing"] = 20;
     $output["chartOptions"]["bezierCurveTension"] = 0.1;
-    $output["chartOptions"]["crossText"] = ["", "Confirmed", "82%"];
+    $output["chartOptions"]["crossText"] = ["", "收款", "82%"];
     $output["chartOptions"]["crossTextAlign"] = ["center"];
     $output["chartOptions"]["crossTextBaseline"] = ["middle"];
     $output["chartOptions"]["crossTextFontColor"] = ["black"];
@@ -481,19 +481,19 @@ class DashpageJsonGenerator extends JsonDashpageBase {
   public function angularJson() {
     $this->setPostUrl('page/forms/preform/add');
 
-    // $output['fixedSection'] = array(
-      // $this->getTileStyleOne(array('value' => array('header' => array('class' => 'bg-2fa9e0 color-fff'))), 'Total Registrations', 128),
-    //   $this->getTileStyleOne(array('value' => array('header' => array('class' => 'bg-f34b99 color-fff'))), 'Total Referrals', 360),
-    //   $this->getTileStyleOne(array('value' => array('header' => array('class' => 'bg-99dc3b color-fff'))), 'Number of Sessions', 96),
-    //   $this->getTileStyleOne(array('value' => array('header' => array('class' => 'bg-f3c848 color-fff'))), 'Overall Satisfaction', 4.5),
-    // );
+    $output['fixedSection'] = array(
+      $this->getTileStyleOne(array('value' => array('header' => array('class' => 'bg-2fa9e0 color-fff'))), 'Total Repair', 128),
+      $this->getTileStyleOne(array('value' => array('header' => array('class' => 'bg-f34b99 color-fff'))), 'Total Return', 120),
+      $this->getTileStyleOne(array('value' => array('header' => array('class' => 'bg-99dc3b color-fff'))), 'Number of Quote', 96),
+      $this->getTileStyleOne(array('value' => array('header' => array('class' => 'bg-f3c848 color-fff'))), 'Overall Day', 7.23),
+    );
 
     $output['contentSection'] = array(
-      $this->getBlockOne(array('class' => "col-md-12", 'type' => "commonTable"), $this->getCommonTable()),
+      // $this->getBlockOne(array('class' => "col-md-12", 'type' => "commonTable"), $this->getCommonTable()),
+      $this->getBlockOne(NULL, $this->getChartDoughnut()),
       // $this->getBlockOne(NULL, $this->getChartDoughnut()),
-      // $this->getBlockOne(NULL, $this->getChartDoughnut()),
-      // $this->getBlockOne(array('class' => "col-md-6"), $this->getChartPie(array("chartId" => "3714520699999"))),
-      // $this->getBlockOne(array('class' => "col-md-12"), $this->getChartBar()),
+      $this->getBlockOne(array('class' => "col-md-6"), $this->getChartPie(array("chartId" => "3714520699999"))),
+      $this->getBlockOne(array('class' => "col-md-12"), $this->getChartBar()),
       // $this->getBlockMultiTabs(
       //   NULL,
       //   array(

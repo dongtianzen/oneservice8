@@ -11,6 +11,7 @@ use Drupal\Core\Controller\ControllerBase;
 use Drupal\Component\Utility\Xss;
 
 use Drupal\dashpage\Content\DashpageContentGenerator;
+use Drupal\dashpage\Content\DashpageJsonGenerator;
 use Drupal\manageinfo\Controller\ManageinfoController;
 
 /**
@@ -129,6 +130,9 @@ class DashpageController extends ControllerBase {
 
     $ManageinfoController = new ManageinfoController($FlexinfoEntityService);
     $json_content_data = $ManageinfoController->termTableContent('company');
+
+    $DashpageJsonGenerator = new DashpageJsonGenerator();
+    $json_content_data = $DashpageJsonGenerator->angularJson();
 
     $build = array(
       '#type' => 'markup',
