@@ -46,7 +46,7 @@ class FlexinfoFieldService {
         $output = \Drupal::getContainer()->get('flexinfo.term.service')->getNameByTid($target_id);
       }
       else{
-        $output = $this->_entity_load_user($target_id);
+        $output = \Drupal::getContainer()->get('flexinfo.user.service')->getUserNameByUid($target_id);
       }
     }
     else {

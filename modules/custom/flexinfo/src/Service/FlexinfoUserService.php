@@ -29,12 +29,15 @@ class FlexinfoUserService {
    * @return user name
    */
   public function getUserNameByUid($uid = NULL) {
+    $output = NULL;
+
     $account = \Drupal\user\Entity\User::load($uid);
+    if ($account) {
+      $output = $account->getUsername();
+      $output = $account->get('name')->value;
+    }
 
-    $name = $account->getUsername();
-    $name = $account->get('name')->value;
-
-    drupal_set_message($name);
+    return $output;
   }
 
 }

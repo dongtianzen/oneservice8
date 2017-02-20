@@ -34,7 +34,6 @@ class FlexinfoEntityService {
         break;
 
       default:
-        # code...
         break;
     }
 

@@ -197,7 +197,7 @@ class DashpageContentGenerator extends ControllerBase {
             $output .= '</tr>';
             $output .= '<tr>';
               $output .= '<td>维修工程师</td>';
-              $output .= '<td>' . $this->flexinfoEntityService->getEntity('user')->getUserNameByUid('node', $node, 'field_repair_checkstaff') . '</td>';
+              $output .= '<td>' . $this->flexinfoEntityService->getEntity('field')->getFieldSingleValue('node', $node, 'field_repair_checkstaff') . '</td>';
               $output .= '<td>返回日期</td>';
               $output .= '<td>' . $this->flexinfoEntityService->getEntity('field')->getFieldSingleValue('node', $node, 'field_repair_returndate') . '</td>';
             $output .= '</tr>';
