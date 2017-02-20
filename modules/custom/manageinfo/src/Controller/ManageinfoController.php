@@ -84,6 +84,38 @@ class ManageinfoController extends ControllerBase {
 
   /**
    * {@inheritdoc}
+   */
+  public function manageinfoTable($topic) {
+    // load and use DashpageContent templage
+    $DashpageContentGenerator = new DashpageContentGenerator();
+    $output = $DashpageContentGenerator->angularSnapshot();
+
+    $json_content_data = $this->manageinfoTableContent($topic);
+
+    $build = array(
+      '#type' => 'markup',
+      '#header' => 'header',
+      '#markup' => $output,
+      '#allowed_tags' => $this->adminTag(),
+      '#attached' => array(
+        'library' => array(
+          'dashpage/angular_snapshot',
+        ),
+        'drupalSettings' => [
+          'manageinfo' => [
+            'manageinfoTable' => [
+              'jsonContentData' => $json_content_data,
+            ],
+          ],
+        ],
+      ),
+    );
+
+    return $build;
+  }
+
+  /**
+   * {@inheritdoc}
    * use Drupal\dashpage\Content\DashpageContentGenerator;
    */
   public function manageinfoList($topic) {
