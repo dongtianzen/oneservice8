@@ -16,7 +16,8 @@ use Drupal\flexinfo\Service\FlexinfoEntityService;
 
 /**
  * An example controller.
- $DashpageContentGenerator = new DashpageContentGenerator();
+ $FlexinfoEntityService = \Drupal::getContainer()->get('flexinfo.entity.service');
+ $DashpageContentGenerator = new DashpageContentGenerator($FlexinfoEntityService);
  $DashpageContentGenerator->angularPage();
  */
 class DashpageContentGenerator extends ControllerBase {
