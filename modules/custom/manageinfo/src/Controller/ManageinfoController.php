@@ -127,7 +127,41 @@ class ManageinfoController extends ControllerBase {
     $DashpageContentGenerator = new DashpageContentGenerator($FlexinfoEntityService);
     $output = $DashpageContentGenerator->angularSnapshot();
 
-    $json_content_data = $this->manageinfoTableContent($topic);
+    $json_content_data = $this->termTableContent($topic);
+
+    $build = array(
+      '#type' => 'markup',
+      '#header' => 'header',
+      '#markup' => $output,
+      '#allowed_tags' => $this->adminTag(),
+      '#attached' => array(
+        'library' => array(
+          'dashpage/angular_snapshot',
+        ),
+        'drupalSettings' => [
+          'manageinfo' => [
+            'manageinfoTable' => [
+              'jsonContentData' => $json_content_data,
+            ],
+          ],
+        ],
+      ),
+    );
+
+    return $build;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function reportSnapshot($topic) {
+    // load and use DashpageContent templage
+    $FlexinfoEntityService = \Drupal::getContainer()->get('flexinfo.entity.service');
+
+    $DashpageContentGenerator = new DashpageContentGenerator($FlexinfoEntityService);
+    $output = $DashpageContentGenerator->angularSnapshot();
+
+    $json_content_data = $this->termTableContent($topic);
 
     $build = array(
       '#type' => 'markup',
@@ -155,10 +189,20 @@ class ManageinfoController extends ControllerBase {
    * {@inheritdoc}
    * @return php object, not JSON
    */
-  public function manageinfoTableContent($topic) {
+  public function termTableContent($topic) {
     $TerminfoJsonController = new TerminfoJsonController();
     $term_content = $TerminfoJsonController->basicCollectionContent($topic);
 
+    $output = $this->convertArrayToCommonTable($term_content);
+
+    return $output;
+  }
+
+  /**
+   * {@inheritdoc}
+   * @return php object, not JSON
+   */
+  public function convertArrayToCommonTable($term_content = array()) {
     $table_value = array();
     if (is_array($term_content)) {
       foreach ($term_content as $row) {

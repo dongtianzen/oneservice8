@@ -34,7 +34,7 @@ class TerminfoJsonController extends ControllerBase {
    * {@inheritdoc}
    * use Symfony\Component\HttpFoundation\JsonResponse;
    * @param, $topic is vid
-   * @return php array
+   * @return key name array
    */
   public function basicCollectionContent($topic) {
     $output = array();
