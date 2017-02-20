@@ -20,15 +20,11 @@ class DashpageBlockGenerator extends ControllerBase {
    */
   function contentRenderHeader() {
     $output = '';
-    $output .= '<div class="panel-header">';
+    $output .= '<div class="panel-header height-12 margin-top-24">';
       $output .= '<span>{{block.top.value}}</span>';
       $output .= '<md-menu>';
-        $output .= '<span id="save-button-{{block.blockId}}" ng-click="openMenu($mdOpenMenu, $event)" class="fa fa-angle-down float-right font-size-14 padding-12 cursor-pointer"></span>';
-        $output .= '<md-menu-content width="3">';
-          $output .= '<md-button ng-click="saveAsPng(3, block.blockId)"> ';
-            $output .= 'Save PNG';
-          $output .= '</md-button>';
-        $output .= '</md-menu-content>';
+        $output .= '<div class="">';
+        $output .= '</div>';
       $output .= '</md-menu>';
     $output .= '</div>';
 
