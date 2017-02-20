@@ -36,7 +36,9 @@ class DashpageController extends ControllerBase {
    * {@inheritdoc}
    */
   public function angularSnapshot() {
-    $DashpageContentGenerator = new DashpageContentGenerator();
+    $FlexinfoEntityService = \Drupal::getContainer()->get('flexinfo.entity.service');
+
+    $DashpageContentGenerator = new DashpageContentGenerator($FlexinfoEntityService);
     $output = $DashpageContentGenerator->angularSnapshot();
 
     $build = array(
@@ -118,7 +120,9 @@ class DashpageController extends ControllerBase {
    * {@inheritdoc}
    */
   public function reportSnapshot() {
-    $DashpageContentGenerator = new DashpageContentGenerator();
+    $FlexinfoEntityService = \Drupal::getContainer()->get('flexinfo.entity.service');
+
+    $DashpageContentGenerator = new DashpageContentGenerator($FlexinfoEntityService);
     $output = $DashpageContentGenerator->angularSnapshot();
 
     $build = array(

@@ -17,3 +17,9 @@ navinfo.main.repair:
   route_name: dashpage.repair.list
   menu_name: main
   weight: 100
+navinfo.main.report:
+  title: 'Report'
+  description: 'Report'
+  route_name: dashpage.report.snapshot
+  menu_name: main
+  weight: 100
