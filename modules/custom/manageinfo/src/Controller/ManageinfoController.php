@@ -83,6 +83,33 @@ class ManageinfoController extends ControllerBase {
   }
 
   /**
+   * @return php object, not JSON
+   */
+  public function convertArrayToCommonTable($term_content = array()) {
+    $table_value = array();
+    if (is_array($term_content)) {
+      foreach ($term_content as $row) {
+        $tbody_content[] = array_values($row);
+      }
+
+      $table_value = array(
+        "thead" => array(array_keys($term_content[0])),
+        "tbody" => array_values($tbody_content),
+      );
+    }
+
+    $DashpageJsonGenerator = new DashpageJsonGenerator();
+    $output['contentSection'] = array(
+      $DashpageJsonGenerator->getBlockOne(
+        array('class' => "col-md-12", 'type' => "commonTable"),
+        $DashpageJsonGenerator->getCommonTable($option = array(), $table_value)
+      ),
+    );
+
+    return $output;
+  }
+
+  /**
    * {@inheritdoc}
    */
   public function manageinfoTable($topic) {
@@ -153,40 +180,6 @@ class ManageinfoController extends ControllerBase {
 
   /**
    * {@inheritdoc}
-   */
-  public function reportSnapshot($topic) {
-    // load and use DashpageContent templage
-    $FlexinfoEntityService = \Drupal::getContainer()->get('flexinfo.entity.service');
-
-    $DashpageContentGenerator = new DashpageContentGenerator($FlexinfoEntityService);
-    $output = $DashpageContentGenerator->angularSnapshot();
-
-    $json_content_data = $this->termTableContent($topic);
-
-    $build = array(
-      '#type' => 'markup',
-      '#header' => 'header',
-      '#markup' => $output,
-      '#allowed_tags' => $this->adminTag(),
-      '#attached' => array(
-        'library' => array(
-          'dashpage/angular_snapshot',
-        ),
-        'drupalSettings' => [
-          'manageinfo' => [
-            'manageinfoTable' => [
-              'jsonContentData' => $json_content_data,
-            ],
-          ],
-        ],
-      ),
-    );
-
-    return $build;
-  }
-
-  /**
-   * {@inheritdoc}
    * @return php object, not JSON
    */
   public function termTableContent($topic) {
@@ -198,33 +191,6 @@ class ManageinfoController extends ControllerBase {
     return $output;
   }
 
-  /**
-   * {@inheritdoc}
-   * @return php object, not JSON
-   */
-  public function convertArrayToCommonTable($term_content = array()) {
-    $table_value = array();
-    if (is_array($term_content)) {
-      foreach ($term_content as $row) {
-        $tbody_content[] = array_values($row);
-      }
-
-      $table_value = array(
-        "thead" => array(array_keys($term_content[0])),
-        "tbody" => array_values($tbody_content),
-      );
-    }
-
-    $DashpageJsonGenerator = new DashpageJsonGenerator();
-    $output['contentSection'] = array(
-      $DashpageJsonGenerator->getBlockOne(
-        array('class' => "col-md-12", 'type' => "commonTable"),
-        $DashpageJsonGenerator->getCommonTable($option = array(), $table_value)
-      ),
-    );
-
-    return $output;
-  }
 
   /**
    * {@inheritdoc}

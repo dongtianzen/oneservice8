@@ -11,6 +11,7 @@ use Drupal\Core\Controller\ControllerBase;
 use Drupal\Component\Utility\Xss;
 
 use Drupal\dashpage\Content\DashpageContentGenerator;
+use Drupal\manageinfo\Controller\ManageinfoController;
 
 /**
  * An example controller.
@@ -120,10 +121,14 @@ class DashpageController extends ControllerBase {
    * {@inheritdoc}
    */
   public function reportSnapshot() {
+    // load and use DashpageContent templage
     $FlexinfoEntityService = \Drupal::getContainer()->get('flexinfo.entity.service');
 
     $DashpageContentGenerator = new DashpageContentGenerator($FlexinfoEntityService);
     $output = $DashpageContentGenerator->angularSnapshot();
+
+    $ManageinfoController = new ManageinfoController($FlexinfoEntityService);
+    $json_content_data = $ManageinfoController->termTableContent('company');
 
     $build = array(
       '#type' => 'markup',
@@ -134,8 +139,16 @@ class DashpageController extends ControllerBase {
         'library' => array(
           'dashpage/angular_snapshot',
         ),
+        'drupalSettings' => [
+          'dashpage' => [
+            'dashpageContent' => [
+              'jsonContentData' => $json_content_data,
+            ],
+          ],
+        ],
       ),
     );
+
     return $build;
   }
 
