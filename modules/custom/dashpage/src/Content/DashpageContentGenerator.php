@@ -103,17 +103,7 @@ class DashpageContentGenerator extends ControllerBase {
    */
   public function renderViewsContent($views_name = NULL) {
     $output = '';
-
-    $date_start = '2017-01-01';
-    $date_end   = '2017-02-01';
-
-    $output .= '<div class="dashpage-daterangepicker-wrapper height-16">';
-      $output .= '<div id="dashpage-daterangepicker-tag" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">';
-          $output .= '<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>';
-          $output .= '<span class="margin-left-6">' . $date_start . ' - ' . $date_end . '</span>';
-          $output .= '<b class="caret margin-left-6"></b>';
-      $output .= '</div>';
-    $output .= '</div>';
+    $output .= $this->dateRangePickerBar();
 
     if ($views_name) {
       $view_content = views_embed_view($views_name, 'default');
@@ -122,6 +112,25 @@ class DashpageContentGenerator extends ControllerBase {
         $output .= render($view_content);
       $output .= '</div>';
     }
+
+    return $output;
+  }
+
+  /**
+   * render views output
+   */
+  public function dateRangePickerBar() {
+    $date_start = '2017-01-01';
+    $date_end   = '2017-02-01';
+
+    $output = '';
+    $output .= '<div class="dashpage-daterangepicker-wrapper height-16">';
+      $output .= '<div id="dashpage-daterangepicker-tag" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">';
+          $output .= '<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>';
+          $output .= '<span class="margin-left-6">' . $date_start . ' - ' . $date_end . '</span>';
+          $output .= '<b class="caret margin-left-6"></b>';
+      $output .= '</div>';
+    $output .= '</div>';
 
     return $output;
   }
