@@ -92,25 +92,7 @@ class SuperinfoController extends ControllerBase {
     }
 
     $topic = strtolower($topic);
-    $json_path = base_path() . 'viewsjson/node/page/all';
-    if ($topic) {
-      $json_file_url = 'viewsjson/term/' . $topic . '/all';
-
-      $url_is_valid = \Drupal::service('path.validator')->isValid($json_file_url);
-      if (!$url_is_valid) {
-        $json_file_url = 'terminfojson/basiccollection/' . $topic;
-      }
-      $json_path = base_path() . $json_file_url;
-      // special
-      switch ($topic) {
-        case 'page':
-          $json_path = base_path() . 'viewsjson/node/page/all';
-          break;
-
-        default:
-          break;
-      }
-    }
+    $json_path = $this->superinfoTableJsonPath($topic);
 
     $SuperinfoContentGenerator = new SuperinfoContentGenerator();
     $output = $SuperinfoContentGenerator->superinfoTable();
@@ -135,6 +117,33 @@ class SuperinfoController extends ControllerBase {
     );
 
     return $build;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function superinfoTableJsonPath($topic) {
+    $json_path = base_path() . 'viewsjson/node/page/all';
+    if ($topic) {
+      $json_file_url = 'viewsjson/term/' . $topic . '/all';
+
+      $url_is_valid = \Drupal::service('path.validator')->isValid($json_file_url);
+      if (!$url_is_valid) {
+        $json_file_url = 'terminfojson/basiccollection/' . $topic;
+      }
+      $json_path = base_path() . $json_file_url;
+      // special
+      switch ($topic) {
+        case 'page':
+          $json_path = base_path() . 'viewsjson/node/page/all';
+          break;
+
+        default:
+          break;
+      }
+    }
+
+    return $json_path;
   }
 
 }

@@ -14,6 +14,13 @@ pageInfoBaseControllers.controller('PageInfoBaseController', ['$scope', '$http',
     angular.element(document).ready(function() {
       $http.get(jsonFileUrl).success(function(data) {
         $scope.pageData = data;
+
+        if ((drupalSettings.path.currentPath.indexOf("manageinfo/") > -1) && (typeof drupalSettings.manageinfo.manageinfoTable.jsonContentData !== 'undefined')) {
+          $scope.pageData = drupalSettings.manageinfo.manageinfoTable.jsonContentData;
+        }
+        else {
+          $scope.pageData = data;
+        }
       }).catch(function(err) {
         // Log error somehow.
       }).finally(function() {

@@ -38,7 +38,7 @@ manageinfo.table.topic:
   path: '/manageinfo/table/{topic}'
   defaults:
     _controller: '\Drupal\manageinfo\Controller\ManageinfoController::manageinfoTable'
-    _title: 'Setting Index'
+    _title: 'Manage Table'
   requirements:
     _permission: 'access content'
     _role: 'authenticated'

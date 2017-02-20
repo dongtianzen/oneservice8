@@ -87,6 +87,10 @@ class ManageinfoController extends ControllerBase {
    */
   public function manageinfoTable($topic) {
     // load and use DashpageContent templage
+    $FlexinfoEntityService = \Drupal::getContainer()->get('flexinfo.entity.service');
+
+    $DashpageContentGenerator = new DashpageContentGenerator($FlexinfoEntityService);
+    $output = $DashpageContentGenerator->angularSnapshot();
 
     $json_content_data = $this->manageinfoTableContent($topic);
 
