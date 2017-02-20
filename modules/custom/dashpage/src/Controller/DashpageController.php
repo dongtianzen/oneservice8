@@ -114,4 +114,25 @@ class DashpageController extends ControllerBase {
     return $build;
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function reportSnapshot() {
+    $DashpageContentGenerator = new DashpageContentGenerator();
+    $output = $DashpageContentGenerator->angularSnapshot();
+
+    $build = array(
+      '#type' => 'markup',
+      '#header' => 'header',
+      '#markup' => $output,
+      '#allowed_tags' => $this->adminTag(),
+      '#attached' => array(
+        'library' => array(
+          'dashpage/angular_snapshot',
+        ),
+      ),
+    );
+    return $build;
+  }
+
 }

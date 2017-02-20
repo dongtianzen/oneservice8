@@ -37,3 +37,11 @@ dashpage.repair.print:
     _title: 'Repair Print'
   requirements:
     _permission: 'access content'
+
+dashpage.report.snapshot:
+  path: '/dashpage/report/snapshot'
+  defaults:
+    _controller: '\Drupal\dashpage\Controller\DashpageController::reportSnapshot'
+    _title: 'Report Page'
+  requirements:
+    _permission: 'access content'
