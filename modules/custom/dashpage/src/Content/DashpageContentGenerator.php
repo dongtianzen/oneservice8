@@ -127,20 +127,6 @@ class DashpageContentGenerator extends ControllerBase {
   }
 
   /**
-   * @return, user uid
-   */
-  public function _entity_load_user($tid) {
-    $output = NULL;
-
-    $term = \Drupal::entityTypeManager()->getStorage('user')->load($tid);
-    if ($term) {
-      $output = $term->get('name')->value;
-    }
-
-    return $output;
-  }
-
-  /**
    * render views output
    */
   public function repairPrint($nid = NULL) {
