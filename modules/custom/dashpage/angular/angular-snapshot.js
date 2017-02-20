@@ -10,7 +10,6 @@ var pageInfoBaseControllers = angular.module('pageInfoBase', ['flexxiaChartsnewj
 pageInfoBaseControllers.controller('PageInfoBaseController', ['$scope', '$http', '$mdDialog', '$mdMedia', '$filter', '$sce',
   function($scope, $http, $mdDialog, $mdMedia, $filter, $sce) {
     $scope.$sce = $sce;
-    $scope.loading = true;
 
     angular.element(document).ready(function() {
       $http.get(jsonFileUrl).success(function(data) {
@@ -25,8 +24,7 @@ pageInfoBaseControllers.controller('PageInfoBaseController', ['$scope', '$http',
       }).catch(function(err) {
         // Log error somehow.
       }).finally(function() {
-        // Hide loading spinner whether our call succeeded or failed.
-        $scope.loading = false;
+
       });
     });
 
