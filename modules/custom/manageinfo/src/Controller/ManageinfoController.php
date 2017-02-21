@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains \Drupal\dashpage\Controller\ManageinfoController.
+ * Contains \Drupal\manageinfo\Controller\ManageinfoController.
  */
 
 namespace Drupal\manageinfo\Controller;
