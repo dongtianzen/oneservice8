@@ -14,6 +14,14 @@ dashpage.client.list:
   requirements:
     _permission: 'access content'
 
+dashpage.parts.list:
+  path: '/dashpage/parts/list'
+  defaults:
+    _controller: '\Drupal\dashpage\Controller\DashpageController::partsList'
+    _title: 'Parts List'
+  requirements:
+    _permission: 'access content'
+
 dashpage.quote.list:
   path: '/dashpage/quote/list'
   defaults:

@@ -5,6 +5,12 @@ navinfo.main.client:
   route_name: dashpage.client.list
   menu_name: main
   weight: 100
+navinfo.main.parts:
+  title: 'Parts'
+  description: 'Parts'
+  route_name: dashpage.parts.list
+  menu_name: main
+  weight: 100
 navinfo.main.quote:
   title: 'Quote'
   description: 'Quote'

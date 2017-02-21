@@ -89,6 +89,13 @@ class DashpageController extends ControllerBase {
   /**
    * call from routing.yml
    */
+  public function partsList() {
+    return $this->contentGeneratorTemplate('renderViewsContent', 'node_parts_collection');
+  }
+
+  /**
+   * call from routing.yml
+   */
   public function quoteList() {
     return $this->contentGeneratorTemplate('renderViewsContent', 'node_quote_collection');
   }
