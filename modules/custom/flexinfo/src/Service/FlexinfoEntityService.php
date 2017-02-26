@@ -21,8 +21,24 @@ class FlexinfoEntityService {
    */
   function getEntity($entity_type) {
     switch ($entity_type) {
+      case 'calc':
+        $container = \Drupal::getContainer()->get('flexinfo.calc.service');
+        break;
+
       case 'field':
         $container = \Drupal::getContainer()->get('flexinfo.field.service');
+        break;
+
+      case 'querynode':
+        $container = \Drupal::getContainer()->get('flexinfo.querynode.service');
+        break;
+
+      case 'queryterm':
+        $container = \Drupal::getContainer()->get('flexinfo.queryterm.service');
+        break;
+
+      case 'setting':
+        $container = \Drupal::getContainer()->get('flexinfo.setting.service');
         break;
 
       case 'term':

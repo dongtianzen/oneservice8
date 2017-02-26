@@ -206,23 +206,20 @@ class TerminfoJsonController extends ControllerBase {
         );
         break;
 
-      case 'program':
+      // term
+      case 'client':
         $output = array(
           array(
-            'field_label' => 'Business Unit',
-            'field_name'  => 'field_program_businessunit',
+            'field_label' => 'Address',
+            'field_name'  => 'field_client_address',
           ),
           array(
-            'field_label' => 'Area',
-            'field_name'  => 'field_program_theraparea',
+            'field_label' => 'Client Type',
+            'field_name'  => 'field_client_clienttype',
           ),
-          // array(
-          //   'field_label' => 'Division',
-          //   'field_name'  => 'field_program_division',
-          // ),
           array(
-            'field_label' => 'Region',
-            'field_name'  => 'field_program_region',
+            'field_label' => 'Contact Name',
+            'field_name'  => 'field_client_contactname',
           ),
         );
         break;

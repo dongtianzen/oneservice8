@@ -1,16 +1,30 @@
 services:
-  # Defines a simple service of which requires no parameter for its constructor.
+  # calculate
+  flexinfo.Calc.service:
+    class: Drupal\flexinfo\Service\FlexinfoCalcService
+  # entity
   flexinfo.entity.service:
     class: Drupal\flexinfo\Service\FlexinfoEntityService
   # field
   flexinfo.field.service:
     class: Drupal\flexinfo\Service\FlexinfoFieldService
+  # setting custom
+  flexinfo.querynode.service:
+    class: Drupal\flexinfo\Service\FlexinfoQueryNodeService
+    arguments: ['@entity.query']
+  # setting custom
+  flexinfo.queryterm.service:
+    class: Drupal\flexinfo\Service\FlexinfoQueryTermService
+    arguments: ['@entity.query']
+  # setting custom
+  flexinfo.setting.service:
+    class: Drupal\flexinfo\Service\FlexinfoSettingService
   # term
   flexinfo.term.service:
     class: Drupal\flexinfo\Service\FlexinfoTermService
-  # vocabulary
-  flexinfo.vocabulary.service:
-    class: Drupal\flexinfo\Service\FlexinfoVocabularyService
   # user
   flexinfo.user.service:
     class: Drupal\flexinfo\Service\FlexinfoUserService
+  # vocabulary
+  flexinfo.vocabulary.service:
+    class: Drupal\flexinfo\Service\FlexinfoVocabularyService
