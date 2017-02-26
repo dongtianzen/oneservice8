@@ -140,7 +140,6 @@ class DashpageContentGenerator extends ControllerBase {
         $output .= '维修情况如下:';
       $output .= '</div>';
 
-
       $node  = \Drupal::entityTypeManager()->getStorage('node')->load($nid);
       if ($node) {
         $output .= '<table class="table table-hover table-responsive">';
