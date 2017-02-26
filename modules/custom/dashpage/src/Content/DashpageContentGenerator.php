@@ -145,21 +145,19 @@ class DashpageContentGenerator extends ControllerBase {
 
       $node  = \Drupal::entityTypeManager()->getStorage('node')->load($nid);
       if ($node) {
-        $output .= '<table class="table table-hover table-responsive">';
+        $output .= '<table class="table table-hover table-responsive color-449bb5 font-bold">';
+          $output .= '<thead>';
+            $output .= '<tr>';
+              $output .= '<td>#</td>';
+              $output .= '<td>型号</td>';
+              $output .= '<td>序列号</td>';
+              $output .= '<td>价格</td>';
+            $output .= '</tr>';
+          $output .= '</thead>';
           $output .= '<tbody>';
             $output .= '<tr>';
               $output .= '<td>客户名称</td>';
               $output .= '<td colspan="3">' . $FieldService->getFieldSingleValue('node', $node, 'field_quote_clientname') . '</td>';
-            $output .= '</tr>';
-            $output .= '<tr>';
-              $output .= '<td>联系人</td>';
-              $output .= '<td>' . $FieldService->getFieldSingleValue('node', $node, 'field_quote_warrantyday') . '</td>';
-              $output .= '<td>联系电话</td>';
-              $output .= '<td>' . $FieldService->getFieldSingleValue('node', $node, 'field_quote_date') . '</td>';
-            $output .= '</tr>';
-            $output .= '<tr>';
-              $output .= '<td>客户地址</td>';
-              $output .= '<td colspan="3"></td>';
             $output .= '</tr>';
           $output .= '</tbody>';
         $output .= '</table>';
