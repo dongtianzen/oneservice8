@@ -18,6 +18,9 @@ pageInfoBaseControllers.controller('PageInfoBaseController', ['$scope', '$http',
         if ((drupalSettings.path.currentPath.indexOf("manageinfo/") > -1) && (typeof drupalSettings.manageinfo.manageinfoTable.jsonContentData !== 'undefined')) {
           $scope.pageData = drupalSettings.manageinfo.manageinfoTable.jsonContentData;
         }
+        else if ((drupalSettings.path.currentPath.indexOf("dashpage/client/list") > -1) && (typeof drupalSettings.manageinfo.manageinfoTable.jsonContentData !== 'undefined')) {
+          $scope.pageData = drupalSettings.manageinfo.manageinfoTable.jsonContentData;
+        }
         else if (typeof drupalSettings.dashpage.dashpageContent.jsonContentData !== 'undefined') {
           $scope.pageData = drupalSettings.dashpage.dashpageContent.jsonContentData;
         }

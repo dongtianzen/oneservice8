@@ -33,12 +33,3 @@ manageinfo.setting.index:
   requirements:
     _permission: 'access content'
     _role: 'authenticated'
-
-manageinfo.table.topic:
-  path: '/manageinfo/table/{topic}'
-  defaults:
-    _controller: '\Drupal\manageinfo\Controller\ManageinfoController::manageinfoTable'
-    _title: 'Manage Table'
-  requirements:
-    _permission: 'access content'
-    _role: 'authenticated'

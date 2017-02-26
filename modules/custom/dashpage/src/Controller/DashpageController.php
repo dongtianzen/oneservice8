@@ -88,7 +88,8 @@ class DashpageController extends ControllerBase {
     $DashpageContentGenerator = new DashpageContentGenerator($FlexinfoEntityService);
     $output = $DashpageContentGenerator->angularSnapshot();
 
-    $json_content_data = $this->termTableContent($topic);
+    $ManageinfoController = new ManageinfoController($FlexinfoEntityService);
+    $json_content_data = $ManageinfoController->termTableContent($topic);
 
     $build = array(
       '#type' => 'markup',
@@ -115,7 +116,8 @@ class DashpageController extends ControllerBase {
    * call from routing.yml
    */
   public function clientList() {
-    return $this->viewsTableGeneratorTemplate('renderViewsContent', 'term_client_collection');
+    // return $this->viewsTableGeneratorTemplate('renderViewsContent', 'term_client_collection');
+    return $this->angularTableGeneratorTemplate('client');
   }
 
   /**
