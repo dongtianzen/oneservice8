@@ -134,6 +134,9 @@ class DashpageContentGenerator extends ControllerBase {
         $output .= '贵公司送修的设备型号:';
       $output .= '</div>';
       $output .= '<div class="">';
+        $output .= '';
+      $output .= '</div>';
+      $output .= '<div class="">';
         $output .= '已经超过保修期, 需要更换配件, 维修后仅对该设备配件将提供为期90天的保修服务.';
       $output .= '</div>';
       $output .= '<div class="">';
@@ -166,22 +169,34 @@ class DashpageContentGenerator extends ControllerBase {
         $output .= $this->t('没有发现维修信息');
       }
 
+      $output .= '<div class="">';
+        $output .= '因已经超过保修期，需要支付维修费.费用为￥7000.00(人民币柒仟元整元整).维修后该设备相同部件将提供为期90天的保修服务。';
+      $output .= '</div>';
+      $output .= '<div class="">';
+        $output .= '以下是我司有关汇款信息:';
+      $output .= '</div>';
+      $output .= '<div class="margin-top-12">';
+        $output .= '名称: 北京万博信普通讯技术有限公司';
+      $output .= '</div>';
+      $output .= '<div class="">';
+        $output .= '开户行: 工商银行北京八里庄支行';
+      $output .= '</div>';
+      $output .= '<div class="">';
+      $output .= '帐号: 0200003819020117350';
+      $output .= '</div>';
+      $output .= '<div class="margin-top-12">';
+        $output .= '收到维修费后，北京万博信普通讯技术有限公司负责开具发票，并将设备快递回贵公司。';
+      $output .= '</div>';
+      $output .= '<div class="">';
+        $output .= '李靖';
+      $output .= '</div>';
+      $output .= '<div class="">';
+        $output .= $FieldService->getFieldSingleValue('node', $node, 'field_quote_date');
+      $output .= '</div>';
+      $output .= '<div class="btn btn-success quote-node-print-button hidden-print margin-top-48 clear-both" type="button">';
+        $output .= 'Print';
+      $output .= '</div>';
     $output .= '</div>';
-
-          $output .= '<div class="">';
-            $output .= '因已经超过保修期，需要支付维修费.费用为￥7000.00(人民币柒仟元整元整).维修后该设备相同部件将提供为期90天的保修服务.
-    以下是我司有关汇款信息：
-
-    名称： 北京万博信普通讯技术有限公司
-    开户行： 工商银行北京八里庄支行
-    帐号： 0200003819020117350
-
-    收到维修费后，北京万博信普通讯技术有限公司负责开具发票，并将设备快递回贵公司。
-    李靖
-    2017-02-10
-    Stamp';
-          $output .= '</div>';
-          $output .= '<div class="btn btn-success quote-node-print-button hidden-print margin-top-48 clear-both" type="button">Print</div>';
 
     return $output;
   }
