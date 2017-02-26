@@ -159,6 +159,10 @@ class DashpageContentGenerator extends ControllerBase {
               $output .= '<td colspan="3">' . $this->flexinfoEntityService->getEntity('field')->getFieldSingleValue('node', $node, 'field_repair_receivenote') . '</td>';
             $output .= '</tr>';
             $output .= '<tr>';
+              $output .= '<td>设备规格</td>';
+              $output .= '<td colspan="3">' . $this->flexinfoEntityService->getEntity('field')->getFieldSingleValue('node', $node, 'field_repair_deviceformat') . '</td>';
+            $output .= '</tr>';
+            $output .= '<tr>';
               $output .= '<td>故障原因</td>';
               $output .= '<td colspan="3">' . $this->flexinfoEntityService->getEntity('field')->getFieldSingleValue('node', $node, 'field_repair_issuereason') . '</td>';
             $output .= '</tr>';
