@@ -121,6 +121,75 @@ class DashpageContentGenerator extends ControllerBase {
   /**
    * render views output
    */
+  public function quotePrint($nid = NULL) {
+    $FieldService = $this->flexinfoEntityService->getEntity('field');
+
+    $output = '';
+
+    $output .= '<div class="dashpage-wrapper">';
+      $output .= '<div class="">';
+        $output .= '产品保修期外维修单';
+      $output .= '</div>';
+      $output .= '<div class="">';
+        $output .= '贵公司送修的设备型号:';
+      $output .= '</div>';
+      $output .= '<div class="">';
+        $output .= '已经超过保修期, 需要更换配件, 维修后仅对该设备配件将提供为期90天的保修服务.';
+      $output .= '</div>';
+      $output .= '<div class="">';
+        $output .= '维修情况如下:';
+      $output .= '</div>';
+
+
+      $node  = \Drupal::entityTypeManager()->getStorage('node')->load($nid);
+      if ($node) {
+        $output .= '<table class="table table-hover table-responsive">';
+          $output .= '<tbody>';
+            $output .= '<tr>';
+              $output .= '<td>客户名称</td>';
+              $output .= '<td colspan="3">' . $FieldService->getFieldSingleValue('node', $node, 'field_quote_clientname') . '</td>';
+            $output .= '</tr>';
+            $output .= '<tr>';
+              $output .= '<td>联系人</td>';
+              $output .= '<td>' . $FieldService->getFieldSingleValue('node', $node, 'field_quote_warrantyday') . '</td>';
+              $output .= '<td>联系电话</td>';
+              $output .= '<td>' . $FieldService->getFieldSingleValue('node', $node, 'field_quote_date') . '</td>';
+            $output .= '</tr>';
+            $output .= '<tr>';
+              $output .= '<td>客户地址</td>';
+              $output .= '<td colspan="3"></td>';
+            $output .= '</tr>';
+          $output .= '</tbody>';
+        $output .= '</table>';
+
+      }
+      else {
+        $output .= $this->t('没有发现维修信息');
+      }
+
+    $output .= '</div>';
+
+          $output .= '<div class="">';
+            $output .= '因已经超过保修期，需要支付维修费.费用为￥7000.00(人民币柒仟元整元整).维修后该设备相同部件将提供为期90天的保修服务.
+    以下是我司有关汇款信息：
+
+    名称： 北京万博信普通讯技术有限公司
+    开户行： 工商银行北京八里庄支行
+    帐号： 0200003819020117350
+
+    收到维修费后，北京万博信普通讯技术有限公司负责开具发票，并将设备快递回贵公司。
+    李靖
+    2017-02-10
+    Stamp';
+          $output .= '</div>';
+          $output .= '<div class="btn btn-success quote-node-print-button hidden-print margin-top-48 clear-both" type="button">Print</div>';
+
+    return $output;
+  }
+
+  /**
+   * render views output
+   */
   public function repairPrint($nid = NULL) {
     $FieldService = $this->flexinfoEntityService->getEntity('field');
 

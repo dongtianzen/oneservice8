@@ -30,6 +30,14 @@ dashpage.quote.list:
   requirements:
     _permission: 'access content'
 
+dashpage.quote.print:
+  path: '/dashpage/quote/print/{nid}'
+  defaults:
+    _controller: '\Drupal\dashpage\Controller\DashpageController::quotePrint'
+    _title: 'Quote Print'
+  requirements:
+    _permission: 'access content'
+
 dashpage.repair.list:
   path: '/dashpage/repair/list'
   defaults:

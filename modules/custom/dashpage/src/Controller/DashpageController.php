@@ -103,6 +103,24 @@ class DashpageController extends ControllerBase {
   /**
    * call from routing.yml
    */
+  public function quotePrint($nid) {
+    $FlexinfoEntityService = \Drupal::getContainer()->get('flexinfo.entity.service');
+
+    $DashpageContentGenerator = new DashpageContentGenerator($FlexinfoEntityService);
+    $output = $DashpageContentGenerator->quotePrint($nid);
+
+    $build = array(
+      '#type' => 'markup',
+      '#header' => 'header',
+      '#markup' => $output,
+      '#allowed_tags' => $this->adminTag(),
+    );
+    return $build;
+  }
+
+  /**
+   * call from routing.yml
+   */
   public function repairList() {
     return $this->contentGeneratorTemplate('renderViewsContent', 'node_repair_collection');
   }
