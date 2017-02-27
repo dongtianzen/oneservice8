@@ -84,7 +84,7 @@ class TerminfoJsonController extends ControllerBase {
     $output = array();
 
     $nodes = \Drupal::getContainer()->get('flexinfo.querynode.service')->nidsByBundle($entity_bundle);
-    // $nodes = array_slice($nodes, 0, 5);
+    $nodes = array_slice($nodes, 0, 10);
 
     if (is_array($nodes)) {
       foreach ($nodes as $nid) {
@@ -223,6 +223,23 @@ class TerminfoJsonController extends ControllerBase {
           array(
             'field_label' => 'Amount',
             'field_name'  => 'field_repair_quoteamount',
+          ),
+        );
+        break;
+
+      case 'quote':
+        $output = array(
+          array(
+            'field_label' => 'Date',
+            'field_name'  => 'field_quote_date',
+          ),
+          array(
+            'field_label' => 'Client Name',
+            'field_name'  => 'field_quote_clientname',
+          ),
+          array(
+            'field_label' => 'Company',
+            'field_name'  => 'field_quote_company',
           ),
         );
         break;
