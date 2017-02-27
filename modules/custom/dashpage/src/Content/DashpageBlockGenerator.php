@@ -32,6 +32,10 @@ class DashpageBlockGenerator extends ControllerBase {
       // $output .= '</md-menu>';
     $output .= '</div>';
 
+    $FlexinfoEntityService = \Drupal::getContainer()->get('flexinfo.entity.service');
+    $DashpageContentGenerator = new DashpageContentGenerator($FlexinfoEntityService);
+    $output .= $DashpageContentGenerator->dateRangePickerBar();
+
     return $output;
   }
 
