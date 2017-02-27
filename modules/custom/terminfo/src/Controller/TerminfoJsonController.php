@@ -10,7 +10,10 @@ namespace Drupal\terminfo\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Url;
 
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
+
+use Drupal\flexinfo\Service\FlexinfoEntityService;
 
 /**
  *
@@ -18,6 +21,24 @@ use Symfony\Component\HttpFoundation\JsonResponse;
   $TerminfoJsonController->basicCollection($topic);
  */
 class TerminfoJsonController extends ControllerBase {
+
+  protected $flexinfoEntityService;
+
+  /**
+   * {@inheritdoc}
+   */
+  public function __construct(FlexinfoEntityService $flexinfoEntityService) {
+    $this->flexinfoEntityService = $flexinfoEntityService;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('flexinfo.entity.service')
+    );
+  }
 
   /**
    * {@inheritdoc}
@@ -220,6 +241,22 @@ class TerminfoJsonController extends ControllerBase {
           array(
             'field_label' => 'Contact Name',
             'field_name'  => 'field_client_contactname',
+          ),
+          array(
+            'field_label' => 'EMAIL',
+            'field_name'  => 'field_client_email',
+          ),
+          array(
+            'field_label' => 'Phone',
+            'field_name'  => 'field_client_phone',
+          ),
+          array(
+            'field_label' => 'PROVINCE',
+            'field_name'  => 'field_client_province',
+          ),
+          array(
+            'field_label' => 'SALESPERSON',
+            'field_name'  => 'field_client_salesperson',
           ),
         );
         break;

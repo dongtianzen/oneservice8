@@ -149,7 +149,8 @@ class ManageinfoController extends ControllerBase {
    * @return php object, not JSON
    */
   public function termTableContent($topic) {
-    $TerminfoJsonController = new TerminfoJsonController();
+    $flexinfoEntityService = \Drupal::getContainer()->get('flexinfo.entity.service');
+    $TerminfoJsonController = new TerminfoJsonController($flexinfoEntityService);
     $term_content = $TerminfoJsonController->basicCollectionContent($topic);
 
     $output = $this->convertArrayToCommonTable($term_content);
