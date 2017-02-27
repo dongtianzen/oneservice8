@@ -493,6 +493,20 @@ class JsonDashpageBase {
   /**
    *
    */
+  public function getGoogleMap($option = array(), $value = NULL) {
+    $output = array(
+      "class" => "col-md-12",
+      "value" => $value,
+    );
+
+    $output = $this->setBlockProperty($output, $option);
+
+    return $output;
+  }
+
+  /**
+   *
+   */
   public function setBlockProperty($output = array(), $option = array()) {
     if (is_array($option)) {
       foreach ($option as $key => $value) {
@@ -525,19 +539,147 @@ class DashpageJsonGenerator extends JsonDashpageBase {
   public function angularJson() {
     $this->setPostUrl('page/forms/preform/add');
 
-    $output['fixedSection'] = array(
-      $this->getTileStyleOne(array('value' => array('header' => array('class' => 'bg-2fa9e0 color-fff'))), 'Total Repair', 128),
-      $this->getTileStyleOne(array('value' => array('header' => array('class' => 'bg-f34b99 color-fff'))), 'Total Return', 120),
-      $this->getTileStyleOne(array('value' => array('header' => array('class' => 'bg-99dc3b color-fff'))), 'Number of Quote', 96),
-      $this->getTileStyleOne(array('value' => array('header' => array('class' => 'bg-f3c848 color-fff'))), 'Overall Day', 7.23),
-    );
+    // $output['fixedSection'] = array(
+    //   $this->getTileStyleOne(array('value' => array('header' => array('class' => 'bg-2fa9e0 color-fff'))), 'Total Registrations', 128),
+    //   $this->getTileStyleOne(array('value' => array('header' => array('class' => 'bg-f34b99 color-fff'))), 'Total Referrals', 360),
+    //   $this->getTileStyleOne(array('value' => array('header' => array('class' => 'bg-99dc3b color-fff'))), 'Number of Sessions', 96),
+    //   $this->getTileStyleOne(array('value' => array('header' => array('class' => 'bg-f3c848 color-fff'))), 'Overall Satisfaction', 4.5),
+    // );
 
+    $bar_chart_data = array(
+      "labels" => array(
+        "IPF",
+        "CTLD-ID",
+        "Other"
+      ),
+      "datasets" => array(
+        array(
+          "fillColor" => "#2FA9E0",
+          "strokeColor" => "#ffffff",
+          "pointColor" => "#05d23e",
+          "pointStrokeColor" => "#fff",
+          "data" => array(
+            20,
+            14,
+            12
+          )
+        ),
+        array(
+          "fillColor" => "#f24b99",
+          "strokeColor" => "#ffffff",
+          "pointColor" => "#05d23e",
+          "pointStrokeColor" => "#fff",
+          "data" => array(
+            22,
+            15,
+            19
+          )
+        )
+      )
+    );
+    $line_chart_data = array(
+      "labels" => array(
+        "JAN",
+        "FEB",
+        "MAR",
+        "APR",
+        "MAY",
+        "JUN",
+        "JUL",
+        "AUG",
+        "SEP",
+        "OCT",
+        "NOV",
+        "DEC"
+      ),
+      "datasets" => array(
+        array(
+          "fillColor" => "rgba(151,187,205,0)",
+          "strokeColor" => "#f24b99",
+          "pointColor" => "#f24b99",
+          "pointStrokeColor" => "#fff",
+          "data" => array(
+            6,
+            8,
+            2,
+            9,
+            19,
+            1,
+            15,
+            15,
+            4,
+            6,
+            9,
+            13
+          )
+        ),
+        array(
+          "fillColor"=> "#00a9e0",
+          "strokeColor"=> "#00a9e0",
+          "pointColor"=> "#00a9e0",
+          "pointStrokeColor"=> "#fff",
+          "data"=> array(
+            12,
+            13,
+            3,
+            7,
+            13,
+            16,
+            17,
+            11,
+            18,
+            4,
+            23,
+            26
+          )
+        )
+      )
+    );
+    $doughnut_chart_data = array(
+      array(
+        "value" => 5,
+        "color" => "#f3f3f3",
+        "title" => "Yes"
+      ),
+      array(
+        "value" => 65,
+        "color" => "#1aaadb",
+        "title" => "No"
+      )
+    );
+    $pie_chart_data = array(
+      array(
+        "value" => 12,
+        "color" => "#2fa9e0",
+        "title" => "1(12)"
+      ),
+      array(
+        "value" => 28,
+        "color" => "#f24b99",
+        "title" => "2(28)"
+      ),
+      array(
+        "value" => 9,
+        "color" => "#37d8b3",
+        "title" => "3(9)"
+      ),
+      array(
+        "value" => 5,
+        "color" => "#bfbfbf",
+        "title" => "4(5)"
+      )
+    );
     $output['contentSection'] = array(
       // $this->getBlockOne(array('class' => "col-md-12", 'type' => "commonTable"), $this->getCommonTable()),
-      $this->getBlockOne(NULL, $this->getChartDoughnut()),
-      // $this->getBlockOne(NULL, $this->getChartDoughnut()),
-      $this->getBlockOne(array('class' => "col-md-6"), $this->getChartPie(array("chartId" => "3714520699999"))),
-      $this->getBlockOne(array('class' => "col-md-12"), $this->getChartBar()),
+
+      $this->getBlockOne(array('class' => "col-md-6"), $this->getChartDoughnut(NUll, $doughnut_chart_data)),
+      $this->getBlockOne(array('class' => "col-md-6"), $this->getChartDoughnut(NUll, $doughnut_chart_data)),
+      $this->getBlockOne(array('class' => "col-md-6"), $this->getChartPie(array("chartId" => "3714520699999"), $pie_chart_data)),
+      $this->getBlockOne(array('class' => "col-md-6"), $this->getChartPie(array("chartId" => "3714520694566"), $pie_chart_data)),
+
+      $this->getBlockOne(array('class' => "col-md-12"), $this->getChartBar(array("chartId" => "3714462764879"), $bar_chart_data)),
+      $this->getBlockOne(array('class' => "col-md-12"), $this->getChartLine(array("chartId" => "3714520642366"),  $line_chart_data)),
+
       // $this->getBlockMultiTabs(
       //   NULL,
       //   array(
@@ -551,7 +693,7 @@ class DashpageJsonGenerator extends JsonDashpageBase {
       //   array('class' => "col-md-12", 'type' => "multiContainer"),
       //   array(
       //     $this->getChartBar(array("chartId" => "37145265","chartClass" => "col-md-6")),
-      //     $this->getChartPie(array("chartId" => "371872879","chartClass" => "col-md-3"))
+      //     $this->getChartPie(array("chartId" => "371872879","chartClass" => "col-md-6"))
       //   )
       // )
     );

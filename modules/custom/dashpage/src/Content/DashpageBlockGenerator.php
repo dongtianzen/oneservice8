@@ -20,11 +20,15 @@ class DashpageBlockGenerator extends ControllerBase {
    */
   function contentRenderHeader() {
     $output = '';
-    $output .= '<div class="panel-header height-12 margin-top-24">';
+    $output .= '<div class="panel-header block-header">';
       $output .= '<span>{{block.top.value}}</span>';
       $output .= '<md-menu>';
-        $output .= '<div class="">';
-        $output .= '</div>';
+        $output .= '<span id="save-charts-{{block.blockId}}" ng-click="openMenu($mdOpenMenu, $event)" class="fa fa-angle-down float-right font-size-14 padding-12 cursor-pointer"></span>';
+        $output .= '<md-menu-content width="3">';
+          $output .= '<md-button ng-click="saveAsPng(\'charts\', block.blockId)"> ';
+            $output .= 'Save PNG';
+          $output .= '</md-button>';
+        $output .= '</md-menu-content>';
       $output .= '</md-menu>';
     $output .= '</div>';
 
@@ -45,7 +49,7 @@ class DashpageBlockGenerator extends ControllerBase {
       $output .= '</div>';
 
       $output .= '<div class="{{block.middle.middleMiddle.middleMiddleMiddleClass}}">';
-        $output .= '<canvas width="600" height="400" flexxiachartjs options="{{block.middle.middleMiddle.middleMiddleMiddle.chartOptions}}" type="{{block.middle.middleMiddle.middleMiddleMiddle.chartType}}" id="{{block.middle.middleMiddle.middleMiddleMiddle.chartId}}" data="{{block.middle.middleMiddle.middleMiddleMiddle.chartData}}"></canvas>';
+        $output .= '<canvas width="600" height="403" flexxiachartjs options="{{block.middle.middleMiddle.middleMiddleMiddle.chartOptions}}" type="{{block.middle.middleMiddle.middleMiddleMiddle.chartType}}" id="{{block.middle.middleMiddle.middleMiddleMiddle.chartId}}" data="{{block.middle.middleMiddle.middleMiddleMiddle.chartData}}"></canvas>';
       $output .= '</div>';
 
       $output .= '<div class="{{block.middle.middleMiddle.middleMiddleRightClass}}">';
@@ -67,6 +71,18 @@ class DashpageBlockGenerator extends ControllerBase {
       $output .= '<md-content class="padding-bottom-12">';
         $output .= '<span ng-bind-html="$sce.trustAsHtml(block.middle.value)">{{block.middle.value}}</span>';
       $output .= '</md-content>';
+    $output .= '</div>';
+
+    return $output;
+  }
+
+  /*
+   * Content Elements comments
+   */
+  function contentRenderGoogleMap() {
+    $output = '';
+    $output .= '<div class="panel-body bg-ffffff">';
+      $output .= '<div id="map" class="google-map-wrapper">map</div>';
     $output .= '</div>';
 
     return $output;
@@ -138,7 +154,7 @@ class DashpageBlockGenerator extends ControllerBase {
       $output .= '<div class="{{block.middle.middleMiddle.middleMiddleMiddleClass}}">';
         $output .= '<div data-ng-repeat="chart in block.middle.middleMiddle.middleMiddleMiddle">';
           $output .= '<div id="chartContainer-{{$index}}" class="{{chart.chartClass}}">';
-            $output .= '<canvas width="600" height="400" flexxiachartjs options="{{chart.chartOptions}}" type="{{chart.chartType}}" id="{{chart.chartId}}" data="{{chart.chartData}}">
+            $output .= '<canvas width="600" height="402" flexxiachartjs options="{{chart.chartOptions}}" type="{{chart.chartType}}" id="{{chart.chartId}}" data="{{chart.chartData}}">
             </canvas>';
             $output .= '<div class="row margin-top-n-10 margin-bottom-12 padding-left-24 font-size-13 text-align-left">';
               $output .= '<span>{{chart.chartTitle}}</span>';
@@ -184,17 +200,19 @@ class DashpageBlockGenerator extends ControllerBase {
         $output .= '<div data-ng-switch-when="widgetOne">';
           $output .= '<div class="{{widget.class}} margin-top-6">';
             $output .=  '<md-content>';
-              $output .= '<div id="block-id-{{$index}}" class="dashpage-square-number-wrapper border-radius-3 {{widget.value.header.class}}">';
+              $output .= '<div id="block-topWidgets-{{$index}}" class="dashpage-square-number-wrapper border-radius-3 {{widget.value.header.class}}">';
                 $output .= '<md-tooltip md-direction="bottom" class="tt-multiline" ng-if="widget.value.header.widgetTooltip">';
                   $output .= '<span class="font-size-14">{{widget.value.header.widgetTooltip.title}}</span>';
-                  $output .= '<span class="font-size-12" ng-bind-html="$sce.trustAsHtml(widget.value.header.widgetTooltip.content)">{{widget.value.header.widgetTooltip.content}}</span>';
+                  $output .= '<span class="font-size-12" ng-bind-html="$sce.trustAsHtml(widget.value.header.widgetTooltip.content)">';
+                    $output .= '{{widget.value.header.widgetTooltip.content}}';
+                  $output .= '</span>';
                 $output .= '</md-tooltip>';
-                $output .= '<div class="dashpage-square-number-top border-1-e7e7e7-n padding-12">';
+                $output .= '<div class="padding-12">';
                   $output .= '<div class="padding-top-6 font-size-16">{{widget.value.header.valueOne.value}}';
                     $output .= '<md-menu>';
-                      $output .= '<span id="save-button-{{$index}}" ng-click="openMenu($mdOpenMenu, $event)" class="fa fa-angle-down float-right padding-12 padding-top-0 cursor-pointer"></span>';
+                      $output .= '<span id="save-topWidgets-{{$index}}" ng-click="openMenu($mdOpenMenu, $event)" class="fa fa-angle-down float-right padding-12 padding-top-0 cursor-pointer"></span>';
                       $output .= '<md-menu-content width="3">';
-                        $output .= '<md-button ng-click="saveAsPng(1,$index)"> ';
+                        $output .= '<md-button ng-click="saveAsPng(\'topWidgets\',$index)"> ';
                           $output .= 'Save PNG';
                         $output .= '</md-button>';
                       $output .= '</md-menu-content>';
@@ -242,7 +260,7 @@ class DashpageBlockGenerator extends ControllerBase {
    */
   function contentBlockMaster() {
     $output = '';
-    $output .= '<div id="{{block.blockId}}" class="panel">';
+    $output .= '<div id="block-charts-{{block.blockId}}" class="panel block">';
       $output .= '<div ng-if="block.top.enable">';
         $output .= '<md-content>';
           $output .= $this->contentRenderHeader();
@@ -264,6 +282,9 @@ class DashpageBlockGenerator extends ControllerBase {
               $output .= '</div>';
               $output .= '<div data-ng-switch-when="commonTable">';
                 $output .= $this->contentRenderTable();
+              $output .= '</div>';
+              $output .= '<div data-ng-switch-when="googleMap">';
+                $output .= $this->contentRenderGoogleMap();
               $output .= '</div>';
 
               $output .= '<div data-ng-switch-when="multiTabs">';
