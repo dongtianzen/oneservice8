@@ -116,7 +116,7 @@ class DashpageBlockGenerator extends ControllerBase {
             $output .= '</thead>';
               $output .= '<tbody>';
                 $output .= '<tr data-ng-repeat="tableRow in block.middle.middleMiddle.middleMiddleMiddle.value.tbody">';
-                  $output .= '<td data-ng-repeat="tableCell in tableRow">';
+                  $output .= '<td data-ng-repeat="tableCell in tableRow track by $index">';
                     $output .= '<span ng-bind-html="$sce.trustAsHtml(tableCell)">{{tableCell}}</span>';
                   $output .= '</td>';
                 $output .= '</tr>';
