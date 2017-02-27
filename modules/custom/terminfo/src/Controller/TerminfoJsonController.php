@@ -18,7 +18,7 @@ use Drupal\flexinfo\Service\FlexinfoEntityService;
 /**
  *
   $TerminfoJsonController = new TerminfoJsonController();
-  $TerminfoJsonController->basicCollection($topic);
+  $TerminfoJsonController->basicCollection($vid);
  */
 class TerminfoJsonController extends ControllerBase {
 
@@ -43,18 +43,18 @@ class TerminfoJsonController extends ControllerBase {
   /**
    * {@inheritdoc}
    * use Symfony\Component\HttpFoundation\JsonResponse;
-   * @param $topic is vid
+   * @param $vid is vid
    * @return JSON
    */
-  public function basicCollection($topic) {
-    $output = $this->basicCollectionContent($topic);
+  public function basicCollection($vid) {
+    $output = $this->basicCollectionContent($vid);
     return new JsonResponse($output);
   }
 
   /**
    * {@inheritdoc}
    * use Symfony\Component\HttpFoundation\JsonResponse;
-   * @param, $topic is vid
+   * @param, $vid is vid
    * @return key name array
    */
   public function basicCollectionContent($vid) {
