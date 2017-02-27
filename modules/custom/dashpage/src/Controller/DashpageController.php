@@ -74,7 +74,7 @@ class DashpageController extends ControllerBase {
     $output = $DashpageContentGenerator->angularSnapshot();
 
     $ManageinfoController = new ManageinfoController($FlexinfoEntityService);
-    $json_content_data = $ManageinfoController->termTableContent($topic);
+    $json_content_data = $ManageinfoController->manageinfoTableContent($topic);
 
     $build = array(
       '#type' => 'markup',
@@ -173,7 +173,7 @@ class DashpageController extends ControllerBase {
     $output = $DashpageContentGenerator->angularSnapshot();
 
     $ManageinfoController = new ManageinfoController($FlexinfoEntityService);
-    $json_content_data = $ManageinfoController->termTableContent('company');
+    $json_content_data = $ManageinfoController->manageinfoTableContent('company');
 
     $DashpageJsonGenerator = new DashpageJsonGenerator();
     $json_content_data = $DashpageJsonGenerator->angularJson();

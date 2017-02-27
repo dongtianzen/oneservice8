@@ -104,7 +104,7 @@ class ManageinfoController extends ControllerBase {
     $DashpageContentGenerator = new DashpageContentGenerator($FlexinfoEntityService);
     $output = $DashpageContentGenerator->angularSnapshot();
 
-    $json_content_data = $this->termTableContent($topic);
+    $json_content_data = $this->manageinfoTableContent($topic);
 
     $build = array(
       '#type' => 'markup',
@@ -132,7 +132,7 @@ class ManageinfoController extends ControllerBase {
    * {@inheritdoc}
    * @return php object, not JSON
    */
-  public function termTableContent($topic) {
+  public function manageinfoTableContent($topic) {
     $flexinfoEntityService = \Drupal::getContainer()->get('flexinfo.entity.service');
     $TerminfoJsonController = new TerminfoJsonController($flexinfoEntityService);
     $term_content = $TerminfoJsonController->basicCollectionContent($topic);
