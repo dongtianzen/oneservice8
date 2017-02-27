@@ -20,21 +20,6 @@ use Drupal\manageinfo\Controller\ManageinfoController;
 class DashpageController extends ControllerBase {
 
   /**
-   *
-   */
-  public function adminTag() {
-    $admin_tags = Xss::getAdminTagList();
-    $admin_tags_plus = [
-      'canvas', 'form', 'input', 'label', 'md-button', 'md-content',
-      'md-input-container', 'md-menu', 'md-menu-content', 'md-option',
-      'md-select', 'md-tab', 'md-tabs', 'md-tooltip',
-    ];
-    $admin_tags = array_merge($admin_tags, $admin_tags_plus);
-
-    return $admin_tags;
-  }
-
-  /**
    * {@inheritdoc}
    */
   public function angularSnapshot() {
@@ -47,7 +32,7 @@ class DashpageController extends ControllerBase {
       '#type' => 'markup',
       '#header' => 'header',
       '#markup' => $output,
-      '#allowed_tags' => $this->adminTag(),
+      '#allowed_tags' => \Drupal::getContainer()->get('flexinfo.setting.service')->adminTag(),
       '#attached' => array(
         'library' => array(
           'dashpage/angular_snapshot',
@@ -95,7 +80,7 @@ class DashpageController extends ControllerBase {
       '#type' => 'markup',
       '#header' => 'header',
       '#markup' => $output,
-      '#allowed_tags' => $this->adminTag(),
+      '#allowed_tags' => \Drupal::getContainer()->get('flexinfo.setting.service')->adminTag(),
       '#attached' => array(
         'library' => array(
           'dashpage/angular_snapshot',
@@ -147,7 +132,7 @@ class DashpageController extends ControllerBase {
       '#type' => 'markup',
       '#header' => 'header',
       '#markup' => $output,
-      '#allowed_tags' => $this->adminTag(),
+      '#allowed_tags' => \Drupal::getContainer()->get('flexinfo.setting.service')->adminTag(),
     );
     return $build;
   }
@@ -172,7 +157,7 @@ class DashpageController extends ControllerBase {
       '#type' => 'markup',
       '#header' => 'header',
       '#markup' => $output,
-      '#allowed_tags' => $this->adminTag(),
+      '#allowed_tags' => \Drupal::getContainer()->get('flexinfo.setting.service')->adminTag(),
     );
     return $build;
   }
@@ -197,7 +182,7 @@ class DashpageController extends ControllerBase {
       '#type' => 'markup',
       '#header' => 'header',
       '#markup' => $output,
-      '#allowed_tags' => $this->adminTag(),
+      '#allowed_tags' => \Drupal::getContainer()->get('flexinfo.setting.service')->adminTag(),
       '#attached' => array(
         'library' => array(
           'dashpage/angular_snapshot',
