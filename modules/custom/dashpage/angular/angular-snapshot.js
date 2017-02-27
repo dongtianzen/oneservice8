@@ -27,6 +27,7 @@ pageInfoBaseControllers.controller('PageInfoBaseController', ['$scope', '$http',
         else {
           $scope.pageData = data;
         }
+
       }).catch(function(err) {
         // Log error somehow.
       }).finally(function() {
