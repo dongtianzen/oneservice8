@@ -33,7 +33,7 @@ class JsonDashpageBase {
     $output = array(
       'blockId' => 1,
       'class' => "col-md-3 col-xs-6",
-      'type' => "widgetOne",
+      'type'  => "widgetOne",
       'value' => array(
         'header' => array(
           'class' => "color-fff",
@@ -59,17 +59,17 @@ class JsonDashpageBase {
    */
   public function getBlockOne($option = array(), $middle_middle_value = array()) {
     $output = array(
-      'blockId' => 25,
-      'class' => "col-md-6",
+      'blockId' => uniqid(),
+      'class' => "col-md-12",
       'blockClasses' => '',
-      'type' => "chart",   // chart or multiContiner
-      'top' =>  array(
+      'type' => "chart",          // chart or multiContiner, commonTable, googleMap
+      'top'  =>  array(
         'enable' => true,
-        'value' => NULL,   // Block Top text
+        'value' => NULL,          // block top title value
       ),
       'middle' =>  array(
         'enable' => true,
-        'middleTop' => NULL,    // Block Middle Top HTML text
+        'middleTop' => NULL,      // block middleTop HTML value, "<div>Multi-Chart-Middle-Top</div>"
         'middleMiddle' =>  array(
           'middleMiddleLeftClass' => "",
           'middleMiddleLeft' => "",
@@ -78,11 +78,11 @@ class JsonDashpageBase {
           'middleMiddleRightClass' => "",
           'middleMiddleRight' => ""
         ),
-        'middleBottom' => NULL   // Block Middle Bottom HTML text
+        'middleBottom' => NULL,   // block middleBottom HTML value, "<div>Multi-Chart-Middle-Bottom</div>"
       ),
       'bottom' => array(
         'enable' => true,
-        'value' => NULL              // Block Bottom text
+        'value' => NULL,          // block Bottom HTML value, "<div>Multi-Chart-Bottom</div>"
       )
     );
 
@@ -97,17 +97,17 @@ class JsonDashpageBase {
   public function getBlockTabContainer($option = array(), $middle_middle = NULL) {
     $output = array(
       'blockId' => 67,
-      'class' => "col-md-6",
-      'blockClasses' => 'col-md-6',
+      'class' => "col-md-12",
+      'blockClasses' => 'col-md-6',    // write comments
       'title' => "Tab 1",
       'type' => "chart",
       'top' =>  array(
         'enable' => true,
-        'value' => "Working Diagnosis TabContainer"
+        'value' => NULL
       ),
       'middle' =>  array(
         'enable' => true,
-        'middleTop' => "<div>Doughnut-Chart-Middle-Top</div>",
+        'middleTop' => NULL,
         'middleMiddle' =>  array(
           'middleMiddleLeftClass' => "",
           'middleMiddleLeft' => "",
@@ -116,11 +116,11 @@ class JsonDashpageBase {
           'middleMiddleRightClass' => "",
           'middleMiddleRight' => ""
         ),
-        'middleBottom' => "<div>Doughnut-Chart-Middle-Bottom</div>"
+        'middleBottom' => NULL
       ),
       'bottom' => array(
         'enable' => true,
-        'value' => "<div>Doughnut-Chart-Bottom</div>"
+        'value' => NULL
       )
     );
 
@@ -157,6 +157,9 @@ class JsonDashpageBase {
     return $output;
   }
 
+  /**
+   *
+   */
   public function chartNewJsOptions() {
     $output = array(
       "animation" => true,
@@ -169,7 +172,7 @@ class JsonDashpageBase {
       "inGraphDataBordersXSpace" => 12,
       "inGraphDataBordersYSpace" => 7,
       "inGraphDataFontColor" => "#163c52",
-      "inGraphDataFontSize" => 12,
+      "inGraphDataFontSize" => 15,
       "inGraphDataFontStyle" => "normal normal",
       "inGraphDataPaddingY" => 15,
       "inGraphDataShow" => true,
@@ -180,19 +183,20 @@ class JsonDashpageBase {
       "responsiveMinHeight" => 280,
       "spaceBottom" => 10,
       "spaceTop" => 10,
-      "legend" => false
-      // "legendBlockSize" => 14,
-      // "legendBorders" => false,
-      // "legendFontColor" => "#000",
-      // "legendFontFamily" => "Roboto,'Helvetica Neue',sans-serif",
-      // "legendPosX" => 2,
-      // "legendPosY" => 0,
-      // "legendSpaceAfterText" => 0,
-      // "legendSpaceBeforeText" => 10,
-      // "legendSpaceBetweenBoxAndText" => 9,
-      // "legendSpaceBetweenTextHorizontal" => 159999,
-      // "legendSpaceBetweenTextVertical" => 28,
-      // "legendSpaceLeftText" => 18,
+      "legend" => false,
+      "legendBlockSize" => 14,
+      "legendBorders" => false,
+      "legendFontColor" => "#000",
+      "legendFontFamily" => "Roboto,'Helvetica Neue',sans-serif",
+      "legendPosX" => 2,
+      "legendPosY" => 0,
+      "legendSpaceAfterText" => 0,
+      "legendSpaceBeforeText" => 10,
+      "legendSpaceBetweenBoxAndText" => 9,
+      "legendSpaceBetweenTextHorizontal" => 15,
+      "legendSpaceBetweenTextVertical" => 28,
+      "legendSpaceLeftText" => 18,
+      "legendBlockSize" => 14,
     );
 
     return $output;
@@ -200,46 +204,49 @@ class JsonDashpageBase {
 
   /**
    *
+   *
+   $chart_data = array(
+     "labels" => [
+       "IPF",
+       "CTLD-ID",
+       "Other"
+     ],
+     "datasets" => [
+       array(
+         "fillColor" => "#2FA9E0",
+         "strokeColor" => "#ffffff",
+         "pointColor" => "#05d23e",
+         "pointStrokeColor" => "#fff",
+         "data" => [
+           20,
+           14,
+           12
+         ],
+         "title" => "Working Dx"
+       ),
+       array(
+         "fillColor" => "#f24b99",
+         "strokeColor" => "#ffffff",
+         "pointColor" => "#05d23e",
+         "pointStrokeColor" => "#fff",
+         "data" => [
+           22,
+           15,
+           19
+         ],
+         "title" => "Working Dx 666"
+       )
+     ]
+   );
    */
-  public function getChartBar($option = array()) {
+
+  public function getChartBar($option = array(), $chart_data = array()) {
     $output = array(
       "chartId" => hexdec(substr(uniqid(), 0, 13)),
       "chartType" => "Bar",
-      "chartClass" => "col-md-4",  // only render on getBlockMultiContainer
-      "chartTitle" => "Identify and address only render on getBlockMultiContainer",
-      "chartData" => array(
-        "labels" => [
-          "ADP-1000",
-          "Ellipse-1000D",
-          "LU2000"
-        ],
-        "datasets" => [
-          array(
-            "fillColor" => "#2FA9E0",
-            "strokeColor" => "#ffffff",
-            "pointColor" => "#05d23e",
-            "pointStrokeColor" => "#fff",
-            "data" => [
-              20,
-              14,
-              12
-            ],
-            "title" => "Working Dx"
-          ),
-          array(
-            "fillColor" => "#f24b99",
-            "strokeColor" => "#ffffff",
-            "pointColor" => "#05d23e",
-            "pointStrokeColor" => "#fff",
-            "data" => [
-              22,
-              15,
-              19
-            ],
-            "title" => ""
-          )
-        ]
-      ),
+      "chartClass" => "col-md-6",  // only render on getBlockMultiContainer
+      "chartTitle" => "Identify and address only render on getBlockMultiContainer",         // do we need this one
+      "chartData" => $chart_data
     );
 
     $output["chartOptions"] = $this->chartNewJsOptions();
@@ -259,31 +266,68 @@ class JsonDashpageBase {
   }
 
   /**
-   *
+   * @return Array data
    */
-  public function getChartDoughnut($option = array()) {
+  public function getChartLine($option = array(), $chart_data = array()) {
+    $output = array(
+      "chartId" => hexdec(substr(uniqid(), 0, 13)),
+      "chartClass" => "col-md-6 opacity-05",
+      "chartType" => "Line",
+      "chartTitle" => "Line Chart",
+      "chartData" => $chart_data
+    );
+
+    $output["chartOptions"] = $this->chartNewJsOptions();
+    $output["chartOptions"]["barValueSpacing"] = 20;
+    $output["chartOptions"]["bezierCurveTension"] = 0.2;
+    $output["chartOptions"]["graphMax"] = 100;
+    $output["chartOptions"]["graphMin"] = 0;
+    $output["chartOptions"]["inGraphDataShow"] = false;
+    $output["chartOptions"]["maxLegendCols"] = 1;
+    $output["chartOptions"]["pointDotRadius"] = 6;
+    $output["chartOptions"]["percentageInnerCutout"] = 99;
+    $output["chartOptions"]["scaleFontSize"] = 14;
+    $output["chartOptions"]["legendPosX"] = 4;
+    $output["chartOptions"]["legendPosY"] = -2;
+    $output["chartOptions"]["legendSpaceLeftText"] = 18;
+    $output["chartOptions"]["yAxisLabel"] = "Number of events";
+    $output["chartOptions"]["yAxisMinimumInterval"] = 20;
+    $output["chartOptions"]["yScaleLabelsMinimumWidth"] = 40;
+
+    $output = $this->setBlockProperty($output, $option);
+
+    return $output;
+  }
+
+  /**
+   *
+   *
+   *
+    $chartData = [
+      array(
+       'value' => 5,
+       'color' => "#f3f3f3",
+       'title' => "Yes"
+      ),
+      array(
+       'value' => 65,
+       'color' => "#1aaadb",
+       'title' => "No"
+      )
+    ],
+   */
+  public function getChartDoughnut($option = array(), $chart_data = array()) {
     $output = array(
       'chartId' => hexdec(substr(uniqid(), 0, 13)),
       'chartType' => "Doughnut",
-      'chartData' => [
-        array(
-          'value' => 5,
-          'color' => "#f3f3f3",
-          'title' => "Yes"
-        ),
-        array(
-          'value' => 65,
-          'color' => "#1aaadb",
-          'title' => "No"
-        )
-      ],
+      'chartData' => $chart_data
     );
 
     $output["chartOptions"] = $this->chartNewJsOptions();
     $output["chartOptions"]["annotateDisplay"] = false;
     $output["chartOptions"]["barValueSpacing"] = 20;
     $output["chartOptions"]["bezierCurveTension"] = 0.1;
-    $output["chartOptions"]["crossText"] = ["", "收款", "82%"];
+    $output["chartOptions"]["crossText"] = ["", "Confirmed", "82%"];
     $output["chartOptions"]["crossTextAlign"] = ["center"];
     $output["chartOptions"]["crossTextBaseline"] = ["middle"];
     $output["chartOptions"]["crossTextFontColor"] = ["black"];
@@ -305,36 +349,36 @@ class JsonDashpageBase {
   }
 
   /**
-   *
+   * chart_data = array(
+      array(
+        "value" => 12,
+        "color" => "#2fa9e0",
+        "title" => "1(12)"
+      ),
+      array(
+        "value" => 28,
+        "color" => "#f24b99",
+        "title" => "2(28)"
+      ),
+      array(
+        "value" => 9,
+        "color" => "#37d8b3",
+        "title" => "3(9)"
+      ),
+      array(
+        "value" => 5,
+        "color" => "#bfbfbf",
+        "title" => "4(5)"
+      )
+    );
    */
-  public function getChartPie($option = array()) {
+  public function getChartPie($option = array(), $chart_data = array()) {
     $output = array(
       "chartId" => hexdec(substr(uniqid(), 0, 13)),
       "chartType" => "Pie",
       "chartClass" => "col-md-6 opacity-05",  // only render on getBlockMultiContainer
       "chartTitle" => "Identify and address only render on getBlockMultiContainer",
-      "chartData" => [
-        array(
-          "value" => 12,
-          "color" => "#2fa9e0",
-          "title" => "1(12)"
-        ),
-        array(
-          "value" => 28,
-          "color" => "#f24b99",
-          "title" => "2(28)"
-        ),
-        array(
-          "value" => 9,
-          "color" => "#37d8b3",
-          "title" => "3(9)"
-        ),
-        array(
-          "value" => 5,
-          "color" => "#bfbfbf",
-          "title" => "4(5)"
-        )
-      ],
+      "chartData" => $chart_data
     );
 
     $output["chartOptions"] = $this->chartNewJsOptions();
@@ -452,7 +496,7 @@ class JsonDashpageBase {
   public function setBlockProperty($output = array(), $option = array()) {
     if (is_array($option)) {
       foreach ($option as $key => $value) {
-        if (isset($output[$key])) {
+        if (array_key_exists($key, $output)) {
           if (is_array($value)) {
             $output[$key] = $this->setBlockProperty($output[$key], $value);
           }
