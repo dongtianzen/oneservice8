@@ -206,23 +206,23 @@ class TerminfoJsonController extends ControllerBase {
 
     switch ($vid) {
       // node
-      case 'meeting':
+      case 'repair':
         $output = array(
           array(
-            'field_label' => 'Program',
-            'field_name'  => 'field_meeting_program',
-          ),
-          array(
             'field_label' => 'Date',
-            'field_name'  => 'field_meeting_date',
+            'field_name'  => 'field_repair_checkdate',
           ),
           array(
-            'field_label' => 'City',
-            'field_name'  => 'field_meeting_city',
+            'field_label' => 'Note',
+            'field_name'  => 'field_repair_checknote',
           ),
           array(
-            'field_label' => 'Province',
-            'field_name'  => 'field_meeting_province',
+            'field_label' => 'Device Format',
+            'field_name'  => 'field_repair_deviceformat',
+          ),
+          array(
+            'field_label' => 'Amount',
+            'field_name'  => 'field_repair_quoteamount',
           ),
         );
         break;
