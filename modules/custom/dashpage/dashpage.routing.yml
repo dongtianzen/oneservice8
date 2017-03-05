@@ -14,6 +14,14 @@ dashpage.client.list:
   requirements:
     _permission: 'access content'
 
+dashpage.landing.page:
+  path: '/dashpage/landing/page'
+  defaults:
+    _controller: '\Drupal\dashpage\Controller\DashpageController::landingPage'
+    _title: 'Landing Page'
+  requirements:
+    _permission: 'access content'
+
 dashpage.parts.list:
   path: '/dashpage/parts/list'
   defaults:
