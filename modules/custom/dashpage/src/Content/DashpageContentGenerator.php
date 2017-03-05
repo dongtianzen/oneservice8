@@ -129,7 +129,9 @@ class DashpageContentGenerator extends ControllerBase {
         $output .= '<div class="col-xs-12 col-sm-6 col-md-4 min-height-216">';
           $output .= '<div class="thumbnail">';
             // $output .= '<img src="..." alt="...">';
-            $output .= '<i class="fa fa-calendar" aria-hidden="true"></i>';
+            $output .= '<div class="text-center">';
+              $output .= '<i class="fa fa-calendar font-size-28 fa-4" aria-hidden="true"></i>';
+            $output .= '</div>';
             $output .= '<div class="caption">';
               $output .= '<h3>用户下载“万博维修申请表”</h3>';
               $output .= '<p>用户下载“万博维修申请表”</p>';
