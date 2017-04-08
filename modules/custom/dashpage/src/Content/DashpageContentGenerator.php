@@ -134,12 +134,12 @@ class DashpageContentGenerator extends ControllerBase {
         'body' => '用户需要填写申请表中的详细信息，我司在维修受理后出具的发票及返修设备的返回地址均以此为依据（除特殊注明）； 用户需标注设备的故障现象，以方便我们进行初检；',
       ),
       array(
-        'icon' => 'fa-newspaper-o',
+        'icon' => 'fa-commenting-o',
         'caption' => '申请表确认',
         'body' => '用户以传真、邮件等形式将维修申请表发给我司进行确认（加盖公章或签名）；',
       ),
       array(
-        'icon' => 'fa-commenting-o',
+        'icon' => 'fa-newspaper-o',
         'caption' => '快递单号填写',
         'body' => '用户将发至我司的快递单号填写在维修申请表的“物流编码”中，以方便我司查询',
       ),
@@ -168,7 +168,7 @@ class DashpageContentGenerator extends ControllerBase {
         foreach ($contents as $row) {
           $output .= '<div class="col-xs-12 col-sm-6 col-md-4">';
             $output .= '<div class="thumbnail min-height-216">';
-              $output .= '<div class="text-center min-height-42">';
+              $output .= '<div class="text-center min-height-42 font-size-28">';
                 $output .= '<i class="fa fa-6 font-size-28 ' . $row['icon']. '" aria-hidden="true"></i>';
               $output .= '</div>';
               $output .= '<div class="caption">';
