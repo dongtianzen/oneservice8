@@ -122,82 +122,61 @@ class DashpageContentGenerator extends ControllerBase {
    * render views output
    */
   public function landingPage($nid = NULL) {
-    $output = '';
-    $output .= '<div class="dashpage-wrapper">';
-      $output .= '<div class="row">';
-
-        $output .= '<div class="col-xs-12 col-sm-6 col-md-4 min-height-216">';
-          $output .= '<div class="thumbnail">';
-            // $output .= '<img src="..." alt="...">';
-            $output .= '<div class="text-center">';
-              $output .= '<i class="fa fa-calendar font-size-28 fa-4" aria-hidden="true"></i>';
-            $output .= '</div>';
-            $output .= '<div class="caption">';
-              $output .= '<h4>下载“万博维修申请表”</h4>';
-              $output .= '<p>用户下载“万博维修申请表”</p>';
-            $output .= '</div>';
-          $output .= '</div>';
-        $output .= '</div>';
-
-        $output .= '<div class="col-xs-12 col-sm-6 col-md-4 min-height-216">';
-          $output .= '<div class="thumbnail">';
-            // $output .= '<img src="..." alt="...">';
-            $output .= '<i class="fa fa-calendar" aria-hidden="true"></i>';
-            $output .= '<div class="caption">';
-              $output .= '<h4>填写详细信息</h4>';
-              $output .= '<p>用户需要填写申请表中的详细信息，我司在维修受理后出具的发票及返修设备的返回地址均以此为依据（除特殊注明）； 用户需标注设备的故障现象，以方便我们进行初检；</p>';
-            $output .= '</div>';
-          $output .= '</div>';
-        $output .= '</div>';
-
-        $output .= '<div class="col-xs-12 col-sm-6 col-md-4 min-height-216">';
-          $output .= '<div class="thumbnail">';
-            // $output .= '<img src="..." alt="...">';
-            $output .= '<i class="fa fa-calendar" aria-hidden="true"></i>';
-            $output .= '<div class="caption">';
-              $output .= '<h4>申请表确认</h4>';
-              $output .= '<p>用户以传真、邮件等形式将维修申请表发给我司进行确认（加盖公章或签名）；</p>';
-            $output .= '</div>';
-          $output .= '</div>';
-        $output .= '</div>';
-
-        $output .= '<div class="col-xs-12 col-sm-6 col-md-4 min-height-216">';
-          $output .= '<div class="thumbnail">';
-            // $output .= '<img src="..." alt="...">';
-            $output .= '<i class="fa fa-calendar" aria-hidden="true"></i>';
-            $output .= '<div class="caption">';
-              $output .= '<h4>快递单号填写</h4>';
-              $output .= '<p>用户将发至我司的快递单号填写在维修申请表的“物流编码”中，以方便我司查询</p>';
-            $output .= '</div>';
-          $output .= '</div>';
-        $output .= '</div>';
-
-        $output .= '<div class="col-xs-12 col-sm-6 col-md-4 min-height-216">';
-          $output .= '<div class="thumbnail">';
-            // $output .= '<img src="..." alt="...">';
-            $output .= '<i class="fa fa-calendar" aria-hidden="true"></i>';
-            $output .= '<div class="caption">';
-              $output .= '<h4>维修周期为15工作日</h4>';
-              $output .= '<p> 我司的处理流程为 接收、初验、维修和返回；通常故障维修周期为15工作日。        A 接收，我司接收到待修设备后，用户即可在我网站根据序列号查询到该设备的状态；
+    $contents = array(
+      array(
+        'caption' => '下载“万博维修申请表”',
+        'body' => '用户下载“万博维修申请表”',
+      ),
+      array(
+        'caption' => '填写详细信息',
+        'body' => '用户需要填写申请表中的详细信息，我司在维修受理后出具的发票及返修设备的返回地址均以此为依据（除特殊注明）； 用户需标注设备的故障现象，以方便我们进行初检；',
+      ),
+      array(
+        'caption' => '申请表确认',
+        'body' => '用户以传真、邮件等形式将维修申请表发给我司进行确认（加盖公章或签名）；',
+      ),
+      array(
+        'caption' => '快递单号填写',
+        'body' => '用户将发至我司的快递单号填写在维修申请表的“物流编码”中，以方便我司查询',
+      ),
+      array(
+        'caption' => '维修周期为15工作日',
+        'body' => '我司的处理流程为 接收、初验、维修和返回；通常故障维修周期为15工作日。
+         A 接收，我司接收到待修设备后，用户即可在我网站根据序列号查询到该设备的状态；
          B 初验、维修等流程情况与用户填写不符时，我司会按照申请单中的信息与用户联系；
          C 我司会按申请单中的信息发送维修报价表，如无特殊情况，我们的报价仅包含单次国内的运输费用；
          D 用户付款后，我司开始实施维修；
          E 维修结束后，出具设备的维修报告，对设备的延保日期进行贴示；
-         F 我司会按照申请单中的地址给用户返还设备；</p>';
-            $output .= '</div>';
-          $output .= '</div>';
-        $output .= '</div>';
+         F 我司会按照申请单中的地址给用户返还设备',
+      ),
+      array(
+        'caption' => '接收返回产品',
+        'body' => '按照申请单中的地址给用户返还设备',
+      ),
 
-        $output .= '<div class="col-xs-12 col-sm-6 col-md-4 min-height-216">';
-          $output .= '<div class="thumbnail">';
-            // $output .= '<img src="..." alt="...">';
-            $output .= '<i class="fa fa-calendar" aria-hidden="true"></i>';
-            $output .= '<div class="caption">';
-              $output .= '<h4>接收返回产品</h4>';
-              $output .= '<p>按照申请单中的地址给用户返还设备</p>';
+    );
+    $output = '';
+    $output .= '<div class="dashpage-wrapper">';
+      $output .= '<div class="row">';
+
+        foreach ($contents as $row) {
+          $output .= '<div class="col-xs-12 col-sm-6 col-md-4 min-height-216">';
+            $output .= '<div class="thumbnail">';
+              $output .= '<div class="text-center">';
+                $output .= '<i class="fa fa-calendar font-size-28 fa-4" aria-hidden="true"></i>';
+              $output .= '</div>';
+              $output .= '<div class="caption">';
+                $output .= '<h4>';
+                  $output .= $row['caption'];
+                $output .= '</h4>';
+                $output .= '<p>';
+                  $output .= $row['body'];
+                $output .= '</p>';
+              $output .= '</div>';
             $output .= '</div>';
           $output .= '</div>';
-        $output .= '</div>';
+        }
+
 
       $output .= '</div>';
     $output .= '</div>';
