@@ -124,22 +124,27 @@ class DashpageContentGenerator extends ControllerBase {
   public function landingPage($nid = NULL) {
     $contents = array(
       array(
+        'icon' => 'fa-download',
         'caption' => '下载“万博维修申请表”',
         'body' => '用户下载“万博维修申请表”',
       ),
       array(
+        'icon' => 'fa-file-text-o',
         'caption' => '填写详细信息',
         'body' => '用户需要填写申请表中的详细信息，我司在维修受理后出具的发票及返修设备的返回地址均以此为依据（除特殊注明）； 用户需标注设备的故障现象，以方便我们进行初检；',
       ),
       array(
+        'icon' => 'fa-newspaper-o',
         'caption' => '申请表确认',
         'body' => '用户以传真、邮件等形式将维修申请表发给我司进行确认（加盖公章或签名）；',
       ),
       array(
+        'icon' => 'fa-commenting-o',
         'caption' => '快递单号填写',
         'body' => '用户将发至我司的快递单号填写在维修申请表的“物流编码”中，以方便我司查询',
       ),
       array(
+        'icon' => 'fa-spinner',
         'caption' => '维修周期为15工作日',
         'body' => '我司的处理流程为 接收、初验、维修和返回；通常故障维修周期为15工作日。
          A 接收，我司接收到待修设备后，用户即可在我网站根据序列号查询到该设备的状态；
@@ -150,20 +155,21 @@ class DashpageContentGenerator extends ControllerBase {
          F 我司会按照申请单中的地址给用户返还设备',
       ),
       array(
+        'icon' => 'fa-envelope-o',
         'caption' => '接收返回产品',
         'body' => '按照申请单中的地址给用户返还设备',
       ),
-
     );
+
     $output = '';
     $output .= '<div class="dashpage-wrapper">';
       $output .= '<div class="row">';
 
         foreach ($contents as $row) {
-          $output .= '<div class="col-xs-12 col-sm-6 col-md-4 min-height-216">';
-            $output .= '<div class="thumbnail">';
-              $output .= '<div class="text-center">';
-                $output .= '<i class="fa fa-calendar font-size-28 fa-4" aria-hidden="true"></i>';
+          $output .= '<div class="col-xs-12 col-sm-6 col-md-4">';
+            $output .= '<div class="thumbnail min-height-216">';
+              $output .= '<div class="text-center min-height-42">';
+                $output .= '<i class="fa fa-6 font-size-28 ' . $row['icon']. '" aria-hidden="true"></i>';
               $output .= '</div>';
               $output .= '<div class="caption">';
                 $output .= '<h4>';
@@ -176,7 +182,6 @@ class DashpageContentGenerator extends ControllerBase {
             $output .= '</div>';
           $output .= '</div>';
         }
-
 
       $output .= '</div>';
     $output .= '</div>';
