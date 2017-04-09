@@ -59,7 +59,6 @@ class TerminfoJsonController extends ControllerBase {
    */
   public function basicCollectionContent($vid) {
     switch ($vid) {
-      case 'parts':
       case 'quote':
       case 'repair':
         $output = $this->basicCollectionNodeContent($vid);
@@ -274,6 +273,19 @@ class TerminfoJsonController extends ControllerBase {
           array(
             'field_label' => 'SALESPERSON',
             'field_name'  => 'field_client_salesperson',
+          ),
+        );
+        break;
+
+      case 'parts':
+        $output = array(
+          array(
+            'field_label' => 'Type',
+            'field_name'  => 'field_parts_devicetype',
+          ),
+          array(
+            'field_label' => 'Inventory',
+            'field_name'  => 'field_parts_inventory',
           ),
         );
         break;
