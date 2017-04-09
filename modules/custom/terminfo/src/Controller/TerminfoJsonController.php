@@ -84,7 +84,7 @@ class TerminfoJsonController extends ControllerBase {
     $output = array();
 
     $nodes = \Drupal::getContainer()->get('flexinfo.querynode.service')->nidsByBundle($entity_bundle);
-    $nodes = array_slice($nodes, 0, 10);
+    // $nodes = array_slice($nodes, 0, 10);
 
     if (is_array($nodes)) {
       foreach ($nodes as $nid) {

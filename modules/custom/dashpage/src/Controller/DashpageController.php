@@ -133,6 +133,7 @@ class DashpageController extends ControllerBase {
    * call from routing.yml
    */
   public function partsList() {
+    return $this->angularTableGeneratorTemplate('parts');
     return $this->viewsTableGeneratorTemplate('renderViewsContent', 'node_parts_collection');
   }
 
@@ -140,6 +141,7 @@ class DashpageController extends ControllerBase {
    * call from routing.yml
    */
   public function quoteList() {
+    return $this->angularTableGeneratorTemplate('quote');
     return $this->viewsTableGeneratorTemplate('renderViewsContent', 'node_quote_collection');
   }
 
