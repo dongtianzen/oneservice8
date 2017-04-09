@@ -109,6 +109,12 @@ class DashpageController extends ControllerBase {
    * call from routing.yml
    */
   public function landingPage() {
+    // set empty title
+    $request = \Drupal::request();
+    if ($route = $request->attributes->get(\Symfony\Cmf\Component\Routing\RouteObjectInterface::ROUTE_OBJECT)) {
+      $route->setDefault('_title', ' ');
+    }
+
     $FlexinfoEntityService = \Drupal::getContainer()->get('flexinfo.entity.service');
 
     $DashpageContentGenerator = new DashpageContentGenerator($FlexinfoEntityService);
