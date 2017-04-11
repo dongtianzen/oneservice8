@@ -113,7 +113,7 @@ daterangepicker:
   dependencies:
       - core/jquery
 
-# external remote
+#
 font-awesome:
   remote: https://fortawesome.github.io/Font-Awesome/
   version: 4.5.0
