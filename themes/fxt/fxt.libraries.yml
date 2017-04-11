@@ -56,9 +56,9 @@ angular.material:
     gpl-compatible: true
   css:
     theme:
-      https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.0.9/angular-material.min.css: { type: external, minified: true }
+      /libraries/angular-material/angular-material.min.css: {}
   js:
-    https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.0.9/angular-material.min.js: { type: external, minified: true }
+    /libraries/angular-material/angular-material.min.js: {}
 
 # external remote CDN
 datatables:
