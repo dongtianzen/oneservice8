@@ -142,7 +142,6 @@ class ManageinfoController extends ControllerBase {
     return $output;
   }
 
-
   /**
    * {@inheritdoc}
    */
