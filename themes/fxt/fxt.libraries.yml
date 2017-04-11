@@ -6,38 +6,38 @@ global-styling:
       css/print.css: { media: print }
 
 # external remote CDN
-# angular.angularjs:
-  # remote: https://github.com/angular
-  # version: 1.6.4
-  # license:
-  #   name: MIT
-  #   url: https://github.com/angular/angular.js/blob/master/LICENSE
-  #   gpl-compatible: true
-  # js:
-  #   /libraries/angularjs/angular.min.js: {}
-  #   /libraries/angularjs/angular-animate.min.js: {}
-  #   /libraries/angularjs/angular-aria.min.js: {}
-  #   /libraries/angularjs/angular-messages.min.js: {}
-  #   /libraries/angularjs/angular-resource.min.js: {}
-  #   /libraries/angularjs/angular-route.min.js: {}
-  #   /libraries/angularjs/angular-sanitize.min.js: {}
-
-    # external remote CDN
 angular.angularjs:
   remote: https://github.com/angular
-  version: 1.4.4
+  version: 1.6.4
   license:
     name: MIT
     url: https://github.com/angular/angular.js/blob/master/LICENSE
     gpl-compatible: true
   js:
-    https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js: { type: external, minified: true }
-    https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-animate.min.js: { type: external, minified: true }
-    https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-aria.min.js: { type: external, minified: true }
-    https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-messages.min.js: { type: external, minified: true }
-    https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-resource.min.js: { type: external, minified: true }
-    https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.min.js: { type: external, minified: true }
-    https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-sanitize.min.js: { type: external, minified: true }
+    /libraries/angularjs/angular.min.js: {}
+    /libraries/angularjs/angular-animate.min.js: {}
+    /libraries/angularjs/angular-aria.min.js: {}
+    /libraries/angularjs/angular-messages.min.js: {}
+    /libraries/angularjs/angular-resource.min.js: {}
+    /libraries/angularjs/angular-route.min.js: {}
+    /libraries/angularjs/angular-sanitize.min.js: {}
+
+# external remote CDN
+# angular.angularjs:
+#   remote: https://github.com/angular
+#   version: 1.4.4
+#   license:
+#     name: MIT
+#     url: https://github.com/angular/angular.js/blob/master/LICENSE
+#     gpl-compatible: true
+#   js:
+#     https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js: { type: external, minified: true }
+#     https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-animate.min.js: { type: external, minified: true }
+#     https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-aria.min.js: { type: external, minified: true }
+#     https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-messages.min.js: { type: external, minified: true }
+#     https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-resource.min.js: { type: external, minified: true }
+#     https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.min.js: { type: external, minified: true }
+#     https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-sanitize.min.js: { type: external, minified: true }
 
 #
 angular.chartnewjs:
