@@ -107,6 +107,7 @@ font-awesome:
   css:
     theme:
       https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css: { type: external, minified: true }
+      # /libraries/font-awesome/font-awesome.min.css: {}
 
 #
 metismenu:
