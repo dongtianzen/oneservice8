@@ -13,18 +13,16 @@ pageInfoBaseControllers.controller('MildderPreFormController', ['$scope', '$http
   function($scope, $http, $timeout, $q, $log, $filter, $mdDialog, $element) {
 
     angular.element(document).ready(function() {
-      $http.get(jsonFileUrl).success(function(data) {
-        $scope.formJson = data;
-      }).catch(function(err) {
-        // Log error somehow.
-      }).finally(function() {
-        //to fill intial values
-        angular.forEach($scope.formJson.formElementsSection, function(field) {
-          if(field.defaultValue != null) {
-            $scope.submitAnswers[field.fieldTitle] = field.defaultValue;
-          }
-        });
+
+      $http({
+        method: 'GET',
+        url: jsonFileUrl
+      }).then(function(response) {
+        $scope.formJson = response.data;
+      },function(error) {
+        // if error occurs
       });
+
     });
     // singleFatherMultipleChild options
     $scope.superSelectOptions = function(answerTid) {

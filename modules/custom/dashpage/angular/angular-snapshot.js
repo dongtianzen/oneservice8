@@ -12,7 +12,11 @@ pageInfoBaseControllers.controller('PageInfoBaseController', ['$scope', '$http',
     $scope.$sce = $sce;
 
     angular.element(document).ready(function() {
-      $http.get(jsonFileUrl).success(function(data) {
+
+      $http({
+        method: 'GET',
+        url: jsonFileUrl
+      }).then(function (response) {
 
         // when manageinfo call table page, $scope.pageData use drupalSettings variable
         if ((drupalSettings.path.currentPath.indexOf("manageinfo/") > -1) && (typeof drupalSettings.manageinfo.manageinfoTable.jsonContentData !== 'undefined')) {
@@ -27,16 +31,14 @@ pageInfoBaseControllers.controller('PageInfoBaseController', ['$scope', '$http',
           $scope.pageData = drupalSettings.dashpage.dashpageContent.jsonContentData;
         }
         else {
-          $scope.pageData = data;
+          $scope.pageData = response.data;
         }
 
-      }).catch(function(err) {
-        // Log error somehow.
-      }).finally(function() {
-
+      },function (error) {
+        // if error occurs
       });
-    });
 
+    });
   }
 ]);
 

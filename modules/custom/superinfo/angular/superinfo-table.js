@@ -12,13 +12,16 @@ pageInfoBaseControllers.controller('PageInfoBaseController', ['$scope', '$http',
     var jsonFileUrl = drupalSettings.superinfo.superinfoTable.jsonFileUrl;
 
     angular.element(document).ready(function() {
-      $http.get(jsonFileUrl).success(function(data) {
-        $scope.pageData = data;
-      }).catch(function(err) {
-        // Log error somehow.
-      }).finally(function() {
-        // Hide loading spinner whether our call succeeded or failed.
+
+      $http({
+        method: 'GET',
+        url: jsonFileUrl
+      }).then(function(response) {
+        $scope.pageData = response.data;
+      },function (error) {
+        // if error occurs
       });
+
     });
 
   }
