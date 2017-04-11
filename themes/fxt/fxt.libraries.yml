@@ -108,7 +108,7 @@ font-awesome:
     theme:
       https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css: { type: external, minified: true }
 
-# external remote CDN
+#
 metismenu:
   remote: https://github.com/onokumus/metisMenu
   version: 2.6.1
@@ -118,9 +118,9 @@ metismenu:
     gpl-compatible: true
   css:
     theme:
-      https://cdnjs.cloudflare.com/ajax/libs/metisMenu/2.6.1/metisMenu.min.css: { type: external, minified: true }
+      /libraries/metismenu/metisMenu.min.css: {}
   js:
-    https://cdnjs.cloudflare.com/ajax/libs/metisMenu/2.6.1/metisMenu.min.js: { type: external, minified: true }
+    /libraries/metismenu/metisMenu.min.js: {}
     /libraries/metismenu/custom/metismenu_controller.js: {}
   dependencies:
       - core/jquery
