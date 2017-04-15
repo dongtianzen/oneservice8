@@ -120,18 +120,6 @@ class DashpageController extends ControllerBase {
   /**
    * call from routing.yml
    */
-  public function standardList($section, $entity_id) {
-    return $this->angularTableGeneratorTemplate($section);
-
-    return $this->viewsTableGeneratorTemplate('renderViewsContent', 'node_parts_collection');
-    return $this->viewsTableGeneratorTemplate('renderViewsContent', 'node_quote_collection');
-    return $this->viewsTableGeneratorTemplate('renderViewsContent', 'node_repair_collection');
-    return $this->viewsTableGeneratorTemplate('renderViewsContent', 'term_client_collection');
-  }
-
-  /**
-   * call from routing.yml
-   */
   public function repairPrint($nid) {
     $FlexinfoEntityService = \Drupal::getContainer()->get('flexinfo.entity.service');
 
@@ -179,6 +167,18 @@ class DashpageController extends ControllerBase {
     );
 
     return $build;
+  }
+
+  /**
+   * call from routing.yml
+   */
+  public function standardList($section, $entity_id) {
+    return $this->angularTableGeneratorTemplate($section);
+
+    return $this->viewsTableGeneratorTemplate('renderViewsContent', 'node_parts_collection');
+    return $this->viewsTableGeneratorTemplate('renderViewsContent', 'node_quote_collection');
+    return $this->viewsTableGeneratorTemplate('renderViewsContent', 'node_repair_collection');
+    return $this->viewsTableGeneratorTemplate('renderViewsContent', 'term_client_collection');
   }
 
   /**
