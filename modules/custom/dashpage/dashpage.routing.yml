@@ -22,14 +22,6 @@ dashpage.quote.print:
   requirements:
     _permission: 'access content'
 
-dashpage.standard.list:
-  path: '/dashpage/{section}/list/{entity_id}'
-  defaults:
-    _controller: '\Drupal\dashpage\Controller\DashpageController::standardList'
-    _title: 'Repair List'
-  requirements:
-    _permission: 'access content'
-
 dashpage.repair.print:
   path: '/dashpage/repair/print/{nid}'
   defaults:
@@ -43,5 +35,13 @@ dashpage.report.snapshot:
   defaults:
     _controller: '\Drupal\dashpage\Controller\DashpageController::reportSnapshot'
     _title: 'Report Page'
+  requirements:
+    _permission: 'access content'
+
+dashpage.standard.list:
+  path: '/dashpage/{section}/list/{entity_id}'
+  defaults:
+    _controller: '\Drupal\dashpage\Controller\DashpageController::standardList'
+    _title: 'Repair List'
   requirements:
     _permission: 'access content'
