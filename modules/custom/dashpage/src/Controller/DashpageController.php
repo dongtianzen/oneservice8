@@ -192,14 +192,10 @@ class DashpageController extends ControllerBase {
    * {@inheritdoc}
    */
   public function reportSnapshot() {
-    // load and use DashpageContent templage
     $FlexinfoEntityService = \Drupal::getContainer()->get('flexinfo.entity.service');
 
     $DashpageContentGenerator = new DashpageContentGenerator($FlexinfoEntityService);
     $output = $DashpageContentGenerator->angularSnapshot();
-
-    $ManageinfoController = new ManageinfoController($FlexinfoEntityService);
-    $json_content_data = $ManageinfoController->manageinfoTableContent('company');
 
     $DashpageJsonGenerator = new DashpageJsonGenerator();
     $json_content_data = $DashpageJsonGenerator->angularJson();
