@@ -174,27 +174,27 @@ class ManageinfoContentGenerator extends ControllerBase {
   public function settingIndex() {
     $setting_array = array(
       array(
-        'url' => '/superinfo/table/client',
+        'url' => '/superinfo/client/table/all',
         'name' => 'Client',
       ),
       array(
-        'url' => '/superinfo/table/client_type',
+        'url' => '/superinfo/client_type/table/all',
         'name' => 'Client Type',
       ),
       array(
-        'url' => '/superinfo/table/company',
+        'url' => '/superinfo/company/table/all',
         'name' => 'Company',
       ),
       array(
-        'url' => '/superinfo/table/device_type',
+        'url' => '/superinfo/device_type/table/all',
         'name' => 'Device Type',
       ),
       array(
-        'url' => '/superinfo/table/notification',
+        'url' => '/superinfo/notification/table/all',
         'name' => 'Notification',
       ),
       array(
-        'url' => '/superinfo/table/province',
+        'url' => '/superinfo/province/table/all',
         'name' => 'Province',
       ),
     );

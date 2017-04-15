@@ -1,5 +1,5 @@
-terminfo_json.basic_collection.topic:
-  path: '/terminfojson/basiccollection/{topic}'
+terminfo_json.basic_collection.vid:
+  path: '/terminfojson/basiccollection/{vid}'
   defaults:
     _controller: '\Drupal\terminfo\Controller\TerminfoJsonController::basicCollection'
     _title: 'Basic Collection'
