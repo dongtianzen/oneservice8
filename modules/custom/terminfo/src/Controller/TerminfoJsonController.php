@@ -190,7 +190,13 @@ class TerminfoJsonController extends ControllerBase {
       $entity  = \Drupal::entityTypeManager()->getStorage($entity_type)->load($entity_id);
 
       foreach ($customManageFields as $field_row) {
-        $output[$field_row['field_label']] = $this->flexinfoEntityService->getEntity('field')->getFieldSingleValue($entity_type, $entity, $field_row['field_name']);
+        if ($field_row['field_name'] == 'custom_formula_function') {
+          $output[$field_row['field_label']] = $this->{$field_row['formula_function']}($entity_id);
+        }
+        else {    // noraml custom field
+          $output[$field_row['field_label']] = $this->flexinfoEntityService->getEntity('field')
+            ->getFieldSingleValue($entity_type, $entity, $field_row['field_name']);
+        }
       }
     }
 
@@ -254,8 +260,10 @@ class TerminfoJsonController extends ControllerBase {
           ),
           array(
             'field_label' => 'Print',
-            'field_name'  => 'field_repair_returndate',
+            'field_name'  => 'custom_formula_function',
+            'formula_function'  => 'linkForRepairPrint',
           ),
+
         );
         break;
 
@@ -325,6 +333,23 @@ class TerminfoJsonController extends ControllerBase {
     }
 
     return $output;
+  }
+
+  /** - - - - - - custom - - - - - - - - - - - - - - - - - - - - - - - - -  */
+
+  /**
+   * @return
+   */
+  public function linkForRepairPrint($repair_nid = NULL) {
+
+    $link = NULL;
+    if ($repair_nid) {
+      $path = '/dashpage/repair/print/' . $repair_nid;
+      $url = Url::fromUserInput($path);
+      $link = \Drupal::l('Print', $url);
+    }
+
+    return $link;
   }
 
 }
