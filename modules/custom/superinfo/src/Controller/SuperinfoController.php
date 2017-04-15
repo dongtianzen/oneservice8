@@ -68,16 +68,47 @@ class SuperinfoController extends ControllerBase {
 
   /**
    * {@inheritdoc}
+   * use Symfony\Component\HttpFoundation\JsonResponse;
+   * @return JSON
    */
-  public function superinfoTable($topic) {
+  public function superinfoJson($section, $entity_id) {
+    $output = $this->superinfoJsonData($section, $entity_id);
+
+    return new JsonResponse($output);
+
+    $build = array(
+      '#type' => 'markup',
+      '#markup' => json_encode($output),
+    );
+
+    return $build;
+  }
+
+  /**
+   * {@inheritdoc}
+   * use Symfony\Component\HttpFoundation\JsonResponse;
+   * @return JSON
+   */
+  public function superinfoJsonData($section, $entity_id) {
+    $ManageinfoTableContent = new ManageinfoTableContent();
+
+    $output = $ManageinfoTableContent->tableContentData($section, $entity_id);
+
+    return $output;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function superinfoTable($section, $entity_id) {
     // set page title
     $request = \Drupal::request();
     if ($route = $request->attributes->get(\Symfony\Cmf\Component\Routing\RouteObjectInterface::ROUTE_OBJECT)) {
-      $route->setDefault('_title', ucwords($topic) . ' Table');
+      $route->setDefault('_title', ucwords($section) . ' Table');
     }
 
-    $topic = strtolower($topic);
-    $json_path = $this->superinfoTableJsonPath($topic);
+    $section = strtolower($section);
+    $json_path = $this->superinfoTableJsonPath($section);
 
     $SuperinfoContentGenerator = new SuperinfoContentGenerator();
     $output = $SuperinfoContentGenerator->superinfoTable();
@@ -107,18 +138,19 @@ class SuperinfoController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
-  public function superinfoTableJsonPath($topic) {
+  public function superinfoTableJsonPath($section) {
     $json_path = base_path() . 'viewsjson/node/page/all';
-    if ($topic) {
-      $json_file_url = 'viewsjson/term/' . $topic . '/all';
+    if ($section) {
+      $json_file_url = 'viewsjson/term/' . $section . '/all';
 
       $url_is_valid = \Drupal::service('path.validator')->isValid($json_file_url);
       if (!$url_is_valid) {
-        $json_file_url = 'terminfojson/basiccollection/' . $topic;
+        $json_file_url = 'terminfojson/basiccollection/' . $section;
       }
+
       $json_path = base_path() . $json_file_url;
       // special
-      switch ($topic) {
+      switch ($section) {
         case 'page':
           $json_path = base_path() . 'viewsjson/node/page/all';
           break;
