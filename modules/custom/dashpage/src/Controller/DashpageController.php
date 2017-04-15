@@ -167,6 +167,15 @@ class DashpageController extends ControllerBase {
    * call from routing.yml
    */
   public function repairList() {
+    // return $this->angularTableGeneratorTemplate('repair');
+    return $this->viewsTableGeneratorTemplate('renderViewsContent', 'node_repair_collection');
+  }
+
+  /**
+   * call from routing.yml
+   */
+  public function standardList($section, $entity_id) {
+    return $this->angularTableGeneratorTemplate($section);
     return $this->viewsTableGeneratorTemplate('renderViewsContent', 'node_repair_collection');
   }
 
