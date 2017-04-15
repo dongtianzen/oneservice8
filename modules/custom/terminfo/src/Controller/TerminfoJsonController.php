@@ -205,27 +205,6 @@ class TerminfoJsonController extends ControllerBase {
 
     switch ($vid) {
       // node
-      case 'repair':
-        $output = array(
-          array(
-            'field_label' => 'Date',
-            'field_name'  => 'field_repair_checkdate',
-          ),
-          array(
-            'field_label' => 'Note',
-            'field_name'  => 'field_repair_checknote',
-          ),
-          array(
-            'field_label' => 'Device Format',
-            'field_name'  => 'field_repair_deviceformat',
-          ),
-          array(
-            'field_label' => 'Amount',
-            'field_name'  => 'field_repair_quoteamount',
-          ),
-        );
-        break;
-
       case 'quote':
         $output = array(
           array(
@@ -239,6 +218,43 @@ class TerminfoJsonController extends ControllerBase {
           array(
             'field_label' => 'Company',
             'field_name'  => 'field_quote_company',
+          ),
+        );
+        break;
+
+      case 'repair':
+        $output = array(
+          array(
+            'field_label' => 'Client',
+            'field_name'  => 'field_repair_clientname',
+          ),
+          array(
+            'field_label' => 'Device',
+            'field_name'  => 'field_repair_devicetype',
+          ),
+          array(
+            'field_label' => 'Serial Num',
+            'field_name'  => 'field_repair_serialnumber',
+          ),
+          array(
+            'field_label' => 'Receive',
+            'field_name'  => 'field_repair_receivedate',
+          ),
+          array(
+            'field_label' => 'Check',
+            'field_name'  => 'field_repair_checkdate',
+          ),
+          array(
+            'field_label' => 'Repair',
+            'field_name'  => 'field_repair_repairdate',
+          ),
+          array(
+            'field_label' => 'Return',
+            'field_name'  => 'field_repair_returndate',
+          ),
+          array(
+            'field_label' => 'Print',
+            'field_name'  => 'field_repair_returndate',
           ),
         );
         break;
