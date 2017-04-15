@@ -45,28 +45,6 @@ class DashpageController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
-  public function viewsTableGeneratorTemplate($method = 'template', $views_name = NULL) {
-    $FlexinfoEntityService = \Drupal::getContainer()->get('flexinfo.entity.service');
-
-    $DashpageContentGenerator = new DashpageContentGenerator($FlexinfoEntityService);
-    $output = $DashpageContentGenerator->{$method}($views_name);
-
-    $build = array(
-      '#type' => 'markup',
-      '#header' => 'header',
-      '#markup' => $output,
-      '#attached' => array(
-        'library' => array(
-          'fxt/daterangepicker',
-        ),
-      ),
-    );
-    return $build;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function angularTableGeneratorTemplate($topic = NULL) {
     $FlexinfoEntityService = \Drupal::getContainer()->get('flexinfo.entity.service');
 
@@ -100,14 +78,6 @@ class DashpageController extends ControllerBase {
   /**
    * call from routing.yml
    */
-  public function clientList() {
-    // return $this->viewsTableGeneratorTemplate('renderViewsContent', 'term_client_collection');
-    return $this->angularTableGeneratorTemplate('client');
-  }
-
-  /**
-   * call from routing.yml
-   */
   public function landingPage() {
     // set empty title
     $request = \Drupal::request();
@@ -132,22 +102,6 @@ class DashpageController extends ControllerBase {
   /**
    * call from routing.yml
    */
-  public function partsList() {
-    return $this->angularTableGeneratorTemplate('parts');
-    return $this->viewsTableGeneratorTemplate('renderViewsContent', 'node_parts_collection');
-  }
-
-  /**
-   * call from routing.yml
-   */
-  public function quoteList() {
-    return $this->angularTableGeneratorTemplate('quote');
-    return $this->viewsTableGeneratorTemplate('renderViewsContent', 'node_quote_collection');
-  }
-
-  /**
-   * call from routing.yml
-   */
   public function quotePrint($nid) {
     $FlexinfoEntityService = \Drupal::getContainer()->get('flexinfo.entity.service');
 
@@ -166,17 +120,13 @@ class DashpageController extends ControllerBase {
   /**
    * call from routing.yml
    */
-  public function repairList() {
-    // return $this->angularTableGeneratorTemplate('repair');
-    return $this->viewsTableGeneratorTemplate('renderViewsContent', 'node_repair_collection');
-  }
-
-  /**
-   * call from routing.yml
-   */
   public function standardList($section, $entity_id) {
     return $this->angularTableGeneratorTemplate($section);
+
+    return $this->viewsTableGeneratorTemplate('renderViewsContent', 'node_parts_collection');
+    return $this->viewsTableGeneratorTemplate('renderViewsContent', 'node_quote_collection');
     return $this->viewsTableGeneratorTemplate('renderViewsContent', 'node_repair_collection');
+    return $this->viewsTableGeneratorTemplate('renderViewsContent', 'term_client_collection');
   }
 
   /**
@@ -228,6 +178,28 @@ class DashpageController extends ControllerBase {
       ),
     );
 
+    return $build;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function viewsTableGeneratorTemplate($method = 'template', $views_name = NULL) {
+    $FlexinfoEntityService = \Drupal::getContainer()->get('flexinfo.entity.service');
+
+    $DashpageContentGenerator = new DashpageContentGenerator($FlexinfoEntityService);
+    $output = $DashpageContentGenerator->{$method}($views_name);
+
+    $build = array(
+      '#type' => 'markup',
+      '#header' => 'header',
+      '#markup' => $output,
+      '#attached' => array(
+        'library' => array(
+          'fxt/daterangepicker',
+        ),
+      ),
+    );
     return $build;
   }
 

@@ -6,14 +6,6 @@ dashpage.angular.snapshot:
   requirements:
     _permission: 'access content'
 
-dashpage.client.list:
-  path: '/dashpage/client/list'
-  defaults:
-    _controller: '\Drupal\dashpage\Controller\DashpageController::clientList'
-    _title: 'Client List'
-  requirements:
-    _permission: 'access content'
-
 dashpage.landing.page:
   path: '/dashpage/landing/page'
   defaults:
@@ -22,35 +14,11 @@ dashpage.landing.page:
   requirements:
     _permission: 'access content'
 
-dashpage.parts.list:
-  path: '/dashpage/parts/list'
-  defaults:
-    _controller: '\Drupal\dashpage\Controller\DashpageController::partsList'
-    _title: 'Parts List'
-  requirements:
-    _permission: 'access content'
-
-dashpage.quote.list:
-  path: '/dashpage/quote/list'
-  defaults:
-    _controller: '\Drupal\dashpage\Controller\DashpageController::quoteList'
-    _title: 'Quote List'
-  requirements:
-    _permission: 'access content'
-
 dashpage.quote.print:
   path: '/dashpage/quote/print/{nid}'
   defaults:
     _controller: '\Drupal\dashpage\Controller\DashpageController::quotePrint'
     _title: 'Quote Print'
-  requirements:
-    _permission: 'access content'
-
-dashpage.repair.list:
-  path: '/dashpage/repair/list'
-  defaults:
-    _controller: '\Drupal\dashpage\Controller\DashpageController::repairList'
-    _title: 'Repair List'
   requirements:
     _permission: 'access content'
 
