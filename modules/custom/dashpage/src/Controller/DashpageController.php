@@ -196,7 +196,7 @@ class DashpageController extends ControllerBase {
       '#markup' => $output,
       '#attached' => array(
         'library' => array(
-          'fxt/daterangepicker',
+          'fxt/bootstrap-daterangepicker',
         ),
       ),
     );
