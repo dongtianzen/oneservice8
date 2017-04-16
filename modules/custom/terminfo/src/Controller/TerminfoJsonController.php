@@ -82,7 +82,7 @@ class TerminfoJsonController extends ControllerBase {
   public function basicCollectionNodeContent($entity_bundle, $entity_id = NULL, $start = NULL, $end = NULL) {
     $output = array();
 
-    $nodes = \Drupal::getContainer()->get('flexinfo.querynode.service')->nidsByBundle($entity_bundle);
+    $nids = \Drupal::getContainer()->get('flexinfo.querynode.service')->nidsByBundle($entity_bundle);
     if ($start && $end) {
       $start_query_date = \Drupal::getContainer()
         ->get('flexinfo.setting.service')->convertTimeStampToQueryDate($start);
@@ -91,20 +91,20 @@ class TerminfoJsonController extends ControllerBase {
         ->get('flexinfo.setting.service')->convertTimeStampToQueryDate($end);
 
       $query_container = \Drupal::getContainer()->get('flexinfo.querynode.service');
-      $query = $query_container->queryNidsByBundle('meeting');
+      $query = $query_container->queryNidsByBundle('quote');
 
       $group = $query_container->groupStandardByFieldValue($query, 'field_quote_date', $start_query_date, '>');
       $query->condition($group);
-      $group = $query_container->groupStandardByFieldValue($query, 'field_quote_date', $end_query_date, '<');
-      $query->condition($group);
+      // $group = $query_container->groupStandardByFieldValue($query, 'field_quote_date', $end_query_date, '<');
+      // $query->condition($group);
 
       $nids = $query_container->runQueryWithGroup($query);
-      $nodes = \Drupal::entityTypeManager()->getStorage('node')->loadMultiple($nids);
+      dpm($nids);
     }
     // $nodes = array_slice($nodes, 0, 10);
 
-    if (is_array($nodes)) {
-      foreach ($nodes as $nid) {
+    if (is_array($nids) && $nids) {
+      foreach ($nids as $nid) {
         $row = array();
 
         $edit_path = '/node/' . $nid . '/edit';

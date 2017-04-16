@@ -69,16 +69,26 @@ class ManageinfoController extends ControllerBase {
   /**
    * @return php object, not JSON
    */
-  public function convertArrayToCommonTable($term_content = array()) {
+  public function convertArrayToCommonTable($source_array = array()) {
     $table_value = array();
-    if (is_array($term_content)) {
-      foreach ($term_content as $row) {
+    if (is_array($source_array)) {
+      foreach ($source_array as $row) {
         $tbody_content[] = array_values($row);
       }
 
+      $table_thead = array();
+      if (is_array($source_array) && isset($source_array[0])) {
+        $table_thead = array(array_keys($source_array[0]));
+      }
+
+      $table_tbody = array();
+      if (isset($tbody_content)) {
+        $table_tbody = array_values($tbody_content);
+      }
+
       $table_value = array(
-        "thead" => array(array_keys($term_content[0])),
-        "tbody" => array_values($tbody_content),
+        "thead" => $table_thead,
+        "tbody" => $table_tbody,
       );
     }
 
