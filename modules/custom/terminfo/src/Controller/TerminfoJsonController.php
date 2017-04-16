@@ -95,11 +95,10 @@ class TerminfoJsonController extends ControllerBase {
 
       $group = $query_container->groupStandardByFieldValue($query, 'field_quote_date', $start_query_date, '>');
       $query->condition($group);
-      // $group = $query_container->groupStandardByFieldValue($query, 'field_quote_date', $end_query_date, '<');
-      // $query->condition($group);
+      $group = $query_container->groupStandardByFieldValue($query, 'field_quote_date', $end_query_date, '<');
+      $query->condition($group);
 
       $nids = $query_container->runQueryWithGroup($query);
-      dpm($nids);
     }
     // $nodes = array_slice($nodes, 0, 10);
 

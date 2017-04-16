@@ -122,7 +122,7 @@ class FlexinfoSettingService {
    */
   public function convertTimeStampToQueryDate($time_stamp) {
     $output = \Drupal::service('date.formatter')
-      ->format($time_stamp, 'page_daytime', $format = '', $timezone = 'Europe/London');
+      ->format($time_stamp, 'html_date', $format = '', $timezone = 'Europe/London');
 
     return $output;
   }
