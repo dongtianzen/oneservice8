@@ -22,17 +22,13 @@ class NavinfoBlockGenerator extends ControllerBase {
    */
   function contentNavigation() {
     $output = '';
-    $output .= '<div data-ng-app="navInfoBase" id="navInfoBase" class="z-index-900">';
-      $output .= '<div data-ng-controller="NavInfoBaseController" ng-cloak>';
-        $output .= '<nav class="navbar navbar-default container padding-0 max-width-inherit width-inherit">';
+    $output .= '<nav class="navbar navbar-default container padding-0 max-width-inherit width-inherit">';
 
-          $output .= '<div class="navbar-second-wrapper height-48 bg-00a9e0 float-left width-pt-100 clear-both">';
-            $output .= $this->contentNavigationStatusbar();
-          $output .= '</div>';
-
-        $output .= '</nav>';
+      $output .= '<div class="navbar-second-wrapper height-48 bg-00a9e0 float-left width-pt-100 clear-both">';
+        $output .= $this->contentNavigationStatusbar();
       $output .= '</div>';
-    $output .= '</div>';
+
+    $output .= '</nav>';
 
     return $output;
   }
@@ -41,9 +37,9 @@ class NavinfoBlockGenerator extends ControllerBase {
    * Implements statusbar content
    */
   function contentNavigationStatusbar() {
-    $page_title = $this->getPageTitle();
-    $user_end_time = \Drupal::getContainer()->get('flexinfo.setting.service')->userEndTimeFormatDate();
-    $user_start_time = \Drupal::getContainer()->get('flexinfo.setting.service')->userStartTimeFormatDate();
+    $page_title = 33;
+    $user_end_time = 333;
+    $user_start_time = 6666;
 
     $output = '';
     $output .= '<div class="">';

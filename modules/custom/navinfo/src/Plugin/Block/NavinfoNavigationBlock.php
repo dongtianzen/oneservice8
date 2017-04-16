@@ -28,11 +28,6 @@ class NavinfoNavigationBlock extends BlockBase {
       '#markup' => $output,
       '#cache' => array('max-age' => 0,),
       '#allowed_tags' => \Drupal::getContainer()->get('flexinfo.setting.service')->adminTag(),
-      '#attached' => array(
-        'library' => array(
-          'navinfo/navinfo.navbar',
-        ),
-      ),
     );
   }
 
