@@ -38,8 +38,8 @@ class NavinfoBlockGenerator extends ControllerBase {
    */
   function contentNavigationStatusbar() {
     $page_title = '';
-    $user_end_time = '2017-01-01';
-    $user_start_time = '2017-05-01';
+    $user_start_time = '2017-01-01';
+    $user_end_time = '2017-05-01';
 
     $output = '';
     $output .= '<div class="">';

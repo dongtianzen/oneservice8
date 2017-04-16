@@ -81,6 +81,25 @@ class FlexinfoQueryNodeService extends ControllerBase {
     return $query;
   }
 
+  /** - - - - - - Node Standard Group - - - - - - - - - - - - - - - - - - - - - -  */
+  /**
+   * @param $field_name like "field_meeting_province", containing
+   * @see https://api.drupal.org/api/drupal/core!lib!Drupal!Core!Entity!Query!QueryInterface.php/function/QueryInterface%3A%3Acondition/8.2.x
+   */
+  public function groupStandardByFieldValue($query = NULL, $field_name = NULL, $field_value = NULL, $operator = NULL, $langcode = NULL) {
+    if ($operator == 'IN' || $operator == 'NOT IN') {
+      if (is_array($field_value) && count($field_value) == 0) {
+        // $field_value cannot be empty array
+        $field_value = array(-1);
+      }
+    }
+
+    $group = $query->andConditionGroup()
+      ->condition($field_name, $field_value, $operator);
+
+    return $group;
+  }
+
   /** - - - - - - Meeting Group - - - - - - - - - - - - - - - - - - - - - -  */
 
   public function groupByMeetingDateTime($query = NULL, $start_time = NULL, $end_time = NULL) {

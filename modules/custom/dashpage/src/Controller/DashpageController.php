@@ -45,14 +45,14 @@ class DashpageController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
-  public function angularTableGeneratorTemplate($topic = NULL) {
+  public function angularTableGeneratorTemplate($section = NULL, $entity_id, $start, $end) {
     $FlexinfoEntityService = \Drupal::getContainer()->get('flexinfo.entity.service');
 
     $DashpageContentGenerator = new DashpageContentGenerator($FlexinfoEntityService);
     $output = $DashpageContentGenerator->angularSnapshot();
 
     $ManageinfoController = new ManageinfoController($FlexinfoEntityService);
-    $json_content_data = $ManageinfoController->manageinfoTableContent($topic);
+    $json_content_data = $ManageinfoController->manageinfoTableContent($section, $entity_id, $start, $end);
 
     $build = array(
       '#type' => 'markup',
@@ -174,7 +174,7 @@ class DashpageController extends ControllerBase {
    * call from routing.yml
    */
   public function standardList($section, $entity_id, $start, $end) {
-    return $this->angularTableGeneratorTemplate($section);
+    return $this->angularTableGeneratorTemplate($section, $entity_id, $start, $end);
 
     return $this->viewsTableGeneratorTemplate('renderViewsContent', 'node_parts_collection');
     return $this->viewsTableGeneratorTemplate('renderViewsContent', 'node_quote_collection');

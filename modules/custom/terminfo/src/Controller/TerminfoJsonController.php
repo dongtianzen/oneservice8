@@ -57,11 +57,11 @@ class TerminfoJsonController extends ControllerBase {
    * @param, $vid is vid
    * @return key name array
    */
-  public function basicCollectionContent($vid) {
+  public function basicCollectionContent($vid, $entity_id = NULL, $start = NULL, $end = NULL) {
     switch ($vid) {
       case 'quote':
       case 'repair':
-        $output = $this->basicCollectionNodeContent($vid);
+        $output = $this->basicCollectionNodeContent($vid, $entity_id, $start, $end);
         break;
 
       case 'user':
@@ -79,10 +79,28 @@ class TerminfoJsonController extends ControllerBase {
   /**
    * @return php array
    */
-  public function basicCollectionNodeContent($entity_bundle) {
+  public function basicCollectionNodeContent($entity_bundle, $entity_id = NULL, $start = NULL, $end = NULL) {
     $output = array();
 
     $nodes = \Drupal::getContainer()->get('flexinfo.querynode.service')->nidsByBundle($entity_bundle);
+    if ($start && $end) {
+      $start_query_date = \Drupal::getContainer()
+        ->get('flexinfo.setting.service')->convertTimeStampToQueryDate($start);
+
+      $end_query_date = \Drupal::getContainer()
+        ->get('flexinfo.setting.service')->convertTimeStampToQueryDate($end);
+
+      $query_container = \Drupal::getContainer()->get('flexinfo.querynode.service');
+      $query = $query_container->queryNidsByBundle('meeting');
+
+      $group = $query_container->groupStandardByFieldValue($query, 'field_quote_date', $start_query_date, '>');
+      $query->condition($group);
+      $group = $query_container->groupStandardByFieldValue($query, 'field_quote_date', $end_query_date, '<');
+      $query->condition($group);
+
+      $nids = $query_container->runQueryWithGroup($query);
+      $nodes = \Drupal::entityTypeManager()->getStorage('node')->loadMultiple($nids);
+    }
     // $nodes = array_slice($nodes, 0, 10);
 
     if (is_array($nodes)) {
