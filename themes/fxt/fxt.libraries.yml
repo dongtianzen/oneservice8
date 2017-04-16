@@ -117,21 +117,6 @@ datatables:
     /libraries/datatables/js/buttons.html5.min.js: {}
     /libraries/datatables/js/buttons.print.min.js: {}
     /libraries/datatables/js/buttons.colVis.min.js: {}
-
-#
-daterangepicker:
-  version: 1.3.17
-  css:
-    theme:
-      /libraries/daterangepicker/css/daterangepicker-bs3.css: {}
-      /libraries/daterangepicker/custom/daterangepicker-controller.css: {}
-  js:
-    /libraries/daterangepicker/js/moment.js: {}
-    /libraries/daterangepicker/js/daterangepicker.js: {}
-    /libraries/daterangepicker/custom/daterangepicker_controller.js: {}
-  dependencies:
-      - core/jquery
-
 #
 font-awesome:
   remote: https://fortawesome.github.io/Font-Awesome/
