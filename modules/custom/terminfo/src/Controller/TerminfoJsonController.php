@@ -385,13 +385,21 @@ class TerminfoJsonController extends ControllerBase {
    * @return
    */
   public function stampForQuoteNode($quote_nid = NULL) {
-    $stamp = NULL;
+    $stamp_path = base_path() . drupal_get_path('module', 'dashpage') . '/image/wanboxinpu_quote_stamp.png';
+
+    $output = NULL;
     if ($quote_nid) {
       $node  = \Drupal::entityTypeManager()->getStorage('node')->load($quote_nid);
       $stamp = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValue($node, 'field_quote_authorizestamp');
+
+      if ($stamp) {
+        $output = '<span class="width-20">';
+          $output .= '<img src="' . $stamp_path . '" alt="stamp" class="width-20">';
+        $output .= '</span>';
+      }
     }
 
-    return $stamp;
+    return $output;
   }
 
 }
