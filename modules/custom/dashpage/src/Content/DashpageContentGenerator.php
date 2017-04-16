@@ -86,7 +86,6 @@ class DashpageContentGenerator extends ControllerBase {
    */
   public function renderViewsContent($views_name = NULL) {
     $output = '';
-    $output .= $this->dateRangePickerBar();
 
     if ($views_name) {
       $view_content = views_embed_view($views_name, 'default');
@@ -95,24 +94,6 @@ class DashpageContentGenerator extends ControllerBase {
         $output .= render($view_content);
       $output .= '</div>';
     }
-
-    return $output;
-  }
-
-  /**
-   * render views output
-   */
-  public function dateRangePickerBar() {
-    $date_start = '2017-01-01';
-    $date_end   = '2017-04-01';
-
-    $output = '';
-    $output .= '<div class="dashpage-daterangepicker-wrapper height-16">';
-      $output .= '<div id="reportrange-header" class="pull-right margin-top-8 margin-right-48 line-height-32">';
-        $output .= '<i class="glyphicon glyphicon-calendar fa fa-calendar padding-right-10"></i>';
-        $output .= '<span class="iconmargin-left-6">' . $date_start . ' - ' . $date_end . '</span>';
-      $output .= '</div>';
-    $output .= '</div>';
 
     return $output;
   }
