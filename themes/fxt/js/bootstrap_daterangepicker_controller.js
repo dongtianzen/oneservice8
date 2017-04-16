@@ -7,35 +7,37 @@ jQuery(document).ready(function($) {
    * Pre-defined Ranges & Callback
    *
    */
-  $(function() {
+  jQuery(function() {
 
     // set dropdown hightlight item, the menu will highlight same one
     var start = moment().subtract(29, 'days');
     var end = moment();
 
     function cb(start, end) {
+      console.log(163);
+      console.log(start);
       // start.valueOf() is Unix TimeStamp
-      var startDate = parseInt((start.valueOf()) / 1000);
-      var endDate = parseInt((end.valueOf()) / 1000);
+      // var startDate = parseInt((start.valueOf()) / 1000);
+      // var endDate = parseInt((end.valueOf()) / 1000);
 
-      // add new date range parameter
-      var setDateUrl = drupalSettings.path.baseUrl + 'navinfo/daterange/setvalue/' + startDate + '/' + endDate;
-      var redirectUrl = drupalSettings.path.baseUrl + pathArg[0] + '/' + pathArg[1] + '/' + pathArg[2] + '/' + pathArg[3] + '/' + startDate + '/' + endDate;
+      // // add new date range parameter
+      // var setDateUrl = drupalSettings.path.baseUrl + 'navinfo/daterange/setvalue/' + startDate + '/' + endDate;
+      // var redirectUrl = drupalSettings.path.baseUrl + pathArg[0] + '/' + pathArg[1] + '/' + pathArg[2] + '/' + pathArg[3] + '/' + startDate + '/' + endDate;
 
-      // Set User Date Range on User Data
-      $.ajax({
-        type: "POST",
-        url: setDateUrl,
-      });
+      // // Set User Date Range on User Data
+      // $.ajax({
+      //   type: "POST",
+      //   url: setDateUrl,
+      // });
 
       // var xmlhttp = new XMLHttpRequest();
       // xmlhttp.open("GET", url, false);
 
       // redirect page
-      window.location.replace(redirectUrl);
+      // window.location.replace(redirectUrl);
     }
-console.log(start);
-    $('#reportrange-header').daterangepicker({
+
+    jQuery('#reportrange-header').daterangepicker({
         startDate: start,
         endDate: end,
         ranges: {
