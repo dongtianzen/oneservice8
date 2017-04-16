@@ -105,6 +105,29 @@ class FlexinfoSettingService {
   }
 
   /**
+   * $timestamp = date_format(date_create($date_time, timezone_open('America/Toronto')), "U");
+   *
+   * @param 'html_date' is HTML Date like 2017-03-24
+   \Drupal::getContainer()->get('flexinfo.setting.service')->convertTimeStampToHtmlDate();
+   */
+  public function convertTimeStampToHtmlDate($time_stamp, $type = 'html_date') {
+    $output = \Drupal::service('date.formatter')->format($time_stamp, $type);
+
+    return $output;
+  }
+
+  /**
+   * @param 'html_date' is HTML Date like 2017-03-24
+   \Drupal::getContainer()->get('flexinfo.setting.service')->convertTimeStampToQueryDate();
+   */
+  public function convertTimeStampToQueryDate($time_stamp) {
+    $output = \Drupal::service('date.formatter')
+      ->format($time_stamp, 'page_daytime', $format = '', $timezone = 'Europe/London');
+
+    return $output;
+  }
+
+  /**
    *
    \Drupal::getContainer()->get('flexinfo.setting.service')->setPageTitle();
    */
