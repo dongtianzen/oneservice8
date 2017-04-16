@@ -62,6 +62,7 @@ class DashpageController extends ControllerBase {
       '#attached' => array(
         'library' => array(
           'dashpage/angular_snapshot',
+          'fxt/bootstrap-daterangepicker',
         ),
         'drupalSettings' => [
           'manageinfo' => [

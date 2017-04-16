@@ -108,8 +108,8 @@ class DashpageContentGenerator extends ControllerBase {
 
     $output = '';
     $output .= '<div class="dashpage-daterangepicker-wrapper height-16">';
-      $output .= '<div id="dashpage-daterangepicker-tag" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">';
-          $output .= '<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>';
+      $output .= '<div id="dashpage-daterangepicker-tag" class="pull-right margin-top-8 margin-right-48 bg-00a9e0 color-fff line-height-32">';
+          $output .= '<i class="fa fa-calendar padding-right-10"></i>';
           $output .= '<span class="margin-left-6">' . $date_start . ' - ' . $date_end . '</span>';
           $output .= '<b class="caret margin-left-6"></b>';
       $output .= '</div>';
