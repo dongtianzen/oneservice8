@@ -3,33 +3,34 @@ navinfo.main.client:
   title: 'Client'
   description: 'Client'
   route_name: dashpage.standard.list
-  route_parameters: { section: 'client', entity_id: 'all' }
+  route_parameters: { section: 'client', entity_id: 'all', start: 'start', end: 'end' }
   menu_name: main
   weight: 100
 navinfo.main.parts:
   title: 'Parts'
   description: 'Parts'
   route_name: dashpage.standard.list
-  route_parameters: { section: 'parts', entity_id: 'all' }
+  route_parameters: { section: 'parts', entity_id: 'all', start: 'start', end: 'end' }
   menu_name: main
   weight: 100
 navinfo.main.quote:
   title: 'Quote'
   description: 'Quote'
   route_name: dashpage.standard.list
-  route_parameters: { section: 'quote', entity_id: 'all' }
+  route_parameters: { section: 'quote', entity_id: 'all', start: 'start', end: 'end' }
   menu_name: main
   weight: 100
 navinfo.main.repair:
   title: 'Repair'
   description: 'Repair'
   route_name: dashpage.standard.list
-  route_parameters: { section: 'repair', entity_id: 'all' }
+  route_parameters: { section: 'repair', entity_id: 'all', start: 'start', end: 'end' }
   menu_name: main
   weight: 100
 navinfo.main.report:
   title: 'Report'
   description: 'Report'
   route_name: dashpage.report.snapshot
+  route_parameters: { entity_id: 'all', start: 'start', end: 'end' }
   menu_name: main
   weight: 100

@@ -31,7 +31,7 @@ dashpage.repair.print:
     _permission: 'access content'
 
 dashpage.report.snapshot:
-  path: '/dashpage/report/snapshot'
+  path: '/dashpage/report/snapshot/{entity_id}/{start}/{end}'
   defaults:
     _controller: '\Drupal\dashpage\Controller\DashpageController::reportSnapshot'
     _title: 'Report Page'
@@ -39,7 +39,7 @@ dashpage.report.snapshot:
     _permission: 'access content'
 
 dashpage.standard.list:
-  path: '/dashpage/{section}/list/{entity_id}'
+  path: '/dashpage/{section}/list/{entity_id}/{start}/{end}'
   defaults:
     _controller: '\Drupal\dashpage\Controller\DashpageController::standardList'
     _title: 'Management List'

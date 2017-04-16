@@ -138,7 +138,7 @@ class DashpageController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
-  public function reportSnapshot() {
+  public function reportSnapshot($entity_id, $start, $end) {
     $FlexinfoEntityService = \Drupal::getContainer()->get('flexinfo.entity.service');
 
     $DashpageContentGenerator = new DashpageContentGenerator($FlexinfoEntityService);
@@ -172,7 +172,7 @@ class DashpageController extends ControllerBase {
   /**
    * call from routing.yml
    */
-  public function standardList($section, $entity_id) {
+  public function standardList($section, $entity_id, $start, $end) {
     return $this->angularTableGeneratorTemplate($section);
 
     return $this->viewsTableGeneratorTemplate('renderViewsContent', 'node_parts_collection');
