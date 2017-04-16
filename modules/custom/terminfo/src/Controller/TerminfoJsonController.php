@@ -214,16 +214,29 @@ class TerminfoJsonController extends ControllerBase {
       case 'quote':
         $output = array(
           array(
-            'field_label' => 'Date',
-            'field_name'  => 'field_quote_date',
-          ),
-          array(
             'field_label' => 'Client Name',
             'field_name'  => 'field_quote_clientname',
           ),
           array(
+            'field_label' => 'Sum',
+            'field_name'  => 'field_quote_sumprice',
+          ),
+          array(
+            'field_label' => 'Warranty',
+            'field_name'  => 'field_quote_warrantyday',
+          ),
+          array(
+            'field_label' => 'Date',
+            'field_name'  => 'field_quote_date',
+          ),
+          array(
             'field_label' => 'Company',
             'field_name'  => 'field_quote_company',
+          ),
+          array(
+            'field_label' => 'Stamp',
+            'field_name'  => 'custom_formula_function',
+            'formula_function'  => 'stampForQuoteNode',
           ),
           array(
             'field_label' => 'Print',
@@ -345,7 +358,6 @@ class TerminfoJsonController extends ControllerBase {
    * @return
    */
   public function linkForQuotePrint($quote_nid = NULL) {
-
     $link = NULL;
     if ($quote_nid) {
       $path = '/dashpage/quote/print/' . $quote_nid;
@@ -359,7 +371,6 @@ class TerminfoJsonController extends ControllerBase {
    * @return
    */
   public function linkForRepairPrint($repair_nid = NULL) {
-
     $link = NULL;
     if ($repair_nid) {
       $path = '/dashpage/repair/print/' . $repair_nid;
@@ -368,6 +379,19 @@ class TerminfoJsonController extends ControllerBase {
     }
 
     return $link;
+  }
+
+  /**
+   * @return
+   */
+  public function stampForQuoteNode($quote_nid = NULL) {
+    $stamp = NULL;
+    if ($quote_nid) {
+      $node  = \Drupal::entityTypeManager()->getStorage('node')->load($quote_nid);
+      $stamp = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValue($node, 'field_quote_authorizestamp');
+    }
+
+    return $stamp;
   }
 
 }
