@@ -225,6 +225,11 @@ class TerminfoJsonController extends ControllerBase {
             'field_label' => 'Company',
             'field_name'  => 'field_quote_company',
           ),
+          array(
+            'field_label' => 'Print',
+            'field_name'  => 'custom_formula_function',
+            'formula_function'  => 'linkForQuotePrint',
+          ),
         );
         break;
 
@@ -263,7 +268,6 @@ class TerminfoJsonController extends ControllerBase {
             'field_name'  => 'custom_formula_function',
             'formula_function'  => 'linkForRepairPrint',
           ),
-
         );
         break;
 
@@ -337,6 +341,20 @@ class TerminfoJsonController extends ControllerBase {
 
   /** - - - - - - custom - - - - - - - - - - - - - - - - - - - - - - - - -  */
 
+  /**
+   * @return
+   */
+  public function linkForQuotePrint($quote_nid = NULL) {
+
+    $link = NULL;
+    if ($quote_nid) {
+      $path = '/dashpage/quote/print/' . $quote_nid;
+      $url = Url::fromUserInput($path);
+      $link = \Drupal::l('Print', $url);
+    }
+
+    return $link;
+  }
   /**
    * @return
    */
