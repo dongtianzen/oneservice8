@@ -27,9 +27,9 @@ class FlexinfoSettingService {
   public function adminTag() {
     $admin_tags = Xss::getAdminTagList();
     $admin_tags_plus = [
-      'canvas', 'form', 'input', 'label', 'md-button', 'md-checkbox', 'md-content',
-      'md-datepicker', 'md-input-container', 'md-menu', 'md-menu-content',
-      'md-option', 'md-select', 'md-slider', 'md-tab', 'md-tabs', 'md-tooltip'
+      'button', 'canvas', 'custom-marker', 'form', 'info-window', 'input', 'label', 'map', 'marker', 'md-button', 'md-checkbox', 'md-content',
+      'md-datepicker', 'md-icon', 'md-input-container', 'md-menu', 'md-menu-content',
+      'md-option', 'md-select', 'md-select-header', 'md-slider', 'md-tab', 'md-tabs', 'md-tooltip', 'md-progress-circular',
     ];
     $admin_tags = array_merge($admin_tags, $admin_tags_plus);
 
