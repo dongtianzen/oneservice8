@@ -104,14 +104,14 @@ class DashpageContentGenerator extends ControllerBase {
    */
   public function dateRangePickerBar() {
     $date_start = '2017-01-01';
-    $date_end   = '2017-02-01';
+    $date_end   = '2017-04-01';
 
     $output = '';
     $output .= '<div class="dashpage-daterangepicker-wrapper height-16">';
-      $output .= '<div id="dashpage-daterangepicker-tag" class="pull-right margin-top-8 margin-right-48 bg-00a9e0 color-fff line-height-32">';
+      $output .= '<div id="reportrange-header" class="pull-right margin-top-8 margin-right-48 line-height-32">';
           $output .= '<i class="fa fa-calendar padding-right-10"></i>';
           $output .= '<span class="margin-left-6">' . $date_start . ' - ' . $date_end . '</span>';
-          $output .= '<b class="caret margin-left-6"></b>';
+          // $output .= '<b class="caret margin-left-6"></b>';
       $output .= '</div>';
     $output .= '</div>';
 
