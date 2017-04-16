@@ -77,6 +77,25 @@ angular.material:
   js:
     /libraries/angular-material/angular-material.min.js: {}
 
+#
+bootstrap-daterangepicker:
+  remote: http://www.daterangepicker.com
+  version: 2.1.25
+  license:
+    name: MIT
+    url: http://www.daterangepicker.com
+    gpl-compatible: true
+  css:
+    theme:
+      /libraries/bootstrap-daterangepicker/daterangepicker.css: {}
+      css/bootstrap_daterangepicker_controller.css: {}
+  js:
+    /libraries/bootstrap-daterangepicker/moment.min.js: {}
+    /libraries/bootstrap-daterangepicker/daterangepicker.js: {}
+    js/bootstrap_daterangepicker_controller.js: {}
+  dependencies:
+      - core/jquery
+
 # external remote CDN
 datatables:
   remote: https://datatables.net/download/packages
