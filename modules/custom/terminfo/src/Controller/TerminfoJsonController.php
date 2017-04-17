@@ -90,15 +90,11 @@ class TerminfoJsonController extends ControllerBase {
       $end_query_date = \Drupal::getContainer()
         ->get('flexinfo.setting.service')->convertTimeStampToQueryDate($end);
 
-      $query_container = \Drupal::getContainer()->get('flexinfo.querynode.service');
-      $query = $query_container->queryNidsByBundle('quote');
-
-      $group = $query_container->groupStandardByFieldValue($query, 'field_quote_date', $start_query_date, '>');
-      $query->condition($group);
-      $group = $query_container->groupStandardByFieldValue($query, 'field_quote_date', $end_query_date, '<');
-      $query->condition($group);
-
-      $nids = $query_container->runQueryWithGroup($query);
+      if ($entity_bundle == 'quote') {
+        // $nids = \Drupal::getContainer()
+        //   ->get('flexinfo.querynode.service')
+        //   ->wrapperNidesByStandardStartEndQueryQate('quote', 'field_quote_date', $start_query_date, $end_query_date);
+      }
     }
     // $nids = array_slice($nodes, 0, 10);
 
