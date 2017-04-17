@@ -134,7 +134,6 @@ class TerminfoJsonController extends ControllerBase {
       }
     }
 
-
     // $nids = array_slice($nodes, 0, 10);
 
     return $nids;
