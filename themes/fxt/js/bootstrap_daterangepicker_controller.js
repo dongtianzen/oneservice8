@@ -14,27 +14,16 @@ jQuery(document).ready(function($) {
     var end = moment();
 
     function cb(start, end) {
-      console.log(163);
-      console.log(start);
+
       // start.valueOf() is Unix TimeStamp
-      // var startDate = parseInt((start.valueOf()) / 1000);
-      // var endDate = parseInt((end.valueOf()) / 1000);
+      var startDate = parseInt((start.valueOf()) / 1000);
+      var endDate = parseInt((end.valueOf()) / 1000);
 
-      // // add new date range parameter
-      // var setDateUrl = drupalSettings.path.baseUrl + 'navinfo/daterange/setvalue/' + startDate + '/' + endDate;
-      // var redirectUrl = drupalSettings.path.baseUrl + pathArg[0] + '/' + pathArg[1] + '/' + pathArg[2] + '/' + pathArg[3] + '/' + startDate + '/' + endDate;
-
-      // // Set User Date Range on User Data
-      // $.ajax({
-      //   type: "POST",
-      //   url: setDateUrl,
-      // });
-
-      // var xmlhttp = new XMLHttpRequest();
-      // xmlhttp.open("GET", url, false);
+      // add new date range parameter
+      var redirectUrl = drupalSettings.path.baseUrl + pathArg[0] + '/' + pathArg[1] + '/' + pathArg[2] + '/' + pathArg[3] + '/' + startDate + '/' + endDate;
 
       // redirect page
-      // window.location.replace(redirectUrl);
+      window.location.replace(redirectUrl);
     }
 
     jQuery('#reportrange-header').daterangepicker({

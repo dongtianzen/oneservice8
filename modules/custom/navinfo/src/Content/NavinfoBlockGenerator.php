@@ -38,8 +38,20 @@ class NavinfoBlockGenerator extends ControllerBase {
    */
   function contentNavigationStatusbar() {
     $page_title = '';
-    $user_start_time = '2017-01-01';
-    $user_end_time = '2017-05-01';
+
+    $user_start_time = 'start';
+    $user_end_time = 'end';
+
+    $current_path = \Drupal::service('path.current')->getPath();
+    $path_args = explode('/', $current_path);
+
+    $start_boolean = \Drupal::getContainer()->get('flexinfo.setting.service')->isTimestamp($path_args[5]);
+    $end_boolean = \Drupal::getContainer()->get('flexinfo.setting.service')->isTimestamp($path_args[6]);
+
+    if ($start_boolean && $end_boolean) {
+      $user_start_time = \Drupal::getContainer()->get('flexinfo.setting.service')->convertTimeStampToHtmlDate($path_args[5]);
+      $user_end_time = \Drupal::getContainer()->get('flexinfo.setting.service')->convertTimeStampToHtmlDate($path_args[6]);
+    }
 
     $output = '';
     $output .= '<div class="margin-top-n-8">';
