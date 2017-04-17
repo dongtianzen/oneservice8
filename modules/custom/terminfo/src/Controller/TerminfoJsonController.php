@@ -100,7 +100,7 @@ class TerminfoJsonController extends ControllerBase {
 
       $nids = $query_container->runQueryWithGroup($query);
     }
-    // $nodes = array_slice($nodes, 0, 10);
+    // $nids = array_slice($nodes, 0, 10);
 
     if (is_array($nids) && $nids) {
       foreach ($nids as $nid) {
