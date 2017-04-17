@@ -133,6 +133,7 @@ class FlexinfoSettingService {
    * @param  string $timestamp Timestamp to validate.
    *
    * @return Boolean
+   \Drupal::getContainer()->get('flexinfo.setting.service')->isTimestamp();
    */
   function isTimestamp($timestamp) {
     $check = (is_int($timestamp) OR is_float($timestamp))

@@ -113,7 +113,9 @@ class TerminfoJsonController extends ControllerBase {
   public function basicCollectionNids($entity_bundle = NULL, $start = NULL, $end = NULL) {
     $nids = \Drupal::getContainer()->get('flexinfo.querynode.service')->nidsByBundle($entity_bundle);
 
-    if ($start && $end) {
+    $start_boolean = \Drupal::getContainer()->get('flexinfo.setting.service')->isTimestamp($start);
+    $end_boolean = \Drupal::getContainer()->get('flexinfo.setting.service')->isTimestamp($end);
+    if ($start_boolean && $end_boolean) {
       $start_query_date = \Drupal::getContainer()
         ->get('flexinfo.setting.service')->convertTimeStampToQueryDate($start);
 
@@ -125,10 +127,13 @@ class TerminfoJsonController extends ControllerBase {
           ->get('flexinfo.querynode.service')
           ->wrapperNidesByStandardStartEndQueryQate('quote', 'field_quote_date', $start_query_date, $end_query_date);
       }
+      elseif ($entity_bundle == 'repair') {
+        $nids = \Drupal::getContainer()
+          ->get('flexinfo.querynode.service')
+          ->wrapperNidesByStandardStartEndQueryQate('repair', 'field_repair_checkdate', $start_query_date, $end_query_date);
+      }
     }
-    else {
 
-    }
 
     // $nids = array_slice($nodes, 0, 10);
 
