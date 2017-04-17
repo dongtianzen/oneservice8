@@ -61,7 +61,7 @@ class DashpageContentGenerator extends ControllerBase {
     $output .= '<div id="pageInfoBase" data-ng-app="pageInfoBase" class="pageinfo-subpage-common">';
       $output .= '<div data-ng-controller="PageInfoBaseController" class="row margin-0 margin-top-16" data-ng-cloak>';
 
-        $output .= '<div class="block-one bg-ffffff padding-bottom-20">';
+        $output .= '<div class="block-one bg-ffffff">';
           $output .= '<div class="row margin-0">';
             $output .= $DashpageBlockGenerator->topWidgetsFixed();
           $output .= '</div>';

@@ -20,6 +20,10 @@ body .main-container {
   margin: 0 12px;
 }
 
+.region-content > h1 {
+  display: none;
+}
+
 .region-navigation nav{
   float: left;
   margin-left: 24px;
