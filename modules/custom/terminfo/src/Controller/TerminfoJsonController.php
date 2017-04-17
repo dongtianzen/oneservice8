@@ -82,21 +82,7 @@ class TerminfoJsonController extends ControllerBase {
   public function basicCollectionNodeContent($entity_bundle, $entity_id = NULL, $start = NULL, $end = NULL) {
     $output = array();
 
-    $nids = \Drupal::getContainer()->get('flexinfo.querynode.service')->nidsByBundle($entity_bundle);
-    if ($start && $end) {
-      $start_query_date = \Drupal::getContainer()
-        ->get('flexinfo.setting.service')->convertTimeStampToQueryDate($start);
-
-      $end_query_date = \Drupal::getContainer()
-        ->get('flexinfo.setting.service')->convertTimeStampToQueryDate($end);
-
-      if ($entity_bundle == 'quote') {
-        // $nids = \Drupal::getContainer()
-        //   ->get('flexinfo.querynode.service')
-        //   ->wrapperNidesByStandardStartEndQueryQate('quote', 'field_quote_date', $start_query_date, $end_query_date);
-      }
-    }
-    // $nids = array_slice($nodes, 0, 10);
+    $nids = $this->basicCollectionNids($entity_bundle, $start, $end);
 
     if (is_array($nids) && $nids) {
       foreach ($nids as $nid) {
@@ -119,6 +105,34 @@ class TerminfoJsonController extends ControllerBase {
     }
 
     return $output;
+  }
+
+  /**
+   * @return php array
+   */
+  public function basicCollectionNids($entity_bundle = NULL, $start = NULL, $end = NULL) {
+    $nids = \Drupal::getContainer()->get('flexinfo.querynode.service')->nidsByBundle($entity_bundle);
+
+    if ($start && $end) {
+      $start_query_date = \Drupal::getContainer()
+        ->get('flexinfo.setting.service')->convertTimeStampToQueryDate($start);
+
+      $end_query_date = \Drupal::getContainer()
+        ->get('flexinfo.setting.service')->convertTimeStampToQueryDate($end);
+
+      if ($entity_bundle == 'quote') {
+        $nids = \Drupal::getContainer()
+          ->get('flexinfo.querynode.service')
+          ->wrapperNidesByStandardStartEndQueryQate('quote', 'field_quote_date', $start_query_date, $end_query_date);
+      }
+    }
+    else {
+
+    }
+
+    // $nids = array_slice($nodes, 0, 10);
+
+    return $nids;
   }
 
   /**
