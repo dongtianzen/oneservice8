@@ -103,29 +103,14 @@ class DashpageController extends ControllerBase {
   /**
    * call from routing.yml
    */
-  public function quotePrint($nid) {
+  public function standardPrint($section, $nid) {
     $FlexinfoEntityService = \Drupal::getContainer()->get('flexinfo.entity.service');
 
-    $DashpageContentGenerator = new DashpageContentGenerator($FlexinfoEntityService);
-    $output = $DashpageContentGenerator->quotePrint($nid);
-
-    $build = array(
-      '#type' => 'markup',
-      '#header' => 'header',
-      '#markup' => $output,
-      '#allowed_tags' => \Drupal::getContainer()->get('flexinfo.setting.service')->adminTag(),
-    );
-    return $build;
-  }
-
-  /**
-   * call from routing.yml
-   */
-  public function repairPrint($nid) {
-    $FlexinfoEntityService = \Drupal::getContainer()->get('flexinfo.entity.service');
+    // repairPrint, quotePrint
+    $method_name = $section . 'Print';
 
     $DashpageContentGenerator = new DashpageContentGenerator($FlexinfoEntityService);
-    $output = $DashpageContentGenerator->repairPrint($nid);
+    $output = $DashpageContentGenerator->{$method_name}($nid);
 
     $build = array(
       '#type' => 'markup',

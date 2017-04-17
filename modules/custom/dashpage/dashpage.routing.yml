@@ -14,19 +14,11 @@ dashpage.landing.page:
   requirements:
     _permission: 'access content'
 
-dashpage.quote.print:
-  path: '/dashpage/quote/print/{nid}'
+dashpage.standard.print:
+  path: '/dashpage/{section}/print/{nid}'
   defaults:
-    _controller: '\Drupal\dashpage\Controller\DashpageController::quotePrint'
-    _title: 'Quote Print'
-  requirements:
-    _permission: 'access content'
-
-dashpage.repair.print:
-  path: '/dashpage/repair/print/{nid}'
-  defaults:
-    _controller: '\Drupal\dashpage\Controller\DashpageController::repairPrint'
-    _title: 'Repair Print'
+    _controller: '\Drupal\dashpage\Controller\DashpageController::standardPrint'
+    _title: 'Page Print'
   requirements:
     _permission: 'access content'
 
