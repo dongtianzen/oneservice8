@@ -3,22 +3,21 @@
  */
 
 var pageInfoBaseControllers = angular.module('pageInfoBase', ['ngResource']);
-pageInfoBaseControllers.controller('quotePrintController', ['$scope', '$http', '$element', '$filter', '$sce',
+pageInfoBaseControllers.controller('QuotePrintController', ['$scope', '$http', '$element', '$filter', '$sce',
   function($scope, $http, $element, $q, $filter) {
 
     jQuery.get(drupalSettings.path.baseUrl + 'rest/session/token').done(function (data) {
       $scope.csrfToken = data;
     });
 
-    $scope.authorizeSubmit = function() {
-      console.log(1516);
+    $scope.authorizeSubmit = function(status) {
       var pathArg = drupalSettings.path.currentPath.split('/');
       var postUrl = drupalSettings.path.baseUrl + 'node/' + pathArg[3];
       var redirectUrl = drupalSettings.path.baseUrl + drupalSettings.path.currentPath;
 
       var postNodeJson = {
         "type": [{ "target_id": "quote" }],
-        "field_quote_authorizestamp": [{ "value": true }],     // or value
+        "field_quote_authorizestamp": [{ "value": status }],     // or value
       };
 
       $http({
@@ -34,6 +33,7 @@ pageInfoBaseControllers.controller('quotePrintController', ['$scope', '$http', '
 
       });
     }
+
   }
 ]);
 

@@ -248,9 +248,17 @@ class DashpageContentGenerator extends ControllerBase {
             $output .= '<div class="btn btn-success quote-node-print-button " type="button">';
               $output .= t('Print');
             $output .= '</div>';
-            $output .= '<div id="quote-authorize-btn" class="btn btn-info quote-node-print-button margin-left-24" ng-click="authorizeSubmit()" type="button">';
-              $output .= t('Authorize');
-            $output .= '</div>';
+
+            if ($FieldService->getFieldSingleValue('node', $node, 'field_quote_authorizestamp')) {
+              $output .= '<div class="btn btn-warning quote-node-print-button margin-left-24" ng-click="authorizeSubmit(false)" type="button">';
+                $output .= t('UnAuthorize');
+              $output .= '</div>';
+            }
+            else {
+              $output .= '<div class="btn btn-info quote-node-print-button margin-left-24" ng-click="authorizeSubmit(true)" type="button">';
+                $output .= t('Authorize');
+              $output .= '</div>';
+            }
           $output .= '</div>';
         $output .= '</div>';
       $output .= '</div>';
