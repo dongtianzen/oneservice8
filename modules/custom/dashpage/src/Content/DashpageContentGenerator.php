@@ -242,12 +242,16 @@ class DashpageContentGenerator extends ControllerBase {
         $output .= $FieldService->getFieldSingleValue('node', $node, 'field_quote_date');
       $output .= '</div>';
 
-      $output .= '<div class="margin-top-48 clear-both hidden-print">';
-        $output .= '<div class="btn btn-success quote-node-print-button " type="button">';
-          $output .= t('Print');
-        $output .= '</div>';
-        $output .= '<div class="btn btn-info quote-node-print-button margin-left-24" type="button">';
-          $output .= t('Authorize');
+      $output .= '<div id="pageInfoBase" data-ng-app="pageInfoBase" class="manageinfo-question-library margin-left-16">';
+        $output .= '<div class="wrapper" data-ng-controller="QuotePrintController" ng-cloak>';
+          $output .= '<div class="margin-top-48 clear-both hidden-print">';
+            $output .= '<div class="btn btn-success quote-node-print-button " type="button">';
+              $output .= t('Print');
+            $output .= '</div>';
+            $output .= '<div id="quote-authorize-btn" class="btn btn-info quote-node-print-button margin-left-24" ng-click="authorizeSubmit()" type="button">';
+              $output .= t('Authorize');
+            $output .= '</div>';
+          $output .= '</div>';
         $output .= '</div>';
       $output .= '</div>';
     $output .= '</div>';
