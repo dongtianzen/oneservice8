@@ -176,7 +176,6 @@ class DashpageContentGenerator extends ControllerBase {
     $FieldService = $this->flexinfoEntityService->getEntity('field');
 
     $output = '';
-
     $output .= '<div class="dashpage-wrapper">';
       $output .= '<div class="">';
         $output .= '产品保修期外维修单';
@@ -242,8 +241,14 @@ class DashpageContentGenerator extends ControllerBase {
       $output .= '<div class="">';
         $output .= $FieldService->getFieldSingleValue('node', $node, 'field_quote_date');
       $output .= '</div>';
-      $output .= '<div class="btn btn-success quote-node-print-button hidden-print margin-top-48 clear-both" type="button">';
-        $output .= 'Print';
+
+      $output .= '<div class="margin-top-48 clear-both hidden-print">';
+        $output .= '<div class="btn btn-success quote-node-print-button " type="button">';
+          $output .= t('Print');
+        $output .= '</div>';
+        $output .= '<div class="btn btn-info quote-node-print-button margin-left-24" type="button">';
+          $output .= t('Authorize');
+        $output .= '</div>';
       $output .= '</div>';
     $output .= '</div>';
 

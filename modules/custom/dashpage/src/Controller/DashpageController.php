@@ -117,6 +117,11 @@ class DashpageController extends ControllerBase {
       '#header' => 'header',
       '#markup' => $output,
       '#allowed_tags' => \Drupal::getContainer()->get('flexinfo.setting.service')->adminTag(),
+      '#attached' => array(
+        'library' => array(
+          'dashpage/quote_authorize',
+        ),
+      ),
     );
     return $build;
   }

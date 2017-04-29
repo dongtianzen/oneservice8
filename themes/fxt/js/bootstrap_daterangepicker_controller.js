@@ -1,7 +1,6 @@
 jQuery(document).ready(function($) {
   var pathArg = drupalSettings.path.currentPath.split('/');
 
-
   /**
    * Date Range Picker
    * Pre-defined Ranges & Callback

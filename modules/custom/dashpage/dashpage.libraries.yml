@@ -3,3 +3,9 @@ angular_snapshot:
     angular/angular-snapshot.js: {}
   dependencies:
     - fxt/angular.angularjs
+
+quote_authorize:
+  js:
+    js/quote-authorize.js: {}
+  dependencies:
+    - fxt/angular.angularjs
