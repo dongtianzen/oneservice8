@@ -250,9 +250,10 @@ class DashpageContentGenerator extends ControllerBase {
 
     $output .= '</div>';
 
-    if (if (\Drupal::currentUser()->id() == 1) {) {
-      # code...
-    }
+    $check_current_user_roles = \Drupal::getContainer()
+      ->get('flexinfo.user.service')
+      ->checkUserHasSpecificRolesFromUid(array('siteadmin', 'administrator'), \Drupal::currentUser()->id());
+
     $output .= '<div id="pageInfoBase" data-ng-app="pageInfoBase" class="manageinfo-question-library margin-left-16">';
       $output .= '<div class="wrapper" data-ng-controller="QuotePrintController" ng-cloak>';
         $output .= '<div class="margin-top-48 clear-both hidden-print">';
@@ -260,15 +261,17 @@ class DashpageContentGenerator extends ControllerBase {
             $output .= t('Print');
           $output .= '</div>';
 
-          if ($FieldService->getFieldSingleValue('node', $node, 'field_quote_authorizestamp')) {
-            $output .= '<div class="btn btn-warning quote-node-print-button margin-left-24" ng-click="authorizeSubmit(false)" type="button">';
-              $output .= t('UnAuthorize');
-            $output .= '</div>';
-          }
-          else {
-            $output .= '<div class="btn btn-info quote-node-print-button margin-left-24" ng-click="authorizeSubmit(true)" type="button">';
-              $output .= t('Authorize');
-            $output .= '</div>';
+          if ($check_current_user_roles) {
+            if ($FieldService->getFieldSingleValue('node', $node, 'field_quote_authorizestamp')) {
+              $output .= '<div class="btn btn-warning quote-node-print-button margin-left-24" ng-click="authorizeSubmit(false)" type="button">';
+                $output .= t('UnAuthorize');
+              $output .= '</div>';
+            }
+            else {
+              $output .= '<div class="btn btn-info quote-node-print-button margin-left-24" ng-click="authorizeSubmit(true)" type="button">';
+                $output .= t('Authorize');
+              $output .= '</div>';
+            }
           }
         $output .= '</div>';
       $output .= '</div>';
