@@ -96,5 +96,59 @@ class FlexinfoUserService {
     return $output;
   }
 
+  /**
+   *
+   \Drupal::getContainer()->get('flexinfo.user.service')->getUserRolesFromUid($uid);
+   */
+  public function getUserRolesFromUid($uid = NULL, $authenticated = FALSE) {
+    $user = \Drupal::entityTypeManager()->getStorage('user')->load($uid);
+    return $this->getUserRolesFromUserObj($user, $authenticated);
+  }
+
+  /**
+   *
+   */
+  public function getUserRolesFromUserObj($user = NULL, $authenticated = FALSE) {
+    $role_names = array();
+    if ($user) {
+      if ($user->id() > 0) {
+
+        $roles = $user->getRoles();
+        if ($roles && is_array($roles)) {
+
+          foreach ($roles as $key => $value) {
+
+            if (!$authenticated) {
+              if ($value == 'authenticated') {
+                continue;
+              }
+            }
+
+            $role_names[] = $value;
+          }
+        }
+      }
+    }
+
+    return $role_names;
+  }
+
+  /**
+   * @return boolean
+   \Drupal::getContainer()->get('flexinfo.user.service')->checkUserHasSpecificRolesFromUid($valid_roles, $uid);
+   */
+  public function checkUserHasSpecificRolesFromUid($valid_roles = array(), $uid = NULL, $authenticated = FALSE) {
+    $user_roles = $this->getUserRolesFromUid($uid, $authenticated);
+    $matches_array = array_intersect($valid_roles, $user_roles);
+
+    if ($matches_array) {
+      return TRUE;
+    }
+    else {
+      return FALSE;
+    }
+  }
+
+
   /** - - - - - - Field - - - - - - - - - - - - - - - - - - - - - - - - - -  */
 }
