@@ -59,7 +59,7 @@ class DashpageContentGenerator extends ControllerBase {
 
     $output = '';
     $output .= '<div id="pageInfoBase" data-ng-app="pageInfoBase" class="pageinfo-subpage-common">';
-      $output .= '<div data-ng-controller="PageInfoBaseController" class="row margin-0" data-ng-cloak>';
+      $output .= '<div data-ng-controller="PageInfoBaseController" class="row margin-0 margin-top-16" data-ng-cloak>';
 
         $output .= '<div class="block-one bg-ffffff">';
           $output .= '<div class="row margin-0">';
@@ -69,7 +69,7 @@ class DashpageContentGenerator extends ControllerBase {
 
         $output .= '<div id="charts-section" class="block-three row tab-content-block-wrapper">';
           $output .= '<div data-ng-repeat="block in pageData.contentSection">';
-            $output .= '<div class="{{block.class}}">';
+            $output .= '<div class="{{block.class}} padding-0">';
               $output .= $DashpageBlockGenerator->contentBlockMaster();
             $output .= '</div>';
           $output .= '</div>';
