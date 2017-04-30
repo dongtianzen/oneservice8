@@ -242,24 +242,34 @@ class DashpageContentGenerator extends ControllerBase {
         $output .= $FieldService->getFieldSingleValue('node', $node, 'field_quote_date');
       $output .= '</div>';
 
-      $output .= '<div id="pageInfoBase" data-ng-app="pageInfoBase" class="manageinfo-question-library margin-left-16">';
-        $output .= '<div class="wrapper" data-ng-controller="QuotePrintController" ng-cloak>';
-          $output .= '<div class="margin-top-48 clear-both hidden-print">';
-            $output .= '<div class="btn btn-success quote-node-print-button " type="button">';
-              $output .= t('Print');
-            $output .= '</div>';
+      $output .= '<div class="">';
+        $output .= '<div class="margin-left-32 margin-top-n-80">';
+          $output .= '<img src="' . base_path() . 'modules/custom/dashpage/image/wanboxinpu_quote_stamp.png" width="128px" height="128px" alt="Stamp" title="Stamp">';
+        $output .= '</div>';
+      $output .= '</div>';
 
-            if ($FieldService->getFieldSingleValue('node', $node, 'field_quote_authorizestamp')) {
-              $output .= '<div class="btn btn-warning quote-node-print-button margin-left-24" ng-click="authorizeSubmit(false)" type="button">';
-                $output .= t('UnAuthorize');
-              $output .= '</div>';
-            }
-            else {
-              $output .= '<div class="btn btn-info quote-node-print-button margin-left-24" ng-click="authorizeSubmit(true)" type="button">';
-                $output .= t('Authorize');
-              $output .= '</div>';
-            }
+    $output .= '</div>';
+
+    if (if (\Drupal::currentUser()->id() == 1) {) {
+      # code...
+    }
+    $output .= '<div id="pageInfoBase" data-ng-app="pageInfoBase" class="manageinfo-question-library margin-left-16">';
+      $output .= '<div class="wrapper" data-ng-controller="QuotePrintController" ng-cloak>';
+        $output .= '<div class="margin-top-48 clear-both hidden-print">';
+          $output .= '<div class="btn btn-success quote-node-print-button " type="button">';
+            $output .= t('Print');
           $output .= '</div>';
+
+          if ($FieldService->getFieldSingleValue('node', $node, 'field_quote_authorizestamp')) {
+            $output .= '<div class="btn btn-warning quote-node-print-button margin-left-24" ng-click="authorizeSubmit(false)" type="button">';
+              $output .= t('UnAuthorize');
+            $output .= '</div>';
+          }
+          else {
+            $output .= '<div class="btn btn-info quote-node-print-button margin-left-24" ng-click="authorizeSubmit(true)" type="button">';
+              $output .= t('Authorize');
+            $output .= '</div>';
+          }
         $output .= '</div>';
       $output .= '</div>';
     $output .= '</div>';
