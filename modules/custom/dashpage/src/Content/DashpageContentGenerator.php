@@ -59,7 +59,7 @@ class DashpageContentGenerator extends ControllerBase {
 
     $output = '';
     $output .= '<div id="pageInfoBase" data-ng-app="pageInfoBase" class="pageinfo-subpage-common">';
-      $output .= '<div data-ng-controller="PageInfoBaseController" class="row margin-0 margin-top-16" data-ng-cloak>';
+      $output .= '<div data-ng-controller="PageInfoBaseController" class="row margin-0 angular-snapshot-wrapper" data-ng-cloak>';
 
         $output .= '<div class="block-one bg-ffffff">';
           $output .= '<div class="row margin-0">';
