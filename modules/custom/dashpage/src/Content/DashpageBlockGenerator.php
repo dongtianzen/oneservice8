@@ -59,7 +59,7 @@ class DashpageBlockGenerator extends ControllerBase {
    */
   function contentRenderComments() {
     $output = '';
-    $output .= '<div class="panel-body bg-ffffff">';
+    $output .= '<div class="panel-body bg-ffffff content-render-comments">';
       $output .= '<md-content class="padding-bottom-12">';
         $output .= '<span ng-bind-html="$sce.trustAsHtml(block.middle.value)">{{block.middle.value}}</span>';
       $output .= '</md-content>';
@@ -73,7 +73,7 @@ class DashpageBlockGenerator extends ControllerBase {
    */
   function contentRenderGoogleMap() {
     $output = '';
-    $output .= '<div class="panel-body bg-ffffff">';
+    $output .= '<div class="panel-body bg-ffffff content-render-googlemap">';
       $output .= '<div id="map" class="google-map-wrapper">map</div>';
     $output .= '</div>';
 
@@ -97,7 +97,7 @@ class DashpageBlockGenerator extends ControllerBase {
 
       // Middle Middle content
       $output .= '<div class={{block.middle.middleMiddle.middleMiddleMiddleClass}}>';
-        $output .= '<div data-ng-controller="AngularDataTables" class="row margin-0 margin-top-16">';
+        $output .= '<div data-ng-controller="AngularDataTables" class="row margin-0 margin-top-16 bg-ffffff">';
           $output .= '<table datatable="ng" dt-options="dtOptionsCommonTables" class="table table-striped">';
             $output .= '<thead>';
             $output .= '<tr>';
@@ -259,9 +259,9 @@ class DashpageBlockGenerator extends ControllerBase {
         $output .= '</md-content>';
       $output .= '</div>';
 
-      $output .= '<div class="panel-body bg-ffffff">';
+      $output .= '<div class="panel-body bg-ffffff border-1-eee">';
         $output .= '<div ng-if="block.middle.enable">';
-          $output .= '<md-content class="{{block.blockClasses}}">';
+          $output .= '<md-content class="{{block.blockClasses}} bg-ffffff">';
             $output .= '<div data-ng-switch="block.type">';
               $output .= '<div data-ng-switch-when="multiContainer">';
                 $output .= $this->contentRenderMultiContainer();

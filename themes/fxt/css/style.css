@@ -32,6 +32,23 @@ header.navbar.navbar-default {
   margin-left: 24px;
 }
 
-.region-navigation .logo.navbar-btn img{
+.region-navigation .logo.navbar-btn img {
   height: 34px;
+}
+
+/**
+ *
+ */
+md-content table.dataTable tr {
+  color: #777;
+}
+
+.dataTables_length > label {
+  font-weight: normal;
+  font-size: 12px;
+}
+
+.dataTables_filter > label > input {
+  font-weight: normal;
+  font-size: 12px;
 }
