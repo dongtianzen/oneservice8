@@ -152,9 +152,9 @@ class DashpageContentGenerator extends ControllerBase {
                 $output .= '<i class="fa fa-6 font-size-28 ' . $row['icon']. '" aria-hidden="true"></i>';
               $output .= '</div>';
               $output .= '<div class="caption">';
-                $output .= '<h4>';
+                $output .= '<h5>';
                   $output .= $row['caption'];
-                $output .= '</h4>';
+                $output .= '</h5>';
                 $output .= '<p>';
                   $output .= $row['body'];
                 $output .= '</p>';
