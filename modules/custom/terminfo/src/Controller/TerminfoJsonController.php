@@ -323,8 +323,21 @@ class TerminfoJsonController extends ControllerBase {
             'field_name'  => 'field_request_checkdate',
           ),
           array(
+            'field_label' => 'Client Name',
+            'field_name'  => 'field_request_clientname',
+          ),
+          array(
             'field_label' => 'Device',
             'field_name'  => 'field_request_devicetype',
+          ),
+          array(
+            'field_label' => 'Check',
+            'field_name'  => 'field_request_checkdate',
+          ),
+          array(
+            'field_label' => 'Add',
+            'field_name'  => 'custom_formula_function',
+            'formula_function'  => 'linkForAddRepair',
           ),
         );
         break;
@@ -399,6 +412,19 @@ class TerminfoJsonController extends ControllerBase {
 
   /** - - - - - - custom - - - - - - - - - - - - - - - - - - - - - - - - -  */
 
+  /**
+   * @return
+   */
+  public function linkForAddRepair($quote_nid = NULL) {
+    $link = NULL;
+    if ($quote_nid) {
+      $path = '/node/add/repair';
+      $url = Url::fromUserInput($path);
+      $link = \Drupal::l('Add', $url);
+    }
+
+    return $link;
+  }
   /**
    * @return
    */
