@@ -10,6 +10,11 @@ body h1 {
   font-size: 24px;
 }
 
+body .h2,
+body h2 {
+  font-size: 20px;
+}
+
 body .main-container {
   font-family: Verdana, "Microsoft Yahei", 微软雅黑, Arial, Helvetica, clean, sans-serif, STXihei, 华文细黑;
   margin-top: 24px;

@@ -62,6 +62,7 @@ class TerminfoJsonController extends ControllerBase {
       case 'quote':
       case 'repair':
       case 'request':
+      case 'supply':
         $output = $this->basicCollectionNodeContent($vid, $entity_id, $start, $end);
         break;
 
@@ -338,6 +339,15 @@ class TerminfoJsonController extends ControllerBase {
             'field_label' => 'Add',
             'field_name'  => 'custom_formula_function',
             'formula_function'  => 'linkForAddRepair',
+          ),
+        );
+        break;
+
+      case 'supply':
+        $output = array(
+          array(
+            'field_label' => 'Date',
+            'field_name'  => 'field_request_checkdate',
           ),
         );
         break;
