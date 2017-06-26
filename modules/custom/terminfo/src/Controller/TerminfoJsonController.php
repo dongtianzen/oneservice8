@@ -346,8 +346,12 @@ class TerminfoJsonController extends ControllerBase {
       case 'supply':
         $output = array(
           array(
-            'field_label' => 'Date',
-            'field_name'  => 'field_request_checkdate',
+            'field_label' => 'Part',
+            'field_name'  => 'field_supply_part',
+          ),
+          array(
+            'field_label' => 'Number',
+            'field_name'  => 'field_supply_number',
           ),
         );
         break;
