@@ -1,7 +1,0 @@
-# setup menu link on admin/config page
-nodeinfo.admin:
-  title: 'NodeInfo Configuration'
-  description: 'NodeInfo Setting on Admin Config Page'
-  parent: system.admin_config_development
-  route_name: nodeinfo.adminSetting
-  weight: 100
