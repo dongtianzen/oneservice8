@@ -1,0 +1,88 @@
+<?php
+
+/**
+ * @file
+ */
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Url;
+use Drupal\node\NodeInterface;
+
+use Symfony\Component\HttpFoundation\RedirectResponse;
+
+/**
+ * Implements hook_entity_insert().
+ *
+ * Inserts nodes properly based on generation options.
+ *
+ * @param \Drupal\Core\Entity\EntityInterface $entity
+ */
+function nodeinfo_entity_insert(EntityInterface $entity) {
+  if ($entity->getEntityTypeId() != 'node') {
+    return;
+  }
+
+  if ($entity->bundle() == 'meeting') {
+    $uri = '/manageinfo/node/evaluation/add/form/' . $entity->id();
+    $url = Url::fromUserInput($uri)->toString();
+
+    $response = new RedirectResponse($url);
+    $response->send();
+
+    return;
+  }
+  elseif ($entity->bundle() == 'evaluation') {
+    $reactset = $entity->get('field_evaluation_reactset')->getValue();
+
+    \Drupal::getContainer()->get('flexinfo.node.service')->updateMeetingForEvaluationNum($entity);
+
+    \Drupal::getContainer()->get('flexinfo.node.service')->entityCreatePoolFromEvaluation($entity);
+
+    return;
+  }
+
+}
+
+/**
+ * Implements hook_entity_update().
+ *
+ * @param \Drupal\Core\Entity\EntityInterface $entity
+ */
+function nodeinfo_entity_update(EntityInterface $entity) {
+  if ($entity->getEntityTypeId() != 'node') {
+    return;
+  }
+
+  if ($entity->bundle() == 'evaluation') {
+    \Drupal::getContainer()->get('flexinfo.node.service')->updateMeetingForEvaluationNum($entity);
+
+    \Drupal::getContainer()->get('flexinfo.node.service')->entityCreatePoolFromEvaluation($entity);
+    return;
+  }
+}
+
+/**
+ * Implements hook_entity_delete().
+ *
+ * @param \Drupal\Core\Entity\EntityInterface $entity
+ */
+function nodeinfo_entity_delete(EntityInterface $entity) {
+  if ($entity->getEntityTypeId() != 'node') {
+    return;
+  }
+
+  if ($entity->bundle() == 'evaluation') {
+    \Drupal::getContainer()->get('flexinfo.node.service')->updateMeetingForEvaluationNum($entity);
+
+    \Drupal::getContainer()->get('flexinfo.node.service')->entityCreatePoolFromEvaluation($entity);
+    return;
+  }
+}
+
+/**
+ * @param Drupal\node\NodeInterface $node
+ * Implements hook_ENTITY_TYPE_presave() for node entities.
+ */
+function nodeinfo_node_presave(NodeInterface $node) {
+  // dpm('can not get node id - ' . $node->id());
+}
