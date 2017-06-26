@@ -28,45 +28,6 @@ use Drupal\terminfo\Controller\TerminfoJsonController;
 class ManageinfoController extends ControllerBase {
 
   /**
-   * {@inheritdoc}
-   */
-  public function angularForm($tid) {
-    $ManageinfoContentGenerator = new ManageinfoContentGenerator();
-    $output = $ManageinfoContentGenerator->angularForm();
-
-    $build = array(
-      '#type' => 'markup',
-      '#header' => 'header',
-      '#markup' => $output,
-      '#allowed_tags' => \Drupal::getContainer()->get('flexinfo.setting.service')->adminTag(),
-      '#attached' => array(
-        'library' => array(
-          'manageinfo/angular_form',
-        ),
-      ),
-    );
-
-    return $build;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function angularJson($tid) {
-    $ManageinfoJsonGenerator = new ManageinfoJsonGenerator();
-    $output = $ManageinfoJsonGenerator->angularJson();
-
-    return new JsonResponse($output);
-
-    $build = array(
-      '#type' => 'markup',
-      '#markup' => json_encode($output),
-    );
-
-    return $build;
-  }
-
-  /**
    * @return php object, not JSON
    */
   public function convertArrayToCommonTable($source_array = array()) {
