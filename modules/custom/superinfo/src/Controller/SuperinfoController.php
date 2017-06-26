@@ -26,7 +26,7 @@ class SuperinfoController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
-  public function formCreate($entity_type, $bundle) {
+  public function formAdd($entity_type, $bundle) {
     $request = \Drupal::request();
     if ($route = $request->attributes->get(\Symfony\Cmf\Component\Routing\RouteObjectInterface::ROUTE_OBJECT)) {
       $route->setDefault('_title', 'New ' . ucfirst($bundle));

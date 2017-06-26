@@ -432,7 +432,7 @@ class TerminfoJsonController extends ControllerBase {
   public function linkForAddRepair($quote_nid = NULL) {
     $link = NULL;
     if ($quote_nid) {
-      $path = '/node/add/repair';
+      $path = '/superinfo/form/create/node/repair';
       $url = Url::fromUserInput($path);
       $link = \Drupal::l('Add', $url);
     }

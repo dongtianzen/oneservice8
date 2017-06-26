@@ -1,7 +1,7 @@
 superinfo.form.create:
-  path: '/superinfo/form/create/{entity_type}/{bundle}'
+  path: '/superinfo/form/add/{entity_type}/{bundle}'
   defaults:
-    _controller: '\Drupal\superinfo\Controller\SuperinfoController::formCreate'
+    _controller: '\Drupal\superinfo\Controller\SuperinfoController::formAdd'
     _title: 'Superinfo Form'
   requirements:
     _permission: 'access content'
