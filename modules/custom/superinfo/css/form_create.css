@@ -7,3 +7,10 @@
 .taxonomy-term-form .field--name-description.field--widget-text-textarea #edit-description-0-format {
   display: none;
 }
+
+/**
+ * hide vertical-tabs
+ */
+.node-form .form-item.form-type-vertical-tabs {
+  display: none;
+}

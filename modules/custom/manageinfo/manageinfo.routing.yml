@@ -1,21 +1,3 @@
-manageinfo.angular.form:
-  path: '/manageinfo/angular/form/{tid}'
-  defaults:
-    _controller: '\Drupal\manageinfo\Controller\ManageinfoController::angularForm'
-    _title: 'Angular Form'
-  requirements:
-    _permission: 'access content'
-    _role: 'authenticated'
-
-manageinfo.angular.json:
-  path: '/manageinfo/angular/json/{tid}'
-  defaults:
-    _controller: '\Drupal\manageinfo\Controller\ManageinfoController::angularJson'
-    _title: 'Angular Form Json'
-  requirements:
-    _permission: 'access content'
-    _role: 'authenticated'
-
 manageinfo.list.topic:
   path: '/manageinfo/list/{topic}'
   defaults:
