@@ -22,7 +22,7 @@ class NavinfoBlockGenerator extends ControllerBase {
    */
   function contentNavigation() {
     $output = '';
-    $output .= '<nav class="navbar navbar-default container margin-bottom-0 padding-0 max-width-inherit width-inherit">';
+    $output .= '<nav class="navbar container margin-bottom-0 padding-0 max-width-inherit width-inherit">';
       $output .= '<div class="navbar-second-wrapper width-pt-100 clear-both">';
         $output .= $this->contentNavigationStatusbar();
       $output .= '</div>';

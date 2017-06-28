@@ -59,23 +59,27 @@ class DashpageContentGenerator extends ControllerBase {
 
     $output = '';
     $output .= '<div id="pageInfoBase" data-ng-app="pageInfoBase" class="pageinfo-subpage-common">';
-      $output .= '<div data-ng-controller="PageInfoBaseController" class="row margin-0 angular-snapshot-wrapper" data-ng-cloak>';
+      $output .= '<div class="col-md-1"></div>';
+        $output .= '<div class="col-md-10">';
+          $output .= '<div data-ng-controller="PageInfoBaseController" class="row margin-0 angular-snapshot-wrapper" data-ng-cloak>';
 
-        $output .= '<div class="block-one bg-ffffff">';
-          $output .= '<div class="row margin-0">';
-            $output .= $DashpageBlockGenerator->topWidgetsFixed();
-          $output .= '</div>';
-        $output .= '</div>';
-
-        $output .= '<div id="charts-section" class="block-three row tab-content-block-wrapper">';
-          $output .= '<div data-ng-repeat="block in pageData.contentSection">';
-            $output .= '<div class="{{block.class}} padding-0">';
-              $output .= $DashpageBlockGenerator->contentBlockMaster();
+            $output .= '<div class="block-one bg-ffffff">';
+              $output .= '<div class="row margin-0">';
+                $output .= $DashpageBlockGenerator->topWidgetsFixed();
+              $output .= '</div>';
             $output .= '</div>';
+
+            $output .= '<div id="charts-section" class="block-three row tab-content-block-wrapper">';
+              $output .= '<div data-ng-repeat="block in pageData.contentSection">';
+                $output .= '<div class="{{block.class}} padding-0">';
+                  $output .= $DashpageBlockGenerator->contentBlockMaster();
+                $output .= '</div>';
+              $output .= '</div>';
+            $output .= '</div>';
+
           $output .= '</div>';
         $output .= '</div>';
-
-      $output .= '</div>';
+      $output .= '<div class="col-md-1"></div>';;
     $output .= '</div>';
 
     return $output;

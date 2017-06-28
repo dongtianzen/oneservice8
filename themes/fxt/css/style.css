@@ -15,9 +15,15 @@ body h2 {
   font-size: 20px;
 }
 
+body.user-logged-in {
+  padding-bottom: 12px;
+}
+
 body .main-container {
   font-family: Verdana, "Microsoft Yahei", 微软雅黑, Arial, Helvetica, clean, sans-serif, STXihei, 华文细黑;
-  margin-top: 24px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
 }
 
 header.navbar.navbar-default {
