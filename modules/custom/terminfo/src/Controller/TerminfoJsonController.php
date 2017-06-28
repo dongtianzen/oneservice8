@@ -282,10 +282,6 @@ class TerminfoJsonController extends ControllerBase {
       case 'repair':
         $output = array(
           array(
-            'field_label' => 'Client',
-            'field_name'  => 'field_repair_clientname',
-          ),
-          array(
             'field_label' => 'Device',
             'field_name'  => 'field_repair_devicetype',
           ),
@@ -296,10 +292,6 @@ class TerminfoJsonController extends ControllerBase {
           array(
             'field_label' => 'Receive',
             'field_name'  => 'field_repair_receivedate',
-          ),
-          array(
-            'field_label' => 'Check',
-            'field_name'  => 'field_repair_checkdate',
           ),
           array(
             'field_label' => 'Repair',
