@@ -34,3 +34,11 @@ navinfo.main.report:
   route_parameters: { entity_id: 'all', start: 'start', end: 'end' }
   menu_name: main
   weight: 100
+navinfo.main.request:
+  title: 'Request'
+  description: 'Request'
+  route_name: dashpage.standard.list
+  route_parameters: { section: 'request', entity_id: 'all', start: 'start', end: 'end' }
+  menu_name: main
+  weight: 100
+
