@@ -41,6 +41,14 @@ navinfo.main.request:
   route_parameters: { section: 'request', entity_id: 'all', start: 'start', end: 'end' }
   menu_name: main
   weight: 100
+navinfo.main.supply:
+  title: 'Supply'
+  description: 'Supply'
+  route_name: dashpage.standard.list
+  route_parameters: { section: 'supply', entity_id: 'all', start: 'start', end: 'end' }
+  menu_name: main
+  weight: 10
+  parent: navinfo.main.parts
 
 # Add node
 navinfo.main.client.add:
@@ -51,6 +59,15 @@ navinfo.main.client.add:
   menu_name: main
   weight: 100
   parent: navinfo.main.client
+
+navinfo.main.parts.add:
+  title: 'Add Parts'
+  description: 'Add Parts Node'
+  route_name: superinfo.form.add
+  route_parameters: { entity_type: 'taxonomy_term', bundle: 'parts' }
+  menu_name: main
+  weight: 20
+  parent: navinfo.main.parts
 
 navinfo.main.quote.add:
   title: 'Add Quote'
@@ -78,3 +95,12 @@ navinfo.main.request.add:
   menu_name: main
   weight: 100
   parent: navinfo.main.request
+
+navinfo.main.supply.add:
+  title: 'Add Supply'
+  description: 'Add Supply Node'
+  route_name: superinfo.form.add
+  route_parameters: { entity_type: 'node', bundle: 'supply' }
+  menu_name: main
+  weight: 30
+  parent: navinfo.main.parts
