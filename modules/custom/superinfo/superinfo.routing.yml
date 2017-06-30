@@ -1,4 +1,4 @@
-superinfo.form.create:
+superinfo.form.add:
   path: '/superinfo/form/add/{entity_type}/{bundle}'
   defaults:
     _controller: '\Drupal\superinfo\Controller\SuperinfoController::formAdd'

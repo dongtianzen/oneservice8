@@ -42,3 +42,42 @@ navinfo.main.request:
   menu_name: main
   weight: 100
 
+# Add node
+navinfo.main.client.add:
+  title: 'Add Client'
+  description: 'Add Client Node'
+  route_name: superinfo.form.add
+  route_parameters: { entity_type: 'taxonomy_term', bundle: 'client' }
+  menu_name: main
+  weight: 100
+  parent: navinfo.main.client
+
+navinfo.main.quote.add:
+  title: 'Add Quote'
+  description: 'Add Quote Node'
+  route_name: superinfo.form.add
+  route_parameters: { entity_type: 'node', bundle: 'quote' }
+  menu_name: main
+  weight: 100
+  parent: navinfo.main.quote
+
+navinfo.main.repair.add:
+  title: 'Add Repair'
+  description: 'Add Repair Node'
+  route_name: superinfo.form.add
+  route_parameters: { entity_type: 'node', bundle: 'repair' }
+  menu_name: main
+  weight: 100
+  parent: navinfo.main.repair
+
+navinfo.main.request.add:
+  title: 'Add Request'
+  description: 'Add Request Node'
+  route_name: superinfo.form.add
+  route_parameters: { entity_type: 'node', bundle: 'request' }
+  menu_name: main
+  weight: 100
+  parent: navinfo.main.request
+
+
+
