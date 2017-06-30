@@ -7,15 +7,6 @@ superinfo.form.create:
     _permission: 'access content'
     _role: 'authenticated'
 
-superinfo.json.section:
-  path: '/superinfo/{section}/json/{entity_id}'
-  defaults:
-    _controller: '\Drupal\superinfo\Controller\SuperinfoController::superinfoJson'
-    _title: 'Superinfo Json'
-  requirements:
-    _permission: 'access content'
-    _role: 'authenticated'
-
 superinfo.table.section:
   path: '/superinfo/{section}/table/{entity_id}'
   defaults:

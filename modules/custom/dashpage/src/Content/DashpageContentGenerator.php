@@ -336,7 +336,7 @@ class DashpageContentGenerator extends ControllerBase {
             $output .= '</tr>';
             $output .= '<tr>';
               $output .= '<td>故障原因</td>';
-              $output .= '<td colspan="3">' . $FieldService->getFieldSingleValue('node', $repair_node, 'field_repair_issuereason') . '</td>';
+              $output .= '<td colspan="3">' . $FieldService->getFieldSingleValue('node', $request_node, 'field_request_issuereason') . '</td>';
             $output .= '</tr>';
             $output .= '<tr>';
               $output .= '<td>维修处理办法</td>';
@@ -348,7 +348,7 @@ class DashpageContentGenerator extends ControllerBase {
             $output .= '</tr>';
             $output .= '<tr>';
               $output .= '<td>收费金额</td>';
-              $output .= '<td colspan="3">' . $FieldService->getFieldSingleValue('node', $repair_node, 'field_repair_quoteamount') . '</td>';
+              $output .= '<td colspan="3">' . $FieldService->getFieldSingleValue('node', $request_node, 'field_request_quoteamount') . '</td>';
             $output .= '</tr>';
             $output .= '<tr>';
               $output .= '<td>维修工程师</td>';

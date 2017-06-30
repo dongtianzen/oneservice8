@@ -71,37 +71,6 @@ class SuperinfoController extends ControllerBase {
 
   /**
    * {@inheritdoc}
-   * use Symfony\Component\HttpFoundation\JsonResponse;
-   * @return JSON
-   */
-  public function superinfoJson($section, $entity_id) {
-    $output = $this->superinfoJsonData($section, $entity_id);
-
-    return new JsonResponse($output);
-
-    $build = array(
-      '#type' => 'markup',
-      '#markup' => json_encode($output),
-    );
-
-    return $build;
-  }
-
-  /**
-   * {@inheritdoc}
-   * use Symfony\Component\HttpFoundation\JsonResponse;
-   * @return JSON
-   */
-  public function superinfoJsonData($section, $entity_id) {
-    $ManageinfoTableContent = new ManageinfoTableContent();
-
-    $output = $ManageinfoTableContent->tableContentData($section, $entity_id);
-
-    return $output;
-  }
-
-  /**
-   * {@inheritdoc}
    */
   public function superinfoTable($section, $entity_id) {
     // set page title

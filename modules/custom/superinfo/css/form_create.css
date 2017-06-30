@@ -14,3 +14,10 @@
 .node-form .form-item.form-type-vertical-tabs {
   display: none;
 }
+
+/**
+ * hide vertical-tabs
+ */
+.region-content > form.node-form{
+  max-width: 600px;
+}
