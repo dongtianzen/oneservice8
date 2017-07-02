@@ -134,43 +134,7 @@ class DashpageController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
-  public function reportSnapshot($entity_id, $start, $end) {
-    $FlexinfoEntityService = \Drupal::getContainer()->get('flexinfo.entity.service');
-
-    $DashpageContentGenerator = new DashpageContentGenerator($FlexinfoEntityService);
-    $output = $DashpageContentGenerator->angularSnapshot();
-
-    $DashpageJsonGenerator = new DashpageJsonGenerator();
-    $json_content_data = $DashpageJsonGenerator->angularJson();
-
-    $DashpageObjectContent = new DashpageObjectContent();
-
-    $build = array(
-      '#type' => 'markup',
-      '#header' => 'header',
-      '#markup' => $output,
-      '#allowed_tags' => \Drupal::getContainer()->get('flexinfo.setting.service')->adminTag(),
-      '#attached' => array(
-        'library' => array(
-          'dashpage/angular_snapshot',
-        ),
-        'drupalSettings' => [
-          'dashpage' => [
-            'dashpageContent' => [
-              'jsonContentData' => $json_content_data,
-            ],
-          ],
-        ],
-      ),
-    );
-
-    return $build;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getDashpageSnapshot($meeting_nodes, $section, $entity_id) {
+  public function getDashpageSnapshot($section, $entity_id) {
     $DashpageObjectContent = new DashpageObjectContent();
 
     // combine like -- programSnapshotObjectContent
@@ -178,7 +142,7 @@ class DashpageController extends ControllerBase {
 
     $object_content_data = NULL;
     if (method_exists($DashpageObjectContent, $content_method)) {
-      $object_content_data = $DashpageObjectContent->{$content_method}($meeting_nodes, $entity_id);
+      $object_content_data = $DashpageObjectContent->{$content_method}($section, $entity_id);
     }
 
     return $object_content_data;
@@ -299,12 +263,7 @@ class DashpageController extends ControllerBase {
     // $name = 'time_two';
     // Timer::start($name);
 
-    if ($section == 'angular') {
-      return $this->angularSnapshot();
-    }
-    else {
-      $this->standardPath($section);
-    }
+    $this->standardPath($section);
 
     $object_content_data = $this->getObjectContentData($section, $entity_id, $start, $end);
 

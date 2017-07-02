@@ -18,6 +18,29 @@ use Drupal\dashpage\Content\DashpageEventLayout;
 class DashpageGridContent {
 
   /**
+   *
+   */
+  public function gridByProgramclass($meeting_nodes = array()) {
+    $output = array();
+    $output['label'] = array();
+    $output['data'] = array();
+
+    $programclass_trees = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('programclass', 0);
+    if (is_array($programclass_trees)) {
+      foreach ($programclass_trees as $term) {
+        $meeting_nodes_current_programclass = \Drupal::getContainer()
+          ->get('flexinfo.querynode.service')
+          ->wrapperMeetingNodesByFieldValue($meeting_nodes, 'field_meeting_programclass', array($term->tid), 'IN');
+
+        $output['data'][] = count($meeting_nodes_current_programclass);
+        $output['label'][] = $term->name;
+      }
+    }
+
+    return $output;
+  }
+
+  /**
    * @return array
    */
   public function tableEventStatus($meeting_nodes = array()) {
@@ -84,6 +107,52 @@ class DashpageGridContent {
  *
  */
 class DashpageBlockContent extends DashpageGridContent{
+
+  /**
+   *
+   */
+  public function blockChartPieReportSnapshot($meeting_nodes = array(), $entity_id = NULL, $page_view = NULL) {
+    $DashpageJsonGenerator = new DashpageJsonGenerator();
+
+    $legends = array();
+    $result = $this->gridByProgramclass($meeting_nodes);
+    $chart_data = \Drupal::getContainer()->get('flexinfo.chart.service')->renderChartPieDataSetAccredited($result['data']);
+
+    $legend = \Drupal::getContainer()->get('flexinfo.chart.service')->renderChartPieLegendAccredited($result['label']);
+
+    $top_text = '<div>&nbsp;</div>';
+
+    $header_text = 'Summary of Event Types';
+    if ($page_view == 'home_view') {
+      $header_text = "Summary of Event Types (All BU's)";
+    }
+
+    $output = $DashpageJsonGenerator->getBlockOne(
+      array(
+        'class' => "col-md-6",
+        'type' => "chart",
+        'top'  =>  array(
+          'enable' => TRUE,
+          'value' => "Summary of Event Types",          // block top title value
+        ),
+        'middle' => array(
+          'middleTop' => $top_text,
+          'middleMiddle' => array(
+            'middleMiddleMiddleClass' => "col-md-8",
+            'middleMiddleRightClass' => "col-md-4",
+            'middleMiddleRight' => $legend,
+          ),
+          // 'middleBottom' => '',
+        ),
+        // 'bottom' => array(
+        //   'value' => '',
+        // )
+      ),
+      $DashpageJsonGenerator->getChartPie(NUll, $chart_data)
+    );
+
+    return $output;
+  }
 
   /**
    *
@@ -231,7 +300,7 @@ class DashpageObjectContent extends DashpageBlockContent {
    * @return php object, not JSON
    */
   public function reportSnapshotObjectContent($meeting_nodes = array()) {
-    $output['contentSection'][] = $this->reportSnapshot();
+    $output['contentSection'][] = $this->blockChartPieReportSnapshot();
 
     return $output;
   }
