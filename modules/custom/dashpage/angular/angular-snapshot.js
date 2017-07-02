@@ -18,6 +18,10 @@ pageInfoBaseControllers.controller('PageInfoBaseController', ['$scope', '$http',
         url: jsonFileUrl
       }).then(function (response) {
 
+        if (typeof drupalSettings.dashpage !== 'undefined' && typeof drupalSettings.dashpage.dashpageData !== 'undefined') {
+          $scope.pageData = drupalSettings.dashpage.dashpageData.objectContentData;
+        }
+
         // when manageinfo call table page, $scope.pageData use drupalSettings variable
         if ((drupalSettings.path.currentPath.indexOf("manageinfo/") > -1) && (typeof drupalSettings.manageinfo.manageinfoTable.jsonContentData !== 'undefined')) {
           $scope.pageData = drupalSettings.manageinfo.manageinfoTable.jsonContentData;
@@ -25,13 +29,8 @@ pageInfoBaseControllers.controller('PageInfoBaseController', ['$scope', '$http',
         else if ((drupalSettings.path.currentPath.indexOf("dashpage/") > -1)
           && (drupalSettings.path.currentPath.indexOf("/list") > -1)
           && (typeof drupalSettings.manageinfo.manageinfoTable.jsonContentData !== 'undefined')) {
+
           $scope.pageData = drupalSettings.manageinfo.manageinfoTable.jsonContentData;
-        }
-        else if (typeof drupalSettings.dashpage.dashpageContent.jsonContentData !== 'undefined') {
-          $scope.pageData = drupalSettings.dashpage.dashpageContent.jsonContentData;
-        }
-        else {
-          $scope.pageData = response.data;
         }
 
       },function (error) {
