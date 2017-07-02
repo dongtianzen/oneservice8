@@ -17,23 +17,24 @@ use Drupal\dashpage\Content\DashpageEventLayout;
  */
 class DashpageGridContent {
 
-  /**
-   *
-   */
-  public function gridByProgramclass($meeting_nodes = array()) {
+  public function meetingNodesByMonth($meeting_nodes = array(), $months = array()) {
     $output = array();
-    $output['label'] = array();
-    $output['data'] = array();
 
-    $programclass_trees = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('programclass', 0);
-    if (is_array($programclass_trees)) {
-      foreach ($programclass_trees as $term) {
-        $meeting_nodes_current_programclass = \Drupal::getContainer()
-          ->get('flexinfo.querynode.service')
-          ->wrapperMeetingNodesByFieldValue($meeting_nodes, 'field_meeting_programclass', array($term->tid), 'IN');
+    if (is_array($meeting_nodes)) {
+      foreach($meeting_nodes as $node) {
 
-        $output['data'][] = count($meeting_nodes_current_programclass);
-        $output['label'][] = $term->name;
+        $date_time = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValue($node, 'field_quote_date');
+        if ($date_time) {
+
+          preg_match("/^20\d\d\-(\d\d)/i", $date_time, $matches);
+          if (isset($matches[1])) {
+
+            $month_num = $matches[1];
+            if (in_array($month_num, $months)) {
+              $output[] = $node;
+            }
+          }
+        }
       }
     }
 
@@ -41,62 +42,18 @@ class DashpageGridContent {
   }
 
   /**
-   * @return array
+   * $month_label[] = t(date('M', mktime(0, 0, 0, $i)));
+   * array(t('JAN'), t('FEB'), t('MAR'), t('APR'), t('MAY'), t('JUN'), t('JUL'), t('AUG'), t('SEP'), t('OCT'), t('NOV'), t('DEC'));
    */
-  public function tableEventStatus($meeting_nodes = array()) {
-    $output = array();
-
-    if (is_array($meeting_nodes)) {
-      foreach ($meeting_nodes as $node) {
-        $program_entity = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstTargetIdTermEntity($node, 'field_meeting_program');
-
-        $internal_url = Url::fromUserInput('/dashpage/meeting/snapshot/' . $node->id());
-        $url_options = array(
-          'attributes' => array(
-            'class' => array(
-              'color-fff',
-            ),
-          ),
-        );
-        $internal_url->setOptions($url_options);
-
-        $status_button = '<span class="width-96 height-24 color-fff float-left line-height-24 text-center ' .  \Drupal::getContainer()->get('flexinfo.node.service')->getMeetingStatusColor($node) . '">';
-          $status_button .= \Drupal::l(
-            \Drupal::getContainer()->get('flexinfo.node.service')->getMeetingStatus($node),
-            $internal_url
-          );
-        $status_button .= '</span>';
-
-        $program_text = '';
-        $get_program_name = $program_entity->getName();
-        if(strlen($get_program_name) > 40) {
-          $program_text  = '<span class="table-tooltip width-180">';
-          $program_text .= Unicode::substr($program_entity->getName(), 0, 40) . '...';
-          $program_text .= '<span class="table-tooltip-text">';
-          $program_text .= $program_entity->getName();
-          $program_text .= '</span>';
-          $program_text .= '</span>';
-        }
-        else {
-          $program_text .= $program_entity->getName();
-        }
-
-        $date_text  = '<span class="width-90 float-left">';
-          $date_text .= \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValueDateFormat($node, 'field_meeting_date');
-        $date_text .= '</span>';
-
-        $output[] = array(
-          // 'REGION' => \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstTargetIdTermName($node, 'field_meeting_eventregion'),
-          'DATE' => $date_text,
-          'PROGRAM' => $program_text,
-          'THERAPEUTIC AREA' => \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstTargetIdTermName($program_entity, 'field_program_theraparea'),
-          'PROVINCE' => \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstTargetIdTermName($node, 'field_meeting_province'),
-          'CITY' => \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstTargetIdTermName($node, 'field_meeting_city'),
-          'REP' => \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstTargetIdUserName($node, 'field_meeting_representative'),
-          'STATUS' => $status_button,
-        );
-      }
+  public function gridByMonth($meeting_nodes = array(), $count_field = NULL) {
+    for ($i = 1; $i < 13; $i++) {
+      $month_label[] = t(date('M', mktime(0, 0, 0, $i)));
+      $month_nodes = $this->meetingNodesByMonth($meeting_nodes, array($i));
+      $month_data[]  = \Drupal::getContainer()->get('flexinfo.calc.service')->getSumFromNodes($month_nodes, $count_field);
     }
+
+    $output['label'] = $month_label;
+    $output['data'] = $month_data;
 
     return $output;
   }
@@ -111,47 +68,37 @@ class DashpageBlockContent extends DashpageGridContent{
   /**
    *
    */
-  public function blockChartPieReportSnapshot($meeting_nodes = array(), $entity_id = NULL, $page_view = NULL) {
+  public function blockReportSnapshot($meeting_nodes = array(), $entity_id = NULL, $page_view = NULL) {
     $DashpageJsonGenerator = new DashpageJsonGenerator();
 
-    $legends = array();
-    $result = $this->gridByProgramclass($meeting_nodes);
-    $chart_data = \Drupal::getContainer()->get('flexinfo.chart.service')->renderChartPieDataSetAccredited($result['data']);
+    $meeting_nodes = \Drupal::entityManager()->getStorage('node')->loadMultiple(array(440, 441));
+    // month
+    $month_grid = $this->gridByMonth($meeting_nodes);
+    $month_tab = \Drupal::getContainer()->get('flexinfo.chart.service')->renderChartLineDataSet($month_grid['data'], $month_grid['label']);
 
-    $legend = \Drupal::getContainer()->get('flexinfo.chart.service')->renderChartPieLegendAccredited($result['label']);
-
-    $top_text = '<div>&nbsp;</div>';
-
-    $header_text = 'Summary of Event Types';
-    if ($page_view == 'home_view') {
-      $header_text = "Summary of Event Types (All BU's)";
-    }
-
-    $output = $DashpageJsonGenerator->getBlockOne(
-      array(
-        'class' => "col-md-6",
-        'type' => "chart",
-        'top'  =>  array(
-          'enable' => TRUE,
-          'value' => "Summary of Event Types",          // block top title value
+    $block_content[] = $DashpageJsonGenerator->getBlockTabContainer(
+      array('title' => t('MONTH'), ),
+      $DashpageJsonGenerator->getChartLine(
+        array(
+          "chartOptions" => array('yAxisLabel' => "Number of Quote"),
         ),
-        'middle' => array(
-          'middleTop' => $top_text,
-          'middleMiddle' => array(
-            'middleMiddleMiddleClass' => "col-md-8",
-            'middleMiddleRightClass' => "col-md-4",
-            'middleMiddleRight' => $legend,
-          ),
-          // 'middleBottom' => '',
-        ),
-        // 'bottom' => array(
-        //   'value' => '',
-        // )
-      ),
-      $DashpageJsonGenerator->getChartPie(NUll, $chart_data)
+        $month_tab
+      )
     );
 
-    return $output;
+    // block option
+    $block_option = array(
+      'top'  => array(
+        'value' => t('Total Reach (All Business Units)'),          // block top title value
+      ),
+    );
+
+    $output = $DashpageJsonGenerator->getBlockMultiTabs(
+      $block_option,
+      $block_content
+    );
+
+    return $month_tab;
   }
 
   /**
@@ -300,7 +247,7 @@ class DashpageObjectContent extends DashpageBlockContent {
    * @return php object, not JSON
    */
   public function reportSnapshotObjectContent($meeting_nodes = array()) {
-    $output['contentSection'][] = $this->blockChartPieReportSnapshot();
+    $output['contentSection'][] = $this->blockReportSnapshot();
 
     return $output;
   }

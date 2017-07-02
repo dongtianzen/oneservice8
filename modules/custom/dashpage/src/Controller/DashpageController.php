@@ -91,9 +91,7 @@ class DashpageController extends ControllerBase {
       $route->setDefault('_title', ' ');
     }
 
-    $FlexinfoEntityService = \Drupal::getContainer()->get('flexinfo.entity.service');
-
-    $DashpageContentGenerator = new DashpageContentGenerator($FlexinfoEntityService);
+    $DashpageContentGenerator = new DashpageContentGenerator();
     $output = $DashpageContentGenerator->landingPage();
 
     $build = array(
