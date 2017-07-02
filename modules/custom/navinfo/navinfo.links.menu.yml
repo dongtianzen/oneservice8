@@ -27,13 +27,13 @@ navinfo.main.repair:
   route_parameters: { section: 'repair', entity_id: 'all', start: 'start', end: 'end' }
   menu_name: main
   weight: 100
-navinfo.main.report:
-  title: 'Report'
-  description: 'Report'
-  route_name: dashpage.report.snapshot
-  route_parameters: { entity_id: 'all', start: 'start', end: 'end' }
-  menu_name: main
-  weight: 100
+# navinfo.main.report:
+#   title: 'Report'
+#   description: 'Report'
+#   route_name: dashpage.report.snapshot
+#   route_parameters: { entity_id: 'all', start: 'start', end: 'end' }
+#   menu_name: main
+#   weight: 100
 navinfo.main.request:
   title: 'Request'
   description: 'Request'

@@ -22,21 +22,6 @@ use Drupal\flexinfo\Service\FlexinfoEntityService;
  */
 class DashpageContentGenerator extends ControllerBase {
 
-  public static function create(ContainerInterface $container) {
-    return new static(
-      $container->get('flexinfo.entity.service')
-    );
-  }
-
-  protected $flexinfoEntityService;
-
-  /**
-   * Constructor.
-   */
-  public function __construct(FlexinfoEntityService $flexinfoEntityService) {
-    $this->flexinfoEntityService = $flexinfoEntityService;
-  }
-
   /**
    * {@inheritdoc}
    */

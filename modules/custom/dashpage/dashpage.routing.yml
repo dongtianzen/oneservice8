@@ -22,18 +22,36 @@ dashpage.standard.print:
   requirements:
     _permission: 'access content'
 
-dashpage.report.snapshot:
-  path: '/dashpage/report/snapshot/{entity_id}/{start}/{end}'
-  defaults:
-    _controller: '\Drupal\dashpage\Controller\DashpageController::reportSnapshot'
-    _title: 'Report Page'
-  requirements:
-    _permission: 'access content'
-
 dashpage.standard.list:
   path: '/dashpage/{section}/list/{entity_id}/{start}/{end}'
   defaults:
     _controller: '\Drupal\dashpage\Controller\DashpageController::standardList'
     _title: 'Management List'
+  requirements:
+    _permission: 'access content'
+
+# json for snapshot
+dashpage.standard.json:
+  path: '/dashpage/{section}/json/{entity_id}/{start}/{end}'
+  defaults:
+    _controller: '\Drupal\dashpage\Controller\DashpageController::standardJson'
+    _title: 'Snapshot Page'
+  requirements:
+    _permission: 'access content'
+
+# snapshot
+dashpage.standard.snapshot:
+  path: '/dashpage/{section}/snapshot/{entity_id}/{start}/{end}'
+  defaults:
+    _controller: '\Drupal\dashpage\Controller\DashpageController::standardSnapshot'
+    _title: 'Snapshot Page'
+  requirements:
+    _permission: 'access content'
+
+dashpage.standard.menu.item:
+  path: '/dashpage/{section}/snapshot/{entity_id}'
+  defaults:
+    _controller: '\Drupal\dashpage\Controller\DashpageController::standardMenuItem'
+    _title: 'Snapshot Page'
   requirements:
     _permission: 'access content'
