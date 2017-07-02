@@ -103,7 +103,7 @@ class DashpageBlockContent extends DashpageGridContent{
 
     $output = $DashpageJsonGenerator->getBlockOne(
       array(
-        'class' => "col-md-6",
+        'class' => "col-md-12",
         'middle' => array(
           'middleMiddle' => array(
             'middleMiddleMiddleClass' => "col-md-9",
@@ -115,7 +115,7 @@ class DashpageBlockContent extends DashpageGridContent{
       ),
       $DashpageJsonGenerator->getChartLine(
         NUll,
-        $DashpageJsonGenerator->generateSampleData("line_chart_data")
+        $month_tab
       )
     );
 
