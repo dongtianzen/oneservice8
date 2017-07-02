@@ -292,7 +292,6 @@ class DashpageController extends ControllerBase {
 
     $DashpageContentGenerator = new DashpageContentGenerator();
     $markup = $DashpageContentGenerator->angularSnapshot();
-    // $markup = '<div id="map" class="google-map-wrapper">map new</div>';
 
     $build = array(
       '#type' => 'markup',

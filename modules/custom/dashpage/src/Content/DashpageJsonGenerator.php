@@ -524,6 +524,233 @@ class JsonDashpageBase {
     return $output;
   }
 
+  /**
+   *
+   */
+  public function generateSampleData($data_type = NULL) {
+    $bar_chart_data = array(
+      "labels" => array(
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ),
+      "datasets" => array(
+        array(
+          "fillColor" => ["#56bfb5","#f24b99","#344a5f","#bfbfbf","#e6e6e6"],
+          "strokeColor" => ["#56bfb5","#f24b99","#344a5f","#bfbfbf","#e6e6e6"],
+          "pointColor" => "#05d23e",
+          "pointStrokeColor" => "#fff",
+          "data" => array(
+            500,
+            140,
+            14,
+            12
+          ),
+        ),
+        array(
+          "fillColor" => "#f24b99",
+          "strokeColor" => "#ffffff",
+          "pointColor" => "#05d23e",
+          "pointStrokeColor" => "#fff",
+          "data" => array(
+            35,
+            // 15,
+            // 15,
+            // 19
+          ),
+        )
+
+      )
+    );
+
+    $pie_chart_data = array(
+      array(
+        "value" => 45,
+        "color" => "#2fa9e0",
+        "title" => "1(12)"
+      ),
+      array(
+        "value" => 12,
+        "color" => "#f24b99",
+        "title" => "2(28)"
+      ),
+      array(
+        "value" => 32,
+        "color" => "#37d8b3",
+        "title" => "3(9)"
+      ),
+      array(
+        "value" => 15,
+        "color" => "#bfbfbf",
+        "title" => "4(5)"
+      )
+    );
+
+    $line_chart_data = array(
+      "labels" => array(
+        "JAN",
+        "FEB",
+        "MAR",
+        "APR",
+        "MAY",
+        "JUN",
+        "JUL",
+        "AUG",
+        "SEP",
+        "OCT",
+        "NOV",
+        "DEC"
+      ),
+      "datasets" => array(
+        array(
+          "fillColor" => "rgba(151,187,205,0)",
+          "strokeColor" => "#f24b99",
+          "pointColor" => "#f24b99",
+          "pointStrokeColor" => "#fff",
+          "data" => array(
+            6,
+            8,
+            2,
+            9,
+            19,
+            1,
+            15,
+            15,
+            4,
+            6,
+            9,
+            13
+          )
+        ),
+        array(
+          "fillColor"=> "#00a9e0",
+          "strokeColor"=> "#00a9e0",
+          "pointColor"=> "#00a9e0",
+          "pointStrokeColor"=> "#fff",
+          "data"=> array(
+            12,
+            13,
+            3,
+            7,
+            13,
+            16,
+            17,
+            11,
+            18,
+            4,
+            23,
+            26
+          )
+        )
+      )
+    );
+
+    $doughnut_chart_data = array(
+      array(
+        "value" => 5,
+        "color" => "#f3f3f3",
+        "title" => "Yes"
+      ),
+      array(
+        "value" => 65,
+        "color" => "#1aaadb",
+        "title" => "No"
+      )
+    );
+
+    $table_data = array(
+      "thead" => [
+        [
+          "Speciality",
+          "Number",
+          "Percentage"
+        ]
+      ],
+      "tbody" => [
+        [
+          "Family Physician",
+          818800,
+          "55%"
+        ],
+        [
+          "Pharmacist",
+          15,
+          "10%"
+        ],
+        [
+          "Nurse",
+          15,
+          "10%"
+        ],
+        [
+          "Diabetes Nurse Educator",
+          7,
+          "5%"
+        ],
+        [
+          "Other",
+          7,
+          "5%"
+        ],
+        [
+          "Dietitian",
+          6,
+          "4%"
+        ],
+        [
+          "Nurse Practitioner",
+          6,
+          "4%"
+        ],
+        [
+          "Resident",
+          3,
+          "2%"
+        ],
+        [
+          "Internist",
+          3,
+          "2%"
+        ],
+        [
+          "Endocrinologist",
+          2,
+          "1%"
+        ],
+        [
+          "Endocrinologist",
+          2,
+          "1%"
+        ],
+        [
+          "Endocrinologist",
+          2,
+          "1%"
+        ],
+        [
+          "Endocrinologist",
+          2,
+          "1%"
+        ],
+        [
+          "Endocrinologist",
+          2,
+          "1%"
+        ],
+        [
+          "Anesthesiologists",
+          1,
+          "1%"
+        ]
+      ]
+    );
+
+    $output = $$data_type;
+    return $output;
+  }
+
 }
 
 /**

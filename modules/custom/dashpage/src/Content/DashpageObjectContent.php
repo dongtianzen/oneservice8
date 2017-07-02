@@ -86,7 +86,6 @@ class DashpageBlockContent extends DashpageGridContent{
       )
     );
 
-    $block_content = array();
     // block option
     $block_option = array(
       'top'  => array(
@@ -100,7 +99,25 @@ class DashpageBlockContent extends DashpageGridContent{
     );
 
     $DashpageJsonGenerator = new DashpageJsonGenerator();
-    $output = $DashpageJsonGenerator->angularJson();
+    // $output = $DashpageJsonGenerator->angularJson();
+
+    $output = $DashpageJsonGenerator->getBlockOne(
+      array(
+        'class' => "col-md-6",
+        'middle' => array(
+          'middleMiddle' => array(
+            'middleMiddleMiddleClass' => "col-md-9",
+            'middleMiddleRightClass' => "col-md-3",
+            // 'middleMiddleRight' => $legends,
+          ),
+          // 'middleBottom' => $bottom_value,
+        )
+      ),
+      $DashpageJsonGenerator->getChartLine(
+        NUll,
+        $DashpageJsonGenerator->generateSampleData("line_chart_data")
+      )
+    );
 
     return $output;
   }
