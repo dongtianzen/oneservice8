@@ -12,6 +12,7 @@ use Drupal\Component\Utility\Xss;
 
 use Drupal\dashpage\Content\DashpageContentGenerator;
 use Drupal\dashpage\Content\DashpageJsonGenerator;
+use Drupal\dashpage\Content\DashpageObjectContent;
 use Drupal\manageinfo\Controller\ManageinfoController;
 
 /**
@@ -138,6 +139,8 @@ class DashpageController extends ControllerBase {
     $DashpageJsonGenerator = new DashpageJsonGenerator();
     $json_content_data = $DashpageJsonGenerator->angularJson();
 
+    $DashpageObjectContent = new DashpageObjectContent();
+
     $build = array(
       '#type' => 'markup',
       '#header' => 'header',
@@ -158,6 +161,23 @@ class DashpageController extends ControllerBase {
     );
 
     return $build;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getDashpageSnapshot($meeting_nodes, $section, $entity_id) {
+    $DashpageObjectContent = new DashpageObjectContent();
+
+    // combine like -- programSnapshotObjectContent
+    $content_method = $section . 'SnapshotObjectContent';
+
+    $object_content_data = NULL;
+    if (method_exists($DashpageObjectContent, $content_method)) {
+      $object_content_data = $DashpageObjectContent->{$content_method}($meeting_nodes, $entity_id);
+    }
+
+    return $object_content_data;
   }
 
   /**
