@@ -86,6 +86,7 @@ class DashpageBlockContent extends DashpageGridContent{
       )
     );
 
+    $block_content = array();
     // block option
     $block_option = array(
       'top'  => array(
@@ -98,7 +99,10 @@ class DashpageBlockContent extends DashpageGridContent{
       $block_content
     );
 
-    return $month_tab;
+    $DashpageJsonGenerator = new DashpageJsonGenerator();
+    $output = $DashpageJsonGenerator->angularJson();
+
+    return $output;
   }
 
   /**
