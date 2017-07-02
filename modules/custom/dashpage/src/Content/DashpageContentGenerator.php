@@ -43,28 +43,27 @@ class DashpageContentGenerator extends ControllerBase {
     $DashpageBlockGenerator = new DashpageBlockGenerator();
 
     $output = '';
-    $output .= '<div id="pageInfoBase" data-ng-app="pageInfoBase" class="pageinfo-subpage-common">';
-      $output .= '<div class="col-md-1"></div>';
-        $output .= '<div class="col-md-10">';
-          $output .= '<div data-ng-controller="PageInfoBaseController" class="row margin-0 angular-snapshot-wrapper" data-ng-cloak>';
+    $output .= '<div id="pageInfoBase" data-ng-app="pageInfoBase" class="pageinfo-subpage-common margin-left-60 margin-right-44">';
+      $output .= '<div data-ng-controller="PageInfoBaseController" class="row margin-0 margin-top-16" ng-cloak>';
+        $output .= '<div data-ng-controller="SaveAsPng">';
 
-            $output .= '<div class="block-one bg-ffffff">';
-              $output .= '<div class="row margin-0">';
-                $output .= $DashpageBlockGenerator->topWidgetsFixed();
-              $output .= '</div>';
+          $output .= '<div class="block-one bg-ffffff padding-bottom-20">';
+            $output .= '<div class="row">';
+              $output .= $DashpageBlockGenerator->topWidgetsFixed();
             $output .= '</div>';
-
-            $output .= '<div id="charts-section" class="block-three row tab-content-block-wrapper">';
-              $output .= '<div data-ng-repeat="block in pageData.contentSection">';
-                $output .= '<div class="{{block.class}} padding-0">';
-                  $output .= $DashpageBlockGenerator->contentBlockMaster();
-                $output .= '</div>';
-              $output .= '</div>';
-            $output .= '</div>';
-
           $output .= '</div>';
+          $output .= '<div id="center" class="fixed-center"></div>';
+
+          $output .= '<div id="charts-section" class="block-three row tab-content-block-wrapper">';
+            $output .= '<div data-ng-repeat="block in pageData.contentSection" >';
+              $output .= '<div class="{{block.class}}">';
+                $output .= $DashpageBlockGenerator->contentBlockMaster();
+              $output .= '</div>';
+            $output .= '</div>';
+          $output .= '</div>';
+
         $output .= '</div>';
-      $output .= '<div class="col-md-1"></div>';;
+      $output .= '</div>';
     $output .= '</div>';
 
     return $output;
