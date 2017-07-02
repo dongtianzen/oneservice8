@@ -2,5 +2,3 @@ services:
   #
   nodeinfo.entity.service:
     class: Drupal\nodeinfo\Service\NodeinfoEntityService
-
-
