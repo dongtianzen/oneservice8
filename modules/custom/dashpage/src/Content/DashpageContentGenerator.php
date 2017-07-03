@@ -56,7 +56,7 @@ class DashpageContentGenerator extends ControllerBase {
 
             $output .= '<div id="charts-section" class="block-three row tab-content-block-wrapper">';
               $output .= '<div data-ng-repeat="block in pageData.contentSection">';
-                $output .= '<div class="{{block.class}} padding-0">';
+                $output .= '<div class="{{block.class}} margin-bottom-12 padding-0">';
                   $output .= $DashpageBlockGenerator->contentBlockMaster();
                 $output .= '</div>';
               $output .= '</div>';

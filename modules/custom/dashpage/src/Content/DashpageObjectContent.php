@@ -17,13 +17,13 @@ use Drupal\dashpage\Content\DashpageEventLayout;
  */
 class DashpageGridContent {
 
-  public function meetingNodesByMonth($meeting_nodes = array(), $months = array()) {
+  public function queryNodesByFieldByMonth($nodes = array(), $field_name = NULL, $months = array()) {
     $output = array();
 
-    if (is_array($meeting_nodes)) {
-      foreach($meeting_nodes as $node) {
+    if (is_array($nodes)) {
+      foreach($nodes as $node) {
 
-        $date_time = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValue($node, 'field_quote_date');
+        $date_time = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValue($node, $field_name);
         if ($date_time) {
 
           preg_match("/^20\d\d\-(\d\d)/i", $date_time, $matches);
@@ -45,11 +45,11 @@ class DashpageGridContent {
    * $month_label[] = t(date('M', mktime(0, 0, 0, $i)));
    * array(t('JAN'), t('FEB'), t('MAR'), t('APR'), t('MAY'), t('JUN'), t('JUL'), t('AUG'), t('SEP'), t('OCT'), t('NOV'), t('DEC'));
    */
-  public function gridByMonth($meeting_nodes = array(), $count_field = NULL) {
+  public function gridByMonth($nodes = array(), $field_name = NULL) {
     for ($i = 1; $i < 13; $i++) {
       $month_label[] = t(date('M', mktime(0, 0, 0, $i)));
-      $month_nodes = $this->meetingNodesByMonth($meeting_nodes, array($i));
-      $month_data[]  = \Drupal::getContainer()->get('flexinfo.calc.service')->getSumFromNodes($month_nodes, $count_field);
+      $month_nodes = $this->queryNodesByFieldByMonth($nodes, $field_name, array($i));
+      $month_data[]  = \Drupal::getContainer()->get('flexinfo.calc.service')->getSumFromNodes($month_nodes, $count_field = NULL);
     }
 
     $output['label'] = $month_label;
@@ -68,27 +68,28 @@ class DashpageBlockContent extends DashpageGridContent{
   /**
    *
    */
-  public function blockReportSnapshot($meeting_nodes = array(), $entity_id = NULL, $page_view = NULL) {
+  public function blockChartLineForNodeByMonth($entity_type = NULL, $field_name = NULL) {
     $DashpageJsonGenerator = new DashpageJsonGenerator();
 
     $query_container = \Drupal::getContainer()->get('flexinfo.querynode.service');
-    $quote_nids = $query_container->nidsByBundle('quote');
+    $nids = $query_container->nidsByBundle($entity_type);
 
-    $quote_nodes = \Drupal::entityManager()->getStorage('node')->loadMultiple($quote_nids);
+    $nodes = \Drupal::entityManager()->getStorage('node')->loadMultiple($nids);
     // month
-    $month_grid = $this->gridByMonth($quote_nodes);
+    $month_grid = $this->gridByMonth($nodes, $field_name);
     $month_tab = \Drupal::getContainer()->get('flexinfo.chart.service')->renderChartLineDataSet($month_grid['data'], $month_grid['label']);
 
+    $block_title = t('Number of ') . ucwords($entity_type);
     $output = $DashpageJsonGenerator->getBlockOne(
       array(
         'top'  => array(
-          'value' => t('Number of Quote'),          // block top title value
+          'value' => $block_title,          // block top title value
         ),
         'class' => "col-md-12",
       ),
       $DashpageJsonGenerator->getChartLine(
         array(
-          "chartOptions" => array('yAxisLabel' => "Number of Quote"),
+          "chartOptions" => array('yAxisLabel' => $block_title),
         ),
         $month_tab
       )
@@ -242,8 +243,10 @@ class DashpageObjectContent extends DashpageBlockContent {
   /**
    * @return php object, not JSON
    */
-  public function reportSnapshotObjectContent($meeting_nodes = array()) {
-    $output['contentSection'][] = $this->blockReportSnapshot();
+  public function reportSnapshotObjectContent() {
+    $output['contentSection'][] = $this->blockChartLineForNodeByMonth($entity_type = 'request', $field_name = 'field_request_checkdate');
+    $output['contentSection'][] = $this->blockChartLineForNodeByMonth($entity_type = 'repair', $field_name = 'field_repair_receivedate');
+    $output['contentSection'][] = $this->blockChartLineForNodeByMonth($entity_type = 'quote', $field_name = 'field_quote_date');
 
     return $output;
   }
