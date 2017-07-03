@@ -20,7 +20,7 @@ class DashpageBlockGenerator extends ControllerBase {
    */
   function contentRenderHeader() {
     $output = '';
-    $output .= '<div class="panel-header block-header">';
+    $output .= '<div class="panel-header block-header padding-12 color-fff bg-2f8ac4">';
       $output .= '<span>{{block.top.value}}</span>';
     $output .= '</div>';
 
