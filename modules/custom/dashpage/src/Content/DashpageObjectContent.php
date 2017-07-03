@@ -101,27 +101,43 @@ class DashpageBlockContent extends DashpageGridContent{
   /**
    *
    */
-  public function blockChartPie() {
+  public function blockChartPieReturnStatus() {
     $DashpageJsonGenerator = new DashpageJsonGenerator();
 
     $returnstatus_trees = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('returnstatus', 0);
 
     $chart_data = array();
+    $legends = '<div class="padding-top-64 margin-left-12 width-pt-100">';
+
     if (is_array($returnstatus_trees)) {
+
       foreach ($returnstatus_trees as $key => $term) {
         $query_container = \Drupal::getContainer()->get('flexinfo.querynode.service');
         $query = $query_container->queryNidsByBundle('repair');
         $group = $query_container->groupStandardByFieldValue($query, 'field_repair_returnstatus', $term->tid);
         $query->condition($group);
         $nids = $query_container->runQueryWithGroup($query);
-dpm(count($nids));
+
         $chart_data[] = array(
           "value" => count($nids),
           "color" => \Drupal::getContainer()->get('flexinfo.setting.service')->colorPlateThree($key + 3, TRUE),
           "title" => "1(12)",
         );
+
+        $legends .= '<div class="clear-both height-32 text-center">';
+          $legends .= '<span class="legend-square bg-' . \Drupal::getContainer()->get('flexinfo.setting.service')->colorPlateThree($key + 3) . '">';
+          $legends .= '</span>';
+          $legends .= '<span class="float-left legend-text">';
+            $legends .= $term->name;
+            $legends .= ' (';
+            $legends .= count($nids);
+            $legends .= ')';
+          $legends .= '</span>';
+        $legends .= '</div>';
       }
+
     }
+    $legends .= '</div>';
 
     $output = $DashpageJsonGenerator->getBlockOne(
       array(
@@ -130,7 +146,11 @@ dpm(count($nids));
         ),
         'class' => "col-md-12",
         "middle" => array(
-          "middleTop" => '<div class="text-center margin-top-12 font-size-16">' . $term->name . '</div>',
+          'middleMiddle' => array(
+            'middleMiddleMiddleClass' => "col-md-8",
+            'middleMiddleRightClass' => "col-md-4",
+            'middleMiddleRight' => $legends,
+          ),
         ),
       ),
       $DashpageJsonGenerator->getChartPie(array("chartType" => "Pie"), $chart_data)
@@ -285,7 +305,7 @@ class DashpageObjectContent extends DashpageBlockContent {
    * @return php object, not JSON
    */
   public function reportSnapshotObjectContent() {
-    $output['contentSection'][] = $this->blockChartPie();
+    $output['contentSection'][] = $this->blockChartPieReturnStatus();
     $output['contentSection'][] = $this->blockChartLineForNodeByMonth($entity_type = 'request', $field_name = 'field_request_checkdate');
     $output['contentSection'][] = $this->blockChartLineForNodeByMonth($entity_type = 'repair', $field_name = 'field_repair_receivedate');
     $output['contentSection'][] = $this->blockChartLineForNodeByMonth($entity_type = 'quote', $field_name = 'field_quote_date');

@@ -1127,6 +1127,9 @@
 .padding-top-40 {
   padding-top: 40px;
 }
+.padding-top-64 {
+  padding-top: 64px;
+}
 .padding-left-0 {
   padding-left: 0px;
 }
@@ -1437,6 +1440,17 @@
 }
 .z-index-999 {
   z-index: 999;
+}
+
+/**
+ *
+ */
+.legend-square {
+  float: left;
+  height: 12px;
+  width: 12px;
+  margin: 2px;
+  margin-right: 6px;
 }
 
 /** - - - - - - - - - - - - - - - - - - - -  */
