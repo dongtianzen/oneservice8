@@ -104,27 +104,31 @@ class DashpageBlockContent extends DashpageGridContent{
   public function blockChartPie() {
     $DashpageJsonGenerator = new DashpageJsonGenerator();
 
-    $query_container = \Drupal::getContainer()->get('flexinfo.querynode.service');
-    $nids = $query_container->nidsByBundle('repair');
-    $nodes = \Drupal::entityManager()->getStorage('node')->loadMultiple($nids);
+    $returnstatus_trees = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('returnstatus', 0);
 
-    foreach ($pool_data as $key => $value) {
-      $chart_data[] = array(
-        "value" => $value,
-        "color" => \Drupal::getContainer()->get('flexinfo.setting.service')->colorPlateThree($key + 2, TRUE),
-        "title" => "1(12)",
-      );
-
-      if ($max_length) {
-        if (($key + 2) > $max_length) {
-          break;
-        }
+    $chart_data = array();
+    if (is_array($returnstatus_trees)) {
+      foreach ($returnstatus_trees as $key => $term) {
+        $query_container = \Drupal::getContainer()->get('flexinfo.querynode.service');
+        $query = $query_container->queryNidsByBundle('repair');
+        $group = $query_container->groupStandardByFieldValue($query, 'field_repair_returnstatus', $term->tid);
+        $query->condition($group);
+        $nids = $query_container->runQueryWithGroup($query);
+dpm(count($nids));
+        $chart_data[] = array(
+          "value" => count($nids),
+          "color" => \Drupal::getContainer()->get('flexinfo.setting.service')->colorPlateThree($key + 3, TRUE),
+          "title" => "1(12)",
+        );
       }
     }
 
     $output = $DashpageJsonGenerator->getBlockOne(
       array(
-        'class' => "col-md-6",
+        'top'  => array(
+          'value' => '维修返回状态',          // block top title value
+        ),
+        'class' => "col-md-12",
         "middle" => array(
           "middleTop" => '<div class="text-center margin-top-12 font-size-16">' . $term->name . '</div>',
         ),
@@ -281,6 +285,7 @@ class DashpageObjectContent extends DashpageBlockContent {
    * @return php object, not JSON
    */
   public function reportSnapshotObjectContent() {
+    $output['contentSection'][] = $this->blockChartPie();
     $output['contentSection'][] = $this->blockChartLineForNodeByMonth($entity_type = 'request', $field_name = 'field_request_checkdate');
     $output['contentSection'][] = $this->blockChartLineForNodeByMonth($entity_type = 'repair', $field_name = 'field_repair_receivedate');
     $output['contentSection'][] = $this->blockChartLineForNodeByMonth($entity_type = 'quote', $field_name = 'field_quote_date');
