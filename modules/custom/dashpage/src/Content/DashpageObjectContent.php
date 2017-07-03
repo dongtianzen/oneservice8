@@ -71,50 +71,25 @@ class DashpageBlockContent extends DashpageGridContent{
   public function blockReportSnapshot($meeting_nodes = array(), $entity_id = NULL, $page_view = NULL) {
     $DashpageJsonGenerator = new DashpageJsonGenerator();
 
-    $meeting_nodes = \Drupal::entityManager()->getStorage('node')->loadMultiple(array(440, 441));
+    $query_container = \Drupal::getContainer()->get('flexinfo.querynode.service');
+    $quote_nids = $query_container->nidsByBundle('quote');
+
+    $quote_nodes = \Drupal::entityManager()->getStorage('node')->loadMultiple($quote_nids);
     // month
-    $month_grid = $this->gridByMonth($meeting_nodes);
+    $month_grid = $this->gridByMonth($quote_nodes);
     $month_tab = \Drupal::getContainer()->get('flexinfo.chart.service')->renderChartLineDataSet($month_grid['data'], $month_grid['label']);
 
-    $block_content[] = $DashpageJsonGenerator->getBlockTabContainer(
-      array('title' => t('MONTH'), ),
+    $output = $DashpageJsonGenerator->getBlockOne(
+      array(
+        'top'  => array(
+          'value' => t('Number of Quote'),          // block top title value
+        ),
+        'class' => "col-md-12",
+      ),
       $DashpageJsonGenerator->getChartLine(
         array(
           "chartOptions" => array('yAxisLabel' => "Number of Quote"),
         ),
-        $month_tab
-      )
-    );
-
-    // block option
-    $block_option = array(
-      'top'  => array(
-        'value' => t('Total Reach (All Business Units)'),          // block top title value
-      ),
-    );
-
-    $output = $DashpageJsonGenerator->getBlockMultiTabs(
-      $block_option,
-      $block_content
-    );
-
-    $DashpageJsonGenerator = new DashpageJsonGenerator();
-    // $output = $DashpageJsonGenerator->angularJson();
-
-    $output = $DashpageJsonGenerator->getBlockOne(
-      array(
-        'class' => "col-md-12",
-        'middle' => array(
-          'middleMiddle' => array(
-            'middleMiddleMiddleClass' => "col-md-9",
-            'middleMiddleRightClass' => "col-md-3",
-            // 'middleMiddleRight' => $legends,
-          ),
-          // 'middleBottom' => $bottom_value,
-        )
-      ),
-      $DashpageJsonGenerator->getChartLine(
-        NUll,
         $month_tab
       )
     );

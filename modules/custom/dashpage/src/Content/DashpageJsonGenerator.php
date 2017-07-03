@@ -280,7 +280,7 @@ class JsonDashpageBase {
     $output["chartOptions"] = $this->chartNewJsOptions();
     $output["chartOptions"]["barValueSpacing"] = 20;
     $output["chartOptions"]["bezierCurveTension"] = 0.2;
-    $output["chartOptions"]["graphMax"] = 100;
+    // $output["chartOptions"]["graphMax"] = 100;
     $output["chartOptions"]["graphMin"] = 0;
     $output["chartOptions"]["inGraphDataShow"] = false;
     $output["chartOptions"]["maxLegendCols"] = 1;
