@@ -73,8 +73,8 @@ class DashpageBlockContent extends DashpageGridContent{
 
     $query_container = \Drupal::getContainer()->get('flexinfo.querynode.service');
     $nids = $query_container->nidsByBundle($entity_type);
-
     $nodes = \Drupal::entityManager()->getStorage('node')->loadMultiple($nids);
+
     // month
     $month_grid = $this->gridByMonth($nodes, $field_name);
     $month_tab = \Drupal::getContainer()->get('flexinfo.chart.service')->renderChartLineDataSet($month_grid['data'], $month_grid['label']);
@@ -93,6 +93,43 @@ class DashpageBlockContent extends DashpageGridContent{
         ),
         $month_tab
       )
+    );
+
+    return $output;
+  }
+
+  /**
+   *
+   */
+  public function blockChartPie() {
+    $DashpageJsonGenerator = new DashpageJsonGenerator();
+
+    $query_container = \Drupal::getContainer()->get('flexinfo.querynode.service');
+    $nids = $query_container->nidsByBundle('repair');
+    $nodes = \Drupal::entityManager()->getStorage('node')->loadMultiple($nids);
+
+    foreach ($pool_data as $key => $value) {
+      $chart_data[] = array(
+        "value" => $value,
+        "color" => \Drupal::getContainer()->get('flexinfo.setting.service')->colorPlateThree($key + 2, TRUE),
+        "title" => "1(12)",
+      );
+
+      if ($max_length) {
+        if (($key + 2) > $max_length) {
+          break;
+        }
+      }
+    }
+
+    $output = $DashpageJsonGenerator->getBlockOne(
+      array(
+        'class' => "col-md-6",
+        "middle" => array(
+          "middleTop" => '<div class="text-center margin-top-12 font-size-16">' . $term->name . '</div>',
+        ),
+      ),
+      $DashpageJsonGenerator->getChartPie(array("chartType" => "Pie"), $chart_data)
     );
 
     return $output;
