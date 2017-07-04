@@ -60,7 +60,7 @@ class SuperinfoController extends ControllerBase {
     //   if ($node) {
     //     $field_name = 'field_repair_' . key($path_parameters);
     //     if (isset($form[$field_name]['widget'])) {
-    //       $form['field_repair_requestnode']['widget'][0]['target_id']['#default_value'][0] = $node;
+    //       $form['field_repair_requestnode']['widget'][0]['target_id']['#default_value'] = $node;
     //     }
     //   }
     // }
