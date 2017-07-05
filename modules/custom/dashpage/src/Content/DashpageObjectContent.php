@@ -17,30 +17,6 @@ use Drupal\dashpage\Content\DashpageEventLayout;
  */
 class DashpageGridContent {
 
-  public function queryNodesByFieldByMonth($nodes = array(), $field_name = NULL, $months = array()) {
-    $output = array();
-
-    if (is_array($nodes)) {
-      foreach($nodes as $node) {
-
-        $date_time = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValue($node, $field_name);
-        if ($date_time) {
-
-          preg_match("/^20\d\d\-(\d\d)/i", $date_time, $matches);
-          if (isset($matches[1])) {
-
-            $month_num = $matches[1];
-            if (in_array($month_num, $months)) {
-              $output[] = $node;
-            }
-          }
-        }
-      }
-    }
-
-    return $output;
-  }
-
   /**
    * $month_label[] = t(date('M', mktime(0, 0, 0, $i)));
    * array(t('JAN'), t('FEB'), t('MAR'), t('APR'), t('MAY'), t('JUN'), t('JUL'), t('AUG'), t('SEP'), t('OCT'), t('NOV'), t('DEC'));
@@ -48,7 +24,7 @@ class DashpageGridContent {
   public function gridByMonth($nodes = array(), $field_name = NULL) {
     for ($i = 1; $i < 13; $i++) {
       $month_label[] = t(date('M', mktime(0, 0, 0, $i)));
-      $month_nodes = $this->queryNodesByFieldByMonth($nodes, $field_name, array($i));
+      $month_nodes = \Drupal::getContainer()->get('flexinfo.querynode.service')->queryNodesByFieldByMonth($nodes, $field_name, array($i));
       $month_data[]  = \Drupal::getContainer()->get('flexinfo.calc.service')->getSumFromNodes($month_nodes, $count_field = NULL);
     }
 
