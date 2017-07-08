@@ -162,8 +162,6 @@ class DashpageContentGenerator extends ControllerBase {
    * render views output
    */
   public function quotePrint($nid = NULL) {
-    $FieldService = $this->flexinfoEntityService->getEntity('field');
-
     $output = '';
     $output .= '<div class="dashpage-wrapper">';
       $output .= '<div class="">';
@@ -196,7 +194,7 @@ class DashpageContentGenerator extends ControllerBase {
           $output .= '<tbody>';
             $output .= '<tr>';
               $output .= '<td>客户名称</td>';
-              $output .= '<td colspan="3">' . $FieldService->getFieldSingleValue('node', $node, 'field_quote_clientname') . '</td>';
+              $output .= '<td colspan="3">' . \Drupal::getContainer()->get('flexinfo.field.service')->getFieldSingleValue('node', $node, 'field_quote_clientname') . '</td>';
             $output .= '</tr>';
           $output .= '</tbody>';
         $output .= '</table>';
@@ -228,7 +226,7 @@ class DashpageContentGenerator extends ControllerBase {
         $output .= '李靖';
       $output .= '</div>';
       $output .= '<div class="">';
-        $output .= $FieldService->getFieldSingleValue('node', $node, 'field_quote_date');
+        $output .= \Drupal::getContainer()->get('flexinfo.field.service')->getFieldSingleValue('node', $node, 'field_quote_date');
       $output .= '</div>';
 
       $output .= '<div class="">';
@@ -251,7 +249,7 @@ class DashpageContentGenerator extends ControllerBase {
           $output .= '</div>';
 
           if ($check_current_user_roles) {
-            if ($FieldService->getFieldSingleValue('node', $node, 'field_quote_authorizestamp')) {
+            if (\Drupal::getContainer()->get('flexinfo.field.service')->getFieldSingleValue('node', $node, 'field_quote_authorizestamp')) {
               $output .= '<div class="btn btn-warning quote-node-print-button margin-left-24" ng-click="authorizeSubmit(false)" type="button">';
                 $output .= t('UnAuthorize');
               $output .= '</div>';
@@ -273,8 +271,6 @@ class DashpageContentGenerator extends ControllerBase {
    * render views output
    */
   public function repairPrint($nid = NULL) {
-    $FieldService = $this->flexinfoEntityService->getEntity('field');
-
     $repair_node  = \Drupal::entityTypeManager()->getStorage('node')->load($nid);
 
     $request_nid = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstTargetId($repair_node, 'field_repair_requestnode');
@@ -289,13 +285,13 @@ class DashpageContentGenerator extends ControllerBase {
           $output .= '<tbody>';
             $output .= '<tr>';
               $output .= '<td>客户名称</td>';
-              $output .= '<td colspan="3">' . $FieldService->getFieldSingleValue('node', $request_node, 'field_request_clientname') . '</td>';
+              $output .= '<td colspan="3">' . \Drupal::getContainer()->get('flexinfo.field.service')->getFieldSingleValue('node', $request_node, 'field_request_clientname') . '</td>';
             $output .= '</tr>';
             $output .= '<tr>';
               $output .= '<td>联系人</td>';
-              $output .= '<td>' . $FieldService->getFieldSingleValue('node', $request_node, 'field_request_contactname') . '</td>';
+              $output .= '<td>' . \Drupal::getContainer()->get('flexinfo.field.service')->getFieldSingleValue('node', $request_node, 'field_request_contactname') . '</td>';
               $output .= '<td>联系电话</td>';
-              $output .= '<td>' . $FieldService->getFieldSingleValue('node', $request_node, 'field_request_contactphone') . '</td>';
+              $output .= '<td>' . \Drupal::getContainer()->get('flexinfo.field.service')->getFieldSingleValue('node', $request_node, 'field_request_contactphone') . '</td>';
             $output .= '</tr>';
             $output .= '<tr>';
               $output .= '<td>客户地址</td>';
@@ -303,43 +299,43 @@ class DashpageContentGenerator extends ControllerBase {
             $output .= '</tr>';
             $output .= '<tr>';
               $output .= '<td>设备型号</td>';
-              $output .= '<td>' . $FieldService->getFieldSingleValue('node', $repair_node, 'field_repair_devicetype') . '</td>';
+              $output .= '<td>' . \Drupal::getContainer()->get('flexinfo.field.service')->getFieldSingleValue('node', $repair_node, 'field_repair_devicetype') . '</td>';
               $output .= '<td>序列号</td>';
-              $output .= '<td>' . $FieldService->getFieldSingleValue('node', $repair_node, 'field_repair_serialnumber') . '</td>';
+              $output .= '<td>' . \Drupal::getContainer()->get('flexinfo.field.service')->getFieldSingleValue('node', $repair_node, 'field_repair_serialnumber') . '</td>';
             $output .= '</tr>';
             $output .= '<tr>';
               $output .= '<td>收取日期</td>';
-              $output .= '<td colspan="3">' . $FieldService->getFieldSingleValue('node', $repair_node, 'field_repair_receivedate') . '</td>';
+              $output .= '<td colspan="3">' . \Drupal::getContainer()->get('flexinfo.field.service')->getFieldSingleValue('node', $repair_node, 'field_repair_receivedate') . '</td>';
             $output .= '</tr>';
             $output .= '<tr>';
               $output .= '<td>收取备注</td>';
-              $output .= '<td colspan="3">' . $FieldService->getFieldSingleValue('node', $repair_node, 'field_repair_receivenote') . '</td>';
+              $output .= '<td colspan="3">' . \Drupal::getContainer()->get('flexinfo.field.service')->getFieldSingleValue('node', $repair_node, 'field_repair_receivenote') . '</td>';
             $output .= '</tr>';
             $output .= '<tr>';
               $output .= '<td>设备规格</td>';
-              $output .= '<td colspan="3">' . $FieldService->getFieldSingleValue('node', $repair_node, 'field_repair_deviceformat') . '</td>';
+              $output .= '<td colspan="3">' . \Drupal::getContainer()->get('flexinfo.field.service')->getFieldSingleValue('node', $repair_node, 'field_repair_deviceformat') . '</td>';
             $output .= '</tr>';
             $output .= '<tr>';
               $output .= '<td>故障原因</td>';
-              $output .= '<td colspan="3">' . $FieldService->getFieldSingleValue('node', $request_node, 'field_request_issuereason') . '</td>';
+              $output .= '<td colspan="3">' . \Drupal::getContainer()->get('flexinfo.field.service')->getFieldSingleValue('node', $request_node, 'field_request_issuereason') . '</td>';
             $output .= '</tr>';
             $output .= '<tr>';
               $output .= '<td>维修处理办法</td>';
-              $output .= '<td colspan="3">' . $FieldService->getFieldSingleValue('node', $repair_node, 'field_repair_repairapproach') . '</td>';
+              $output .= '<td colspan="3">' . \Drupal::getContainer()->get('flexinfo.field.service')->getFieldSingleValue('node', $repair_node, 'field_repair_repairapproach') . '</td>';
             $output .= '</tr>';
             $output .= '<tr>';
               $output .= '<td>返回备注</td>';
-              $output .= '<td colspan="3">' . $FieldService->getFieldSingleValue('node', $repair_node, 'field_repair_returnnote') . '</td>';
+              $output .= '<td colspan="3">' . \Drupal::getContainer()->get('flexinfo.field.service')->getFieldSingleValue('node', $repair_node, 'field_repair_returnnote') . '</td>';
             $output .= '</tr>';
             $output .= '<tr>';
               $output .= '<td>收费金额</td>';
-              $output .= '<td colspan="3">' . $FieldService->getFieldSingleValue('node', $request_node, 'field_request_quoteamount') . '</td>';
+              $output .= '<td colspan="3">' . \Drupal::getContainer()->get('flexinfo.field.service')->getFieldSingleValue('node', $request_node, 'field_request_quoteamount') . '</td>';
             $output .= '</tr>';
             $output .= '<tr>';
               $output .= '<td>维修工程师</td>';
-              $output .= '<td>' . $FieldService->getFieldSingleValue('node', $request_node, 'field_request_checkstaff') . '</td>';
+              $output .= '<td>' . \Drupal::getContainer()->get('flexinfo.field.service')->getFieldSingleValue('node', $request_node, 'field_request_checkstaff') . '</td>';
               $output .= '<td>返回日期</td>';
-              $output .= '<td>' . $FieldService->getFieldSingleValue('node', $repair_node, 'field_repair_returndate') . '</td>';
+              $output .= '<td>' . \Drupal::getContainer()->get('flexinfo.field.service')->getFieldSingleValue('node', $repair_node, 'field_repair_returndate') . '</td>';
             $output .= '</tr>';
           $output .= '</tbody>';
         $output .= '</table>';

@@ -103,7 +103,6 @@ class SuperinfoController extends ControllerBase {
    * {@inheritdoc}
    */
   public function superinfoTableJsonPath($section) {
-
     $json_path = base_path() . 'viewsjson/node/page/all';
     if ($section) {
       $json_file_url = 'viewsjson/term/' . $section . '/all';
