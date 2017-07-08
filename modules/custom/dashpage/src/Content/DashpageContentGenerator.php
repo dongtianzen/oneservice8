@@ -274,7 +274,10 @@ class DashpageContentGenerator extends ControllerBase {
     $repair_node  = \Drupal::entityTypeManager()->getStorage('node')->load($nid);
 
     $request_nid = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstTargetId($repair_node, 'field_repair_requestnode');
-    $request_node  = \Drupal::entityTypeManager()->getStorage('node')->load($request_nid);
+    $request_node = NULL;
+    if ($request_nid) {
+      $request_node  = \Drupal::entityTypeManager()->getStorage('node')->load($request_nid);
+    }
 
     $output = '';
 
@@ -329,7 +332,7 @@ class DashpageContentGenerator extends ControllerBase {
             $output .= '</tr>';
             $output .= '<tr>';
               $output .= '<td>收费金额</td>';
-              $output .= '<td colspan="3">' . \Drupal::getContainer()->get('flexinfo.field.service')->getFieldSingleValue('node', $request_node, 'field_request_quoteamount') . '</td>';
+              $output .= '<td colspan="3">' . \Drupal::getContainer()->get('flexinfo.field.service')->getFieldSingleValue('node', $repair_node, 'field_repair_repairamount') . '</td>';
             $output .= '</tr>';
             $output .= '<tr>';
               $output .= '<td>维修工程师</td>';
