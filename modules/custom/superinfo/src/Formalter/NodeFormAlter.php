@@ -2,17 +2,21 @@
 
 /**
  * @file
- * This is superinfo module.
  */
 
-use Drupal\Core\Form\FormStateInterface;
+namespace Drupal\superinfo\FormAlter;
 
 /**
- * Implements hook_form_alter().
+ * An example controller.
+   $NodeFormAlter = new NodeFormAlter();
+   $NodeFormAlter->superinfoTable();
  */
-function superinfo_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+class NodeFormAlter extends ControllerBase {
 
-  if ($form_id == 'node_repair_form') {
+  /**
+   * {@inheritdoc}
+   */
+  public function nodeRepairFormAlter(&$form) {
     $path_args = \Drupal::getContainer()->get('flexinfo.setting.service')->getCurrentPathArgs();
     if (isset($path_args[5]) && $path_args[5] == 'repair' && $path_args[1] == 'superinfo') {
 
@@ -31,4 +35,5 @@ function superinfo_form_alter(&$form, FormStateInterface $form_state, $form_id) 
       }
     }
   }
+
 }
