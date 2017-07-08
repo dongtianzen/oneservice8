@@ -46,6 +46,8 @@ class SuperinfoController extends ControllerBase {
     $entity_form = \Drupal::entityTypeManager()
       ->getFormObject($entity_type, 'default')
       ->setEntity($entity);
+ksm($entity_form);
+
     $form = \Drupal::formBuilder()->getForm($entity_form);
 
     // $node  = \Drupal::entityTypeManager()->getStorage('node')->load(468);
@@ -64,7 +66,9 @@ class SuperinfoController extends ControllerBase {
     //     }
     //   }
     // }
+// dpm($form['field_repair_receivenote']['widget'][0]['value']['#default_value']);
 
+    $form['field_repair_receivenote']['widget'][0]['value']['#default_value'] = 'other things';
 
     $build = array(
       '#type' => 'markup',

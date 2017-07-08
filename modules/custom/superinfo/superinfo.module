@@ -1,0 +1,19 @@
+<?php
+
+/**
+ * @file
+ * This is my module.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Symfony\Component\HttpFoundation\Request;
+
+/**
+ * Implements hook_form_alter().
+ */
+function superinfo_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  dpm($form_id);
+  if ($form_id == 'node_repair_form') {
+    $form['field_repair_receivenote']['widget'][0]['value']['#default_value'] = 'other things'
+  }
+}
