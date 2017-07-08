@@ -145,20 +145,38 @@ class TerminfoJsonController extends ControllerBase {
    * @return php array
    */
   public function basicCollectionTermContent($vid) {
+    $terms = \Drupal::getContainer()->get('flexinfo.term.service')->getFullTermsFromVidName($vid);
+    $output = $this->basicCollectionTermTableArray($vid, $terms);
+
+    return $output;
+  }
+
+  /**
+   * @return php array
+   */
+  public function basicCollectionTermTableArray($vid, $terms, $edit_link_column = TRUE) {
     $output = array();
 
-    $TerminfoFetchController = new TerminfoFetchController();
-    $trees = $TerminfoFetchController->getVocabularyTreeTidTerms($vid);
-    if (is_array($trees)) {
-      foreach ($trees as $tid => $term_name) {
+    // check if custom fields already have 'Edit' link
+    $custom_manage_fields = $this->customManageFields($vid);
+    if ($custom_manage_fields) {
+      $field_label_column = array_column($custom_manage_fields, 'field_label');
+      $edit_exist = in_array('Edit', $field_label_column);
+      if ($edit_exist) {
+        $edit_link_column = FALSE;
+      }
+    }
+
+    if (is_array($terms)) {
+      foreach ($terms as $tid => $term) {
         $row = array();
 
         $edit_path = '/taxonomy/term/' . $tid . '/edit';
         $edit_url = Url::fromUserInput($edit_path);
-        $edit_link = \Drupal::l(t('Edit'), $edit_url);
+        $edit_link_ob = \Drupal::l(t('Edit'), $edit_url);
 
         // first
-        $row["Name"] = $term_name;
+        $row["Name"] = $term->getName();
 
         $collectionContentFields = $this->collectionContentFields($vid, $tid, $entity_type = 'taxonomy_term');
         if (is_array($collectionContentFields)) {
@@ -166,7 +184,9 @@ class TerminfoJsonController extends ControllerBase {
         }
 
         // last
-        $row["Edit"] = $edit_link;
+        if ($edit_link_column) {
+          $row["Edit"] = $edit_link_ob;
+        }
 
         $output[] = $row;
       }
