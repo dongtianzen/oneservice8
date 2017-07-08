@@ -302,6 +302,11 @@ class TerminfoJsonController extends ControllerBase {
             'field_name'  => 'field_repair_returndate',
           ),
           array(
+            'field_label' => 'Add',
+            'field_name'  => 'custom_formula_function',
+            'formula_function'  => 'linkForAddQuote',
+          ),
+          array(
             'field_label' => 'Print',
             'field_name'  => 'custom_formula_function',
             'formula_function'  => 'linkForRepairPrint',
@@ -421,10 +426,23 @@ class TerminfoJsonController extends ControllerBase {
   /**
    * @return
    */
-  public function linkForAddRepair($quote_nid = NULL) {
+  public function linkForAddQuote($nid = NULL) {
     $link = NULL;
-    if ($quote_nid) {
-      $path = '/superinfo/form/add/node/repair';
+    if ($nid) {
+      $path = '/superinfo/form/add/node/quote' . '?repairnode=' . $nid;
+      $url = Url::fromUserInput($path);
+      $link = \Drupal::l('Add', $url);
+    }
+
+    return $link;
+  }
+  /**
+   * @return
+   */
+  public function linkForAddRepair($nid = NULL) {
+    $link = NULL;
+    if ($nid) {
+      $path = '/superinfo/form/add/node/repair' . '?requestnode=' . $nid;
       $url = Url::fromUserInput($path);
       $link = \Drupal::l('Add', $url);
     }

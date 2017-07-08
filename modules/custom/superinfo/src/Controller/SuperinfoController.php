@@ -16,7 +16,6 @@ use Drupal\Component\Utility\Xss;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 use Drupal\superinfo\Content\SuperinfoContentGenerator;
-use Drupal\terminfo\Controller\TerminfoFetchController;
 
 /**
  * An example controller.

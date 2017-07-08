@@ -18,5 +18,9 @@ function superinfo_form_alter(&$form, FormStateInterface $form_state, $form_id) 
     $NodeFormAlter = new NodeFormAlter();
     $NodeFormAlter->nodeRepairFormAlter($form);
   }
+  elseif ($form_id == 'node_quote_form') {
+    $NodeFormAlter = new NodeFormAlter();
+    $NodeFormAlter->nodeQuoteFormAlter($form);
+  }
 
 }

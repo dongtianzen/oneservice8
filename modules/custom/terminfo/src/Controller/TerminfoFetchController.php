@@ -9,9 +9,6 @@ use Drupal\Core\Entity\Query\QueryFactory;
 
 /**
  * class
-   $TerminfoFetchController = new TerminfoFetchController();
-   $TerminfoFetchController->count();
- *
  */
 class TerminfoFetchController extends ControllerBase {
 
