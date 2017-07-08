@@ -46,7 +46,6 @@ class SuperinfoController extends ControllerBase {
     $entity_form = \Drupal::entityTypeManager()
       ->getFormObject($entity_type, 'default')
       ->setEntity($entity);
-ksm($entity_form);
 
     $form = \Drupal::formBuilder()->getForm($entity_form);
 
