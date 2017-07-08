@@ -7,28 +7,16 @@
 
 use Drupal\Core\Form\FormStateInterface;
 
+use Drupal\superinfo\FormAlter\NodeFormAlter;
+
 /**
  * Implements hook_form_alter().
  */
 function superinfo_form_alter(&$form, FormStateInterface $form_state, $form_id) {
 
   if ($form_id == 'node_repair_form') {
-    $path_args = \Drupal::getContainer()->get('flexinfo.setting.service')->getCurrentPathArgs();
-    if (isset($path_args[5]) && $path_args[5] == 'repair' && $path_args[1] == 'superinfo') {
-
-      // superinfo/form/add/node/repair?requestnode=468
-      $path_parameters = \Drupal::request()->query->all();
-      if ($path_parameters) {
-        $parameter_value = reset($path_parameters);
-
-        $node  = \Drupal::entityTypeManager()->getStorage('node')->load($parameter_value);
-        if ($node) {
-          $field_name = 'field_repair_' . key($path_parameters);
-          if (isset($form[$field_name]['widget'])) {
-            $form['field_repair_requestnode']['widget'][0]['target_id']['#default_value'] = $node;
-          }
-        }
-      }
-    }
+    $NodeFormAlter = new NodeFormAlter();
+    $NodeFormAlter->nodeRepairFormAlter($form);
   }
+
 }

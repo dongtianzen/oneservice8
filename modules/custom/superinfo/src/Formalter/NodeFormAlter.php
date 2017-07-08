@@ -9,12 +9,12 @@ namespace Drupal\superinfo\FormAlter;
 /**
  * An example controller.
    $NodeFormAlter = new NodeFormAlter();
-   $NodeFormAlter->superinfoTable();
+   $NodeFormAlter->nodeRepairFormAlter($form);
  */
-class NodeFormAlter extends ControllerBase {
+class NodeFormAlter {
 
   /**
-   * {@inheritdoc}
+   * @inherit hook_form_alter()
    */
   public function nodeRepairFormAlter(&$form) {
     $path_args = \Drupal::getContainer()->get('flexinfo.setting.service')->getCurrentPathArgs();
