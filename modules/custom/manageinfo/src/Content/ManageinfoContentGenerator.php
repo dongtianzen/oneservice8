@@ -46,6 +46,10 @@ class ManageinfoContentGenerator extends ControllerBase {
         'url' => '/superinfo/province/table/all',
         'name' => 'Province',
       ),
+      array(
+        'url' => '/superinfo/user/table/all',
+        'name' => 'User',
+      ),
     );
 
     $output = '';

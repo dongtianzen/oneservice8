@@ -424,12 +424,9 @@ class TerminfoJsonController extends ControllerBase {
       case 'user':
         $output = array(
           array(
-            'field_label' => 'Region',
-            'field_name'  => 'field_user_region',
-          ),
-          array(
-            'field_label' => 'Business Unit',
-            'field_name'  => 'field_user_businessunit',
+            'field_label' => 'Role',
+            'field_name'  => 'custom_formula_function',
+            'formula_function'  => 'userForUserRole',
           ),
         );
         break;
@@ -510,6 +507,25 @@ class TerminfoJsonController extends ControllerBase {
       if ($stamp) {
         $output = '<span class="width-20">';
           $output .= '<img src="' . $stamp_path . '" alt="stamp" class="width-20">';
+        $output .= '</span>';
+      }
+    }
+
+    return $output;
+  }
+
+  /**
+   * @return
+   */
+  public function userForUserRole($entity_id = NULL) {
+    $output = NULL;
+    if ($entity_id) {
+      $user = \Drupal::entityTypeManager()->getStorage('user')->load($entity_id);
+      $UserRoles = \Drupal::getContainer()->get('flexinfo.user.service')->getUserRolesFromUid($entity_id);
+
+      if ($UserRoles) {
+        $output = '<span>';
+          $output .= implode(", ", $UserRoles);
         $output .= '</span>';
       }
     }
