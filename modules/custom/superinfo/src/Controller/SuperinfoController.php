@@ -41,7 +41,6 @@ class SuperinfoController extends ControllerBase {
         );
     }
 
-
     $entity_form = \Drupal::entityTypeManager()
       ->getFormObject($entity_type, 'default')
       ->setEntity($entity);
@@ -54,6 +53,7 @@ class SuperinfoController extends ControllerBase {
       '#attached' => array(
         'library' => array(
           'superinfo/form_create',
+          'fxt/angular.material',
         ),
       ),
     );
