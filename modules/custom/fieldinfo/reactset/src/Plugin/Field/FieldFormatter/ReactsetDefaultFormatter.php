@@ -73,22 +73,19 @@ class ReactsetDefaultFormatter extends FormatterBase {
     $title_setting = $this->getSetting('title');
 
     foreach ($items as $delta => $item) {
-      $question_tid_text = $item->question_tid;
-      if ($item->question_tid) {
-        $question_term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($item->question_tid);
-        if ($question_term->getName()) {
-          $question_tid_text = $question_term->getName() . ' - ' . $item->question_tid;
+      $parts_tid_text = $item->parts_tid;
+      if ($item->parts_tid) {
+        $parts_term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($item->parts_tid);
+        if ($parts_term->getName()) {
+          $parts_tid_text = $parts_term->getName() . ' - ' . $item->parts_tid;
         }
       }
 
       // Render each element as table row.
       $rows[] = array(
         'data' => array(
-          $question_tid_text,
-          $item->question_answer,
-          $item->refer_uid,
-          $item->refer_tid,
-          $item->refer_other,
+          $parts_tid_text,
+          $item->parts_answer,
         ),
       );
     }
