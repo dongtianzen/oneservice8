@@ -49,7 +49,10 @@ class NodeFormAlter {
           }
         }
 
-        dpm($form['title']);
+        // dpm($form['title']);
+        // <md-input-container>
+        //   <input mdInput placeholder="Favorite food" value="Sushi">
+        // </md-input-container>
         $form['title']['#prefix'] = '<span>Your HTML Just Before</span><md-input-container>';
         $form['title']['#suffix'] = '</md-input-container><span>Your HTML Just After</span>';
 
