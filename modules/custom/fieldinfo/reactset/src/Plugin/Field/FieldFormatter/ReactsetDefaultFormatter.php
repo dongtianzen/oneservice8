@@ -94,11 +94,8 @@ class ReactsetDefaultFormatter extends FormatterBase {
     }
 
     $headers = array(
-      t('Question Tid'),
-      t('Question Answer'),
-      t('Refer User'),
-      t('Refer Term'),
-      t('Refer Other'),
+      t('Parts Tid'),
+      t('Parts Num'),
     );
 
     $table = array(

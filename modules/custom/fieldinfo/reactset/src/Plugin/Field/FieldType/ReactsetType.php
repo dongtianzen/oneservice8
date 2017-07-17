@@ -33,36 +33,18 @@ class ReactsetType extends FieldItemBase {
   public static function schema(FieldStorageDefinitionInterface $field_definition) {
     return array(
       'columns' => array(
-        'question_tid' => array(
-          'description' => 'The question library tid.',
+        'parts_tid' => array(
+          'description' => 'The parts term tid.',
           'type' => 'int',
           'not full' => TRUE,
           'default' => 0,
         ),
-        'question_answer' => array(
-          'description' => 'The question answer set.',
-          'type' => 'varchar',
-          'length' => 1024,
-          'not full' => TRUE,
-          'default' => '',
-        ),
-        'refer_uid' => array(
-          'description' => 'The refer user uid.',
+        'parts_num' => array(
+          'description' => 'The parts number.',
           'type' => 'int',
           'not full' => FALSE,
         ),
-        'refer_tid' => array(
-          'description' => 'The refer taxonomy term.',
-          'type' => 'int',
-          'not full' => FALSE,
-        ),
-        'refer_other' => array(
-          'description' => 'The refer other.',
-          'type' => 'varchar',
-          'length' => 1024,
-          'not full' => TRUE,
-          'default' => '',
-        ),
+
       ),
     );
   }
@@ -73,26 +55,14 @@ class ReactsetType extends FieldItemBase {
    * @todo provide meta data for field properties
    */
   public static function propertyDefinitions(FieldStorageDefinitionInterface $field_definition) {
-    $properties['question_tid'] = DataDefinition::create('string')
-      ->setLabel(t('Question Tid'))
-      ->setDescription(t('Question Library Tid'))
+    $properties['parts_tid'] = DataDefinition::create('string')
+      ->setLabel(t('Parts Tid'))
+      ->setDescription(t('Parts Term Tid'))
       ->setRequired(FALSE);
 
-    $properties['question_answer'] = DataDefinition::create('string')
-      ->setLabel(t('Answer Set'))
-      ->setDescription(t('Question Answer Set'));
-
-    $properties['refer_uid'] = DataDefinition::create('string')
-      ->setLabel(t('Refer User'))
-      ->setDescription(t('Question Refer User'));
-
-    $properties['refer_tid'] = DataDefinition::create('string')
-      ->setLabel(t('Refer Term'))
-      ->setDescription(t('Question Refer Term'));
-
-    $properties['refer_other'] = DataDefinition::create('string')
-      ->setLabel(t('Refer Other'))
-      ->setDescription(t('Question Refer Other'));
+    $properties['parts_num'] = DataDefinition::create('string')
+      ->setLabel(t('Parts Num'))
+      ->setDescription(t('Parts Num'));
 
     return $properties;
   }
@@ -105,14 +75,11 @@ class ReactsetType extends FieldItemBase {
    * If this method returns FALSE, Drupal knows that the field has some value which needs to be validated and saved
    */
   public function isEmpty() {
-    $question_tid    = $this->get('question_tid')->getValue();
-    $question_answer = $this->get('question_answer')->getValue();
-    $refer_uid = $this->get('refer_uid')->getValue();
-    $refer_tid = $this->get('refer_tid')->getValue();
-    $refer_other = $this->get('refer_other')->getValue();
+    $parts_tid = $this->get('parts_tid')->getValue();
+    $parts_num = $this->get('parts_num')->getValue();
 
-    // question_tid can't be empty
-    return empty($question_tid) && empty($question_answer);
+    // parts_tid can't be empty
+    return empty($parts_tid) && empty($parts_num);
   }
 
   /**
@@ -122,8 +89,9 @@ class ReactsetType extends FieldItemBase {
     $constraint_manager = \Drupal::typedDataManager()->getValidationConstraintManager();
     $constraints = parent::getConstraints();
 
+    // This value should be a valid number.
     $constraints[] = $constraint_manager->create('ComplexData', array(
-      'question_tid' => array(
+      'parts_tid' => array(
         'Range' => array(
           'min' => 0,
           'minMessage' => t('%name: The Question Tid must be larger or equal to %min.', array(
@@ -134,28 +102,17 @@ class ReactsetType extends FieldItemBase {
       ),
     ));
 
-    $max_length = 1024;
     $constraints[] = $constraint_manager->create('ComplexData', array(
-      'question_answer' => array(
-        'Length' => array(
-          'max' => $max_length,
-          'maxMessage' => t('%name: The Question Answer may not be longer than @max characters.', array('%name' => $this->getFieldDefinition()->getLabel(), '@max' => $max_length)),
-        )
+      'parts_num' => array(
+        'Range' => array(
+          'min' => 0,
+          'minMessage' => t('%name: The Question Tid must be larger or equal to %min.', array(
+            '%name' => $this->getFieldDefinition()->getLabel(),
+            '%min' => 0,
+          )),
+        ),
       ),
     ));
-
-    // This value should be a valid number.
-    // $constraints[] = $constraint_manager->create('ComplexData', array(
-    //   'refer_uid' => array(
-    //     'Range' => array(
-    //       'min' => 0,
-    //       'minMessage' => t('%name: The Refer User Uid must be larger or equal to %min.', array(
-    //         '%name' => $this->getFieldDefinition()->getLabel(),
-    //         '%min' => 0,
-    //       )),
-    //     ),
-    //   ),
-    // ));
 
     return $constraints;
   }
@@ -168,10 +125,10 @@ class ReactsetType extends FieldItemBase {
   public static function generateSampleValue(FieldDefinitionInterface $field_definition) {
     $min = 0;
     $max = 999;
-    $values['question_tid'] = mt_rand($min, $max);
+    $values['parts_tid'] = mt_rand($min, $max);
 
     $random = new Random();
-    $values['question_answer'] = $random->word(mt_rand(1, $field_definition->getSetting('max_length')));
+    $values['parts_num'] = $random->word(mt_rand(1, $field_definition->getSetting('max_length')));
     return $values;
   }
 

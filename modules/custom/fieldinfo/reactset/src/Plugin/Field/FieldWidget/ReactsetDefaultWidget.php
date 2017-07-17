@@ -68,44 +68,19 @@ class ReactsetDefaultWidget extends WidgetBase {
    * @todo add form element which are displyed in the node add/edit form
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
-    $element['question_tid'] = $element;
-    $element['question_tid'] = array(
-      '#title' => t('Question Tid'),
+    $element['parts_tid'] = $element;
+    $element['parts_tid'] = array(
+      '#title' => t('Parts Term'),
       '#type' => 'textfield',
-      '#default_value' => isset($items[$delta]->question_tid) ? $items[$delta]->question_tid : NULL,
+      '#default_value' => isset($items[$delta]->parts_tid) ? $items[$delta]->parts_tid : NULL,
       '#placeholder' => $this->getSetting('placeholder'),
     );
 
-    $element['question_answer'] = $element;
-    $element['question_answer'] = array(
-      '#title' => t('Question Answer'),
+    $element['parts_num'] = $element;
+    $element['parts_num'] = array(
+      '#title' => t('Parts Num'),
       '#type' => 'textfield',
-      '#default_value' => isset($items[$delta]->question_answer) ? $items[$delta]->question_answer : NULL,
-      '#placeholder' => $this->getSetting('placeholder'),
-      '#maxlength' => 1024,
-    );
-
-    $element['refer_uid'] = $element;
-    $element['refer_uid'] = array(
-      '#title' => t('Refer User'),
-      '#type' => 'textfield',
-      '#default_value' => isset($items[$delta]->refer_uid) ? $items[$delta]->refer_uid : NULL,
-      '#placeholder' => $this->getSetting('placeholder'),
-    );
-
-    $element['refer_tid'] = $element;
-    $element['refer_tid'] = array(
-      '#title' => t('Refer Term'),
-      '#type' => 'textfield',
-      '#default_value' => isset($items[$delta]->refer_tid) ? $items[$delta]->refer_tid : NULL,
-      '#placeholder' => $this->getSetting('placeholder'),
-    );
-
-    $element['refer_other'] = $element;
-    $element['refer_other'] = array(
-      '#title' => t('Refer Other'),
-      '#type' => 'textfield',
-      '#default_value' => isset($items[$delta]->refer_other) ? $items[$delta]->refer_other : NULL,
+      '#default_value' => isset($items[$delta]->parts_num) ? $items[$delta]->parts_num : NULL,
       '#placeholder' => $this->getSetting('placeholder'),
       '#maxlength' => 1024,
     );
