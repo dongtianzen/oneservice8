@@ -79,7 +79,7 @@ class ReactsetDefaultWidget extends WidgetBase {
     $element['parts_num'] = $element;
     $element['parts_num'] = array(
       '#title' => t('Parts Num'),
-      '#type' => 'textfield',
+      '#type' => 'number',
       '#default_value' => isset($items[$delta]->parts_num) ? $items[$delta]->parts_num : NULL,
       '#placeholder' => $this->getSetting('placeholder'),
       '#maxlength' => 1024,

@@ -90,17 +90,17 @@ class ReactsetType extends FieldItemBase {
     $constraints = parent::getConstraints();
 
     // This value should be a valid number.
-    $constraints[] = $constraint_manager->create('ComplexData', array(
-      'parts_tid' => array(
-        'Range' => array(
-          'min' => 0,
-          'minMessage' => t('%name: The Question Tid must be larger or equal to %min.', array(
-            '%name' => $this->getFieldDefinition()->getLabel(),
-            '%min' => 0,
-          )),
-        ),
-      ),
-    ));
+    // $constraints[] = $constraint_manager->create('ComplexData', array(
+    //   'parts_tid' => array(
+    //     'Range' => array(
+    //       'min' => 0,
+    //       'minMessage' => t('%name: The Question Tid must be larger or equal to %min.', array(
+    //         '%name' => $this->getFieldDefinition()->getLabel(),
+    //         '%min' => 0,
+    //       )),
+    //     ),
+    //   ),
+    // ));
 
     $constraints[] = $constraint_manager->create('ComplexData', array(
       'parts_num' => array(
