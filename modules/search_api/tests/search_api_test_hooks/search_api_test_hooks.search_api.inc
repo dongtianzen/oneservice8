@@ -9,7 +9,6 @@ use Drupal\search_api\IndexInterface;
 use Drupal\search_api\Query\QueryInterface;
 use Drupal\search_api\Query\ResultSetInterface;
 use Drupal\search_api\ServerInterface;
-use Drupal\search_api\Utility\Utility;
 
 /**
  * Implements hook_search_api_backend_info_alter().
@@ -62,7 +61,7 @@ function search_api_test_hooks_search_api_tracker_info_alter(array &$tracker_inf
  */
 function search_api_test_hooks_search_api_displays_alter(array &$displays) {
   if (isset($displays['views_page:search_api_test_view__page_1'])) {
-    $displays['views_page:search_api_test_view__page_1']['label'] = t('Some funny label for testing');
+    $displays['views_page:search_api_test_view__page_1']['label'] = 'Some funny label for testing';
   }
 }
 

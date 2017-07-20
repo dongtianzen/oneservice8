@@ -65,7 +65,7 @@ interface QueryInterface extends ConditionSetInterface {
    *   Thrown if a search on that index (or with those options) won't be
    *   possible.
    */
-  public static function create(IndexInterface $index, array $options = array());
+  public static function create(IndexInterface $index, array $options = []);
 
   /**
    * Retrieves the search ID.
@@ -161,7 +161,7 @@ interface QueryInterface extends ConditionSetInterface {
    * @return \Drupal\search_api\Query\ConditionGroupInterface
    *   A condition group object that is set to use the specified conjunction.
    */
-  public function createConditionGroup($conjunction = 'AND', array $tags = array());
+  public function createConditionGroup($conjunction = 'AND', array $tags = []);
 
   /**
    * Sets the keys to search for.
@@ -427,6 +427,12 @@ interface QueryInterface extends ConditionSetInterface {
    *     access checks, if available and enabled for the index.
    *   - search_api_bypass_access: If set to TRUE, entity access checks will be
    *     skipped, even if enabled for the index.
+   *   - search_api_retrieved_properties: A list of properties that will be
+   *     required from results by the code displaying the results list. This
+   *     option, if present, should be an array keyed by datasource ID and
+   *     (datasource-internal) property path, with combined property paths as
+   *     the values. (The "_object" pseudo-property can be used where a whole
+   *     object (entity or other) is required.)
    *   However, contrib modules might introduce arbitrary other keys with their
    *   own, special meaning. (Usually they should be prefixed with the module
    *   name, though, to avoid conflicts.)
