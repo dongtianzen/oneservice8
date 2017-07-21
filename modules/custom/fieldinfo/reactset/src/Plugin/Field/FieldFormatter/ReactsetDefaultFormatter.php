@@ -85,7 +85,7 @@ class ReactsetDefaultFormatter extends FormatterBase {
       $rows[] = array(
         'data' => array(
           $parts_tid_text,
-          $item->parts_answer,
+          $item->parts_num,
         ),
       );
     }
