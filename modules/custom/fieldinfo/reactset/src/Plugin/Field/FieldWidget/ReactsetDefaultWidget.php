@@ -71,8 +71,11 @@ class ReactsetDefaultWidget extends WidgetBase {
     $element['parts_tid'] = $element;
     $element['parts_tid'] = array(
       '#title' => t('Parts Term'),
-      '#type' => 'textfield',
-      '#default_value' => isset($items[$delta]->parts_tid) ? $items[$delta]->parts_tid : NULL,
+      // '#type' => 'textfield',
+      '#type' => 'entity_autocomplete',
+      '#target_type' => 'taxonomy_term',
+      '#selection_settings' => ['target_bundles' => ['parts']],
+      // '#default_value' => isset($items[$delta]->parts_tid) ? $items[$delta]->parts_tid : NULL,
       '#placeholder' => $this->getSetting('placeholder'),
     );
 
