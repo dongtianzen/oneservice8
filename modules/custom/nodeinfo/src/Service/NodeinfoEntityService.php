@@ -15,6 +15,16 @@ class NodeinfoEntityService {
    *
    \Drupal::getContainer()->get('flexinfo.entity.service')->nodeSupplyInsertUpdateTermPartsFieldValue($entity);
    */
+  function nodeRepairInsertUpdateSupplyFieldValue($node_entity = NULL) {
+    if ($node_entity) {
+
+    }
+  }
+
+  /**
+   *
+   \Drupal::getContainer()->get('flexinfo.entity.service')->nodeSupplyInsertUpdateTermPartsFieldValue($entity);
+   */
   function nodeSupplyInsertUpdateTermPartsFieldValue($node_entity = NULL) {
     if ($node_entity) {
 
@@ -32,7 +42,6 @@ class NodeinfoEntityService {
         }
       }
     }
-
   }
 
   /**

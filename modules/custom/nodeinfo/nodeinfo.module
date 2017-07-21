@@ -22,8 +22,11 @@ function nodeinfo_entity_insert(EntityInterface $entity) {
     return;
   }
 
-  if ($entity->bundle() == 'supply') {
-   \Drupal::getContainer()->get('nodeinfo.entity.service')->nodeSupplyInsertUpdateTermPartsFieldValue($entity);
+  if ($entity->bundle() == 'repair') {
+    \Drupal::getContainer()->get('nodeinfo.entity.service')->nodeRepairInsertUpdateTermPartsFieldValue($entity);
+  }
+  elseif ($entity->bundle() == 'supply') {
+    \Drupal::getContainer()->get('nodeinfo.entity.service')->nodeSupplyInsertUpdateTermPartsFieldValue($entity);
   }
 
   return;
@@ -34,8 +37,8 @@ function nodeinfo_entity_insert(EntityInterface $entity) {
  *
  * @param \Drupal\Core\Entity\EntityInterface $entity
  */
-// function nodeinfo_entity_update(EntityInterface $entity) {
-// }
+function nodeinfo_entity_update(EntityInterface $entity) {
+}
 
 /**
  * Implements hook_entity_delete().
