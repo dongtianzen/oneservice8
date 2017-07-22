@@ -24,7 +24,7 @@ class NodeinfoEntityService {
         foreach ($parts_values as $parts_value) {
 
           if (isset($parts_value['parts_tid']) && $parts_value['parts_tid']) {
-            $field_array = $this->generateSupplyfieldsValue($node_entity, $parts_value);
+            $field_array = $this->generateSupplyfieldsValueForRepairInsert($node_entity, $parts_value);
             \Drupal::getContainer()->get('flexinfo.node.service')->entityCreateNode($field_array);
           }
         }
@@ -35,7 +35,7 @@ class NodeinfoEntityService {
   /**
    *
    */
-  public function nodeRepairUpdateToCreateSupply($node_entity = NULL) {
+  public function nodeRepairUpdateToUpdateSupply($node_entity = NULL) {
     if ($node_entity) {
       $parts_values = $node_entity->get('field_repair_partsnum')->getValue();
 
@@ -44,8 +44,8 @@ class NodeinfoEntityService {
         foreach ($parts_values as $parts_value) {
 
           if (isset($parts_value['parts_tid']) && $parts_value['parts_tid']) {
-            $field_array = $this->generateSupplyfieldsValue($node_entity, $parts_value);
-            \Drupal::getContainer()->get('flexinfo.node.service')->entityCreateNode($field_array);
+            $field_array = $this->generateSupplyfieldsValueForRepairUpdate($node_entity, $parts_value);
+            \Drupal::getContainer()->get('flexinfo.node.service')->entityUpdateNode($nid, $field_array);
           }
         }
       }
@@ -55,7 +55,7 @@ class NodeinfoEntityService {
   /**
    *
    */
-  public function generateSupplyfieldsValue($node_entity, $parts_value) {
+  public function generateSupplyfieldsValueForRepairInsert($node_entity, $parts_value) {
     $entity_bundle = 'supply';
     $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
@@ -67,6 +67,17 @@ class NodeinfoEntityService {
       'status' => 1,
     );
 
+    $fields_value['field_supply_part'] = array($parts_value['parts_tid']);
+    $fields_value['field_supply_number'] = array($parts_value['parts_num']);
+    $fields_value['field_supply_repairnode'] = array($node_entity->id());
+
+    return $fields_value;
+  }
+
+  /**
+   *
+   */
+  public function generateSupplyfieldsValueForRepairUpdate($node_entity, $parts_value) {
     $fields_value['field_supply_part'] = array($parts_value['parts_tid']);
     $fields_value['field_supply_number'] = array($parts_value['parts_num']);
     $fields_value['field_supply_repairnode'] = array($node_entity->id());
