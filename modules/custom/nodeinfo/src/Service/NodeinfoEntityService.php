@@ -115,6 +115,10 @@ class NodeinfoEntityService {
    *
    */
   public function nodeSupplyUpdateToUpdateTermPartsFieldValue($node_entity = NULL) {
+    $node_original = \Drupal::entityTypeManager()->getStorage('node')->loadUnchanged($node_entity->id());
+
+    $parts_values = $node_original->get('field_supply_number')->getValue();
+    dpm($parts_values);
 
   }
 

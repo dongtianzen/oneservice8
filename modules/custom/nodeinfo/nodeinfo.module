@@ -62,6 +62,22 @@ function nodeinfo_entity_update(EntityInterface $entity) {
 
 /**
  * @param Drupal\node\NodeInterface $node
+ * Implements hook_entity_presave() for node entities.
+ */
+function nodeinfo_entity_presave(EntityInterface $entity) {
+  if ($entity->getEntityTypeId() != 'node') {
+    return;
+  }
+
+  if ($entity->bundle() == 'supply') {
+    \Drupal::getContainer()->get('nodeinfo.entity.service')->nodeSupplyUpdateToUpdateTermPartsFieldValue($entity);
+  }
+
+  return;
+}
+
+/**
+ * @param Drupal\node\NodeInterface $node
  * Implements hook_ENTITY_TYPE_presave() for node entities.
  */
 // function nodeinfo_node_presave(NodeInterface $node) {
