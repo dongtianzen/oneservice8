@@ -23,7 +23,7 @@ function nodeinfo_entity_insert(EntityInterface $entity) {
   }
 
   if ($entity->bundle() == 'repair') {
-    \Drupal::getContainer()->get('nodeinfo.entity.service')->nodeRepairInsertUpdateTermPartsFieldValue($entity);
+    \Drupal::getContainer()->get('nodeinfo.entity.service')->nodeRepairInsertToCreateSupply($entity);
   }
   elseif ($entity->bundle() == 'supply') {
     \Drupal::getContainer()->get('nodeinfo.entity.service')->nodeSupplyInsertUpdateTermPartsFieldValue($entity);

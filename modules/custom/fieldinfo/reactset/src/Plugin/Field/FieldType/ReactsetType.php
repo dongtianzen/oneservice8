@@ -44,7 +44,6 @@ class ReactsetType extends FieldItemBase {
           'type' => 'int',
           'not full' => FALSE,
         ),
-
       ),
     );
   }
