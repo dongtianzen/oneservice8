@@ -17,17 +17,14 @@ class NodeinfoEntityService {
    */
   public function nodeRepairInsertToCreateSupply($node_entity = NULL) {
     if ($node_entity) {
-      $parts_tids = \Drupal::getContainer()->get('flexinfo.field.service')->getReactsetFieldAllValue($node_entity, 'field_repair_partsnum', 'parts_tid');
-      $parts_nums = \Drupal::getContainer()->get('flexinfo.field.service')->getReactsetFieldAllValue($node_entity, 'field_repair_partsnum', 'parts_num');
-
       $parts_values = $node_entity->get('field_repair_partsnum')->getValue();
 
       if ($parts_values && is_array($parts_values)) {
-        foreach ($parts_values as $parts_value) {
-          if (isset($parts_value['parts_tid']) && $parts_value['parts_tid']) {
-            dpm($parts_value['parts_tid']);
-            $field_array = $this->generateSupplyfieldsValue($node_entity, $parts_value);
 
+        foreach ($parts_values as $parts_value) {
+
+          if (isset($parts_value['parts_tid']) && $parts_value['parts_tid']) {
+            $field_array = $this->generateSupplyfieldsValue($node_entity, $parts_value);
             \Drupal::getContainer()->get('flexinfo.node.service')->entityCreateNode($field_array);
           }
         }
@@ -35,6 +32,29 @@ class NodeinfoEntityService {
     }
   }
 
+  /**
+   *
+   */
+  public function nodeRepairUpdateToCreateSupply($node_entity = NULL) {
+    if ($node_entity) {
+      $parts_values = $node_entity->get('field_repair_partsnum')->getValue();
+
+      if ($parts_values && is_array($parts_values)) {
+
+        foreach ($parts_values as $parts_value) {
+
+          if (isset($parts_value['parts_tid']) && $parts_value['parts_tid']) {
+            $field_array = $this->generateSupplyfieldsValue($node_entity, $parts_value);
+            \Drupal::getContainer()->get('flexinfo.node.service')->entityCreateNode($field_array);
+          }
+        }
+      }
+    }
+  }
+
+  /**
+   *
+   */
   public function generateSupplyfieldsValue($node_entity, $parts_value) {
     $entity_bundle = 'supply';
     $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
@@ -56,9 +76,9 @@ class NodeinfoEntityService {
 
   /**
    *
-   \Drupal::getContainer()->get('nodeinfo.entity.service')->nodeSupplyInsertUpdateTermPartsFieldValue($entity);
+   \Drupal::getContainer()->get('nodeinfo.entity.service')->nodeSupplyInsertToUpdateTermPartsFieldValue($entity);
    */
-  public function nodeSupplyInsertUpdateTermPartsFieldValue($node_entity = NULL) {
+  public function nodeSupplyInsertToUpdateTermPartsFieldValue($node_entity = NULL) {
     if ($node_entity) {
 
       $term_part_tid = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstTargetId($node_entity, 'field_supply_part');
@@ -75,6 +95,13 @@ class NodeinfoEntityService {
         }
       }
     }
+  }
+
+  /**
+   *
+   */
+  public function nodeSupplyUpdateToUpdateTermPartsFieldValue($node_entity = NULL) {
+
   }
 
   /**
