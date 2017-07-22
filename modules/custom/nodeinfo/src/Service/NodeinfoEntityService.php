@@ -44,8 +44,23 @@ class NodeinfoEntityService {
         foreach ($parts_values as $parts_value) {
 
           if (isset($parts_value['parts_tid']) && $parts_value['parts_tid']) {
-            $field_array = $this->generateSupplyfieldsValueForRepairUpdate($node_entity, $parts_value);
-            \Drupal::getContainer()->get('flexinfo.node.service')->entityUpdateNode($nid, $field_array);
+            $query_container = \Drupal::getContainer()->get('flexinfo.querynode.service');
+            $query = $query_container->queryNidsByBundle('supply');
+
+            $group = $query_container->groupStandardByFieldValue($query, 'field_supply_repairnode', $node_entity->id());
+            $query->condition($group);
+
+            $group = $query_container->groupStandardByFieldValue($query, 'field_supply_part', $parts_value['parts_tid']);
+            $query->condition($group);
+
+            $nids = $query_container->runQueryWithGroup($query);
+
+            if ($nids) {
+              $nid = reset($nids);
+
+              $field_array = $this->generateSupplyfieldsValueForRepairUpdate($node_entity, $parts_value);
+              \Drupal::getContainer()->get('flexinfo.node.service')->entityUpdateNode($nid, $field_array);
+            }
           }
         }
       }
