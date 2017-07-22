@@ -57,9 +57,8 @@ class NodeinfoEntityService {
 
             if ($nids) {
               $nid = reset($nids);
-
-              $field_array = $this->generateSupplyfieldsValueForRepairUpdate($node_entity, $parts_value);
-              \Drupal::getContainer()->get('flexinfo.node.service')->entityUpdateNode($nid, $field_array);
+              $supply_entity = \Drupal::entityTypeManager()->getStorage('node')->load($nid);
+              \Drupal::getContainer()->get('flexinfo.field.service')->updateFieldValue('node', $supply_entity, 'field_supply_number', $parts_value['parts_num']);
             }
           }
         }
@@ -82,17 +81,6 @@ class NodeinfoEntityService {
       'status' => 1,
     );
 
-    $fields_value['field_supply_part'] = array($parts_value['parts_tid']);
-    $fields_value['field_supply_number'] = array($parts_value['parts_num']);
-    $fields_value['field_supply_repairnode'] = array($node_entity->id());
-
-    return $fields_value;
-  }
-
-  /**
-   *
-   */
-  public function generateSupplyfieldsValueForRepairUpdate($node_entity, $parts_value) {
     $fields_value['field_supply_part'] = array($parts_value['parts_tid']);
     $fields_value['field_supply_number'] = array($parts_value['parts_num']);
     $fields_value['field_supply_repairnode'] = array($node_entity->id());
