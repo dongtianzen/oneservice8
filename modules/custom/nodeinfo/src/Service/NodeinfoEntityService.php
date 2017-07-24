@@ -118,35 +118,7 @@ class NodeinfoEntityService {
     $node_original = \Drupal::entityTypeManager()->getStorage('node')->loadUnchanged($node_entity->id());
 
     $parts_values = $node_original->get('field_supply_number')->getValue();
-    dpm($parts_values);
-
-  }
-
-  /**
-   * @param
-   *  $entity_type = 'taxonomy_term'
-   *  $field_name = 'field_page_city';
-
-   \Drupal::getContainer()->get('flexinfo.field.service')->updateFieldValue('taxonomy_term', $entity, 'field_evaluationform_questionset');
-   \Drupal::getContainer()->get('flexinfo.field.service')->updateFieldValue('node', $entity, 'field_page_city');
-   */
-  public function updateFieldValue222($entity_type = 'node', $entity = NULL, $field_name = NULL, $new_field_values = array()) {
-    $field = $entity->get($field_name);
-    if ($field->getName() == $field_name) {
-      $field->setValue($new_field_values);
-      $result = $entity->save();
-
-      if ($result = SAVED_UPDATED) {
-        if (\Drupal::currentUser()->id() == 1) {
-          dpm('successful update  - ' . $entity->id() . ' - updateFieldValue()');
-        }
-      }
-      else {
-        if (\Drupal::currentUser()->id() == 1) {
-          dpm('fail to update  - ' . $entity->id() . ' - updateFieldValue()');
-        }
-      }
-    }
+    // dpm($parts_values);
   }
 
 }
