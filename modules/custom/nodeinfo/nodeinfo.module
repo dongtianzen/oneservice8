@@ -46,7 +46,7 @@ function nodeinfo_entity_update(EntityInterface $entity) {
     \Drupal::getContainer()->get('nodeinfo.entity.service')->nodeRepairUpdateToUpdateSupply($entity);
   }
   elseif ($entity->bundle() == 'supply') {
-    \Drupal::getContainer()->get('nodeinfo.entity.service')->nodeSupplyUpdateToUpdateTermPartsFieldValue($entity);
+    \Drupal::getContainer()->get('nodeinfo.entity.service')->nodeSupplyUpdateToUpdateTermPartsFieldValue($entity, $entity->original);
   }
 
   return;
@@ -64,17 +64,9 @@ function nodeinfo_entity_update(EntityInterface $entity) {
  * @param Drupal\node\NodeInterface $node
  * Implements hook_entity_presave() for node entities.
  */
-function nodeinfo_entity_presave(EntityInterface $entity) {
-  if ($entity->getEntityTypeId() != 'node') {
-    return;
-  }
+// function nodeinfo_entity_presave(EntityInterface $entity) {
 
-  if ($entity->bundle() == 'supply') {
-    \Drupal::getContainer()->get('nodeinfo.entity.service')->nodeSupplyUpdateToUpdateTermPartsFieldValue($entity);
-  }
-
-  return;
-}
+// }
 
 /**
  * @param Drupal\node\NodeInterface $node

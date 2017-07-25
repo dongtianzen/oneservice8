@@ -55,10 +55,15 @@ class NodeinfoEntityService {
 
             $nids = $query_container->runQueryWithGroup($query);
 
+            // update exist or insert new one
             if ($nids) {
               $nid = reset($nids);
               $supply_entity = \Drupal::entityTypeManager()->getStorage('node')->load($nid);
               \Drupal::getContainer()->get('flexinfo.field.service')->updateFieldValue('node', $supply_entity, 'field_supply_number', $parts_value['parts_num']);
+            }
+            else {
+              $field_array = $this->generateSupplyfieldsValueForRepairInsert($node_entity, $parts_value);
+              \Drupal::getContainer()->get('flexinfo.node.service')->entityCreateNode($field_array);
             }
           }
         }
@@ -118,7 +123,7 @@ class NodeinfoEntityService {
     $node_original = \Drupal::entityTypeManager()->getStorage('node')->loadUnchanged($node_entity->id());
 
     $parts_values = $node_original->get('field_supply_number')->getValue();
-    // dpm($parts_values);
+    dpm($parts_values);
   }
 
 }
