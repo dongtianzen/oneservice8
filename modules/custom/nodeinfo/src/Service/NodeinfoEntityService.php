@@ -97,20 +97,22 @@ class NodeinfoEntityService {
    *
    \Drupal::getContainer()->get('nodeinfo.entity.service')->nodeSupplyInsertToUpdateTermPartsFieldValue($entity);
    */
-  public function nodeSupplyInsertToUpdateTermPartsFieldValue($node_entity = NULL) {
-    if ($node_entity) {
+  public function nodeSupplyInsertToUpdateTermPartsFieldValue($entity) {
+    if ($entity) {
 
-      $term_part_tid = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstTargetId($node_entity, 'field_supply_part');
-      $new_number = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValue($node_entity, 'field_supply_number');
+      $term_part_tid = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstTargetId($entity, 'field_supply_part');
+      $new_number = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValue($entity, 'field_supply_number');
 
-      if ($term_part_tid && $new_number) {
-        $term_entity = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($term_part_tid);
-        $old_number = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValue($term_entity, 'field_parts_inventory');
+      if ($diff_number != 0) {
+        if ($term_part_tid) {
+          $term_entity = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($term_part_tid);
+          $old_number = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValue($term_entity, 'field_parts_inventory');
 
-        $result_number = $old_number + $new_number;
+          $result_number = $old_number + $new_number;
 
-        if ($term_entity) {
-          \Drupal::getContainer()->get('flexinfo.field.service')->updateFieldValue('taxonomy_term', $term_entity, 'field_parts_inventory', $result_number);
+          if ($term_entity) {
+            \Drupal::getContainer()->get('flexinfo.field.service')->updateFieldValue('taxonomy_term', $term_entity, 'field_parts_inventory', $result_number);
+          }
         }
       }
     }
@@ -119,11 +121,29 @@ class NodeinfoEntityService {
   /**
    *
    */
-  public function nodeSupplyUpdateToUpdateTermPartsFieldValue($node_entity = NULL) {
-    $node_original = \Drupal::entityTypeManager()->getStorage('node')->loadUnchanged($node_entity->id());
+  public function nodeSupplyUpdateToUpdateTermPartsFieldValue($entity, $entity_original) {
+    if ($entity) {
 
-    $parts_values = $node_original->get('field_supply_number')->getValue();
-    dpm($parts_values);
+      $term_part_tid = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstTargetId($entity, 'field_supply_part');
+      $new_number = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValue($entity, 'field_supply_number');
+      $original_number = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValue($entity_original, 'field_supply_number');
+
+      $diff_number = $new_number - $original_number;
+
+      if ($diff_number != 0) {
+        if ($term_part_tid) {
+          $term_entity = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($term_part_tid);
+          $old_number = \Drupal::getContainer()->get('flexinfo.field.service')->getFieldFirstValue($term_entity, 'field_parts_inventory');
+
+          $result_number = $old_number + $diff_number;
+
+          if ($term_entity) {
+            \Drupal::getContainer()->get('flexinfo.field.service')->updateFieldValue('taxonomy_term', $term_entity, 'field_parts_inventory', $result_number);
+          }
+        }
+      }
+    }
+
   }
 
 }
